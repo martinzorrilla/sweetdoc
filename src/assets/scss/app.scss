@@ -6,7 +6,7 @@
 @import 'motion-ui';
 
 @include foundation-global-styles;
-//@include foundation-grid;
+@include foundation-grid;
 //@include foundation-flex-grid;
 
 @include foundation-xy-grid-classes;
@@ -57,6 +57,11 @@
   My custom styles:
   Add your scss files below to structure your project styles
 */
+//@import "_singleperson";
+
+@import "templates/_singleperson";
+@import "templates/_patients-all";
+@import "templates/_front-page";
 
 // Global
 @import "global/_accessibility";

@@ -51,5 +51,34 @@ require_once( 'library/sticky-posts.php' );
 /** Configure responsive image sizes */
 require_once( 'library/responsive-images.php' );
 
+
+require_once( 'library/oikos-post-type-lib.php' );
+
 /** If your site requires protocol relative url's for theme assets, uncomment the line below */
 // require_once( 'library/class-foundationpress-protocol-relative-theme-assets.php' );
+
+
+
+//returns person post id on succes, false on failure.
+  function cca_get_current_user_person_post_id(){
+    $current_user = wp_get_current_user();
+    $current_user_id = $current_user->ID;
+    //If the meta value does not exist and $single is true the function will return an empty string.
+    $user_person_id= get_user_meta( $current_user_id, 'person_post_id', true );
+    return $user_person_id;
+  }
+
+/**
+ * Post Types Definitions - autoloader
+ */
+foreach (glob(get_template_directory()."/config/post-types/*.php") as $filename) {
+    require_once($filename);
+}
+
+/**
+ * Taxonomies Definitions - autoloader
+ */
+foreach (glob(get_template_directory()."/config/taxonomies/*.php") as $filename) {
+    require_once($filename);
+}
+
