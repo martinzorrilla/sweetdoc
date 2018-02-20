@@ -165,6 +165,9 @@ function sw_create_appointment(){
                 update_field( $field, $value, $app_id );
         }
 
+        // save the data
+        //do_action('acf/save_post' , $app_id);
+
         $result['success'] = true;
     }
     else{

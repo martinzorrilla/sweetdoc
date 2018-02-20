@@ -196,15 +196,15 @@
         myFile = $("#profile_photo");
 
         //define events
-        OrgTypeDropdown.on("change", function () {
+/*        OrgTypeDropdown.on("change", function () {
           onDropdownChange($(this));
-        });
+        });*/
 
         createAppBtn.on("click", function (e) {
           saveProfileData(e);
         })
 
-        createProfileClose.on("click" ,function (e) {
+/*        createProfileClose.on("click" ,function (e) {
           oncreateAppBtnClose();
         })
 
@@ -215,13 +215,13 @@
 
         myFile.on("change" ,function (e) {
           onFileChange(e);
-        })
+        })*/
 
 
       });
     }
 
-    function oncreateAppBtnClose() {
+/*    function oncreateAppBtnClose() {
       $('#interests').foundation('open');
     }
 
@@ -251,7 +251,7 @@
 
         $(rolesDropdown).trigger("liszt:updated");
       });
-    }
+    }*/
 
     function populateFormData() {
       //var inputs = createAppointmentForm.serializeArray();
@@ -274,8 +274,8 @@
         formData.append(element.name, element.value);
       });
 
-      formData.append("app_id", <?php echo $appointment_id ?>);
-      //formData.append("app_id", 55);
+      formData.append("app_id", "<?php echo $appointment_id ?>");
+      //formData.append("app_id", "55");
 
       formData.append("action", "sw_create_appointment");
 
@@ -285,7 +285,7 @@
     function saveProfileData(e) {
       e.preventDefault();
 
-      //alert("askfjnsdkjnasdnl");
+      alert("askfjnsdkjnasdnl");
       var $ = jQuery;
       var formData = populateFormData();
 
@@ -317,7 +317,7 @@
       });
     }
 
-    function onUploadFile() {
+   /* function onUploadFile() {
       $("#profile_photo").trigger("click");
     }
 
@@ -331,7 +331,7 @@
 
       //$( "p.filetext" ).html("File changed");
       $( "p.filetext" ).html(file.name);
-    }
+    }*/
 
   return{
     init:init
