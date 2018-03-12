@@ -2,57 +2,36 @@
 <?php get_header();/* Template Name: Appointment*/?>
 <?php
   
-  $patient_id = $_GET['patient_id'];
+  //$patient_id = $_GET['patient_id'];
   //The patient id is send from patients-all through the url so we grab here with $_GET
   //$patient_post = get_post($_GET['patient_id']);
   //var_dump($patient_post);
 
-  $local_timestamp = get_the_time('U');
 
+$app_id =  $_GET['app_id'];
 
   //load all the data we need
-  $name = get_field('nombre', $patient_id);
+  /*$name = get_field('nombre', $patient_id);
   $lastname = get_field('apellido', $patient_id);
   $cedula = get_field('cedula', $patient_id);
   $fullname = $name.' '.$lastname;
-  echo $fullname;
+  echo $fullname; */
 
   //wp_reset_postdata(); //always reset the post data!
   //echo(" id del paciente:");
   //echo $patient_post; // output 2489
-  echo(" old app_id:");
-  echo $_GET['app_id']; // output 2489
+  //echo(" old app_id:");
+  //echo $_GET['app_id']; // output 2489
 
-  $menarca = get_field('menarca', $_GET['app_id']);
-  echo "menarCA:  ";
-  var_dump($menarca);
+  $stored_fields = get_post_custom($app_id);
+  echo "</br> get_fields(" . $app_id . "): </br>";
+  var_dump($stored_fields);
+  echo '</br></br>';
 
 
-  $app_id = $_GET['app_id'];
   if ($app_id === 'new') {
     echo "  nueva consulta";
-    $my_post = array(
-      'post_title'    => wp_strip_all_tags( $fullname.$local_timestamp ),
-      //'post_content'  => $_POST['post_content'],
-      'post_status'   => 'publish',
-      'post_author'   => get_current_user_id(),
-      'post_type' => 'sw_consulta',
-      //'meta_input' => ["related_patient", $patient_post ]
-      //'post_category' => array( 8,39 )
-    );
-
-    // Insert the post into the database // returns post id on succes. 0 on fail
-    $app_post = wp_insert_post( $my_post );
-    if ($app_post == 0) {
-      wp_die( "Error creating a new appointment" );
-    }
-
-    add_post_meta( $app_post, 'related_patient', $patient_id );
-  
-    $appointment_id = $app_post;
-
-    echo "## newly created app_id: ";
-    echo $appointment_id;
+    $appointment_id = $app_id;
   }//if new patient = true
 
   else{
@@ -60,14 +39,12 @@
   $appointment_id = $app_id;
   //$appointment_id = get_post($_GET['app_id']);
   
-  $appointment_post_id = get_post($app_id);
+  //$appointment_post_id = get_post($app_id);
   //$aux = get_post($app_id);
   //$appointment_id = 85;
   //  var_dump($aux);
-  $menarca = get_field('menarca', $app_id);
-  $irs = get_field('irs', $app_id);
-
-  echo "menarcaa: ".$menarca;
+  $menarca = $stored_fields['menarca'][0];
+  $irs = $stored_fields['irs'][0];
   }
 ?>
 
@@ -148,20 +125,7 @@
         </form>
   </div>
 </div><!-- patient-div -->
-
-<?php 
-/*acf_form(array(
-          'post_id' => $appointment_post_id,
-          'post_title'  => false,
-          'submit_value'  => 'Update the post!'
-        )); 
-*/
-?>
-
 <?php get_footer(); ?>
-
-
-
 
 <script >
   var CreateProfileModule = function(){
@@ -275,9 +239,10 @@
       });
 
       formData.append("app_id", "<?php echo $appointment_id ?>");
+      formData.append("patient_id", "<?php echo $patient_id ?>");
       //formData.append("app_id", "55");
 
-      formData.append("action", "sw_create_appointment");
+      formData.append("action", "sw_create_appointment_ajax");
 
       return formData;
     }
@@ -285,11 +250,11 @@
     function saveProfileData(e) {
       e.preventDefault();
 
-      alert("askfjnsdkjnasdnl");
+      alert("Se guardaran los datos");
       var $ = jQuery;
       var formData = populateFormData();
 
-      //console.log("window.homeUrl = ", window);
+      console.log("formData = ", formData);
 
       $.ajax({
         url: window.homeUrl + "/wp-admin/admin-ajax.php",
@@ -299,7 +264,7 @@
         type: 'POST',
         success: function(data){
           var result = JSON.parse(data);
-          console.log("result", result);
+          //console.log("result", result);
           //handle error
           if(result.error.length >0){
             alert(result.error.msg);
@@ -312,6 +277,9 @@
             alert("Creacion de Consulta exitosa");
             //$('#interests').foundation('open');
             //window.location.reload();
+          }
+          else{
+            alert("Appointment Post Updated ");
           } 
         }
       });
