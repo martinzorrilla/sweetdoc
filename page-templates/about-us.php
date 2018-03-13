@@ -21,14 +21,29 @@
     //$menarca = get_field('menarca', $post_id);
     //echo "Menarca: ".$menarca;
     
+/*    $params = [
+      'app_id' => 168,
+      'menarca' => 89,
+      'irs' => 89
+    ];
+
+    echo "post: ".$params['app_id']." fields<br>";
+    $stored_fields = get_post_custom($params['app_id']);
+    var_dump($stored_fields);
+    //var_dump(get_fields($params['app_id']));
+    echo "<br>";
+    echo "<br>";
+    echo "<br>";
+
+    sw_update_single_appointment($params);*/
+
     $params = [
       'app_id' => 'new',
       'patient_id' => 37,
-      'menarca' => 9999,
-      'irs' => 666
+      'menarca' => 444,
+      'irs' => 555
     ];
-
-    sw_create_appointment($params);
+    sw_create_new_appointment($params);
   ?>
 
 </div>

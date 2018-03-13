@@ -2,7 +2,7 @@
 <?php get_header();/* Template Name: Appointment*/?>
 <?php
   
-  //$patient_id = $_GET['patient_id'];
+  $patient_id = $_GET['patient_id'];
   //The patient id is send from patients-all through the url so we grab here with $_GET
   //$patient_post = get_post($_GET['patient_id']);
   //var_dump($patient_post);
@@ -250,11 +250,16 @@ $app_id =  $_GET['app_id'];
     function saveProfileData(e) {
       e.preventDefault();
 
-      alert("Se guardaran los datos");
+      //alert("Se guardaran los datos");
       var $ = jQuery;
       var formData = populateFormData();
 
-      console.log("formData = ", formData);
+      //console.log("formData = ", formData);
+      // Display the key/value pairs
+      for (var pair of formData.entries())
+      {
+       console.log(pair[0]+ ', '+ pair[1]); 
+      }
 
       $.ajax({
         url: window.homeUrl + "/wp-admin/admin-ajax.php",
@@ -264,10 +269,11 @@ $app_id =  $_GET['app_id'];
         type: 'POST',
         success: function(data){
           var result = JSON.parse(data);
-          //console.log("result", result);
+          console.log("result", result);
           //handle error
           if(result.error.length >0){
-            alert(result.error.msg);
+          //if(result.error){
+            //alert(result.error.msg);
             alert('errorrrrr');
 
             //let errorMsg = result.error.msg;
@@ -276,7 +282,7 @@ $app_id =  $_GET['app_id'];
           if(result.success){
             alert("Creacion de Consulta exitosa");
             //$('#interests').foundation('open');
-            //window.location.reload();
+            window.location.reload();
           }
           else{
             alert("Appointment Post Updated ");

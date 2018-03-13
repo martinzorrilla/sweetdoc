@@ -143,8 +143,8 @@ function hm_get_template_part( $file, $template_args = array(), $cache_args = ar
 
   function sw_create_appointment_ajax(){
 
-  $result = [];
-  //$result = array("error"=>[], "success"=>false);
+    $result = array('error'=>[], 'success'=>FALSE);
+    //$result= [];
 
     $app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
     $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
@@ -164,18 +164,31 @@ function hm_get_template_part( $file, $template_args = array(), $cache_args = ar
 
     //wp_die(var_dump($params));
 
-    $result = sw_create_appointment($params);
+    if($app_id === 'new'){
+      //$result = sw_create_new_appointment($params);
+      sw_create_new_appointment($params);
+      $result = array('error'=>[], 'success'=>TRUE);
+    }
+    //elseif ($app_id != NULL && $app_id != '') {
+    else{
+      # there's no need of  the patient_id here
+      //$result = sw_update_single_appointment($params);
+      
+      sw_update_single_appointment($params);
+      
+      $result = array('error'=>[], 'success'=>TRUE);
+    }
 
-
+    //solo para testing, borrar este $result, esta hardcoded. WRONG!!!!
+    //$result = array('error'=>[], 'success'=>TRUE);
+    
     wp_die(json_encode($result));
   }
-
-
 
 //wp_ajax_nopriv_
 add_action( 'wp_ajax_sw_create_appointment_ajax', 'sw_create_appointment_ajax');
 
-function sw_create_appointment($params){
+function sw_create_new_appointment($params){
 
     $result = array('error'=>[], 'success'=>FALSE);
 
@@ -200,7 +213,7 @@ function sw_create_appointment($params){
     $fullname = $name.' '.$lastname;
     $local_timestamp = get_the_time('U');
 
-    var_dump('$patient_id ' . $patient_id . ' --</br>');
+    //var_dump('$patient_id ' . $patient_id . ' --</br>');
 
     if ($app_id === 'new' && $patient_id != NULL) {
       //echo "  nueva consulta";
@@ -226,35 +239,50 @@ function sw_create_appointment($params){
             "irs" => $irs
         );
 
-      var_dump('$app_post' . $app_post . '</br>');
+      //var_dump('$app_post' . $app_post . '</br>');
 
         foreach ($acf_fields as $field => $value) {
             if($value != NULL){
-                var_dump($value); echo '<br>';
+                //var_dump($value); echo '<br>';
                 update_field( $field, $value, $app_post );
             }
         }
 
-      echo '<br>'; echo '<br>';
-      var_dump(get_fields($app_post));
+      //echo '<br>'; echo '<br>';
+      //var_dump(get_fields($app_post));
 
       add_post_meta( $app_post, 'related_patient', $patient_id );
      // echo "## newly created app_id: ";
       //echo $appointment_id;
       $result['success'] = TRUE;
+      return $result;
       //$result['error'] => 'no errors';
       //var_dump('<br> result = '. $result['succes'].'<br>'.$result['error']);
-      var_dump('<br> result = '. $result['success']);
+      //var_dump('<br> result from new app = '. $result['success']);
     }//if new patient = true
 
+    //else{$result['error'] = ["key"=> "user_not_created", "msg" => "Error creating the Account"];}
+
+}//end of sw_create_appointment
 
 
-  /* ************************************** */
+function sw_update_single_appointment($params){
 
 
-    //if ( true ) { //aca deberia controlar que la consulta es de es paciente o algo asi
-    else{
+    $result = array('error'=>[], 'success'=>FALSE);
 
+    //wp_die(var_dump($params));
+    //$patient_id = $params['patient_id'];
+    
+    $app_id  = $params["app_id"];
+    $menarca = $params['menarca'];
+    $irs = $params['irs'];
+
+
+    if ($app_id != NULL && $app_id != '') {
+      # code...
+        //echo "entro";
+        //wp_die(var_dump($params));
         $acf_fields = array(
             "menarca" => $menarca,
             "irs" => $irs
@@ -262,21 +290,25 @@ function sw_create_appointment($params){
 
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)
-                update_field( $field, $value, $app_id );
+                //var_dump("clave: ".$field." valor: ".$value)."<br>";
+                //var_dump("app_id: ".$app_id)."<br>";
+                //update_field( $field, $value, $app_id );
+                update_post_meta( $app_id, $field, $value );
         }
 
         // save the data
         //do_action('acf/save_post' , $app_id);
 
-        $result['success'] = false;
+        $result['success'] = TRUE;
+        //var_dump('result from existing app = '. $result['success']);
     }
     /*else{
         $result['error'] = ["key"=> "create_app_fail", "msg" => "Error creting app"];
     }*/
 
     //wp_die(json_encode($result));
-}//end of sw_create_appointment
 
+}
 
 //get all the related appointments of a given patient
 function sw_get_related_appointments($patient_id){
