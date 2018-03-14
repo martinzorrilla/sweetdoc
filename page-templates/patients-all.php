@@ -1,16 +1,8 @@
 <?php get_header();/* Template Name: Patients All */ ?>
 <?php//$latest_patients = wp_list_pluck( $latest_patients, 'post_title'  );?>
-
-
 <?php
 //we use this to redirect to an appointment with te selected patient id
-$appointment_url = home_url().'/consulta/?patient_id=';
-
-//the id of the appointment if the user selects a appointment that's already created
-//$app_id = '&app_id=new';
-//$app_id = '&app_id=55';
-//echo esc_url( $appointment_url ); ?>
-
+$appointment_url = home_url().'/consulta/?patient_id=';?>
 <div class="patient-div">
 
   <ul class="menu align-center">
@@ -60,6 +52,8 @@ $appointment_url = home_url().'/consulta/?patient_id=';
   <div class="profile-card-author">
     <h5 class="author-title">Todos los pacientes</h5>
     <p class="author-description">Alguna descripcion sobre alguna baticosa</p>
+    <a href="">
+    <button id="create-patient" class="submit_button create-patient" type="submit" value="Crear">Crear Nuevo Paciente</button></a>
   </div>
     
   <?php
@@ -68,20 +62,19 @@ $appointment_url = home_url().'/consulta/?patient_id=';
     'post_type'   => 'sw_patient'
   );
   $latest_patients = get_posts( $args );?>
-    <?php foreach ($latest_patients as $patient): ?>
+    
+  <?php foreach ($latest_patients as $patient): ?>
       <div data-closable class="callout alert-callout-border primary">
         <a href="<?php echo get_permalink( $patient->ID ); ?> "><strong><?php echo $patient->post_title;?></strong></a>
         <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id=new'; ?>"> - Nueva consulta</a>
 
-        <?php $related = sw_get_related_appointments($patient->ID); 
-          foreach ($related as $r) {
-            # code...
-            //echo $r.'</br>';
-            ?>
-            <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id='.$r; ?>"> - Consulta Anterior id: <?php echo $r ?> </a>
-            <?php
-          }
-        ?>
+  <?php 
+    $related = sw_get_related_appointments($patient->ID); 
+      foreach ($related as $r){?>
+        <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id='.$r; ?>"> - Consulta Anterior id: <?php echo $r ?> </a>
+        <?php
+      }
+    ?>
 
         <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
           <span aria-hidden="true">&times;</span>

@@ -2,27 +2,17 @@
 <?php get_header();/* Template Name: Appointment*/?>
 <?php
   
-  $patient_id = $_GET['patient_id'];
   //The patient id is send from patients-all through the url so we grab here with $_GET
-  //$patient_post = get_post($_GET['patient_id']);
-  //var_dump($patient_post);
+  $patient_id = $_GET['patient_id'];
+  $app_id =  $_GET['app_id'];
 
-
-$app_id =  $_GET['app_id'];
-
-  //load all the data we need
-  /*$name = get_field('nombre', $patient_id);
+  //load all the data we need from the Person Post
+  $name = get_field('nombre', $patient_id);
   $lastname = get_field('apellido', $patient_id);
   $cedula = get_field('cedula', $patient_id);
   $fullname = $name.' '.$lastname;
-  echo $fullname; */
-
-  //wp_reset_postdata(); //always reset the post data!
-  //echo(" id del paciente:");
-  //echo $patient_post; // output 2489
-  //echo(" old app_id:");
-  //echo $_GET['app_id']; // output 2489
-
+ 
+  //ACF get field IS NOT WORKING for the app posst type when it's just been created so we use geet_post_custom instead to retrieve the data.
   $stored_fields = get_post_custom($app_id);
   echo "</br> get_fields(" . $app_id . "): </br>";
   var_dump($stored_fields);
@@ -37,12 +27,7 @@ $app_id =  $_GET['app_id'];
   else{
   echo "no es una nueva consulta";
   $appointment_id = $app_id;
-  //$appointment_id = get_post($_GET['app_id']);
   
-  //$appointment_post_id = get_post($app_id);
-  //$aux = get_post($app_id);
-  //$appointment_id = 85;
-  //  var_dump($aux);
   $menarca = $stored_fields['menarca'][0];
   $irs = $stored_fields['irs'][0];
   }
@@ -274,19 +259,19 @@ $app_id =  $_GET['app_id'];
           if(result.error.length >0){
           //if(result.error){
             //alert(result.error.msg);
-            alert('errorrrrr');
-
+            alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> sw_create_appointment_ajax ');
             //let errorMsg = result.error.msg;
             //jQuery('form#create-appointment-form .errorWrapper').prepend(errorMsg);
           }
           if(result.success){
-            alert("Creacion de Consulta exitosa");
+            alert(result['msg']);
             //$('#interests').foundation('open');
-            window.location.reload();
+            var oldUrl = window.location.href; 
+            var replaceId = "app_id="+result['app_id'];
+            var newUrl = oldUrl.replace("app_id=new", replaceId);
+            window.location.replace(newUrl);
+            //window.location.reload();
           }
-          else{
-            alert("Appointment Post Updated ");
-          } 
         }
       });
     }
