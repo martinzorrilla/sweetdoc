@@ -2,7 +2,10 @@
 <?php//$latest_patients = wp_list_pluck( $latest_patients, 'post_title'  );?>
 <?php
 //we use this to redirect to an appointment with te selected patient id
-$appointment_url = home_url().'/consulta/?patient_id=';?>
+$appointment_url = home_url().'/consulta/?patient_id=';
+$create_patient_url = home_url().'/crear-paciente/';
+//echo "crear paciente url: ".$create_patient_url;
+?>
 <div class="patient-div">
 
   <ul class="menu align-center">
@@ -44,6 +47,13 @@ $appointment_url = home_url().'/consulta/?patient_id=';?>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem libero fugit, pariatur maxime! Optio enim, deserunt quia molestiae fugiat delectus, dolore et esse nostrum, quod autem necessitatibus fugit soluta repellendus.
       </p>
+      <br>
+      <div>
+        <a href="<?php echo $create_patient_url ?>" rel="nofollow" target="_blank">
+            <button id="create-patient" class="submit_button create-patient-button" type="submit" value="Crear">Crear Nuevo Paciente
+            </button>
+        </a>
+      </div>
     </div> <!-- /.card-profile-stats-more-content -->
   </div> <!-- /.card-profile-stats-more -->
 </div> <!-- /.card-profile-stats -->
@@ -52,8 +62,6 @@ $appointment_url = home_url().'/consulta/?patient_id=';?>
   <div class="profile-card-author">
     <h5 class="author-title">Todos los pacientes</h5>
     <p class="author-description">Alguna descripcion sobre alguna baticosa</p>
-    <a href="">
-    <button id="create-patient" class="submit_button create-patient" type="submit" value="Crear">Crear Nuevo Paciente</button></a>
   </div>
     
   <?php

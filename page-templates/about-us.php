@@ -37,13 +37,29 @@
 
     sw_update_single_appointment($params);*/
 
+
+
+    /*To create a new TEST appointment for the patient 37*/
+
+    /*    $params = [
+          'app_id' => 'new',
+          'patient_id' => 37,
+          'menarca' => 444,
+          'irs' => 555
+        ];
+        sw_create_new_appointment($params);
+    */
+
+
+    /*To create a new TEST Patient*/
+
     $params = [
-      'app_id' => 'new',
-      'patient_id' => 37,
-      'menarca' => 444,
-      'irs' => 555
+      'patient_name' => 'yyy-',
+      'patient_ci' => '123'
     ];
-    sw_create_new_appointment($params);
+    $result = sw_create_patient($params);
+    var_dump("result = ".$result['success']);
+
   ?>
 
 </div>

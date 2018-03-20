@@ -146,8 +146,67 @@ function hm_get_template_part( $file, $template_args = array(), $cache_args = ar
 
 function sw_create_patient_ajax(){
 
+    $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+    //$result = [];
+    $patient_name = isset($_POST['patient_name']) && $_POST['patient_name'] != '' ? $_POST['patient_name'] : NULL;
+    $patient_last_name = isset($_POST['patient_last_name']) && $_POST['patient_last_name'] != '' ? $_POST['patient_last_name'] : NULL;
+    $patient_ci = isset($_POST['patient_ci']) && $_POST['patient_ci'] != '' ? $_POST['patient_ci'] : NULL;
+
+    $params = array(
+        "patient_name" => $patient_name,
+        "patient_last_name" => $patient_last_name,
+        "patient_ci" => $patient_ci
+    );
+
+    $result = sw_create_patient($params);
+
+    //if(algun tipo de control)
+      //$result['success'] = TRUE;
+    wp_die(json_encode($result));
 }
 
+add_action( 'wp_ajax_sw_create_patient_ajax', 'sw_create_patient_ajax');
+
+function sw_create_patient($params){
+
+    $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+
+      $patient_name = $params['patient_name'];
+      $patient_last_name = $params['patient_last_name'];
+      $patient_ci = $params['patient_ci'];
+
+      $my_post = array(
+        'post_title'    => wp_strip_all_tags( $patient_name.'fromBE' ),
+        'post_status'   => 'publish',
+        'post_author'   => get_current_user_id(),
+        'post_type' => 'sw_patient',
+        //'meta_input' => ["related_patient", $patient_post ]
+        //'post_category' => array( 8,39 )
+      );
+
+      // Insert the post into the database // returns post id on succes. 0 on fail
+      $post_id = wp_insert_post( $my_post );
+      if ($post_id == 0) {
+      //  wp_die( "Error creating a new Patient" );
+      }
+
+      $acf_fields = array(
+            "nombre" => $patient_name,
+            "apellido" => $patient_last_name,
+            "cedula" => $patient_ci
+        );
+
+        foreach ($acf_fields as $field => $value) {
+            if($value != NULL){
+                update_field( $field, $value, $post_id );
+            }
+        }
+
+
+      $result['success'] = TRUE;
+      $result['msg'] = 'Nuevo Paciente creado';
+      return $result;
+}
 
 
 /*
