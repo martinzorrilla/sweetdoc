@@ -65,7 +65,8 @@ $create_patient_url = home_url().'/crear-paciente/';
   </div>
     
 
-  <?php hm_get_template_part('template-parts/patients-all/list-patients'); ?>
+  <!-- Get the Part that renders the Patient List -->
+  <?php hm_get_template_part('template-parts/patients-all/list-patients', ['search_param' => '']); ?>
 
 
 </div>

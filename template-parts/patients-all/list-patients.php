@@ -1,13 +1,22 @@
   <?php
 
-  $appointment_url = home_url().'/consulta/?patient_id=';
   
-  $args = array(
+  $appointment_url = home_url().'/consulta/?patient_id=';
+
+  $search_param = $template_args["search_param"];
+
+  echo "search_param = ".$search_param;
+
+/*  $args = array(
     'numberposts' => -1,
     'post_type'   => 'sw_patient'
   );
   $latest_patients = get_posts( $args );
   wp_reset_postdata();
+*/
+
+  $latest_patients = sw_get_patients($search_param);
+
   ?>
   <?php foreach ($latest_patients as $patient): ?>
       <div data-closable class="callout alert-callout-border primary">

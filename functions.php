@@ -176,7 +176,7 @@ function sw_create_patient($params){
       $patient_ci = $params['patient_ci'];
 
       $my_post = array(
-        'post_title'    => wp_strip_all_tags( $patient_name.'fromBE' ),
+        'post_title'    => wp_strip_all_tags( $patient_name.' '. $patient_last_name ),
         'post_status'   => 'publish',
         'post_author'   => get_current_user_id(),
         'post_type' => 'sw_patient',
@@ -378,4 +378,31 @@ function sw_get_related_appointments($patient_id){
   return $related;
   //if want to return the query object
   //return $myquery;
+}
+
+//  Get all the patients of a given doctor
+//  * search_param = ''; will get all the patients
+function sw_get_patients($param){
+
+  $args = array(
+    'post_type'   => 'sw_patient',
+    'numberposts' => -1,
+    'meta_key'   => 'nombre',
+    'meta_query' => array(
+      'relation' => 'OR',
+        array(
+          'key'     => 'nombre',
+          'value'   => $param,
+          'compare' => 'LIKE',
+        ),
+        array(
+          'key'     => 'apellido',
+          'value'   => $param,
+          'compare' => 'LIKE',
+        ),
+    ),
+  );
+  $latest_patients = get_posts( $args );
+  wp_reset_postdata();
+  return $latest_patients;
 }
