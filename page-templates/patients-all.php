@@ -2,7 +2,7 @@
 <?php//$latest_patients = wp_list_pluck( $latest_patients, 'post_title'  );?>
 <?php
 //we use this to redirect to an appointment with te selected patient id
-$appointment_url = home_url().'/consulta/?patient_id=';
+//$appointment_url = home_url().'/consulta/?patient_id=';
 $create_patient_url = home_url().'/crear-paciente/';
 //echo "crear paciente url: ".$create_patient_url;
 ?>
@@ -19,7 +19,7 @@ $create_patient_url = home_url().'/crear-paciente/';
   <div class="card-profile-stats-intro">
     <img class="card-profile-stats-intro-pic" src="https://pbs.twimg.com/profile_images/732634911761260544/OxHbNdTF.jpg" alt="profile-image" />
     <div class="card-profile-stats-intro-content">
-      <h3>Dr. Diego Garcia</h3>
+      <h3>Dr. House</h3>
       <p>Gineco obstetra</small></p>
     </div> <!-- /.card-profile-stats-intro-content -->
   </div> <!-- /.card-profile-stats-intro -->
@@ -64,30 +64,9 @@ $create_patient_url = home_url().'/crear-paciente/';
     <p class="author-description">Alguna descripcion sobre alguna baticosa</p>
   </div>
     
-  <?php
-  $args = array(
-    'numberposts' => -1,
-    'post_type'   => 'sw_patient'
-  );
-  $latest_patients = get_posts( $args );?>
-    
-  <?php foreach ($latest_patients as $patient): ?>
-      <div data-closable class="callout alert-callout-border primary">
-        <a href="<?php echo get_permalink( $patient->ID ); ?> "><strong><?php echo $patient->post_title;?></strong></a>
-        <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id=new'; ?>"> - Nueva consulta</a>
 
-  <?php 
-    $related = sw_get_related_appointments($patient->ID); 
-      foreach ($related as $r){?>
-        <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id='.$r; ?>"> - Consulta Anterior id: <?php echo $r ?> </a>
-        <?php
-      }
-    ?>
+  <?php hm_get_template_part('template-parts/patients-all/list-patients'); ?>
 
-        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <?php endforeach; ?>
+
 </div>
 <?php get_footer(); ?>

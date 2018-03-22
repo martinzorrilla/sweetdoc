@@ -6,12 +6,25 @@
   $patient_id = $_GET['patient_id'];
   $app_id =  $_GET['app_id'];
 
+  echo "</br> patient_id: (" . $patient_id . "): </br>";
+
+  $post7 = get_post_meta($patient_id);
+  //wp_die(var_dump($post7));
+
+  $patient_fields = get_post_custom($patient_id);
+
   //load all the data we need from the Person Post
-  $name = get_field('nombre', $patient_id);
+  $name = $patient_fields['nombre'][0];
+  $lastname = $patient_fields['apellido'][0];
+  $cedula = $patient_fields['cedula'][0];
+  $fullname = $name.' '.$lastname;
+
+  //load all the data we need from the Person Post
+ /* $name = get_field('nombre', $patient_id);
   $lastname = get_field('apellido', $patient_id);
   $cedula = get_field('cedula', $patient_id);
   $fullname = $name.' '.$lastname;
- 
+*/ 
   //ACF get field IS NOT WORKING for the app posst type when it's just been created so we use geet_post_custom instead to retrieve the data.
   $stored_fields = get_post_custom($app_id);
   echo "</br> get_fields(" . $app_id . "): </br>";

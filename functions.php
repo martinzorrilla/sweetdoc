@@ -252,6 +252,7 @@ add_action( 'wp_ajax_sw_create_appointment_ajax', 'sw_create_appointment_ajax');
 
 function sw_create_new_appointment($params){
 
+    //global $post;
     $result = array('error'=>[], 'success'=>FALSE, 'patient_id'=>'', 'app_id'=>'','msg'=>'');
 
     $app_id  = $params['app_id'];
@@ -261,10 +262,17 @@ function sw_create_new_appointment($params){
 
     //$app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
 
-    $name = get_field('nombre', $patient_id);
-    $lastname = get_field('apellido', $patient_id);
+    //$name = get_field('nombre', $patient_id);
+    //$lastname = get_field('apellido', $patient_id);
     //$cedula = get_field('cedula', $patient_id);
+    
+    $patient_fields = get_post_custom($patient_id);
+    $name = $patient_fields['nombre'][0];
+    $lastname = $patient_fields['apellido'][0];
+    $cedula = $patient_fields['cedula'][0];
     $fullname = $name.' '.$lastname;
+
+    //$fullname = $name.' '.$lastname;
     $local_timestamp = get_the_time('U');
 
     if ($app_id === 'new' && $patient_id != NULL) {
@@ -365,9 +373,9 @@ function sw_get_related_appointments($patient_id){
   $related =  wp_list_pluck( $myquery->posts, 'ID' );
 
   wp_reset_postdata(); //always reset the post data!
+  
   //if want to return an array of id's
   return $related;
-
   //if want to return the query object
   //return $myquery;
 }
