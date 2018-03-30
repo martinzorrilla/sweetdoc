@@ -5,6 +5,11 @@
 //$appointment_url = home_url().'/consulta/?patient_id=';
 $create_patient_url = home_url().'/crear-paciente/';
 //echo "crear paciente url: ".$create_patient_url;
+
+//$is_secretary = sw_user_has_role_secretary();
+//echo "Is secretary? : ";
+//wp_die(var_dump($is_secretary));
+
 ?>
 <div class="patient-div">
 
@@ -65,9 +70,34 @@ $create_patient_url = home_url().'/crear-paciente/';
   </div>
     
 
-  <!-- Get the Part that renders the Patient List -->
+  <!-- 
+  Get the Part that renders the Patient List. 
+  * search_param = ''; will get all the patients
+   -->
   <?php hm_get_template_part('template-parts/patients-all/list-patients', ['search_param' => '']); ?>
 
 
 </div>
 <?php get_footer(); ?>
+
+
+<script>
+function myFunction() {
+    // Declare variables
+    var input, filter, ul, li, a, i;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+</script>

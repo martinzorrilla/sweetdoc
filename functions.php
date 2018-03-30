@@ -58,7 +58,8 @@ require_once( 'library/oikos-post-type-lib.php' );
 
 
 
-//returns person post id on succes, false on failure.
+//DEPRECATED: NO SE USA EN SWEETDOCTOR
+// returns person post id on succes, false on failure.
   function cca_get_current_user_person_post_id(){
     $current_user = wp_get_current_user();
     $current_user_id = $current_user->ID;
@@ -78,6 +79,13 @@ foreach (glob(get_template_directory()."/config/post-types/*.php") as $filename)
  * Taxonomies Definitions - autoloader
  */
 foreach (glob(get_template_directory()."/config/taxonomies/*.php") as $filename) {
+    require_once($filename);
+}
+
+/**
+ * Custom Roles - autoloader
+ */
+foreach (glob(get_template_directory()."/config/custom-roles/*.php") as $filename) {
     require_once($filename);
 }
 
@@ -167,6 +175,10 @@ function sw_create_patient_ajax(){
 
 add_action( 'wp_ajax_sw_create_patient_ajax', 'sw_create_patient_ajax');
 
+//deberia recibir el parametro ''post_author' asi si si la que creo el paciente
+//fue la secretaria, solo le paso como parametro el meta de la secre "post_author"
+//que va coincidir con el doctor que la creo, de esa forma al traer los pacientes
+// puedo usar ese parametro para que traiga todos los pacientes de ese doctor.
 function sw_create_patient($params){
 
     $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
@@ -174,11 +186,15 @@ function sw_create_patient($params){
       $patient_name = $params['patient_name'];
       $patient_last_name = $params['patient_last_name'];
       $patient_ci = $params['patient_ci'];
+      $post_author = $params['post_author'];
+
+      $patient_owner = sw_get_patient_owner();
 
       $my_post = array(
         'post_title'    => wp_strip_all_tags( $patient_name.' '. $patient_last_name ),
         'post_status'   => 'publish',
-        'post_author'   => get_current_user_id(),
+        //'post_author'   => get_current_user_id(),
+        'post_author'   => $patient_owner,
         'post_type' => 'sw_patient',
         //'meta_input' => ["related_patient", $patient_post ]
         //'post_category' => array( 8,39 )
@@ -384,15 +400,20 @@ function sw_get_related_appointments($patient_id){
 //  * search_param = ''; will get all the patients
 function sw_get_patients($param){
 
+//'author__in' needs an array to work properly
+$patient_owner = [];
+$patient_owner[0] = sw_get_patient_owner();
+
   $args = array(
     'post_type'   => 'sw_patient',
     'numberposts' => -1,
-    'meta_key'   => 'nombre',
-    'meta_query' => array(
+    'author__in'   => $patient_owner,
+    //'meta_key'   => 'nombre',
+    /*'meta_query' => array(
       'relation' => 'OR',
         array(
-          'key'     => 'nombre',
-          'value'   => $param,
+          'key'     => 'post_author',
+          'value'   => 2,
           'compare' => 'LIKE',
         ),
         array(
@@ -400,9 +421,80 @@ function sw_get_patients($param){
           'value'   => $param,
           'compare' => 'LIKE',
         ),
-    ),
+    ),*/
   );
   $latest_patients = get_posts( $args );
   wp_reset_postdata();
   return $latest_patients;
 }
+
+//returns the id of the doctor thaat created this sw_get_secretarys_doctor_id
+  function sw_get_secretarys_doctor_id(){
+    $current_user = wp_get_current_user();
+    $current_user_id = $current_user->ID;
+    //If the meta value does not exist and $single is true the function will return an empty string.
+    $doctor_id= get_user_meta( $current_user_id, 'created_by', true );
+    return $doctor_id;
+  }
+
+// returns id of the current user
+  function sw_get_current_id(){
+    $current_user = wp_get_current_user();
+    $current_id = $current_user->ID;
+    return $current_id;
+  }
+
+
+//crear funcion que determina si el usuario tiene el rol secretaria
+function sw_get_current_user_role(){
+  $current_user_id = sw_get_current_id();
+  $user_info = get_userdata($current_user_id);
+  $user_roles = $user_info->roles;
+
+  $result = "";
+
+  if (in_array("doctor", $user_roles))
+  {
+    //echo "Match found";
+    $result = "doctor";
+    return $result;
+  }
+
+  if (in_array("secretary", $user_roles))
+  {
+    //echo "Match found";
+    $result = "secretary";
+    return $result;
+  }
+
+  return $result;
+}
+
+//funcion que devuelve el author por el cual buscar o crear el paciente
+function sw_get_patient_owner(){
+
+  $result = sw_get_current_user_role();
+
+  if($result == "doctor" or $result == ""){
+    $patient_owner = sw_get_current_id();
+    return $patient_owner;
+  }
+
+  if($result == "secretary"){
+    $patient_owner = sw_get_secretarys_doctor_id();
+    return $patient_owner;
+  }
+}
+
+
+//Cuando se crea un usuario del tipo secretaria es importante saber el id del doctor que 
+//creo este usuario para poder despues filtrar los pacientes por doctor.
+//(en caso que la secretraria cree pacientes).
+function save_custom_user_profile_fields($user_id){
+
+
+    $current_id = sw_get_current_id();
+    # save my custom field
+    update_user_meta($user_id, 'created_by', $current_id);
+}
+add_action('user_register', 'save_custom_user_profile_fields');

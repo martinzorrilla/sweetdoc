@@ -1,7 +1,20 @@
 <?php get_header();?>
 <?php
+
+  //the id of the post in the current loop. wich is the patient
   $post_id = get_the_ID(); 
   //echo $post_id;
+
+  $post7 =get_post($post_id);
+  $post_author = $post7->post_author; 
+  echo "post author = ".$post_author."<br/>";
+
+  $current_user = wp_get_current_user();
+  $current_user_id = $current_user->ID;
+  echo "logged user id = ".$current_user_id."<br/>";
+  
+  $usersrole = sw_get_current_user_role();
+  echo "the users role : ". $usersrole;
 
   $name = get_field('nombre');
   $lastname = get_field('apellido');

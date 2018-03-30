@@ -1,4 +1,8 @@
 <?php get_header();/* Template Name: Front Page */ ?>
+<?php  
+  $all_patient_url = home_url().'/pacientes/';
+  $create_patient_url = home_url().'/crear-paciente/';
+?>
 <div class="app-dashboard shrink-medium">
   <div class="row expanded app-dashboard-top-nav-bar">
     <div class="columns medium-2">
@@ -12,7 +16,7 @@
       </div>
     </div>
     <div class="columns shrink app-dashboard-top-bar-actions">
-      <button href="#" class="button hollow">Logout</button>
+      <button href="#" class="button hollow">Salir</button>
       <a href="#" height="30" width="30" alt=""><i class="fa fa-info-circle"></i></a>
     </div>
   </div>
@@ -35,39 +39,21 @@
       </div>
       <div class="app-dashboard-sidebar-inner">
         <ul class="menu vertical">
-          <li><a href="#" class="is-active">
-            <i class="large fa fa-institution"></i><span class="app-dashboard-sidebar-text">Buildings</span>
+          <li><a href="<?php echo $all_patient_url ?>" class="is-active">
+            <i class="large fa fa-industry"></i><span class="app-dashboard-sidebar-text">Listar Pacientes</span>
           </a></li>
-          <li><a>
-            <i class="large fa fa-hourglass"></i><span class="app-dashboard-sidebar-text">Time</span>
+          <li><a href="<?php echo $create_patient_url ?>">
+            <i class="large fa fa-hourglass"></i><span class="app-dashboard-sidebar-text">Crear Paciente Nuevo</span>
           </a></li>
-          <li><a>
-            <i class="large fa fa-industry"></i><span class="app-dashboard-sidebar-text">Industry</span>
-          </a></li>
-          <li><a href="#" class="is-active">
-            <i class="large fa fa-institution"></i><span class="app-dashboard-sidebar-text">Buildings</span>
-          </a></li>
-          <li><a>
-            <i class="large fa fa-hourglass"></i><span class="app-dashboard-sidebar-text">Time</span>
-          </a></li>
-          <li><a>
-            <i class="large fa fa-industry"></i><span class="app-dashboard-sidebar-text">Industry</span>
-          </a></li>
-          <li><a href="#" class="is-active">
-            <i class="large fa fa-institution"></i><span class="app-dashboard-sidebar-text">Buildings</span>
-          </a></li>
-          <li><a>
-            <i class="large fa fa-hourglass"></i><span class="app-dashboard-sidebar-text">Time</span>
-          </a></li>
-          <li><a>
-            <i class="large fa fa-industry"></i><span class="app-dashboard-sidebar-text">Industry</span>
+          <li><a href="<?php echo $create_patient_url ?>">
+            <i class="large fa fa-industry"></i><span class="app-dashboard-sidebar-text">Crear Asistente</span>
           </a></li>
         </ul>
       </div>
     </div>
 
     <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
-      <h2 class="text-center">Loremm Ipsum</h2>
+      <h2 class="text-center">Gestionar Pacientes</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus blandit ligula eget est feugiat viverra. Duis a arcu laoreet, rhoncus libero imperdiet, placerat velit. Vestibulum euismod mi et ornare sodales. Donec efficitur mattis blandit. Proin in massa elit. Praesent malesuada iaculis nisl, a venenatis dui. Nullam venenatis tincidunt placerat. Suspendisse egestas urna a aliquet pretium.</p>
 
       <p>Curabitur ullamcorper mollis lobortis. Integer a scelerisque turpis, sed dictum lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam quis placerat sem. Suspendisse vulputate, leo ac sollicitudin lobortis, dui dui blandit justo, ut molestie justo sem in ipsum. Vestibulum convallis ex ac est tristique tincidunt. Vivamus dui dui, viverra et urna vitae, aliquam facilisis erat. Nam lorem nibh, elementum semper commodo at, fermentum quis justo. Donec finibus sapien eget scelerisque rhoncus. Nullam at nisi sed mi congue vestibulum. Vivamus nec scelerisque orci, vel fringilla nisi. Sed dictum, leo in consectetur porttitor, quam nibh aliquet nisi, in pulvinar sapien ante id dui. Aliquam massa nisl, auctor eget nisl in, faucibus gravida lectus. Nullam mattis orci at turpis finibus egestas. Nam vitae lorem accumsan, tempus lectus vitae, rutrum diam. Integer pulvinar placerat magna aliquam scelerisque.</p>

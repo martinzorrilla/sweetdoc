@@ -13,6 +13,7 @@ function create_post_type_patient() {
       'has_archive' => true,
     )
   );
+    //echo "Patient post type registered.<br/>";
 }
 add_action( 'init', 'create_post_type_patient' );
 ?>
