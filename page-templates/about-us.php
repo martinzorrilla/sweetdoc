@@ -41,14 +41,14 @@
 
     /*To create a new TEST appointment for the patient 37*/
 
-        $params = [
+ /*       $params = [
           'app_id' => 'new',
           'patient_id' => 213,
           'menarca' => 444,
           'irs' => 555
         ];
         sw_create_new_appointment($params);
-    
+    */
 
 
     /*To create a new TEST Patient*/
@@ -60,6 +60,18 @@
     $result = sw_create_patient($params);
     var_dump("result = ".$result['success']);
 */
+
+
+        /*To create a new TEST secretrary*/
+
+    $params = [
+      'patient_name' => 'backend',
+      'patient_last_name' => '123',
+      'patient_ci' => 'back@bk.com'
+    ];
+    $result = sw_create_secretary($params);
+    var_dump("result = ".$result['msg']);
+
   ?>
 
 </div>

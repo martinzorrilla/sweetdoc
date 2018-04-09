@@ -2,6 +2,7 @@
 <?php  
   $all_patient_url = home_url().'/pacientes/';
   $create_patient_url = home_url().'/crear-paciente/';
+  $create_secretary_url = home_url().'/crear-asistente/';
 ?>
 <div class="app-dashboard shrink-medium">
   <div class="row expanded app-dashboard-top-nav-bar">
@@ -25,7 +26,7 @@
     <div id="app-dashboard-sidebar" class="app-dashboard-sidebar position-left off-canvas off-canvas-absolute reveal-for-medium" data-off-canvas>
       <div class="app-dashboard-sidebar-title-area">
         <div class="app-dashboard-close-sidebar">
-          <h3 class="app-dashboard-sidebar-block-title">Items</h3>
+          <h3 class="app-dashboard-sidebar-block-title">Menu</h3>
           <!-- Close button -->
           <button id="close-sidebar" data-app-dashboard-toggle-shrink class="app-dashboard-sidebar-close-button show-for-medium" aria-label="Close menu" type="button">
             <span aria-hidden="true"><a href="#"><i class="large fa fa-angle-double-left"></i></a></span>
@@ -45,7 +46,7 @@
           <li><a href="<?php echo $create_patient_url ?>">
             <i class="large fa fa-hourglass"></i><span class="app-dashboard-sidebar-text">Crear Paciente Nuevo</span>
           </a></li>
-          <li><a href="<?php echo $create_patient_url ?>">
+          <li><a href="<?php echo $create_secretary_url ?>">
             <i class="large fa fa-industry"></i><span class="app-dashboard-sidebar-text">Crear Asistente</span>
           </a></li>
         </ul>
@@ -68,3 +69,4 @@
     </div>
   </div>
 </div>
+<?php get_footer(); ?>

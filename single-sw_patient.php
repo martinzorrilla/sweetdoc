@@ -100,7 +100,14 @@
   </div>
 </div>
 
-<?php hm_get_template_part('template-parts/appointment/ago', ['appointment_post_id' => $appointment_id]); ?>
+<?php 
+  //como prueba de concepto. si el usuario es doctor muestra estos campos si no, no
+  $result = "";
+  $result = sw_get_current_user_role();
+  if($result == "doctor"){
+    hm_get_template_part('template-parts/appointment/ago', ['appointment_post_id' => $appointment_id]); 
+  }
+?>
 
 
 </div>

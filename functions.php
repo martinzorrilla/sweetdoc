@@ -142,7 +142,71 @@ function hm_get_template_part( $file, $template_args = array(), $cache_args = ar
   echo $data;
 }
 
+/*
+********************************************************************************
+*
+      CreateSecretary
+*
+********************************************************************************
+*/
 
+function sw_create_secretary_ajax(){
+
+    $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+    //$result = [];
+    $patient_name = isset($_POST['patient_name']) && $_POST['patient_name'] != '' ? $_POST['patient_name'] : NULL;
+    $patient_last_name = isset($_POST['patient_last_name']) && $_POST['patient_last_name'] != '' ? $_POST['patient_last_name'] : NULL;
+    $patient_ci = isset($_POST['patient_ci']) && $_POST['patient_ci'] != '' ? $_POST['patient_ci'] : NULL;
+
+    $params = array(
+        "patient_name" => $patient_name,
+        "patient_last_name" => $patient_last_name,
+        "patient_ci" => $patient_ci
+    );
+
+    $result = sw_create_secretary($params);
+
+    //if(algun tipo de control)
+      //$result['success'] = TRUE;
+    wp_die(json_encode($result));
+}
+
+add_action( 'wp_ajax_sw_create_secretary_ajax', 'sw_create_secretary_ajax');
+
+
+function sw_create_secretary($params){
+
+    $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+
+      $secretary_name = $params['patient_name'];
+      $secretary_last_name = $params['patient_last_name'];
+      $secretary_email = $params['patient_ci'];
+      //$post_author = $params['post_author'];
+
+
+
+      //create a new wp user-----------
+      $user_id = username_exists( $secretary_name );
+      //if ( !$user_id and email_exists($patient_email) == false ) {
+      if ( true ) {
+        $password = "admin";
+        $user_id = wp_create_user( $secretary_name, $password, $secretary_email );
+
+         $user = new WP_User( $user_id );
+         $user->set_role( 'secretary' );
+
+
+        $result['success'] = TRUE;
+        $result['msg'] = 'Nuevo Asistente creado';
+      } else {
+        $result['success'] = 'FALLO';
+        //$result['error'][0] = TRUE;
+        //$random_password = __('User already exists.  Password inherited.');
+      }
+      //------------------------------
+
+      return $result;
+}
 
 /*
 ********************************************************************************
@@ -445,7 +509,7 @@ $patient_owner[0] = sw_get_patient_owner();
   }
 
 
-//crear funcion que determina si el usuario tiene el rol secretaria
+//crear funcion que determina si el usuario tiene el rol secretaria o doctor
 function sw_get_current_user_role(){
   $current_user_id = sw_get_current_id();
   $user_info = get_userdata($current_user_id);

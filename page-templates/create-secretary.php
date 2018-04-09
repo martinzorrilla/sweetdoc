@@ -53,7 +53,7 @@
         createSecretaryBtn = $("#create-secretary");
         createSecretaryForm = $("#create-secretary-form");
 
-        createSecretary.on("click", function (e) {
+        createSecretaryBtn.on("click", function (e) {
           saveProfileData(e);
         })
 
@@ -64,8 +64,8 @@
 
     function populateFormData() {
       //var inputs = createAppointmentForm.serializeArray();
-      var inputs = createPatientForm.find("input, select, textarea");
-      var serializedInputs = createPatientForm.serializeArray();
+      var inputs = createSecretaryForm.find("input, select, textarea");
+      var serializedInputs = createSecretaryForm.serializeArray();
       var formData = new FormData();
 
 
@@ -80,7 +80,7 @@
       //formData.append("patient_id", "<?php //echo $patient_id ?>");
       //formData.append("app_id", "55");
 
-      formData.append("action", "sw_create_patient_ajax");
+      formData.append("action", "sw_create_secretary_ajax");
 
       return formData;
     }
@@ -112,7 +112,7 @@
           if(result.error.length >0){
           //if(result.error){
             //alert(result.error.msg);
-            alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> sw_create_appointment_ajax ');
+            alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> sw_create_secretary_ajax ');
             //let errorMsg = result.error.msg;
             //jQuery('form#create-appointment-form .errorWrapper').prepend(errorMsg);
           }
