@@ -1,13 +1,5 @@
 <?php get_header();/* Template Name: About Us */ ?>
 
-<div class="patient-div">
-
-  <ul class="menu align-center">
-    <li><a href="#">One</a></li>
-    <li><a href="#">Two</a></li>
-    <li><a href="#">Three</a></li>
-  </ul>
-
   <h1>About Us</h1>
 
   <?php  
@@ -64,15 +56,26 @@
 
         /*To create a new TEST secretrary*/
 
-    $params = [
+/*    $params = [
       'patient_name' => 'backend',
       'patient_last_name' => '123',
       'patient_ci' => 'back@bk.com'
     ];
     $result = sw_create_secretary($params);
     var_dump("result = ".$result['msg']);
+*/
+
+        /*To create a new TEST secretrary*/
+
+    $params = [
+      'patient_name' => 'Private',
+      'patient_last_name' => 'Data',
+      'patient_id' => 263
+    ];
+    //$result = sw_create_static_data($params);
+    var_dump("result = ".$result['msg']);
 
   ?>
 
-</div>
+
 <?php get_footer(); ?>

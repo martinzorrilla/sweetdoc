@@ -7,14 +7,6 @@
 
   echo "search_param = ".$search_param;
 
-/*  $args = array(
-    'numberposts' => -1,
-    'post_type'   => 'sw_patient'
-  );
-  $latest_patients = get_posts( $args );
-  wp_reset_postdata();
-*/
-
   $latest_patients = sw_get_patients($search_param);
   ?>
 

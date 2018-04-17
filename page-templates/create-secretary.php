@@ -1,14 +1,6 @@
 <?php get_header();/* Template Name: Create Secretary*/?>
 <?php?>
 
-<div class="patient-div">
-
-  <ul class="menu align-center">
-    <li><a href="#">Onee</a></li>
-    <li><a href="#">Two</a></li>
-    <li><a href="#">Three</a></li>
-  </ul>
-
   <h1>Crear Nuevo Asistente</h1>
 
   <div class="appform">
@@ -36,7 +28,6 @@
           </fieldset>
         </form>
   </div>
-</div><!-- patient-div -->
 <?php get_footer(); ?>
 
 <script >

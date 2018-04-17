@@ -3,12 +3,6 @@
 
 <div class="patient-div">
 
-  <ul class="menu align-center">
-    <li><a href="#">Onee</a></li>
-    <li><a href="#">Two</a></li>
-    <li><a href="#">Three</a></li>
-  </ul>
-
   <h1>Crear Nuevo Paciente</h1>
 
   <div class="appform">

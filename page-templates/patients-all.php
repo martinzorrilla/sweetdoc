@@ -6,18 +6,7 @@
 $create_patient_url = home_url().'/crear-paciente/';
 //echo "crear paciente url: ".$create_patient_url;
 
-//$is_secretary = sw_user_has_role_secretary();
-//echo "Is secretary? : ";
-//wp_die(var_dump($is_secretary));
-
 ?>
-<div class="patient-div">
-
-  <ul class="menu align-center">
-    <li><a href="#">One</a></li>
-    <li><a href="#">Two</a></li>
-    <li><a href="#">Three</a></li>
-  </ul>
 
 
 <div class="card-profile-stats">
@@ -77,7 +66,6 @@ $create_patient_url = home_url().'/crear-paciente/';
   <?php hm_get_template_part('template-parts/patients-all/list-patients', ['search_param' => '']); ?>
 
 
-</div>
 <?php get_footer(); ?>
 
 

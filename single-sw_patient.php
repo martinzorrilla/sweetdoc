@@ -16,17 +16,18 @@
   $usersrole = sw_get_current_user_role();
   echo "the users role : ". $usersrole;
 
-  $name = get_field('nombre');
-  $lastname = get_field('apellido');
-  $fullname = $name.' '.$lastname;?>
+  //$name = get_field('nombre');
+  //$lastname = get_field('apellido');
+  //$fullname = $name.' '.$lastname;
 
-<div class="patient-div">
+  $patient_fields = get_post_custom($patient_id);
+  //load all the data we need from the Person Post
+  $name = $patient_fields['nombre'][0];
+  $lastname = $patient_fields['apellido'][0];
+  $cedula = $patient_fields['cedula'][0];
+  $fullname = $name.' '.$lastname;
+  ?>
 
-  <ul class="menu align-center">
-    <li><a href="#">Onee</a></li>
-    <li><a href="#">Two</a></li>
-    <li><a href="#">Three</a></li>
-  </ul>
 
 <div class="card profile-card-action-icons">
   <div class="card-section">
@@ -109,6 +110,4 @@
   }
 ?>
 
-
-</div>
 <?php get_footer();?>

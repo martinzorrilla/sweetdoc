@@ -246,6 +246,7 @@ add_action( 'wp_ajax_sw_create_patient_ajax', 'sw_create_patient_ajax');
 function sw_create_patient($params){
 
     $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+    $static_values = [];
 
       $patient_name = $params['patient_name'];
       $patient_last_name = $params['patient_last_name'];
@@ -283,11 +284,64 @@ function sw_create_patient($params){
         }
 
 
+      //create the patient static data post type
+      //send param array with name , lastname and $post_id wich is the receently created patient
+      $static_values = ['patient_name'=>$patient_name,
+                        'patient_last_name'=>$patient_last_name, 
+                        'patient_id'=>$post_id
+                       ];
+
+      $static_data = sw_create_static_data($static_values);
+
       $result['success'] = TRUE;
       $result['msg'] = 'Nuevo Paciente creado';
       return $result;
 }
 
+//Create post type static data and relate it to the created patient
+function sw_create_static_data($params){
+
+    $result = array('error'=>[], 'success'=>FALSE, 'patient_id'=>'','msg'=>'');
+
+    $patient_name = $params['patient_name'];
+    $patient_last_name = $params['patient_last_name'];
+    $patient_id = $params['patient_id'];
+
+    $fullname = $patient_name.' '.$patient_last_name;
+
+      $my_post = array(
+        'post_title'    => wp_strip_all_tags( $fullname.' ID: '.$patient_id),
+        'post_status'   => 'publish',
+        'post_author'   => get_current_user_id(),
+        'post_type'     => 'sw_static_data',
+        //'meta_input' => ["related_patient", $patient_post ]
+        //'post_category' => array( 8,39 )
+      );
+
+      // Insert the post into the database // returns post id on succes. 0 on fail
+      $app_post = wp_insert_post( $my_post );
+      if ($app_post == 0) {
+        wp_die( "Error creating a new static data post for this patient" );
+      }
+
+/*      $acf_fields = array(
+            "menarca" => $menarca,
+            "irs" => $irs
+        );
+
+        foreach ($acf_fields as $field => $value) {
+            if($value != NULL){
+                update_field( $field, $value, $app_post );
+            }
+        }*/
+
+      add_post_meta( $app_post, 'patients_static_data', $patient_id );
+      $result['success'] = TRUE;
+      $result['patient_id'] = $patient_id;
+      //$result['app_id'] = $app_post;
+      $result['msg'] = 'Patient Static Data Created.';
+      return $result;
+}
 
 /*
 ********************************************************************************
@@ -302,14 +356,21 @@ function sw_create_patient($params){
   
     $app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
     $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
+    //common-variable data
     $menarca = isset($_POST['menarca']) && $_POST['menarca'] != '' ? $_POST['menarca'] : NULL;
     $irs = isset($_POST['irs']) && $_POST['irs'] != '' ? $_POST['irs'] : NULL; 
-  
+    
+    //private/static data
+    $cesareas = isset($_POST['cesareas']) && $_POST['cesareas'] != '' ? $_POST['cesareas'] : NULL; 
+    $static_data_post_id = isset($_POST['static_data_post_id']) && $_POST['static_data_post_id'] != '' ? $_POST['static_data_post_id'] : NULL;
+
     $params = array(
         "app_id" => $app_id,
         "menarca" => $menarca,
         "irs" => $irs,
-        "patient_id" => $patient_id
+        "patient_id" => $patient_id,
+        "cesareas" => $cesareas,
+        "static_data_post_id" => $static_data_post_id
     );
 
     //wp_die(var_dump($params));
@@ -353,11 +414,11 @@ function sw_create_new_appointment($params){
     $fullname = $name.' '.$lastname;
 
     //$fullname = $name.' '.$lastname;
-    $local_timestamp = get_the_time('U');
+    //$local_timestamp = get_the_time('U');
 
     if ($app_id === 'new' && $patient_id != NULL) {
       $my_post = array(
-        'post_title'    => wp_strip_all_tags( $fullname.'test' ),
+        'post_title'    => wp_strip_all_tags( $fullname),
         'post_status'   => 'publish',
         'post_author'   => get_current_user_id(),
         'post_type' => 'sw_consulta',
@@ -400,16 +461,32 @@ function sw_update_single_appointment($params){
     $result = array('error'=>[], 'success'=>FALSE, 'patient_id'=>'', 'app_id'=>'','msg'=>'');
     
     $app_id  = $params["app_id"];
+    $static_data_post_id  = $params["static_data_post_id"];
     $menarca = $params['menarca'];
     $irs = $params['irs'];
+    
+    //private/static data
+    $cesareas = $params['cesareas'];
 
     if ($app_id != NULL && $app_id != '') {
+        //update the private/static data
+        $acf_fields = array(
+            "cesareas" => $cesareas,
+        );
+        foreach ($acf_fields as $field => $value) {
+            if($value != NULL)
+                //var_dump("clave: ".$field." valor: ".$value)."<br>";
+                //var_dump("app_id: ".$app_id)."<br>";
+                //update_field( $field, $value, $app_id );
+                update_post_meta( $static_data_post_id, $field, $value );
+        }
 
+
+        //update the common fields
         $acf_fields = array(
             "menarca" => $menarca,
             "irs" => $irs
         );
-
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)
                 //var_dump("clave: ".$field." valor: ".$value)."<br>";
@@ -418,8 +495,6 @@ function sw_update_single_appointment($params){
                 update_post_meta( $app_id, $field, $value );
         }
 
-        // save the data
-        //do_action('acf/save_post' , $app_id);
 
         $result['success'] = TRUE;
         $result['msg'] = 'Consulta Actualizada';
@@ -442,6 +517,37 @@ function sw_get_related_appointments($patient_id){
     'meta_query' => array(
       array(
         'key'     => 'related_patient',
+        'value'   => array($patient_id),
+        'compare' => 'IN',
+      ),
+    ),
+  );
+  $myquery = new WP_Query( $args );
+
+  //returns a fucking array
+  $related =  wp_list_pluck( $myquery->posts, 'ID' );
+
+  wp_reset_postdata(); //always reset the post data!
+  
+  //if want to return an array of id's
+  return $related;
+  //if want to return the query object
+  //return $myquery;
+}
+
+
+//get static_data post of a given patient
+function sw_get_static_data_id($patient_id){
+
+  $args = array(
+    'post_type'  => 'sw_static_data',
+    'meta_key'   => 'patients_static_data',
+    'posts_per_page' => -1,
+  //'orderby'    => 'meta_value_num',
+  //'order'      => 'ASC',
+    'meta_query' => array(
+      array(
+        'key'     => 'patients_static_data',
         'value'   => array($patient_id),
         'compare' => 'IN',
       ),
