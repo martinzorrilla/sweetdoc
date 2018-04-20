@@ -5,9 +5,7 @@
 //$appointment_url = home_url().'/consulta/?patient_id=';
 $create_patient_url = home_url().'/crear-paciente/';
 //echo "crear paciente url: ".$create_patient_url;
-
 ?>
-
 
 <div class="card-profile-stats">
   <div class="card-profile-stats-intro">

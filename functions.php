@@ -357,18 +357,20 @@ function sw_create_static_data($params){
     $app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
     $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
     //common-variable data
-    $menarca = isset($_POST['menarca']) && $_POST['menarca'] != '' ? $_POST['menarca'] : NULL;
-    $irs = isset($_POST['irs']) && $_POST['irs'] != '' ? $_POST['irs'] : NULL; 
+    $motivo_de_consulta = isset($_POST['motivo_de_consulta']) && $_POST['motivo_de_consulta'] != '' ? $_POST['motivo_de_consulta'] : NULL;
     
     //private/static data
     $cesareas = isset($_POST['cesareas']) && $_POST['cesareas'] != '' ? $_POST['cesareas'] : NULL; 
+    $menarca = isset($_POST['menarca']) && $_POST['menarca'] != '' ? $_POST['menarca'] : NULL;
+    $irs = isset($_POST['irs']) && $_POST['irs'] != '' ? $_POST['irs'] : NULL; 
     $static_data_post_id = isset($_POST['static_data_post_id']) && $_POST['static_data_post_id'] != '' ? $_POST['static_data_post_id'] : NULL;
 
     $params = array(
         "app_id" => $app_id,
+        "patient_id" => $patient_id,
+        "motivo_de_consulta" => $motivo_de_consulta,
         "menarca" => $menarca,
         "irs" => $irs,
-        "patient_id" => $patient_id,
         "cesareas" => $cesareas,
         "static_data_post_id" => $static_data_post_id
     );
@@ -398,8 +400,15 @@ function sw_create_new_appointment($params){
 
     $app_id  = $params['app_id'];
     $patient_id = $params['patient_id'];
+
+    //private/static data
+    $static_data_post_id  = $params["static_data_post_id"];
+    $cesareas = $params['cesareas'];
     $menarca = $params['menarca'];
     $irs = $params['irs'];
+
+    //common fields
+    $motivo_de_consulta = $params['motivo_de_consulta'];
 
     //$app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
 
@@ -411,14 +420,13 @@ function sw_create_new_appointment($params){
     $name = $patient_fields['nombre'][0];
     $lastname = $patient_fields['apellido'][0];
     $cedula = $patient_fields['cedula'][0];
-    $fullname = $name.' '.$lastname;
+    $fullname = $name.'-'.$lastname;
 
-    //$fullname = $name.' '.$lastname;
-    //$local_timestamp = get_the_time('U');
+    $timeStamp = date("Y-m-d H:i:s"); 
 
     if ($app_id === 'new' && $patient_id != NULL) {
       $my_post = array(
-        'post_title'    => wp_strip_all_tags( $fullname),
+        'post_title'    => wp_strip_all_tags( $fullname."-".$timeStamp),
         'post_status'   => 'publish',
         'post_author'   => get_current_user_id(),
         'post_type' => 'sw_consulta',
@@ -433,8 +441,7 @@ function sw_create_new_appointment($params){
       }
 
       $acf_fields = array(
-            "menarca" => $menarca,
-            "irs" => $irs
+            "motivo_de_consulta" => $motivo_de_consulta
         );
 
         foreach ($acf_fields as $field => $value) {
@@ -442,8 +449,23 @@ function sw_create_new_appointment($params){
                 update_field( $field, $value, $app_post );
             }
         }
-
       add_post_meta( $app_post, 'related_patient', $patient_id );
+      
+      //update the private/static data
+        $acf_fields = array(
+            "cesareas" => $cesareas,
+            "menarca" => $menarca,
+            "irs" => $irs
+        );
+        foreach ($acf_fields as $field => $value) {
+            if($value != NULL)
+                //var_dump("clave: ".$field." valor: ".$value)."<br>";
+                //var_dump("app_id: ".$app_id)."<br>";
+                //update_field( $field, $value, $app_id );
+                update_post_meta( $static_data_post_id, $field, $value );
+        }
+
+
       $result['success'] = TRUE;
       $result['patient_id'] = $patient_id;
       $result['app_id'] = $app_post;
@@ -461,17 +483,23 @@ function sw_update_single_appointment($params){
     $result = array('error'=>[], 'success'=>FALSE, 'patient_id'=>'', 'app_id'=>'','msg'=>'');
     
     $app_id  = $params["app_id"];
-    $static_data_post_id  = $params["static_data_post_id"];
-    $menarca = $params['menarca'];
-    $irs = $params['irs'];
+   
+    //common fields 
+    $motivo_de_consulta = $params['motivo_de_consulta'];
     
     //private/static data
+    $static_data_post_id  = $params["static_data_post_id"];
     $cesareas = $params['cesareas'];
+    $menarca = $params['menarca'];
+    $irs = $params['irs'];
 
     if ($app_id != NULL && $app_id != '') {
+
         //update the private/static data
         $acf_fields = array(
             "cesareas" => $cesareas,
+            "menarca" => $menarca,
+            "irs" => $irs
         );
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)
@@ -484,8 +512,7 @@ function sw_update_single_appointment($params){
 
         //update the common fields
         $acf_fields = array(
-            "menarca" => $menarca,
-            "irs" => $irs
+            "motivo_de_consulta" => $motivo_de_consulta            
         );
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)

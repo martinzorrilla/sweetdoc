@@ -12,11 +12,6 @@
   $patient_id = $_GET['patient_id'];
   $app_id =  $_GET['app_id'];
 
-  //echo "</br> patient_id: (" . $patient_id . "): </br>";
-
-  //$post7 = get_post_meta($patient_id);
-  //wp_die(var_dump($post7));
-
   //this is to get the id of the static_data post for this patient
   //returns an array 
   $static_data_array = sw_get_static_data_id($patient_id);
@@ -31,11 +26,8 @@
   $fullname = $name.' '.$lastname;
 
   //load all the data we need from the Person Post
- /* $name = get_field('nombre', $patient_id);
-  $lastname = get_field('apellido', $patient_id);
-  $cedula = get_field('cedula', $patient_id);
-  $fullname = $name.' '.$lastname;
-*/ 
+ /* $name = get_field('nombre', $patient_id);*/ 
+
   //ACF get field IS NOT WORKING for the app posst type when it's just been created so we use geet_post_custom instead to retrieve the data.
   $stored_fields = get_post_custom($app_id);
   //echo "</br> get_fields(" . $app_id . "): </br>";
@@ -50,12 +42,12 @@
   else{
     //echo "no es una nueva consulta";
     $appointment_id = $app_id;
-    $menarca = $stored_fields['menarca'][0];
-    $irs = $stored_fields['irs'][0];
+//    $menarca = $stored_fields['menarca'][0];
+//    $irs = $stored_fields['irs'][0];
   }
 ?>
 
-  <h1>Consulta</h1>
+  <h1 style="text-align: center">CONSULTA</h1>
 
   <div class="card profile-card-action-icons">
     <div class="card-section">
@@ -97,10 +89,7 @@
     </div>
   </div>
 
-  <?php //hm_get_template_part('parts/components/currently-working-on', ['person_post_id' => $current_post_id[0]]); ?>
-
   <?php //hm_get_template_part('template-parts/appointment/ago', ['appointment_id' => $appointment_id]); ?>
-
 
 
   <div class="appform">
@@ -109,20 +98,13 @@
           <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id]); ?>
 
           <fieldset>
-            <div class="floated-label-wrapper">
-              <label for="menarca">Menarca &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="menarca" name="menarca" value="<?php echo $menarca ?>" placeholder="Type..." required>
-            </div>
-
-            <div class="floated-label-wrapper">
-              <label for="irs">IRS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="irs" name="irs" value="<?php echo $irs ?>" placeholder="Type..." required>
-            </div>
+            <?php hm_get_template_part('template-parts/appointment/common-data', ['appointment_id' => $appointment_id]); ?>
           </fieldset>
+          
         </form>
   </div>
 
-  <div>
+  <div style="text-align: center">
     <button id="create-appointment" class="submit_button" type="submit" value="Next">Guardar</button>
     <p class="errorWrapper"></p>
   </div>

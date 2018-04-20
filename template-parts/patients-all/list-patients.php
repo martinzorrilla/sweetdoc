@@ -5,12 +5,12 @@
 
   $search_param = $template_args["search_param"];
 
-  echo "search_param = ".$search_param;
+  //echo "search_param = ".$search_param;
 
   $latest_patients = sw_get_patients($search_param);
   ?>
 
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar por Nombre de Pacientes..">
 
   <ul id="myUL">
     <?php foreach ($latest_patients as $patient): ?>
