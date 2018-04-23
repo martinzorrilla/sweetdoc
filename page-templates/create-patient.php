@@ -59,6 +59,7 @@
         createPatientForm = $("#create-patient-form");
 
         createPatientBtn.on("click", function (e) {
+          createPatientBtn.hide();
           saveProfileData(e);
         })
 

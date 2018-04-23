@@ -358,6 +358,7 @@ function sw_create_static_data($params){
     $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
     //common-variable data
     $motivo_de_consulta = isset($_POST['motivo_de_consulta']) && $_POST['motivo_de_consulta'] != '' ? $_POST['motivo_de_consulta'] : NULL;
+    $antecedente_actual = isset($_POST['antecedente_actual']) && $_POST['antecedente_actual'] != '' ? $_POST['antecedente_actual'] : NULL;
     
     //private/static data
     $cesareas = isset($_POST['cesareas']) && $_POST['cesareas'] != '' ? $_POST['cesareas'] : NULL; 
@@ -369,6 +370,7 @@ function sw_create_static_data($params){
         "app_id" => $app_id,
         "patient_id" => $patient_id,
         "motivo_de_consulta" => $motivo_de_consulta,
+        "antecedente_actual" => $antecedente_actual,
         "menarca" => $menarca,
         "irs" => $irs,
         "cesareas" => $cesareas,
@@ -409,6 +411,7 @@ function sw_create_new_appointment($params){
 
     //common fields
     $motivo_de_consulta = $params['motivo_de_consulta'];
+    $antecedente_actual = $params['antecedente_actual'];
 
     //$app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
 
@@ -441,7 +444,8 @@ function sw_create_new_appointment($params){
       }
 
       $acf_fields = array(
-            "motivo_de_consulta" => $motivo_de_consulta
+            "motivo_de_consulta" => $motivo_de_consulta,
+            "antecedente_actual" => $antecedente_actual
         );
 
         foreach ($acf_fields as $field => $value) {
@@ -486,6 +490,7 @@ function sw_update_single_appointment($params){
    
     //common fields 
     $motivo_de_consulta = $params['motivo_de_consulta'];
+    $antecedente_actual = $params['antecedente_actual'];
     
     //private/static data
     $static_data_post_id  = $params["static_data_post_id"];
@@ -512,7 +517,8 @@ function sw_update_single_appointment($params){
 
         //update the common fields
         $acf_fields = array(
-            "motivo_de_consulta" => $motivo_de_consulta            
+            "motivo_de_consulta" => $motivo_de_consulta,           
+            "antecedente_actual" => $antecedente_actual           
         );
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)

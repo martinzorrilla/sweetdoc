@@ -68,7 +68,7 @@ $create_patient_url = home_url().'/crear-paciente/';
 
 
 <script>
-function myFunction() {
+function searchBarFunction() {
     // Declare variables
     var input, filter, ul, li, a, i;
     input = document.getElementById('myInput');

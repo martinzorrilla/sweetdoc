@@ -104,7 +104,7 @@
         </form>
   </div>
 
-  <div style="text-align: center">
+  <div class="my_save_button">
     <button id="create-appointment" class="submit_button" type="submit" value="Next">Guardar</button>
     <p class="errorWrapper"></p>
   </div>
@@ -150,6 +150,7 @@
         });*/
 
         createAppBtn.on("click", function (e) {
+          createAppBtn.hide();
           saveProfileData(e);
         })
 

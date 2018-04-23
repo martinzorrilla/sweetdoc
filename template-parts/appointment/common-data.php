@@ -3,6 +3,7 @@
     
     $stored_fields = get_post_custom($appointment_post_id);
     $motivo_de_consulta = $stored_fields['motivo_de_consulta'][0];
+    $antecedente_actual = $stored_fields['antecedente_actual'][0];
     //$irs = $stored_fields['irs'][0];
  ?>
 <!-- <h3>Datos de la Consulta</h3> -->
@@ -24,8 +25,13 @@
                   </p>
 
                   <div class="floated-label-wrapper">
-                    <label for="menarca">Motivo de Consulta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    <input type="text" id="motivo_de_consulta" name="motivo_de_consulta" value="<?php echo $motivo_de_consulta ?>" placeholder="Type..." required>
+                    <label for="Motivo de Consulta">Motivo de Consulta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <input type="text" id="motivo_de_consulta" name="motivo_de_consulta" value="<?php echo $motivo_de_consulta ?>" placeholder="Escribir..." required>
+                  </div>
+
+                  <div class="floated-label-wrapper">
+                    <label for="antecedente_actual">Antecedentes de la enfermedad actual &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <input type="text" id="antecedente_actual" name="antecedente_actual" value="<?php echo $antecedente_actual ?>" placeholder="Escribir..." required>
                   </div>
 
                 </div>

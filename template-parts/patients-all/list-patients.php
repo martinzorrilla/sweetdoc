@@ -5,12 +5,11 @@
 
   $search_param = $template_args["search_param"];
 
-  //echo "search_param = ".$search_param;
-
+  //search_param DEPRECTATED. I don't use search param anymore but it can be used
   $latest_patients = sw_get_patients($search_param);
   ?>
 
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar por Nombre de Pacientes..">
+  <input type="text" id="myInput" onkeyup="searchBarFunction()" placeholder="Buscar por Nombre de Pacientes..">
 
   <ul id="myUL">
     <?php foreach ($latest_patients as $patient): ?>

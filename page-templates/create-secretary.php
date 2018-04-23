@@ -45,6 +45,7 @@
         createSecretaryForm = $("#create-secretary-form");
 
         createSecretaryBtn.on("click", function (e) {
+          createSecretaryBtn.hide();
           saveProfileData(e);
         })
 
