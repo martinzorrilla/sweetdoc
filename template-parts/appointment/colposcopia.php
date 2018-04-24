@@ -1,9 +1,8 @@
 <?php
-    $colpo_post_id = $template_args["colpo_post_id"];
-    //$static_data_array = sw_get_static_data_id($patient_id); 
+    $colpo_post_id = $template_args["colpo_post_id"]; 
     $colpo_data_post = get_post_custom($colpo_post_id);
-    //var_dump($static_data_post);
     
+    print_hello_world();
     //load all the data we need from the static_data
     $macroscopia = $colpo_data_post['macroscopia'][0];
  ?>
@@ -13,7 +12,7 @@
   <div class="card-section">
     <div class="profile-card-header">
       <div class="profile-card-avatar">
-        <img class="avatar-image" src="https://i.imgur.com/3AeQRbR.jpg" alt="Harry Manchanda">
+        <img class="avatar-image" src="<?php bloginfo('template_url')?>/src/assets/images/pepaicon.jpg" alt="Peppa Pig">
       </div>
       <div class="profile-card-author">
         <h5 class="author-title">Colposcopia</h5>

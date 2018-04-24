@@ -90,6 +90,13 @@ foreach (glob(get_template_directory()."/config/custom-roles/*.php") as $filenam
 }
 
 
+/**
+ * My-Custom Functions - autoloader
+ */
+foreach (glob(get_template_directory()."/src/my-functions/*.php") as $filename) {
+    require_once($filename);
+}
+
 /*********************************************************************************
 *
 *
@@ -773,13 +780,10 @@ function sw_get_patient_owner(){
   }
 }
 
-
 //Cuando se crea un usuario del tipo secretaria es importante saber el id del doctor que 
 //creo este usuario para poder despues filtrar los pacientes por doctor.
 //(en caso que la secretraria cree pacientes).
 function save_custom_user_profile_fields($user_id){
-
-
     $current_id = sw_get_current_id();
     # save my custom field
     update_user_meta($user_id, 'created_by', $current_id);

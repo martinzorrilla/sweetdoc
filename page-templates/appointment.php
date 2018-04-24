@@ -8,6 +8,7 @@
   if($the_role != "doctor"){
     wp_redirect(home_url());
   }
+  
   //The patient id is send from patients-all through the url so we grab here with $_GET
   $patient_id = $_GET['patient_id'];
   $app_id =  $_GET['app_id'];
@@ -17,22 +18,9 @@
   $static_data_array = sw_get_static_data_id($patient_id);
   $static_data_post_id = $static_data_array[0];
 
-  $patient_fields = get_post_custom($patient_id);
-  //load all the data we need from the Person Post
-  $name = $patient_fields['nombre'][0];
-  $lastname = $patient_fields['apellido'][0];
-  $cedula = $patient_fields['cedula'][0];
-  $fullname = $name.' '.$lastname;
-
-  //load all the data we need from the Person Post
- /* $name = get_field('nombre', $patient_id);*/ 
 
   //ACF get field IS NOT WORKING for the app posst type when it's just been created so we use geet_post_custom instead to retrieve the data.
   $stored_fields = get_post_custom($app_id);
-  //echo "</br> get_fields(" . $app_id . "): </br>";
-  //var_dump($stored_fields);
-  //echo '</br></br>';
-
 
   if ($app_id === 'new') {
     //echo "  nueva consulta";
@@ -48,50 +36,7 @@
   }
 ?>
 
-  <h1 style="text-align: center">CONSULTA</h1>
-
-  <div class="card profile-card-action-icons">
-    <div class="card-section">
-      <div class="profile-card-header">
-        <div class="profile-card-avatar">
-          <img class="avatar-image" src="https://i.imgur.com/3AeQRbR.jpg" alt="Harry Manchanda">
-        </div>
-        <div class="profile-card-author">
-          <h5 class="author-title"><?php echo $fullname." ci:".$cedula ?></h5>
-          <p class="author-description">Paciente</p>
-        </div>
-      </div>
-      <div class="profile-card-about">
-        <h5 class="about-title separator-left">Acerca de <?php echo $name?></h5>
-        <p class="about-content">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet autem eveniet nulla quae ullam sit iure voluptatum, nesciunt voluptas perferendis, minus natus in quaerat?
-        </p>
-
-        <br>
-        <h5 class="about-title separator-left">Ultimo estudios</h5>
-        
-        <div class="row about-skills">
-          <div class="small-6 columns">
-            <ul class="arrow">
-              <li>Ecografia</li>
-              <li>Colposcopia</li>
-              <li>Analisis de Sangre</li>
-            </ul>
-          </div>
-          <div class="small-6 columns">
-            <ul class="arrow">
-              <li>Maths</li>
-              <li>Dancing</li>
-              <li>Smiling</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <?php //hm_get_template_part('template-parts/appointment/ago', ['appointment_id' => $appointment_id]); ?>
-
+  <?php hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]); ?>
 
   <div class="appform">
     <form id="create-appointment-form" name="create-appointment-form" method="post" class="text-center">

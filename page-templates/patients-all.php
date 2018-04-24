@@ -9,7 +9,7 @@ $create_patient_url = home_url().'/crear-paciente/';
 
 <div class="card-profile-stats">
   <div class="card-profile-stats-intro">
-    <img class="card-profile-stats-intro-pic" src="https://pbs.twimg.com/profile_images/732634911761260544/OxHbNdTF.jpg" alt="profile-image" />
+    <img class="card-profile-stats-intro-pic" src="<?php bloginfo('template_url')?>/src/assets/images/andrea.jpg" alt="Andrea Zorrilla" />
     <div class="card-profile-stats-intro-content">
       <h3>Dr. House</h3>
       <p>Gineco obstetra</small></p>
