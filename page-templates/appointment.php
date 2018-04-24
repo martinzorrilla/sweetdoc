@@ -18,7 +18,6 @@
   $static_data_post_id = $static_data_array[0];
 
   $patient_fields = get_post_custom($patient_id);
-
   //load all the data we need from the Person Post
   $name = $patient_fields['nombre'][0];
   $lastname = $patient_fields['apellido'][0];
@@ -38,12 +37,14 @@
   if ($app_id === 'new') {
     //echo "  nueva consulta";
     $appointment_id = $app_id;
+    $colpo_post_id = 'new';
   }//if new patient = true
   else{
     //echo "no es una nueva consulta";
     $appointment_id = $app_id;
-//    $menarca = $stored_fields['menarca'][0];
-//    $irs = $stored_fields['irs'][0];
+    //get the colposcopia post id for this app
+    $colpo_patient_array = sw_get_colpo_id($appointment_id);
+    $colpo_post_id = $colpo_patient_array[0];
   }
 ?>
 
@@ -100,6 +101,8 @@
           <fieldset>
             <?php hm_get_template_part('template-parts/appointment/common-data', ['appointment_id' => $appointment_id]); ?>
           </fieldset>
+
+          <?php hm_get_template_part('template-parts/appointment/colposcopia', ['colpo_post_id' => $colpo_post_id]); ?>
           
         </form>
   </div>
@@ -227,7 +230,7 @@
       formData.append("app_id", "<?php echo $appointment_id ?>");
       formData.append("patient_id", "<?php echo $patient_id ?>");
       formData.append("static_data_post_id", "<?php echo $static_data_post_id ?>");
-      //formData.append("app_id", "55");
+      formData.append("colpo_post_id", "<?php echo $colpo_post_id ?>");
 
       formData.append("action", "sw_create_appointment_ajax");
 

@@ -366,15 +366,22 @@ function sw_create_static_data($params){
     $irs = isset($_POST['irs']) && $_POST['irs'] != '' ? $_POST['irs'] : NULL; 
     $static_data_post_id = isset($_POST['static_data_post_id']) && $_POST['static_data_post_id'] != '' ? $_POST['static_data_post_id'] : NULL;
 
+    
+    //colposcopia data
+    $colpo_post_id = isset($_POST['colpo_post_id']) && $_POST['colpo_post_id'] != '' ? $_POST['colpo_post_id'] : NULL;
+    $macroscopia = isset($_POST['macroscopia']) && $_POST['macroscopia'] != '' ? $_POST['macroscopia'] : NULL;
+    
     $params = array(
         "app_id" => $app_id,
         "patient_id" => $patient_id,
+        "static_data_post_id" => $static_data_post_id,
+        "colpo_post_id" => $colpo_post_id,
         "motivo_de_consulta" => $motivo_de_consulta,
         "antecedente_actual" => $antecedente_actual,
         "menarca" => $menarca,
         "irs" => $irs,
         "cesareas" => $cesareas,
-        "static_data_post_id" => $static_data_post_id
+        "macroscopia" => $macroscopia
     );
 
     //wp_die(var_dump($params));
@@ -412,6 +419,9 @@ function sw_create_new_appointment($params){
     //common fields
     $motivo_de_consulta = $params['motivo_de_consulta'];
     $antecedente_actual = $params['antecedente_actual'];
+    
+    //colposcopia data
+    $macroscopia = $params['macroscopia'];
 
     //$app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
 
@@ -469,6 +479,35 @@ function sw_create_new_appointment($params){
                 update_post_meta( $static_data_post_id, $field, $value );
         }
 
+      //crear el post colposcopia y actualizar. vincular el post con patient_id y con app_id
+      $colpo_post_data = array(
+        'post_title'    => wp_strip_all_tags( $fullname." App ID: ".$app_post),
+        'post_status'   => 'publish',
+        'post_author'   => get_current_user_id(),
+        'post_type' => 'sw_colposcopia',
+        //'meta_input' => ["related_patient", $patient_post ]
+        //'post_category' => array( 8,39 )
+      );
+
+      // Insert the post into the database // returns post id on succes. 0 on fail
+      $colpo_post = wp_insert_post( $colpo_post_data );
+      if ($colpo_post == 0) {
+        wp_die( "Error creating a new Colposcopia" );
+      }
+
+      $acf_fields = array(
+            "macroscopia" => $macroscopia
+        );
+
+        foreach ($acf_fields as $field => $value) {
+            if($value != NULL){
+                update_field( $field, $value, $colpo_post );
+            }
+        }
+      //agregar al post colpo el id de la app y del paciente que le corresponde.
+      add_post_meta( $colpo_post, 'colpo_related_patient', $patient_id );
+      add_post_meta( $colpo_post, 'colpo_related_app', $app_post );
+
 
       $result['success'] = TRUE;
       $result['patient_id'] = $patient_id;
@@ -497,6 +536,10 @@ function sw_update_single_appointment($params){
     $cesareas = $params['cesareas'];
     $menarca = $params['menarca'];
     $irs = $params['irs'];
+
+    //colposcopia data
+    $colpo_post_id  = $params["colpo_post_id"];
+    $macroscopia = $params['macroscopia'];
 
     if ($app_id != NULL && $app_id != '') {
 
@@ -528,6 +571,17 @@ function sw_update_single_appointment($params){
                 update_post_meta( $app_id, $field, $value );
         }
 
+        //update the colposcopy fields
+        $acf_fields = array(
+            "macroscopia" => $macroscopia         
+        );
+        foreach ($acf_fields as $field => $value) {
+            if($value != NULL)
+                //var_dump("clave: ".$field." valor: ".$value)."<br>";
+                //var_dump("app_id: ".$app_id)."<br>";
+                //update_field( $field, $value, $app_id );
+                update_post_meta( $colpo_post_id, $field, $value );
+        }
 
         $result['success'] = TRUE;
         $result['msg'] = 'Consulta Actualizada';
@@ -582,6 +636,36 @@ function sw_get_static_data_id($patient_id){
       array(
         'key'     => 'patients_static_data',
         'value'   => array($patient_id),
+        'compare' => 'IN',
+      ),
+    ),
+  );
+  $myquery = new WP_Query( $args );
+
+  //returns a fucking array
+  $related =  wp_list_pluck( $myquery->posts, 'ID' );
+
+  wp_reset_postdata(); //always reset the post data!
+  
+  //if want to return an array of id's
+  return $related;
+  //if want to return the query object
+  //return $myquery;
+}
+
+//get static_data post of a given patient
+function sw_get_colpo_id($app_id){
+
+  $args = array(
+    'post_type'  => 'sw_colposcopia',
+    'meta_key'   => 'colpo_related_app',
+    'posts_per_page' => -1,
+  //'orderby'    => 'meta_value_num',
+  //'order'      => 'ASC',
+    'meta_query' => array(
+      array(
+        'key'     => 'colpo_related_app',
+        'value'   => array($app_id),
         'compare' => 'IN',
       ),
     ),
