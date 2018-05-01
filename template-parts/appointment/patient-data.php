@@ -8,8 +8,6 @@
   $fullname = $name.' '.$lastname;
  ?>
 
-<h1 style="text-align: center; margin-left: 50px;">CONSULTA</h1>
-
   <div class="card profile-card-action-icons">
     <div class="card-section">
       <div class="profile-card-header">

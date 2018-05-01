@@ -11,7 +11,7 @@ $create_patient_url = home_url().'/crear-paciente/';
   <div class="card-profile-stats-intro">
     <img class="card-profile-stats-intro-pic" src="<?php bloginfo('template_url')?>/src/assets/images/andrea.jpg" alt="Andrea Zorrilla" />
     <div class="card-profile-stats-intro-content">
-      <h3>Dr. House</h3>
+      <h3>Dra. Andrea Zorrilla</h3>
       <p>Gineco obstetra</small></p>
     </div> <!-- /.card-profile-stats-intro-content -->
   </div> <!-- /.card-profile-stats-intro -->
@@ -42,7 +42,7 @@ $create_patient_url = home_url().'/crear-paciente/';
       <br>
       <div>
         <a href="<?php echo $create_patient_url ?>" rel="nofollow" target="_blank">
-            <button id="create-patient" class="submit_button create-patient-button" type="submit" value="Crear">Crear Nuevo Paciente
+            <button id="create-patient" class="submit_button create-button" type="submit" value="Crear">Crear Nuevo Paciente
             </button>
         </a>
       </div>

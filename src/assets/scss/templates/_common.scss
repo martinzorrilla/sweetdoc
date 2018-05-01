@@ -1,0 +1,83 @@
+.patient-div{
+  max-width: 900px;
+  margin: auto;
+}
+
+
+.button-div{
+  text-align: center !important;
+  //border: 2px solid red;
+} 
+//.button-div:hover {background-color: red;}
+
+//SAVE button used across the site
+.my_save_button {
+    font-style: normal;
+    font-weight: normal;
+    //color: inherit;
+    text-rendering: optimizeLegibility;
+    position: relative;
+    background-color: #4CAF50;
+    border: none;
+    font-size: 28px;
+    color: #FFFFFF;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.my_save_button:after {
+    content: "";
+    background: #90EE90;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.my_save_button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+//.my_save_button:hover {background-color: red !important;}
+
+
+//-----------------------------------------------------------
+  .save-button-expanded {
+    //max-width: 100%;
+    font-family: inherit;
+    width:50%;
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #1779ba;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+
+  .save-button-expanded:hover {background-color: #176ca5;
+    color: white;
+    //opacity: 0.7;
+  }
+
+  .save-button-expanded:active {
+    background-color: #11537f;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }

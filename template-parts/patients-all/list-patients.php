@@ -14,20 +14,19 @@
   <ul id="myUL">
     <?php foreach ($latest_patients as $patient): ?>
       <li>
-        <div data-closable class="callout alert-callout-border primary">
-          <a href="<?php echo get_permalink( $patient->ID ); ?> "><strong><?php echo $patient->post_title;?></strong></a>
-          <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id=new'; ?>"> - Nueva consulta</a>
+        <div data-closable class="callout alert-callout-border primary list-patients">
+          <a href="<?php echo get_permalink( $patient->ID ); ?> " class="name"><strong><?php echo $patient->post_title;?></strong></a>
+          <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id=new'; ?>" class="crete-app"> - Crear Nueva consulta</a>
 
           <?php 
-          $related = sw_get_related_appointments($patient->ID); 
-          foreach ($related as $r){?>
-            <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id='.$r; ?>"> - Consulta Anterior id: <?php echo $r ?> </a>
-            <?php
-          }
-          ?>
-          <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+          //$related = sw_get_related_appointments($patient->ID); 
+          //foreach ($related as $r){?>
+            <!-- <a href="<?php //echo esc_url( $appointment_url ).$patient->ID.'&app_id='.$r; ?>"> - Consulta Anterior id: <?php //echo $r ?> </a> -->
+          <?php//}?>
+          <!-- <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
             <span aria-hidden="true">&times;</span>
-          </button>
+          </button> -->
+
         </div>
       </li>
     <?php endforeach;?>

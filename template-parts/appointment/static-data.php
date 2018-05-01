@@ -13,16 +13,19 @@
 
 <div class="card profile-card-action-icons">
   <div class="card-section">
-    <div class="profile-card-header">
+    <div class="profile-card-header static-data-click-to-show">
       <div class="profile-card-avatar">
         <img class="avatar-image" src="<?php bloginfo('template_url')?>/src/assets/images/pepaicon.jpg" alt="Peppa Pig">
       </div>
       <div class="profile-card-author">
-        <h5 class="author-title">Datos Privados</h5>
+        <h5 class="author-title">AGO</h5>
         <p class="author-description">Paciente</p>
+        <p class="card-profile-stats-more-link"><a href="#"><i class="fa fa-angle-down" aria-hidden="true"></i></a></p>
       </div>
     </div>
-    <div class="profile-card-about">
+    
+    
+    <div class="profile-card-about static-data-slide">
       <h5 class="about-title separator-left">Aca van los campos <?php //echo $name?></h5>
       <p class="about-content">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet autem eveniet nulla quae ullam sit iure voluptatum, nesciunt voluptas perferendis, minus natus in quaerat?

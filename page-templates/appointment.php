@@ -12,6 +12,7 @@
   //The patient id is send from patients-all through the url so we grab here with $_GET
   $patient_id = $_GET['patient_id'];
   $app_id =  $_GET['app_id'];
+  $app_creation_date = get_the_date( 'd-M-Y', $app_id );
 
   //this is to get the id of the static_data post for this patient
   //returns an array 
@@ -36,6 +37,10 @@
   }
 ?>
 
+  <div class="callout secondary">
+    <h3 style="text-align: center; margin-left: 50px;">Consulta del Paciente <strong> <?php echo $app_creation_date ?> </strong></h3>
+  </div>
+
   <?php hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]); ?>
 
   <div class="appform">
@@ -52,8 +57,8 @@
         </form>
   </div>
 
-  <div class="my_save_button">
-    <button id="create-appointment" class="submit_button" type="submit" value="Next">Guardar</button>
+  <div class="button-div">
+    <button id="create-appointment" class="save-button-expanded" type="submit" value="Next">Guardar</button>
     <p class="errorWrapper"></p>
   </div>
 
@@ -92,13 +97,18 @@
         myInputFile = $(".filelabel");
         myFile = $("#profile_photo");
 
+        //to toggle slide of the private data section in appointment page
+        $(".static-data-click-to-show").click(function(){
+            $(".static-data-slide").slideToggle( "slow" );
+        });
+
         //define events
 /*        OrgTypeDropdown.on("change", function () {
           onDropdownChange($(this));
         });*/
 
         createAppBtn.on("click", function (e) {
-          createAppBtn.hide();
+          createAppBtn.fadeOut( "slow" );
           saveProfileData(e);
         })
 

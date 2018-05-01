@@ -2,7 +2,6 @@
     $colpo_post_id = $template_args["colpo_post_id"]; 
     $colpo_data_post = get_post_custom($colpo_post_id);
     
-    print_hello_world();
     //load all the data we need from the static_data
     $macroscopia = $colpo_data_post['macroscopia'][0];
  ?>

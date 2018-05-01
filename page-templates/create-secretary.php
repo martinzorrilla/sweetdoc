@@ -1,5 +1,6 @@
 <?php get_header();/* Template Name: Create Secretary*/?>
 <?php?>
+<div class="create-patient-div">
 
   <h1>Crear Nuevo Asistente</h1>
 
@@ -21,13 +22,14 @@
               <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Type..." required>
             </div>
 
-            <button id="create-secretary" class="submit_button create-patient" type="submit" value="create-patient">Guardar</button>
+            <button id="create-secretary" class="submit_button save-button-expanded" type="submit" value="create-patient">Guardar</button>
             <p class="errorWrapper">
             </p>
 
           </fieldset>
         </form>
   </div>
+</div><!-- create-patient-div -->
 <?php get_footer(); ?>
 
 <script >

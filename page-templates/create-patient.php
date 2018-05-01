@@ -1,7 +1,7 @@
 <?php get_header();/* Template Name: Create Patient*/?>
 <?php?>
 
-<div class="patient-div">
+<div class="create-patient-div">
 
   <h1>Crear Nuevo Paciente</h1>
 
@@ -23,14 +23,16 @@
               <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Type..." required>
             </div>
 
-            <button id="create-patient" class="submit_button create-patient" type="submit" value="create-patient">Guardar</button>
+            <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">Guardar</button>
             <p class="errorWrapper">
             </p>
+
+            
 
           </fieldset>
         </form>
   </div>
-</div><!-- patient-div -->
+</div><!-- create-patient-div -->
 <?php get_footer(); ?>
 
 <script >
@@ -59,7 +61,7 @@
         createPatientForm = $("#create-patient-form");
 
         createPatientBtn.on("click", function (e) {
-          createPatientBtn.hide();
+          createPatientBtn.fadeOut( "slow" );
           saveProfileData(e);
         })
 
@@ -75,7 +77,7 @@
       var formData = new FormData();
 
 
-      console.log("serializedInputs", serializedInputs);
+      //console.log("serializedInputs", serializedInputs);
 
 
       $.each(serializedInputs, function (i, element) {
@@ -94,7 +96,7 @@
     function saveProfileData(e) {
       e.preventDefault();
 
-      alert("Se guardaran los datos");
+      //alert("Se guardaran los datos");
       var $ = jQuery;
       var formData = populateFormData();
 
