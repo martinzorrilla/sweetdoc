@@ -33,17 +33,17 @@
 
       <div class="floated-label-wrapper">
         <label for="cesareas">Cesareas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <input type="text" id="cesareas" name="cesareas" value="<?php echo $cesareas ?>" placeholder="Type..." required>
+        <input type="text" id="cesareas" name="cesareas" value="<?php echo $cesareas ?>" placeholder="Cesareas" required>
       </div>
 
       <div class="floated-label-wrapper">
         <label for="menarca">Menarca &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <input type="text" id="menarca" name="menarca" value="<?php echo $menarca ?>" placeholder="Type..." required>
+        <input type="text" id="menarca" name="menarca" value="<?php echo $menarca ?>" placeholder="Menarca" required>
       </div>
 
       <div class="floated-label-wrapper">
         <label for="irs">IRS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <input type="text" id="irs" name="irs" value="<?php echo $irs ?>" placeholder="Type..." required>
+        <input type="text" id="irs" name="irs" value="<?php echo $irs ?>" placeholder="IRS" required>
       </div>
       
     </div>

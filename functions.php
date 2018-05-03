@@ -354,6 +354,8 @@ function sw_create_new_appointment($params){
                 update_post_meta( $static_data_post_id, $field, $value );
         }
 
+      //create colpo only if all the fields are not empty
+      if ($macroscopia != NULL /* && other_fields != NULL */) {
       //crear el post colposcopia y actualizar. vincular el post con patient_id y con app_id
       $colpo_post_data = array(
         'post_title'    => wp_strip_all_tags( $fullname." App ID: ".$app_post),
@@ -365,6 +367,7 @@ function sw_create_new_appointment($params){
       );
 
       // Insert the post into the database // returns post id on succes. 0 on fail
+      
       $colpo_post = wp_insert_post( $colpo_post_data );
       if ($colpo_post == 0) {
         wp_die( "Error creating a new Colposcopia" );
@@ -382,7 +385,7 @@ function sw_create_new_appointment($params){
       //agregar al post colpo el id de la app y del paciente que le corresponde.
       add_post_meta( $colpo_post, 'colpo_related_patient', $patient_id );
       add_post_meta( $colpo_post, 'colpo_related_app', $app_post );
-
+      }//if colpo fields are not empty
 
       $result['success'] = TRUE;
       $result['patient_id'] = $patient_id;
@@ -447,6 +450,10 @@ function sw_update_single_appointment($params){
         }
 
         //update the colposcopy fields
+        if ($colpo_post_id === NULL) {
+            $macroscopia = 'vacio';
+            $colpo_post_id = 421;
+        }
         $acf_fields = array(
             "macroscopia" => $macroscopia         
         );
@@ -528,7 +535,8 @@ function sw_get_static_data_id($patient_id){
   //return $myquery;
 }
 
-//get static_data post of a given patient
+//get static_data post of a given app_id of a patient
+//returns NULL if the app_id does not have a colposcopy
 function sw_get_colpo_id($app_id){
 
   $args = array(
