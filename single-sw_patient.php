@@ -33,14 +33,20 @@ if($result == "doctor"){
   hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
   ?> 
 
-  <h1 style="text-align: center; margin-left: 50px;">Consultas</h1>
+  <h2 style="text-align: center; margin-left: 50px;">Consultas</h2>
   <!-- <a href="#"><strong>Nombre paciente</strong></a> -->
   <br/>
 
   <?php 
-  $related = sw_get_related_appointments($patient_id); 
+  $related = sw_get_related_appointments($patient_id);
+  //r is the current app_id 
   foreach ($related as $r){
+        //get the appointment creation date
         $creation_date = get_the_date( 'd-M-Y', $r );
+    
+        //get the colposcopy id and href of this app
+        $colpo_patient_array = sw_get_colpo_id($r);
+        $colpo_post_id = $colpo_patient_array[0];
         //$the_app = get_post($r); 
         //  var_dump($the_app);
         //echo $creation_date;
@@ -48,9 +54,10 @@ if($result == "doctor"){
         //var_dump($the_app->post_date);
     ?>
     <div data-closable class="callout alert-callout-border primary">
-      <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id='.$r; ?>"> - Consulta en fecha <strong> <?php echo $creation_date ?> </strong> - Codigo: <?php echo $r ?></a>
+      <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id='.$r; ?>"> - Consulta en fecha <strong> <?php echo $creation_date ?> </strong> - Codigo: <?php echo $r ?> <br>- Colposcopia: <?php echo $colpo_post_id; ?>
+      </a>
       
-      <br/><br/>
+      <br/>
       <a href="<?php echo esc_url( $prescription_url ).$patient_id.'&app_id='.$r; ?>"> - Solicitar Nueva Prescripción </a>
       <br/>
       
@@ -60,7 +67,29 @@ if($result == "doctor"){
     </div>
   <?php
   } //foreach 
-}//if
+  ?>
+  
+  <!-- COLPOSCOPIAS DEL PACIENTE -->
+
+  <h2 style="text-align: center; margin-left: 50px;">Colposcopias</h2>
+    <?php 
+        // to do
+        // crear la funcion get patients_colpos la cual es igual a la que ya tengo pero
+        // le tengo que pasar el paciente en vez del app_id
+        // luego hacer un for each y por cada colpo id traer su href ya sea a la consulta
+        // o al colposcopia en si, en ese caso deberia crear una pagina para las colpos
+    $patients_colpos = sw_patiente_colpos($patient_id);
+    var_dump($patients_colpos);
+    foreach ($patients_colpos as $p) {
+      $creation_date = get_the_date( 'd-M-Y', $p );?>
+        <div data-closable class="callout alert-callout-border success">
+          <a href="#"> - Colposcopia en fecha <strong> <?php echo $creation_date ?> </strong> - iD: <?php echo $p ?></a>
+        </div>
+    <?php 
+    } //foreach patient_colpos ?>
+
+<?php
+}//if is a doctor
 ?>
 
 <?php get_footer();?>
