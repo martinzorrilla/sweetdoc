@@ -4,6 +4,14 @@
     
     //load all the data we need from the static_data
     $macroscopia = $colpo_data_post['macroscopia'][0];
+    
+    //$image =  get_post_custom(460);
+    //$colpo_imagen = $image['_wp_attached_file'][0];
+     //var_dump($colpo_imagen); 
+      
+    //$image = $colpo_imagen['url'];
+    //echo "image url: ".$image;
+    //var_dump($image);
  ?>
 <!-- <h3>Datos Estaticos del Paciente</h3> -->
 
@@ -29,6 +37,19 @@
         <input type="text" id="macroscopia" name="macroscopia" value="<?php echo $macroscopia ?>" placeholder="Type..." required>
       </div>
 
+      <!-- Testing the image uploader -->
+      <br>
+      
+        <div class="floated-label-wrapper">
+          <!-- <input type="file" accepts="jpg,jpeg,png" id="profile_photo" name="profile_photo" placeholder="Type..." required>&nbsp; -->
+
+          <input type="file" accepts="jpg,jpeg,png" name="profile_photo" id="profile_photo" class="inputfile"/>
+          <label class="filelabel" for="file">Choose file</label>
+
+          <p class="filetext">(No file chosen)<br/>.jpg, .gif and .png Max file size 700K<br/>For best quality use a 330x330 pixel image.<span class="user-email"></span></p> 
+          
+        </div>
+      <!-- Testing the image uploader -->
       
     </div>
   </div>

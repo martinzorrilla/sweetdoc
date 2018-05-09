@@ -118,6 +118,7 @@
           oncreateAppBtnClose();
         })
 
+*/
         //added
         myInputFile.on("click" ,function (e) {
           onUploadFile();
@@ -125,7 +126,7 @@
 
         myFile.on("change" ,function (e) {
           onFileChange(e);
-        })*/
+        }) //*/
 
 
       });
@@ -172,13 +173,17 @@
 
       console.log("serializedInputs", serializedInputs);
 
-      /*$.each(inputs.filter('[type="file"]'), function (i, element) {
+      
+      //-- code section to get the file
+      $.each(inputs.filter('[type="file"]'), function (i, element) {
         var input = $(element)[0].files;
         $.each(input, function (j, file) {
           //console.log("file", file);
           formData.append(file.name, file);
         });
-      });*/
+      });
+      //--
+      
 
       $.each(serializedInputs, function (i, element) {
         formData.append(element.name, element.value);
@@ -238,7 +243,7 @@
       });
     }
 
-   /* function onUploadFile() {
+    function onUploadFile() {
       $("#profile_photo").trigger("click");
     }
 
@@ -252,7 +257,7 @@
 
       //$( "p.filetext" ).html("File changed");
       $( "p.filetext" ).html(file.name);
-    }*/
+    }
 
   return{
     init:init

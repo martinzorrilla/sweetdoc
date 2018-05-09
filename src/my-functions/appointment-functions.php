@@ -27,6 +27,8 @@
     $colpo_post_id = isset($_POST['colpo_post_id']) && $_POST['colpo_post_id'] != '' ? $_POST['colpo_post_id'] : NULL;
     $macroscopia = isset($_POST['macroscopia']) && $_POST['macroscopia'] != '' ? $_POST['macroscopia'] : NULL;
     
+    //wp_die(var_dump($_FILES));
+    
     $params = array(
         "app_id" => $app_id,
         "patient_id" => $patient_id,
