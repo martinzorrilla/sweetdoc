@@ -28,7 +28,7 @@
     $macroscopia = isset($_POST['macroscopia']) && $_POST['macroscopia'] != '' ? $_POST['macroscopia'] : NULL;
     
     //wp_die(var_dump($_FILES));
-    
+
     $params = array(
         "app_id" => $app_id,
         "patient_id" => $patient_id,
