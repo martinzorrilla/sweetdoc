@@ -171,6 +171,31 @@ function sw_create_new_appointment($params){
       add_post_meta( $colpo_post, 'colpo_related_app', $app_post );
       }//if colpo fields are not empty
 
+
+      //file upload test  
+      foreach ($_FILES as $file ) {
+
+          $uploadedfile = $file;
+          $movefile = wp_handle_upload($uploadedfile, array('action' => 'sw_create_appointment_ajax'));
+
+          //Guardamos la foto en la biblioteca multimedia
+          if ($movefile) {
+              $wp_upload_dir = wp_upload_dir();
+              $attachment = array(
+                  'guid' => $wp_upload_dir['url'].'/'.basename($movefile['file']),
+                  'post_mime_type' => $movefile['type'],
+                  'post_title' => preg_replace('/\.[^.]+$/', '', basename($movefile['file'])),
+                  'post_content' => '',
+                  'post_status' => 'inherit'
+              );
+              $attach_id = wp_insert_attachment($attachment, $movefile['file']);
+
+              update_field('colpo_imagen', $attach_id, $colpo_post);
+          }
+      }
+
+
+      //---------------------------------------
       $result['success'] = TRUE;
       $result['patient_id'] = $patient_id;
       $result['app_id'] = $app_post;
