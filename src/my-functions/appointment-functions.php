@@ -291,6 +291,30 @@ function sw_update_single_appointment($params){
                 //update_field( $field, $value, $app_id );
                 update_post_meta( $colpo_post_id, $field, $value );
         }
+
+        //file upload test  
+        foreach ($_FILES as $file ) {
+
+          $uploadedfile = $file;
+          $movefile = wp_handle_upload($uploadedfile, array('action' => 'sw_create_appointment_ajax'));
+
+          //Guardamos la foto en la biblioteca multimedia
+          if ($movefile) {
+            $wp_upload_dir = wp_upload_dir();
+            $attachment = array(
+              'guid' => $wp_upload_dir['url'].'/'.basename($movefile['file']),
+              'post_mime_type' => $movefile['type'],
+              'post_title' => preg_replace('/\.[^.]+$/', '', basename($movefile['file'])),
+              'post_content' => '',
+              'post_status' => 'inherit'
+            );
+            $attach_id = wp_insert_attachment($attachment, $movefile['file']);
+
+
+            update_post_meta( $colpo_post_id, 'colpo_imagen', $attach_id );  
+            //update_field('colpo_imagen', $attach_id, $colpo_post_id);
+          }
+        }
         //end update colposcopy
 
         $result['success'] = TRUE;

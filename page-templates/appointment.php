@@ -95,11 +95,6 @@
 
         //console.log("createProfileForm", createAppointmentForm);
 
-        //added
-        myInputFile = $(".filelabel");
-        myFile = $("#profile_photo");
-        //myInputFile.style.opacity = 0;
-
         var fileInput = document.querySelector('input[type="file"]');
         var preview = document.querySelector('.preview');
 
@@ -114,7 +109,7 @@
         });
 
         //define events
-/*        OrgTypeDropdown.on("change", function () {
+        /* OrgTypeDropdown.on("change", function () {
           onDropdownChange($(this));
         });*/
 
@@ -123,25 +118,16 @@
           saveProfileData(e);
         })
 
-/*        createProfileClose.on("click" ,function (e) {
+        /* createProfileClose.on("click" ,function (e) {
           oncreateAppBtnClose();
-        })
-
-*/
-        //added
-        myInputFile.on("click" ,function (e) {
-          onUploadFile();
-        })
-
-        myFile.on("change" ,function (e) {
-          onFileChange(e);
-        }) //*/
-
+        }) */
 
       });
-    }
+    }//function init
 
-/*    function oncreateAppBtnClose() {
+    //-------------- FUNCTIONS
+
+    /* function oncreateAppBtnClose() {
       $('#interests').foundation('open');
     }
 
@@ -193,7 +179,6 @@
       });
       //--
       
-
       $.each(serializedInputs, function (i, element) {
         formData.append(element.name, element.value);
       });
@@ -252,22 +237,6 @@
       });
     }
 
-    function onUploadFile() {
-      $("#profile_photo").trigger("click");
-    }
-
-    function onFileChange(e) {
-      //$( "div#success span.user-email" ).html(reset_pass);
-      var fileName = '';
-
-      //fileName =  $('#profile_photo').val();
-      
-      let file = $("#profile_photo")[0].files[0]; 
-
-      //$( "p.filetext" ).html("File changed");
-      $( "p.filetext" ).html(file.name);
-    }
-
 /*--------------------------------------*/
 
 function updateImageDisplay(preview, fileInput) {
@@ -279,7 +248,7 @@ function updateImageDisplay(preview, fileInput) {
     preview.removeChild(preview.firstChild);
   }
 
-console.log("fileInput", fileInput.files);
+  console.log("fileInput", fileInput.files);
   var curFiles = fileInput.files;
   //si no se agregan o no hay ningun file, apendar a preview un parrafo con texto
   if(curFiles.length === 0) {

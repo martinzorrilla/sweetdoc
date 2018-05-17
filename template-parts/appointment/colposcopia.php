@@ -2,32 +2,31 @@
     $colpo_post_id = $template_args["colpo_post_id"]; 
     $colpo_data_post = get_post_custom($colpo_post_id);
     //load all the data we need from the colpscopy post
-    $macroscopia = $colpo_data_post['macroscopia'][0];
+      
+    //image files 
     $image_post_id = $colpo_data_post['colpo_imagen'][0];
+    
+    //to get the image name if it has
+    $image_post = get_post_custom( $image_post_id ); 
+    $image_name = $image_post["_wp_attached_file"][0];
+    //var_dump($image_name);
 
-    //$image =  get_post_custom(460);
-    //$colpo_imagen = $image['_wp_attached_file'][0];
-     //var_dump($colpo_data_post); 
-     //$image_post = get_post_custom( $image_post_id );
-     //var_dump($image_post); 
-     //$image_name = $image_post["_wp_attached_file"][0];
-     //var_dump($image_name);
-
-
-      $size = "thumbnail"; // (thumbnail, medium, large, full or custom size)
-      //$attachment_id = get_field('colpo_imagen', $colpo_post_id );
-      //$image = wp_get_attachment_image_src( $attachment_id, $size );
-      $image = wp_get_attachment_image_src( $image_post_id, $size );
-      // url = $image[0];
-      // width = $image[1];
-      // height = $image[2]; 
-      //var_dump($attachment_id);
-
-
+    //to get the image
+    $size = "thumbnail"; // (thumbnail, medium, large, full or custom size)
+    //$attachment_id = get_field('colpo_imagen', $colpo_post_id );
+    //$image = wp_get_attachment_image_src( $attachment_id, $size );
+    $image = wp_get_attachment_image_src( $image_post_id, $size );
+    // url = $image[0];
+    // width = $image[1];
+    // height = $image[2]; 
+    //var_dump($attachment_id);
 
     //$image = $colpo_imagen['url'];
     //echo "image url: ".$image;
-    var_dump($image);
+    //var_dump($image);
+    
+    //field files
+    $macroscopia = $colpo_data_post['macroscopia'][0];
  ?>
 <!-- <h3>Datos Estaticos del Paciente</h3> -->
 
@@ -134,7 +133,7 @@
           <ol>
             <li>
               <img class="image-class" alt="" src="<?php echo $image[0]; ?>" />
-              <p>Nombre del archivo , Tamaño</p>
+              <p>Nombre del archivo <?php echo $image_name; ?> </p>
             </li>
           </ol>
           </div> <?php
