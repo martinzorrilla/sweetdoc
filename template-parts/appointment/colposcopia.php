@@ -7,7 +7,7 @@
     
     //image files
     //store the ids of the images post
-    $max_images = 2;
+    $max_images = 5;
     $images_ids_array = array();
     // +1 bc 
     for ($i=0; $i < $max_images; $i++) {
