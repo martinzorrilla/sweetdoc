@@ -70,6 +70,10 @@
       border: 1px solid black;
     }
 
+    .archivos li .listItem-error-color{
+      background: red !important;
+    }
+
     .archivos img {
       height: 64px;
       order: 1;
@@ -81,7 +85,7 @@
     }
 
     .archivos label, .archivos button {
-      background-color: #7F9CCB;
+      background-color: #1779ba;
       padding: 5px 10px;
       border-radius: 5px;
       border: 1px ridge black;

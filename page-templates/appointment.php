@@ -261,7 +261,10 @@ function updateImageDisplay(preview, fileInput) {
     for(var i = 0; i < curFiles.length; i++) {
       var listItem = document.createElement('li');
       var para = document.createElement('p');
-      if(validFileType(curFiles[i])) {
+      //si el tipo es validoy el tamnho no exede los 6MB
+      if(validFileType(curFiles[i]) && curFiles[i].size < 6291456) {
+        //add a class to change to succes/valid color
+        $(listItem).css('background', '#3adb76');
         para.textContent = 'Nombre del archivo ' + curFiles[i].name + ', Tamaño ' + returnFileSize(curFiles[i].size) + '.';
         var image = document.createElement('img');
         image.src = window.URL.createObjectURL(curFiles[i]);
@@ -270,7 +273,10 @@ function updateImageDisplay(preview, fileInput) {
         listItem.appendChild(para);
 
       } else {
-        para.textContent = 'Nombre del archivo ' + curFiles[i].name + ': Tipo incorrecto de archivo. Actualice las seleccion.';
+        //agregar estilo para hacerlo de color rojo
+        //$( listItem ).addClass( "listItem-error-color" );
+        $(listItem).css('background', '#cc4b37');
+        para.textContent = 'Nombre del archivo: ' + curFiles[i].name + '  -   Tipo de archivo incorrecto. Actualice las seleccion.';
         listItem.appendChild(para);
       }
 
