@@ -54,7 +54,7 @@
       /* background: #ccc; */
       margin: 0 auto;
       padding: 20px;
-      border: 1px solid black;
+      border: 1px solid #1779ba;
     }
 
     .archivos ol {
@@ -68,10 +68,6 @@
       margin-bottom: 10px;
       list-style-type: none;
       border: 1px solid black;
-    }
-
-    .archivos li .listItem-error-color{
-      background: red !important;
     }
 
     .archivos img {
