@@ -262,7 +262,7 @@ function updateImageDisplay(preview, fileInput) {
       var listItem = document.createElement('li');
       var para = document.createElement('p');
       if(validFileType(curFiles[i])) {
-        para.textContent = 'File name ' + curFiles[i].name + ', file size ' + returnFileSize(curFiles[i].size) + '.';
+        para.textContent = 'Nombre del archivo ' + curFiles[i].name + ', Tamaño ' + returnFileSize(curFiles[i].size) + '.';
         var image = document.createElement('img');
         image.src = window.URL.createObjectURL(curFiles[i]);
 
@@ -270,7 +270,7 @@ function updateImageDisplay(preview, fileInput) {
         listItem.appendChild(para);
 
       } else {
-        para.textContent = 'File name ' + curFiles[i].name + ': Not a valid file type. Update your selection.';
+        para.textContent = 'Nombre del archivo ' + curFiles[i].name + ': Tipo incorrecto de archivo. Actualice las seleccion.';
         listItem.appendChild(para);
       }
 

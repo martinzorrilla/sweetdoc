@@ -49,8 +49,9 @@
 
     .archivos {
       font-family: sans-serif;
-      width: 600px;
-      background: #ccc;
+      /* width: 600px; */
+      width: 100%;
+      /* background: #ccc; */
       margin: 0 auto;
       padding: 20px;
       border: 1px solid black;
