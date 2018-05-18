@@ -172,7 +172,8 @@ function sw_create_new_appointment($params){
       }//if colpo fields are not empty
 
 
-      //file upload test  
+      //file upload test
+      $i = 1;  
       foreach ($_FILES as $file ) {
 
           $uploadedfile = $file;
@@ -190,7 +191,9 @@ function sw_create_new_appointment($params){
               );
               $attach_id = wp_insert_attachment($attachment, $movefile['file']);
 
-              update_field('colpo_imagen', $attach_id, $colpo_post);
+              update_field('colpo_imagen_'.$i, $attach_id, $colpo_post);
+              //update_field('colpo_imagen', $attach_id, $colpo_post);
+              $i++;
           }
       }
 
@@ -215,6 +218,12 @@ function sw_update_single_appointment($params){
     $app_id  = $params["app_id"];
     $patient_id  = $params["patient_id"];
    
+    $patient_fields = get_post_custom($patient_id);
+    $name = $patient_fields['nombre'][0];
+    $lastname = $patient_fields['apellido'][0];
+    //$cedula = $patient_fields['cedula'][0];
+    $fullname = $name.'-'.$lastname;
+
     //common fields 
     $motivo_de_consulta = $params['motivo_de_consulta'];
     $antecedente_actual = $params['antecedente_actual'];
@@ -292,7 +301,8 @@ function sw_update_single_appointment($params){
                 update_post_meta( $colpo_post_id, $field, $value );
         }
 
-        //file upload test  
+        //file upload test
+        $i = 1;   
         foreach ($_FILES as $file ) {
 
           $uploadedfile = $file;
@@ -309,10 +319,11 @@ function sw_update_single_appointment($params){
               'post_status' => 'inherit'
             );
             $attach_id = wp_insert_attachment($attachment, $movefile['file']);
-
-
-            update_post_meta( $colpo_post_id, 'colpo_imagen', $attach_id );  
+            
+            //update_post_meta( $colpo_post_id, 'colpo_imagen', $attach_id );  
+            update_post_meta( $colpo_post_id, 'colpo_imagen_'.$i, $attach_id );  
             //update_field('colpo_imagen', $attach_id, $colpo_post_id);
+            $i++;
           }
         }
         //end update colposcopy
