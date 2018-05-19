@@ -34,10 +34,10 @@
                     <input type="text" id="antecedente_actual" name="antecedente_actual" value="<?php echo $antecedente_actual ?>" placeholder="Escribir..." required>
                   </div>                  
 
-                  <div class="floated-label-wrapper">
-                    <label for="antecedente_actual">Datos Relevantes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    <input type="text" id="antecedente_actual" name="antecedente_actual" value="<?php echo $antecedente_actual ?>" placeholder="Escribir..." required>
-                  </div>
+<!--                   <div class="floated-label-wrapper">
+  <label for="antecedente_actual">Datos Relevantes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+  <input type="text" id="antecedente_actual" name="antecedente_actual" value="<?php //echo $antecedente_actual ?>" placeholder="Escribir..." required>
+</div> -->
 
                 </div>
               </div>

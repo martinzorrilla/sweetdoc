@@ -54,9 +54,12 @@ if($result == "doctor"){
         //var_dump($the_app->post_date);
     ?>
     <div data-closable class="callout alert-callout-border primary">
-      <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id='.$r; ?>"> - Consulta en fecha <strong> <?php echo $creation_date ?> </strong> - Codigo: <?php echo $r ?> <br>- Colposcopia: <?php echo $colpo_post_id; ?>
+      <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id='.$r; ?>"> - Consulta en fecha <strong> <?php echo $creation_date ?> </strong> - Codigo: <?php echo $r ?>
       </a>
       
+      <br/>
+      <a href="<?php echo get_permalink( $colpo_post_id ); ?> ">- Colposcopia: <?php echo $colpo_post_id; ?></a>
+
       <br/>
       <a href="<?php echo esc_url( $prescription_url ).$patient_id.'&app_id='.$r; ?>"> - Solicitar Nueva Prescripción </a>
       <br/>
@@ -79,11 +82,12 @@ if($result == "doctor"){
         // luego hacer un for each y por cada colpo id traer su href ya sea a la consulta
         // o al colposcopia en si, en ese caso deberia crear una pagina para las colpos
     $patients_colpos = sw_patiente_colpos($patient_id);
-    var_dump($patients_colpos);
-    foreach ($patients_colpos as $p) {
+    //  var_dump($patients_colpos);
+    foreach ($patients_colpos as $p){
+      //$colpo_post =get_post($p);
       $creation_date = get_the_date( 'd-M-Y', $p );?>
         <div data-closable class="callout alert-callout-border success">
-          <a href="#"> - Colposcopia en fecha <strong> <?php echo $creation_date ?> </strong> - iD: <?php echo $p ?></a>
+          <a href="<?php echo get_permalink( $p ); ?> "> - Colposcopia en fecha <strong> <?php echo $creation_date ?> </strong> - iD: <?php echo $p ?></a>
         </div>
     <?php 
     } //foreach patient_colpos ?>

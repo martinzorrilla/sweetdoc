@@ -34,8 +34,8 @@
     //get the colposcopia post id for this app
     $colpo_patient_array = sw_get_colpo_id($appointment_id);
     $colpo_post_id = $colpo_patient_array[0];
-    echo "Colpo Post Id = ";
-    var_dump($colpo_post_id);
+    //echo "Colpo Post Id = ";
+    //var_dump($colpo_post_id);
   }
 ?>
 
