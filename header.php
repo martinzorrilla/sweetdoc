@@ -60,8 +60,13 @@
 
 	<div class="patient-div">
 
-		<ul class="menu align-center">
-			<li><a href="#">One</a></li>
-			<li><a href="#">Two</a></li>
-			<li><a href="#">Three</a></li>
-		</ul>
+	<ul class="menu align-center">
+		<li><a href="#">One</a></li>
+		<li><a href="#">Two</a></li>
+		<li><a href="#">Three</a></li>
+	</ul>
+
+	<?php
+	date_default_timezone_set("America/Asuncion");
+	//echo date_default_timezone_get();
+	?>

@@ -4,11 +4,13 @@
   $create_patient_url = home_url().'/crear-paciente/';
   $create_secretary_url = home_url().'/crear-asistente/';
 ?>
+
 <div class="app-dashboard shrink-medium">
+
   <div class="row expanded app-dashboard-top-nav-bar">
     <div class="columns medium-2">
       <button data-toggle="app-dashboard-sidebar" class="menu-icon hide-for-medium"></button>
-      <a class="app-dashboard-logo">Foundation</a>
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="app-dashboard-logo">Inicio</a>
     </div>
     <div class="columns show-for-medium">
       <div class="app-dashboard-search-bar-container">
@@ -41,13 +43,13 @@
       <div class="app-dashboard-sidebar-inner">
         <ul class="menu vertical">
           <li><a href="<?php echo $all_patient_url ?>" class="is-active">
-            <i class="large fa fa-industry"></i><span class="app-dashboard-sidebar-text">Listar Pacientes</span>
+            <i class="fas fa-address-book fa-2x"></i><span class="app-dashboard-sidebar-text"> Listar Pacientes</span>
           </a></li>
           <li><a href="<?php echo $create_patient_url ?>">
-            <i class="large fa fa-hourglass"></i><span class="app-dashboard-sidebar-text">Crear Paciente Nuevo</span>
+            <i class="fas fa-heartbeat fa-lg"></i><span class="app-dashboard-sidebar-text"> Crear Paciente Nuevo</span>
           </a></li>
           <li><a href="<?php echo $create_secretary_url ?>">
-            <i class="large fa fa-industry"></i><span class="app-dashboard-sidebar-text">Crear Asistente</span>
+            <i class="fas fa-user-md fa-2x"></i><span class="app-dashboard-sidebar-text"> Crear Asistente</span>
           </a></li>
         </ul>
       </div>
@@ -76,4 +78,5 @@
     </div>
   </div>
 </div>
+
 <?php get_footer(); ?>
