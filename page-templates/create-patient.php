@@ -90,8 +90,6 @@
   </div>
 </div><!-- create-patient-div -->
 
-
-
     </div>
   </div>
 </div>

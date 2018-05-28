@@ -57,7 +57,7 @@
 
     <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
       <div class="callout primary">
-        <h1 class="text-center">Buenas Noches !</h1>
+        <h1 class="text-center">Buenas dani!</h1>
       </div>
 
       <div class="callout secondary">
