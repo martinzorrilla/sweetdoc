@@ -25,10 +25,20 @@
     "responsive"
   ],
   "dependencies": {
+    "cryptiles": "^4.1.2",
+    "debug": "^4.0.1",
     "foundation-sites": "6.4.3",
+    "fresh": "^0.5.2",
+    "graceful-fs": "^4.1.11",
+    "hoek": "^5.0.4",
     "jquery": "~3.0.0",
     "lodash": "^4.17.11",
+    "marked": "^0.5.1",
+    "mime": "^2.3.1",
+    "minimatch": "^3.0.4",
     "motion-ui": "~1.2.2",
+    "sshpk": "^1.14.2",
+    "tough-cookie": "^2.4.3",
     "what-input": "^4.1.3"
   },
   "devDependencies": {
