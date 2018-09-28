@@ -3,6 +3,7 @@
   $all_patient_url = home_url().'/pacientes/';
   $create_patient_url = home_url().'/crear-paciente/';
   $create_secretary_url = home_url().'/crear-asistente/';
+  $current_user = wp_get_current_user();
 ?>
 
 <div class="app-dashboard shrink-medium">
@@ -57,7 +58,7 @@
 
     <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
       <div class="callout primary">
-        <h1 class="text-center">Buenos dias!</h1>
+        <h1 class="text-center">Buenos dias <?php echo $current_user->user_firstname; ?></h1>
       </div>
 
       <div class="callout secondary">
