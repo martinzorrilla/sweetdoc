@@ -22,11 +22,6 @@
     $checkbox_field_key = "checkbox";
     $checkbox_field = get_field_object($checkbox_field_key, $appointment_post_id);
 
-
-
-
-
-
  ?>
 <!-- <h3>Datos de la Consulta</h3> -->
             <div class="card profile-card-action-icons">
@@ -70,17 +65,29 @@
                     ?>
                   </div>
 
-
+                  <!-- show frontend of the checkbox -->
                   <div class="floated-label-wrapper">
+                    <div id="log"></div>
                     <?php
                       if( $checkbox_field )
                       {
-                          echo '<select name="' . $checkbox_field['key'] . '">';
+                              $values = get_field('checkbox', $appointment_post_id);
+                              var_dump($values);
                               foreach( $checkbox_field['choices'] as $k => $v )
                               {
-                                  echo '<option value="' . $k . '">' . $v . '</option>';
+                                echo '<label class = "checkbox-container" >' . $k . 
+                                '<input type ="checkbox" value="'.$v.'"';
+                                if (in_array($v, $values)){
+                                  echo 'checked="checked">';
+                                }
+                                else{
+                                  echo '>';
+                                }
+                                
+                                echo '<span class="checkmark"></span>'.
+                                '</label>';                        
                               }
-                          echo '</select>';
+                      //update_field('checkbox', array("blue"), $appointment_post_id);
                       }
                     ?>
                   </div>
@@ -88,9 +95,9 @@
                   <div class="floated-label-wrapper">
                     <?php
 
-$values = get_field('checkbox', $appointment_post_id);
-$field = get_field_object('checkbox', $appointment_post_id);
-$choices = $field['choices'];
+                      $values = get_field('checkbox', $appointment_post_id);
+                      $field = get_field_object('checkbox', $appointment_post_id);
+                      $choices = $field['choices'];
                     
                       foreach ($choices as $value => $label) {
                         echo $label,': ';
@@ -102,10 +109,10 @@ $choices = $field['choices'];
                     ?>
                   </div>
 
-<!--                   <div class="floated-label-wrapper">
-  <label for="antecedente_actual">Datos Relevantes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-  <input type="text" id="antecedente_actual" name="antecedente_actual" value="<?php //echo $antecedente_actual ?>" placeholder="Escribir..." required>
-</div> -->
+                  <!--                   <div class="floated-label-wrapper">
+                    <label for="antecedente_actual">Datos Relevantes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <input type="text" id="antecedente_actual" name="antecedente_actual" value="<?php //echo $antecedente_actual ?>" placeholder="Escribir..." required>
+                  </div> -->
 
                 </div>
               </div>

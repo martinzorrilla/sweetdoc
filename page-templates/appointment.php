@@ -114,6 +114,7 @@
         });*/
 
         createAppBtn.on("click", function (e) {
+          get_checkbox_values();
           createAppBtn.fadeOut( "slow" );
           saveProfileData(e);
         })
@@ -299,6 +300,22 @@ function validFileType(file) {
   }
 
   return false;
+}
+
+function hello_world(){
+  alert("hello_world");
+}
+
+function get_checkbox_values(){
+  
+  var checked_values = [];
+    $("input[type=checkbox]").each(function(){
+      if (this.checked) {
+        checked_values.push($(this).val());
+      }
+    });// each
+    console.log(checked_values);
+    alert("check your console");  
 }
 
 function returnFileSize(number) {
