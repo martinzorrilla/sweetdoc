@@ -69,9 +69,12 @@
                   <div class="floated-label-wrapper">
                     <div id="log"></div>
                     <?php
+                      //if( $checkbox_field )
                       if( $checkbox_field )
                       {
-                              $values = get_field('checkbox', $appointment_post_id);
+                              //this is bc $values need to be an array in the foreach
+                              $tmp_values = get_field('checkbox', $appointment_post_id);
+                              $values = $tmp_values != '' ? $tmp_values : array();
                               var_dump($values);
                               foreach( $checkbox_field['choices'] as $k => $v )
                               {
@@ -95,7 +98,7 @@
                   <div class="floated-label-wrapper">
                     <?php
 
-                      $values = get_field('checkbox', $appointment_post_id);
+/*                      $values = get_field('checkbox', $appointment_post_id);
                       $field = get_field_object('checkbox', $appointment_post_id);
                       $choices = $field['choices'];
                     
@@ -105,7 +108,7 @@
                             echo 'checked';
                         }
                         echo '<br />';
-                    }
+                    }*/
                     ?>
                   </div>
 

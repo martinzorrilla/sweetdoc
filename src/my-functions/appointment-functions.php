@@ -15,7 +15,9 @@
     //common-variable data
     $motivo_de_consulta = isset($_POST['motivo_de_consulta']) && $_POST['motivo_de_consulta'] != '' ? $_POST['motivo_de_consulta'] : NULL;
     $antecedente_actual = isset($_POST['antecedente_actual']) && $_POST['antecedente_actual'] != '' ? $_POST['antecedente_actual'] : NULL;
-    
+    //agregar aca el mismo codigo que arriba pero para los valores del checkbox el cual deberia ser un array
+    $checkbox_values = isset($_POST['checkbox_values']) && $_POST['checkbox_values'] != '' ? $_POST['checkbox_values'] : NULL;
+
     //private/static data
     $cesareas = isset($_POST['cesareas']) && $_POST['cesareas'] != '' ? $_POST['cesareas'] : NULL; 
     $menarca = isset($_POST['menarca']) && $_POST['menarca'] != '' ? $_POST['menarca'] : NULL;
@@ -39,7 +41,8 @@
         "menarca" => $menarca,
         "irs" => $irs,
         "cesareas" => $cesareas,
-        "macroscopia" => $macroscopia
+        "macroscopia" => $macroscopia,
+        "checkbox_values" => $checkbox_values
     );
 
     //wp_die(var_dump($params));
@@ -227,6 +230,7 @@ function sw_update_single_appointment($params){
     //common fields 
     $motivo_de_consulta = $params['motivo_de_consulta'];
     $antecedente_actual = $params['antecedente_actual'];
+    $checkbox_values = $params['checkbox_values'];
     
     //private/static data
     $static_data_post_id  = $params["static_data_post_id"];
@@ -267,7 +271,9 @@ function sw_update_single_appointment($params){
                 //update_field( $field, $value, $app_id );
                 update_post_meta( $app_id, $field, $value );
         }
-
+        //update_field('checkbox', array("blue"), $appointment_post_id);
+        update_field('checkbox', $checkbox_values, $app_id);
+        
         //update the colposcopy fields
         
         //but if the id is null we have to create a new colpo bc
