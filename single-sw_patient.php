@@ -85,7 +85,9 @@ $patient_id = $post_id;
 $result = "";
 $result = sw_get_current_user_role();
 
-if($result == "doctor"){
+//en produccion: verificar que el usuario sea doctor
+//if($result == "doctor"){
+if(true){
 
   hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
   ?> 

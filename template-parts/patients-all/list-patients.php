@@ -19,10 +19,10 @@
           <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id=new'; ?>" class="crete-app"> - Crear Nueva consulta</a>
 
           <?php 
-          //$related = sw_get_related_appointments($patient->ID); 
-          //foreach ($related as $r){?>
-            <!-- <a href="<?php //echo esc_url( $appointment_url ).$patient->ID.'&app_id='.$r; ?>"> - Consulta Anterior id: <?php //echo $r ?> </a> -->
-          <?php//}?>
+          $related = sw_get_related_appointments($patient->ID); 
+          foreach ($related as $r){?>
+             <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id='.$r; ?>"> - Consulta Anterior id: <?php echo $r ?> </a>
+          <?php }?>
           <!-- <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
             <span aria-hidden="true">&times;</span>
           </button> -->
