@@ -6,7 +6,7 @@
   $lastname = $patient_fields['apellido'][0];
   $cedula = $patient_fields['cedula'][0];
   $fullname = $name.' '.$lastname;
- ?>
+ ?> 
 
   <div class="card profile-card-action-icons">
     <div class="card-section">
