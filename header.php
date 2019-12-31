@@ -60,11 +60,13 @@
 
 	<div class="patient-div">
 
-	<ul class="menu align-center">
+	<!-- <ul class="menu align-center">
 		<li><a href="#">One</a></li>
 		<li><a href="#">Two</a></li>
 		<li><a href="#">Three</a></li>
-	</ul>
+	</ul> -->
+
+	<?php //hm_get_template_part('template-parts/sweet-navbar'); ?>
 
 	<?php
 	date_default_timezone_set("America/Asuncion");

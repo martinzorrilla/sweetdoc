@@ -1,4 +1,4 @@
-<?php
+<?php /* Template Name: pdf-prescription*/
 class PDF extends FPDF
 {
 protected $col = 0; // Columna actual
