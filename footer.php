@@ -31,6 +31,7 @@
 
 	<!-- por default, esto estaba descomentado y no estaba lo que agregue mas arriba --> 	
 	<footer class="footer">
+		<h3>Footer</h3>
 		<?php dynamic_sidebar( 'footer-widgets' ); ?>
 	</footer> 
 	
