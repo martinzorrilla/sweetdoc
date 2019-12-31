@@ -31,7 +31,8 @@
 	<?php endif; ?>
 
 
-	<header class="site-header" role="banner">
+	<!-- original header section -->
+	<header class="site-header" role="banner" style="display:none">
 		<div class="site-title-bar title-bar" <?php foundationpress_title_bar_responsive_toggle(); ?>>
 			<div class="title-bar-left">
 				<button aria-label="<?php _e( 'Main Menu', 'foundationpress' ); ?>" class="menu-icon" type="button" data-toggle="<?php foundationpress_mobile_menu_id(); ?>"></button>
