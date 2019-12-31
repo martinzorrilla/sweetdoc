@@ -114,6 +114,11 @@ $app-dashboard-top-nav-height: 55px;
       color: $sweet-white;
     }
   }
+
+  .app-dashboard-sidebar-text{
+    padding: 0 10px;
+  }
+
   .fa.large {
     font-size: rem-calc(24);
     width: 40px;
@@ -137,6 +142,10 @@ $app-dashboard-top-nav-height: 55px;
 
 .app-dashboard-open-sidebar {
   text-align: center;
+  a {
+    color: $sweet-white;
+    //color: red;
+  } 
 }
 
 .app-dashboard-body-content {
@@ -150,6 +159,12 @@ $app-dashboard-top-nav-height: 55px;
 @mixin shrunk-sidebar() {
   .app-dashboard-close-sidebar, .app-dashboard-sidebar-text {
     display: none;
+  }
+
+  .app-dashboard-sidebar-inner {
+    .menu.vertical{
+      text-align: center;
+    }
   }
 
   .app-dashboard-open-sidebar {
