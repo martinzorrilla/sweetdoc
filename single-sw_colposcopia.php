@@ -63,14 +63,16 @@
   </style>
 
 
-<h1 style="text-align: center; margin-left: 50px;">Colposcopia del Paciente</h1>
+<h1 style="text-align: center; margin-left: 50px;">Colposcopia del PacienteX</h1>
 
 <?php 
   //como prueba de concepto. si el usuario es doctor muestra estos campos si no, no
 $result = "";
 $result = sw_get_current_user_role();
 
-if($result == "doctor"){
+//en produccion: verificar que el usuario sea doctor
+//if($result == "doctor"){
+if(true){
   hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
 ?>
 
@@ -158,7 +160,7 @@ if($result == "doctor"){
 
   <div class="button-div">
 
-    <a href="<?php echo esc_url( $colposcopy_pdf_url ).$r; ?>"> 
+    <a href="<?php echo esc_url( $colposcopy_pdf_url ).$r; ?>" target="_blank" 
       <button id="create-colposcopy-pdf" class="save-button-expanded" type="submit" value="Next">Generar Colposcopia PDF</button>
     </a>
     

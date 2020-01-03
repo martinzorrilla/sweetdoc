@@ -9,6 +9,11 @@
  */
 ?>
 
+
+     <!-- the content ends here! -->
+	 </div>
+  </div>
+</div>
 </div><!-- patient-div -->
 
 <div class="footer-container">
@@ -31,6 +36,7 @@
 
 	<!-- por default, esto estaba descomentado y no estaba lo que agregue mas arriba --> 	
 	<footer class="footer">
+		<h3>Footer</h3>
 		<?php dynamic_sidebar( 'footer-widgets' ); ?>
 	</footer> 
 	

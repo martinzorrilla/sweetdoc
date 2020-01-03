@@ -6,7 +6,9 @@
   //check permissions for the user
   //this page should be visible only for a doctor role. else redirect to home page
   $the_role = sw_get_current_user_role();
-  if($the_role != "doctor"){
+  
+  //if($the_role != "doctor"){
+  if(false){
     wp_redirect(home_url());
   }
   
