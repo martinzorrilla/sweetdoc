@@ -67,13 +67,15 @@
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #1779ba;
+    //background-color: #1779ba;
+    background-color: $sweet-sidebar;
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px #999;
   }
 
-  .save-button-expanded:hover {background-color: #176ca5;
+  .save-button-expanded:hover {
+    background-color: $sweet-sidebar-hover;
     color: white;
     //opacity: 0.7;
   }

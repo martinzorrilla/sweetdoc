@@ -9,6 +9,11 @@
  */
 ?>
 
+
+     <!-- the content ends here! -->
+	 </div>
+  </div>
+</div>
 </div><!-- patient-div -->
 
 <div class="footer-container">

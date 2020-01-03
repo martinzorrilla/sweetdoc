@@ -153,7 +153,7 @@ $app-dashboard-top-nav-height: 55px;
   overflow-y: auto;
   flex: 1 1 0;
   padding: 20px;
-  background-color: $white;
+  background-color: $sweet-content-background;
 }
 
 @mixin shrunk-sidebar() {
@@ -214,6 +214,13 @@ $app-dashboard-top-nav-height: 55px;
     }
   }
 }
+
+
+// css para mis customs divs
+.the-content{
+  //background-color: $sweet-content-background;
+}
+
 
 // mini sidebar on medium/tablet size
 @include breakpoint(medium only) {
