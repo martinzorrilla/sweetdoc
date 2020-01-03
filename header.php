@@ -89,10 +89,10 @@
 				<div class="app-dashboard-sidebar-inner">
 					<ul class="menu vertical">
 					<li><a href="<?php echo $all_patient_url ?>" class="is-active">
-						<i class="fas fa-address-book fa-2x"></i><span class="app-dashboard-sidebar-text"> Listar Pacientes</span>
+						<i class="fas fa-address-book fa-2x"></i><span class="app-dashboard-sidebar-text"> Todos los Pacientes</span>
 					</a></li>
 					<li><a href="<?php echo $create_patient_url ?>">
-						<i class="fas fa-heartbeat fa-lg"></i><span class="app-dashboard-sidebar-text"> Crear Paciente Nuevo</span>
+						<i class="fas fa-plus fa-2x"></i><span class="app-dashboard-sidebar-text"> Agregar Paciente</span>
 					</a></li>
 					<li><a href="<?php echo $create_secretary_url ?>">
 						<i class="fas fa-user-md fa-2x"></i><span class="app-dashboard-sidebar-text"> Crear Asistente</span>

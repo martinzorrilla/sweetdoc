@@ -6,37 +6,125 @@
   $create_secretary_url = home_url().'/crear-asistente/';
 ?>
 
+<style>
+/* body {font-family: Arial;} */
 
-<div class="create-patient-div">
+  /* Style the tab */
+.tab {
+  overflow: hidden;
+  /* border: 1px solid #ccc; */
+  border: none;
+  background-color: #f1f1f1;
+}
+
+.tablinks.active{
+    border-radius: 10px 10px 0 0;
+  }
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 27px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+.tab.white-tab button.active {
+  background-color: #fff;
+  border-left: 1px solid #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  /* display: none; */
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+  background-color: #ccc;
+}
+
+.tabcontent.white-tab{
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-top: none
+}
+
+
+</style>
+
+<div class="create-patient-div form-tab-style">
 <!-- <div class="the-content"> -->
 
-  <h1>Crear Nuevo Paciente</h1>
+  <h3>Agregar Paciente</h3>
 
-  <div class="appform">
-    <form id="create-patient-form" name="create-patient-form" method="post" class="text-center">
-          <fieldset>
-            <div class="floated-label-wrapper">
+  <div class="tab white-tab">
+    <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
+  </div>
+
+  <div class="appform tabcontent white-tab">
+    <form id="create-patient-form" name="create-patient-form" method="post" >
+          <fieldset row>
+            <div class="floated-label-wrapper large-6 columns">
               <label for="nombre">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_name" name="patient_name" value="<?php echo $nombre ?>" placeholder="Type..." required>
+              <input type="text" id="patient_name" name="patient_name" value="<?php echo $nombre ?>" placeholder="Ingrese el nombre del paciente..." required>
             </div>
 
-            <div class="floated-label-wrapper">
+            <div class="floated-label-wrapper large-6 columns">
               <label for="apellido">Apellido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_last_name" name="patient_last_name" value="<?php echo $apellido ?>" placeholder="Type..." required>
+              <input type="text" id="patient_last_name" name="patient_last_name" value="<?php echo $apellido ?>" placeholder="Ingrese el apellido del paciente..." required>
             </div>
 
-            <div class="floated-label-wrapper">
+            <div class="floated-label-wrapper large-12 columns">
               <label for="cedula">Cedula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Type..." required>
+              <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Ingrese el documento del paciente..." required>
             </div>
 
-            <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">Guardar</button>
-            <p class="errorWrapper">
-            </p>
+            <!-- <div class="floated-label-wrapper large-12 columns text-center">
+              <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">Crear</button>
+              <p class="errorWrapper">
+              </p>
+            </div> -->
+
+            <div class="floated-label-wrapper large-12 columns text-center ">
+              <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">
+              <i class="fas fa-save fa-lg"></i><span class="app-dashboard-sidebar-text"></span>
+              </button>
+              <p class="errorWrapper">
+              </p>
+            </div>
 
           </fieldset>
         </form>
   </div>
+
+
+
+<!-- <div class="tab">
+  <button class="tablinks active" onclick="openCity(event, 'London')">London</button>
+</div>
+
+<div id="London" class="tabcontent">
+  <h4>London</h4>
+  <p>London is the capital city of England.</p>
+</div> -->
+
+
+
+
 </div><!-- create-patient-div -->
 
 
