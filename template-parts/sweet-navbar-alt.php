@@ -3,7 +3,10 @@
 <div class="top-bar" id="example-menu">
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu>
-      <li class="menu-text">SweetDoc!</li>
+      <li class="menu-text">
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="app-dashboard-logo">SweetDoc!</a>
+      </li>
+      
     </ul>
   </div>
   <div class="top-bar-right">
