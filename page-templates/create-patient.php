@@ -55,6 +55,8 @@
   border: 1px solid #ccc;
   border-top: none;
   background-color: #ccc;
+  /* box-shadow: 5px 5px 10px; */
+  box-shadow: 0 0 10px;
 }
 
 .tabcontent.white-tab{
@@ -71,11 +73,14 @@
 
   <h3>Agregar Paciente</h3>
 
-  <div class="tab white-tab">
+  <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
+  <!-- <div class="tab white-tab"> -->
+  <div class="tab">
     <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
   </div>
 
-  <div class="appform tabcontent white-tab">
+  <!-- <div class="appform tabcontent white-tab"> -->
+  <div class="appform tabcontent">
     <form id="create-patient-form" name="create-patient-form" method="post" >
           <fieldset row>
             <div class="floated-label-wrapper large-6 columns">
