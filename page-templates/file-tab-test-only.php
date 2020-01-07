@@ -1,55 +1,30 @@
-<?php get_header();/* Template Name: Create Patient*/?>
+<?php get_header();/* Template Name: file-tab-test*/?>
+
 
 <div class="create-patient-div form-tab-style">
 <!-- <div class="the-content"> -->
 
-<div data-closable="" class="callout alert-callout-border secondary">
-  <h3>Agregar Paciente</h3>
+
+    <?php hm_get_template_part('template-parts/appointment/motivo-consulta', ['appointment_id' => $appointment_id]); ?>
+
+
+
+<!-- <div class="tab">
+  <button class="tablinks active" onclick="openCity(event, 'London')">London</button>
 </div>
 
-  <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
-  <!-- <div class="tab white-tab"> -->
-  <div class="tab">
-    <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
-  </div>
+<div id="London" class="tabcontent">
+  <h4>London</h4>
+  <p>London is the capital city of England.</p>
+</div> -->
 
-  <!-- <div class="appform tabcontent white-tab"> -->
-  <div class="appform tabcontent">
-    <form id="create-patient-form" name="create-patient-form" method="post" >
-          <fieldset row>
-            <div class="floated-label-wrapper large-6 columns">
-              <label for="nombre">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_name" name="patient_name" value="<?php echo $nombre ?>" placeholder="Ingrese el nombre del paciente..." required>
-            </div>
 
-            <div class="floated-label-wrapper large-6 columns">
-              <label for="apellido">Apellido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_last_name" name="patient_last_name" value="<?php echo $apellido ?>" placeholder="Ingrese el apellido del paciente..." required>
-            </div>
 
-            <div class="floated-label-wrapper large-12 columns">
-              <label for="cedula">Cedula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Ingrese el documento del paciente..." required>
-            </div>
 
-            <!-- <div class="floated-label-wrapper large-12 columns text-center">
-              <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">Crear</button>
-              <p class="errorWrapper">
-              </p>
-            </div> -->
-
-            <div class="floated-label-wrapper large-12 columns text-center ">
-              <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">
-              <i class="fas fa-save fa-lg"></i><span class="app-dashboard-sidebar-text"></span>
-              </button>
-              <p class="errorWrapper">
-              </p>
-            </div>
-
-          </fieldset>
-        </form>
-  </div>
 </div><!-- create-patient-div -->
+
+
+
 
 <?php get_footer(); ?>
 

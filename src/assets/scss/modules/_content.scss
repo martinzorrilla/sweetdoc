@@ -52,3 +52,64 @@
 
   }
 }
+
+
+// Custom scss for the form tab style used in Create-patient.php. written by MZ
+/* body {font-family: Arial;} */
+
+  /* Style the tab */
+  .tab {
+    overflow: hidden;
+    /* border: 1px solid #ccc; */
+    border: none;
+    background-color: #f1f1f1;
+    margin-top: 3em;
+  }
+  
+  .tablinks.active{
+      border-radius: 10px 10px 0 0;
+    }
+  
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 27px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: $sweet-single-tab-background;
+  }
+  
+  .tab.white-tab button.active {
+    background-color: #fff;
+    border-left: 1px solid $sweet-single-tab-background;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    /* display: none; */
+    padding: 6px 12px;
+    border: 1px solid $sweet-single-tab-background;
+    border-top: none;
+    background-color: $sweet-single-tab-background;
+    /* box-shadow: 5px 5px 10px; */
+    box-shadow: 0 0 10px;
+  }
+  
+  .tabcontent.white-tab{
+    border: 1px solid $sweet-single-tab-background;
+    background-color: #fff;
+    border-top: none
+  }
