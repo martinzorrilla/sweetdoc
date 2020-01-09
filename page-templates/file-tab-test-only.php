@@ -23,6 +23,46 @@
 
 </div><!-- create-patient-div -->
 
+<div class="buscar-ci" id="buscar-ci">
+  <div class="input-group">
+    <span class="input-group-label">Cedula: </span>
+    <input class="input-group-field" type="number">
+    <div class="input-group-button">
+      <input type="submit" class="button" value="Buscar">
+    </div>
+  </div>
+</div>
+
+<?php 
+
+// args
+$args = array(
+	'numberposts'	=> -1,
+	'post_type'		=> 'sw_patient',
+	'meta_key'		=> 'cedula',
+	'meta_value'	=> '334455'
+);
+
+
+// query
+$the_query = new WP_Query( $args );
+
+?>
+<?php if( $the_query->have_posts() ): ?>
+	<ul>
+	<?php while( $the_query->have_posts() ) : $the_query->the_post(); ?>
+		<li>
+			<a href="<?php the_permalink(); ?>">
+				<img src="<?php the_field('event_thumbnail'); ?>" />
+				<?php the_title(); ?>
+			</a>
+		</li>
+	<?php endwhile; ?>
+	</ul>
+<?php endif; ?>
+
+<?php wp_reset_query();	 // Restore global post data stomped by the_post(). ?>
+
 
 
 
@@ -36,6 +76,8 @@
 
     
     var createPatientBtn;
+
+    var buscarCiBtn;
 
 /*    var createAppointmentForm;
     var createProfileClose;
@@ -52,6 +94,7 @@
         
         createPatientBtn = $("#create-patient");
         createPatientForm = $("#create-patient-form");
+        buscarPorCiBtn = $("#buscar-ci");
 
         createPatientBtn.on("click", function (e) {
           createPatientBtn.fadeOut( "slow" );

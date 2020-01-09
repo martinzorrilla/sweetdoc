@@ -27,21 +27,21 @@
     
     <div class="profile-card-about static-data-slide">
       <h5 class="about-title separator-left">Aca van los campos <?php //echo $name?></h5>
-      <p class="about-content">
+      <p class="about-content large-12 columns">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet autem eveniet nulla quae ullam sit iure voluptatum, nesciunt voluptas perferendis, minus natus in quaerat?
       </p>
 
-      <div class="floated-label-wrapper">
+      <div class="floated-label-wrapper large-6 columns">
         <label for="cesareas">Cesareas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <input type="text" id="cesareas" name="cesareas" value="<?php echo $cesareas ?>" placeholder="Cesareas" required>
       </div>
 
-      <div class="floated-label-wrapper">
+      <div class="floated-label-wrapper large-6 columns">
         <label for="menarca">Menarca &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <input type="text" id="menarca" name="menarca" value="<?php echo $menarca ?>" placeholder="Menarca" required>
       </div>
 
-      <div class="floated-label-wrapper">
+      <div class="floated-label-wrapper large-12 columns">
         <label for="irs">IRS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <input type="text" id="irs" name="irs" value="<?php echo $irs ?>" placeholder="IRS" required>
       </div>

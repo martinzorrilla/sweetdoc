@@ -15,7 +15,12 @@
     <?php foreach ($latest_patients as $patient): ?>
       <li>
         <div data-closable class="callout alert-callout-border primary list-patients">
-          <a href="<?php echo get_permalink( $patient->ID ); ?> " class="name"><strong><?php echo $patient->post_title;?></strong></a>
+          
+          <a href="<?php echo get_permalink( $patient->ID ); ?> " class="name">
+            <strong><?php echo $patient->post_title;?></strong>           
+            <span><strong> - Cedula: <?php echo (get_field( "cedula", $patient->ID ));?></strong></p>
+          </a>
+          
           <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id=new'; ?>" class="crete-app"> - Crear Nueva consulta</a>
 
           <?php 
