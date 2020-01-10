@@ -54,7 +54,7 @@
 }
 
 
-// Custom scss for the form tab style used in Create-patient.php. written by MZ
+// Custom scss for the form tab style used in Create-patient.php, appointment.php and other pages. written by MZ
 /* body {font-family: Arial;} */
 
   /* Style the tab */
@@ -124,4 +124,82 @@
   }
 
 
-  // scss for the tab forms used in appointment.php
+  // Colposcopias.css
+  
+  .archivos {
+    font-family: sans-serif;
+    /* width: 600px; */
+    width: 100%;
+    /* background: #ccc; */
+    margin: 0 auto;
+    padding: 20px;
+    /* border: 1px solid #1779ba; */
+    border: 10px dotted #eee;
+  }
+
+  .archivos .preview ol{
+    margin-left: 0;
+  }
+
+  .archivos .preview ol li{
+    background: $sweet-sidebar !important;
+  }
+
+  .archivos .preview ol li p{
+    color: $sweet-white;
+  }
+
+  .archivos .preview p {
+    background: none;
+    border: none;
+    display: inline-block;
+    margin-bottom: 0px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .archivos ol {
+    padding-left: 0;
+  }
+
+  .archivos li, .archivos div > p {
+    background: $sweet-white;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    list-style-type: none;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+
+  .archivos img {
+    max-width: 100px;
+    width: 100%;
+    height: 100px;
+    order: 1;
+  }
+
+  .archivos p {
+    line-height: 32px;
+    padding-left: 10px;
+  }
+
+  .archivos label, .archivos button {
+    /* background-color: #1779ba; */
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px ridge black;
+    height: auto;
+    background-color: $sweet-sidebar;
+    color: $sweet-white;
+    font-size: 1.5em;
+  }
+
+  .archivos label:hover, .archivos button:hover {
+    background-color: $sweet-sidebar-hover;
+    color: $sweet-white;
+  }
+
+  .archivos label:active, .archivos button:active {
+    background-color: black;
+    color: $sweet-white;
+  }

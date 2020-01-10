@@ -43,63 +43,6 @@
     //field files
     $macroscopia = $colpo_data_post['macroscopia'][0];
  ?>
-<!-- <h3>Datos Estaticos del Paciente</h3> -->
-
-  <style>
-
-    .archivos {
-      font-family: sans-serif;
-      /* width: 600px; */
-      width: 100%;
-      /* background: #ccc; */
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #1779ba;
-    }
-
-    .archivos ol {
-      padding-left: 0;
-    }
-
-    .archivos li, .archivos div > p {
-      background: #eee;
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      list-style-type: none;
-      border: 1px solid black;
-    }
-
-    .archivos img {
-      height: 64px;
-      order: 1;
-    }
-
-    .archivos p {
-      line-height: 32px;
-      padding-left: 10px;
-    }
-
-    .archivos label, .archivos button {
-      background-color: #1779ba;
-      padding: 5px 10px;
-      border-radius: 5px;
-      border: 1px ridge black;
-      font-size: 0.8rem;
-      height: auto;
-    }
-
-    .archivos label:hover, .archivos button:hover {
-      background-color: #2D5BA3;
-      color: white;
-    }
-
-    .archivos label:active, .archivos button:active {
-      background-color: #0D3F8F;
-      color: white;
-    }
-  </style>
-
 
 <div class="card profile-card-action-icons">
   <div class="card-section">
@@ -131,24 +74,30 @@
 
       <div class="archivos">
 
-        <div>
-          <label for="image_uploads">Seleccione las imagenes (PNG, JPG)</label>
+        <div class="subir-colpo test">
+          <label for="image_uploads">Seleccionar imagenes (png, jpg )</label>
           <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
         </div>
 
         <?php 
         //if ($image) { cerrar el php
         if (sizeof($images_ids_array)>0) { ?>
-          <div class="preview">
+          <div class="preview test">
           <ol>
             
             <?php  
             $k = 0; 
             foreach ($images_array as $image) { ?>
-            <li>
-              <img class="image-class" alt="" src="<?php echo $image[0]; ?>" />
-              <p>Nombre del archivo <?php echo $images_names[$k]; ?> </p>
-            </li>
+            
+              <li>
+                
+                  <img class="image-class" alt="" src="<?php echo $image[0]; ?>" />
+                
+                
+                  <p>Nombre del archivo <?php echo $images_names[$k]; ?> </p>
+                
+              </li>
+            
             <?php
             $k++;
             } ?>
@@ -156,7 +105,7 @@
           </ol>
           </div> <?php
         }else{ ?>
-          <div class="preview">
+          <div class="preview no-files">
             <p>No hay archivos seleccionados</p>
           </div> <?php  
         } 

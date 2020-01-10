@@ -17,7 +17,7 @@
 		
 
 		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-		<script src="../wp-content/themes/FoundationPress/src/assets/js/bar.js"></script>
+		<!-- <script src="../wp-content/themes/FoundationPress/src/assets/js/bar.js"></script> -->
 
 		<?php wp_head(); ?>
 

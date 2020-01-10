@@ -276,7 +276,7 @@
     //si no se agregan o no hay ningun file, apendar a preview un parrafo con texto
     if(curFiles.length === 0) {
       var para = document.createElement('p');
-      para.textContent = 'No files currently selected for upload';
+      para.textContent = 'No hay archivos seleccionados';
       preview.appendChild(para);
     } else {
       var list = document.createElement('ol');
