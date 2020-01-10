@@ -106,6 +106,15 @@
     background-color: $sweet-single-tab-background;
     /* box-shadow: 5px 5px 10px; */
     box-shadow: 0 0 10px;
+
+
+    .floated-label-wrapper{
+      label{
+        text-align: left;
+        font-weight: bold;
+        padding: 0.5em 0;
+      }
+    }
   }
   
   .tabcontent.white-tab{
@@ -113,3 +122,6 @@
     background-color: #fff;
     border-top: none
   }
+
+
+  // scss for the tab forms used in appointment.php

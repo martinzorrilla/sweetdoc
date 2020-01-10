@@ -19,14 +19,14 @@
       </div>
       <div class="profile-card-author">
         <h5 class="author-title">AGO</h5>
-        <p class="author-description">Paciente</p>
-        <p class="card-profile-stats-more-link"><a href="#"><i class="fa fa-angle-down" aria-hidden="true"></i></a></p>
+       
+        <p class="card-profile-stats-more-link"><a href="#"><i class="fa fa-angle-down fa-2x" aria-hidden="true"></i></a></p>
       </div>
     </div>
     
     
     <div class="profile-card-about static-data-slide">
-      <h5 class="about-title separator-left">Aca van los campos <?php //echo $name?></h5>
+      <h5 class="about-title separator-left"> Ingresar datos AGO <?php //echo $name?></h5>
       <p class="about-content large-12 columns">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet autem eveniet nulla quae ullam sit iure voluptatum, nesciunt voluptas perferendis, minus natus in quaerat?
       </p>

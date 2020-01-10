@@ -104,23 +104,16 @@
 <div class="card profile-card-action-icons">
   <div class="card-section">
     <div class="profile-card-header">
-      <div class="profile-card-avatar">
-        <img class="avatar-image" src="<?php bloginfo('template_url')?>/src/assets/images/pepaicon.jpg" alt="Peppa Pig">
-      </div>
       <div class="profile-card-author">
         <h5 class="author-title">Colposcopia</h5>
-        <p class="author-description">Paciente</p>
       </div>
     </div>
     <div class="profile-card-about">
-      <h5 class="about-title separator-left">Aca van los campos de la Colposcopia <?php //echo $name?></h5>
-      <p class="about-content">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet autem eveniet nulla quae ullam sit iure voluptatum, nesciunt voluptas perferendis, minus natus in quaerat?
-      </p>
+      <h5 class="about-title separator-left"> Ingresar datos de la Colposcopia <?php //echo $name?></h5>
 
       <div class="floated-label-wrapper">
         <label for="macroscopia">Macroscopia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <input type="text" id="macroscopia" name="macroscopia" value="<?php echo $macroscopia ?>" placeholder="Type..." required>
+        <input type="text" id="macroscopia" name="macroscopia" value="<?php echo $macroscopia ?>" placeholder="Escribir..." required>
       </div>
 
       <br>

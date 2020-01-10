@@ -33,25 +33,26 @@
   <div class="card profile-card-action-icons">
     <div class="card-section">
       <div class="profile-card-header">
-        <div class="profile-card-avatar">
-          <img class="avatar-image" src="<?php bloginfo('template_url')?>/src/assets/images/pepaicon.jpg" alt="Peppa Pig">
-        </div>
         <div class="profile-card-author">
           <h5 class="author-title">Motivo de Consulta</h5>
           <!-- <p class="author-description">Paciente</p> -->
         </div>
       </div>
       <div class="profile-card-about">
-        <h5 class="about-title separator-left"> Datos a guardar <?php //echo $name?></h5>
+        <h5 class="about-title separator-left"> Ingresar datos de la Consulta <?php //echo $name?></h5>
 
         <div class="floated-label-wrapper">
           <label for="Motivo de Consulta">Motivo de Consulta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <input type="text" id="motivo_de_consulta" name="motivo_de_consulta" value="<?php echo $motivo_de_consulta ?>" placeholder="Escribir..." required>
+          <textarea id="motivo_de_consulta" name="motivo_de_consulta" placeholder="Ingrese aqui el motivo de la consulta.." style="height:5em" required><?php echo $motivo_de_consulta ?></textarea>
         </div>
+
 
         <div class="floated-label-wrapper">
           <label for="antecedente_actual">Antecedentes de la enfermedad actual &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <input type="text" id="antecedente_actual" name="antecedente_actual" value="<?php echo $antecedente_actual ?>" placeholder="Escribir..." required>
+
+          <!-- <input type="text" id="antecedente_actual" name="antecedente_actual" value="<?php //echo $antecedente_actual ?>" placeholder="Escribir..." required> -->
+
+          <textarea id="antecedente_actual" name="antecedente_actual" placeholder="Ingrese aqui el antecedente actual.." style="height:5em" required><?php echo $antecedente_actual ?></textarea>
         </div>                  
 
         <div class="floated-label-wrapper">
