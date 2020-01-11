@@ -1,11 +1,11 @@
 <?php get_header();/* Template Name: Create Patient*/?>
 
-<div class="create-patient-div form-tab-style">
-<!-- <div class="the-content"> -->
-
-<div data-closable="" class="callout alert-callout-border secondary">
+<div data-closable="" class="callout alert-callout-border secondary text-center">
   <h3>Agregar Paciente</h3>
 </div>
+
+<!-- crear-editar paciente -->
+<div class="form-tab-style">
 
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
   <!-- <div class="tab white-tab"> -->
@@ -27,9 +27,15 @@
               <input type="text" id="patient_last_name" name="patient_last_name" value="<?php echo $apellido ?>" placeholder="Ingrese el apellido del paciente..." required>
             </div>
 
-            <div class="floated-label-wrapper large-12 columns">
+            <div class="floated-label-wrapper large-6 columns">
               <label for="cedula">Cedula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Ingrese el documento del paciente..." required>
+            </div>
+
+            <!-- email del paciente -->
+            <div class="floated-label-wrapper large-6 columns">
+              <label for="email">email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="text" id="email" name="email" value="<?php echo $email_paciente ?>" placeholder="Ingrese el email del paciente..." required>
             </div>
 
             <!-- <div class="floated-label-wrapper large-12 columns text-center">
@@ -38,7 +44,7 @@
               </p>
             </div> -->
 
-            <div class="floated-label-wrapper large-12 columns text-center ">
+            <div class="floated-label-wrapper large-12 columns text-center" style="padding-top: 1rem;">
               <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">
               <i class="fas fa-save fa-lg"></i><span class="app-dashboard-sidebar-text"></span>
               </button>
@@ -49,7 +55,8 @@
           </fieldset>
         </form>
   </div>
-</div><!-- create-patient-div -->
+</div>
+<!-- fin de crear-editar paciente -->
 
 <?php get_footer(); ?>
 

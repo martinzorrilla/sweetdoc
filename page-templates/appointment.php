@@ -282,18 +282,37 @@
       var list = document.createElement('ol');
       preview.appendChild(list);
       for(var i = 0; i < curFiles.length; i++) {
+        //var liContainer = document.createElement('div');
+        //liContainer.classList.add("row");
         var listItem = document.createElement('li');
+        //liContainer.appendChild(listItem);
+        
+        //$( listItem ).wrap( "<div class='row'></div>" );
+        
         var para = document.createElement('p');
+        //para.classList.add("small-12");
         //si el tipo es validoy el tamnho no exede los 6MB
         if(validFileType(curFiles[i]) && curFiles[i].size < 6291456) {
           //add a class to change to succes/valid color
-          $(listItem).css('background', '#3adb76');
-          para.textContent = 'Nombre del archivo ' + curFiles[i].name + ', Tamaño ' + returnFileSize(curFiles[i].size) + '.';
+          //$(listItem).css('background', '#2c3840');
+          
+           para.textContent = 'Nombre del archivo:  ' + curFiles[i].name;
+          //var paraText = 'Archivo:  ' + curFiles[i].name + '<br> Tamaño: ' + returnFileSize(curFiles[i].size) + '.';
+          //$(para ).html(paraText);
+
           var image = document.createElement('img');
+          
           image.src = window.URL.createObjectURL(curFiles[i]);
 
-          listItem.appendChild(image);
-          listItem.appendChild(para);
+          var liContainer = document.createElement('div');
+          liContainer.classList.add("row");
+          //var listItem = document.createElement('li');
+          listItem.appendChild(liContainer);
+
+          liContainer.appendChild(image);
+          $( image ).wrap( "<div class='large-6 medium-6 small-12 columns colpo-files-list'></div>" );
+          liContainer.appendChild(para);
+          $( para ).wrap( "<div class='large-6 medium-6 small-12 columns'></div>" );
 
         } else {
           //agregar estilo para hacerlo de color rojo

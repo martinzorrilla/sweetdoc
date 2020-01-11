@@ -1,28 +1,11 @@
 
 .create-patient-div{
-  h1{
-    text-align:center;
-    text-transform: uppercase;  
-  }
-  h3{
-    font-family: helvetica;
-    //font-size: xx-large;
-    text-align: center;
-  }
-}//create-patient-div
-
-.create-patient-div .floated-label-wrapper{
-  
 }
-
 
 #myUL{
   list-style-type: none;
   padding: 0;
   margin: 0;
-  li{
-    //text-decoration: none; /* Remove default text underline */
-  }
 }
 
 #myInput {

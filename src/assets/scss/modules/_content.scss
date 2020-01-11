@@ -72,6 +72,7 @@
   
   /* Style the buttons inside the tab */
   .tab button {
+    font-weight: bold;
     background-color: inherit;
     float: left;
     border: none;
@@ -124,7 +125,7 @@
   }
 
 
-  // Colposcopias.css
+  // Colposcopias.css ----------------------------- ####### *************************************************
   
   .archivos {
     font-family: sans-serif;
@@ -172,9 +173,9 @@
   }
 
   .archivos img {
-    max-width: 100px;
+    max-width: 50px;
     width: 100%;
-    height: 100px;
+    height: 50px;
     order: 1;
   }
 
@@ -202,4 +203,8 @@
   .archivos label:active, .archivos button:active {
     background-color: black;
     color: $sweet-white;
+  }
+
+  .colpo-files-list{
+    padding: 0.625rem;
   }
