@@ -2,14 +2,13 @@
 
 //test------------------------------------------
 
-heroImage = $(".card-profile-stats");
+// heroImage = $(".card-profile-stats");
 //createPatientForm = $("#create-patient-form");
 
-heroImage.on("click", function (e) {
-  alert("clicked on hero image");
-  //heroImage.fadeOut( "slow" );
-  //saveProfileData(e);
-});
+// heroImage.on("click", function (e) {
+//   alert("clicked on hero image");
+ 
+// });
 
 
 
