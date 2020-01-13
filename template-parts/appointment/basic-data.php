@@ -105,6 +105,17 @@
               <input type="text" id="direccion" name="direccion" value="<?php echo $direccion ?>" placeholder="Ingrese al dirección del paciente..." required>
             </div>
 
+            <div class="floated-label-wrapper large-6 columns">
+              <legend>Metodo anticonceptivo actual</legend>
+                <div>
+                  <input type="checkbox" id="inyectable" name="metodo_anticonceptivo" value="inyectable">
+                  <label for="inyectable">Inyectable</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="preservativos" name="metodo_anticonceptivo" value="preservativos">
+                  <label for="preservativos">Preservativos</label>
+                </div>
+            </div>
             <!-- <div class="floated-label-wrapper large-12 columns text-center">
               <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">Crear</button>
               <p class="errorWrapper">

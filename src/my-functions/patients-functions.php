@@ -20,6 +20,7 @@ function sw_create_patient_ajax(){
     $departamento = isset($_POST['departamento']) && $_POST['departamento'] != '' ? $_POST['departamento'] : NULL;
     $ciudad = isset($_POST['ciudad']) && $_POST['ciudad'] != '' ? $_POST['ciudad'] : NULL;
     $direccion = isset($_POST['direccion']) && $_POST['direccion'] != '' ? $_POST['direccion'] : NULL;
+    $metodo_anticonceptivo = isset($_POST['metodo_anticonceptivo']) && $_POST['metodo_anticonceptivo'] != '' ? $_POST['metodo_anticonceptivo'] : NULL;
 
     $params = array(
         "patient_name" => $patient_name,
@@ -29,7 +30,8 @@ function sw_create_patient_ajax(){
         "fecha_de_nacimiento" => $fecha_de_nacimiento,
         "departamento" => $departamento,
         "ciudad" => $ciudad,
-        "direccion" => $direccion
+        "direccion" => $direccion,
+        "metodo_anticonceptivo" => $metodo_anticonceptivo
     );
 
     $result = sw_create_patient($params);
@@ -58,6 +60,7 @@ function sw_create_patient($params){
       $departamento = $params['departamento'];
       $ciudad = $params['ciudad'];
       $direccion = $params['direccion'];
+      $metodo_anticonceptivo = $params['metodo_anticonceptivo'];
 
       $post_author = $params['post_author'];
       $patient_owner = sw_get_patient_owner();
@@ -86,7 +89,9 @@ function sw_create_patient($params){
             "fecha_de_nacimiento" => $fecha_de_nacimiento,
             "departamento" => $departamento,
             "ciudad" => $ciudad,
-            "direccion" => $direccion
+            "direccion" => $direccion,
+            "metodo_anticonceptivo" => $metodo_anticonceptivo
+
         );
 
         foreach ($acf_fields as $field => $value) {

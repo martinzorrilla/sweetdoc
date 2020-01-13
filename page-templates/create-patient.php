@@ -46,7 +46,7 @@
 
     function populateFormData() {
       //var inputs = createAppointmentForm.serializeArray();
-      var inputs = createPatientForm.find("input, select, textarea, date, email");
+      var inputs = createPatientForm.find("input, select, textarea, date, email, checkbox");
       var serializedInputs = createPatientForm.serializeArray();
       var formData = new FormData();
 
