@@ -15,11 +15,21 @@ function sw_create_patient_ajax(){
     $patient_name = isset($_POST['patient_name']) && $_POST['patient_name'] != '' ? $_POST['patient_name'] : NULL;
     $patient_last_name = isset($_POST['patient_last_name']) && $_POST['patient_last_name'] != '' ? $_POST['patient_last_name'] : NULL;
     $patient_ci = isset($_POST['patient_ci']) && $_POST['patient_ci'] != '' ? $_POST['patient_ci'] : NULL;
+    $email = isset($_POST['email_paciente']) && $_POST['email_paciente'] != '' ? $_POST['email_paciente'] : NULL;
+    $fecha_de_nacimiento = isset($_POST['fecha_de_nacimiento']) && $_POST['fecha_de_nacimiento'] != '' ? $_POST['fecha_de_nacimiento'] : NULL;
+    $departamento = isset($_POST['departamento']) && $_POST['departamento'] != '' ? $_POST['departamento'] : NULL;
+    $ciudad = isset($_POST['ciudad']) && $_POST['ciudad'] != '' ? $_POST['ciudad'] : NULL;
+    $direccion = isset($_POST['direccion']) && $_POST['direccion'] != '' ? $_POST['direccion'] : NULL;
 
     $params = array(
         "patient_name" => $patient_name,
         "patient_last_name" => $patient_last_name,
-        "patient_ci" => $patient_ci
+        "patient_ci" => $patient_ci,
+        "email" => $email,
+        "fecha_de_nacimiento" => $fecha_de_nacimiento,
+        "departamento" => $departamento,
+        "ciudad" => $ciudad,
+        "direccion" => $direccion
     );
 
     $result = sw_create_patient($params);
@@ -43,8 +53,13 @@ function sw_create_patient($params){
       $patient_name = $params['patient_name'];
       $patient_last_name = $params['patient_last_name'];
       $patient_ci = $params['patient_ci'];
-      $post_author = $params['post_author'];
+      $email = $params['email'];
+      $fecha_de_nacimiento = $params['fecha_de_nacimiento'];
+      $departamento = $params['departamento'];
+      $ciudad = $params['ciudad'];
+      $direccion = $params['direccion'];
 
+      $post_author = $params['post_author'];
       $patient_owner = sw_get_patient_owner();
 
       $my_post = array(
@@ -66,7 +81,12 @@ function sw_create_patient($params){
       $acf_fields = array(
             "nombre" => $patient_name,
             "apellido" => $patient_last_name,
-            "cedula" => $patient_ci
+            "cedula" => $patient_ci,
+            "email_paciente" => $email,
+            "fecha_de_nacimiento" => $fecha_de_nacimiento,
+            "departamento" => $departamento,
+            "ciudad" => $ciudad,
+            "direccion" => $direccion
         );
 
         foreach ($acf_fields as $field => $value) {

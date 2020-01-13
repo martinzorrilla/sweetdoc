@@ -4,59 +4,8 @@
   <h3>Agregar Paciente</h3>
 </div>
 
-<!-- crear-editar paciente -->
-<div class="form-tab-style">
 
-  <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
-  <!-- <div class="tab white-tab"> -->
-  <div class="tab">
-    <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
-  </div>
-
-  <!-- <div class="appform tabcontent white-tab"> -->
-  <div class="appform tabcontent">
-    <form id="create-patient-form" name="create-patient-form" method="post" >
-          <fieldset row>
-            <div class="floated-label-wrapper large-6 columns">
-              <label for="nombre">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_name" name="patient_name" value="<?php echo $nombre ?>" placeholder="Ingrese el nombre del paciente..." required>
-            </div>
-
-            <div class="floated-label-wrapper large-6 columns">
-              <label for="apellido">Apellido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_last_name" name="patient_last_name" value="<?php echo $apellido ?>" placeholder="Ingrese el apellido del paciente..." required>
-            </div>
-
-            <div class="floated-label-wrapper large-6 columns">
-              <label for="cedula">Cedula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Ingrese el documento del paciente..." required>
-            </div>
-
-            <!-- email del paciente -->
-            <div class="floated-label-wrapper large-6 columns">
-              <label for="email">email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="email" name="email" value="<?php echo $email_paciente ?>" placeholder="Ingrese el email del paciente..." required>
-            </div>
-
-            <!-- <div class="floated-label-wrapper large-12 columns text-center">
-              <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">Crear</button>
-              <p class="errorWrapper">
-              </p>
-            </div> -->
-
-            <div class="floated-label-wrapper large-12 columns text-center" style="padding-top: 1rem;">
-              <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">
-              <i class="fas fa-save fa-lg"></i><span class="app-dashboard-sidebar-text"></span>
-              </button>
-              <p class="errorWrapper">
-              </p>
-            </div>
-
-          </fieldset>
-        </form>
-  </div>
-</div>
-<!-- fin de crear-editar paciente -->
+<?php $patient_id = ""; hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id]); ?>
 
 <?php get_footer(); ?>
 
@@ -97,7 +46,7 @@
 
     function populateFormData() {
       //var inputs = createAppointmentForm.serializeArray();
-      var inputs = createPatientForm.find("input, select, textarea");
+      var inputs = createPatientForm.find("input, select, textarea, date, email");
       var serializedInputs = createPatientForm.serializeArray();
       var formData = new FormData();
 
@@ -107,6 +56,7 @@
 
       $.each(serializedInputs, function (i, element) {
         formData.append(element.name, element.value);
+        console.log("name: "+ element.name + " - value: " + element.value);
       });
 
       //formData.append("app_id", "<?php //echo $appointment_id ?>");
