@@ -23,10 +23,8 @@
   $ciudad = $patient_fields['ciudad'][0];
   $direccion = $patient_fields['direccion'][0];
 
-  var_dump($departamento);
+  //var_dump($departamento);
   
-
-
 
   $fullname = $name.' '.$lastname;
  ?> 
