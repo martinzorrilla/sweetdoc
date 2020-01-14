@@ -114,7 +114,7 @@ function sw_create_patient($params){
       $result['msg'] = 'Nuevo Paciente creado';
       return $result;
 }
-
+  
 //Create post type static data and relate it to the created patient
 function sw_create_static_data($params){
 
