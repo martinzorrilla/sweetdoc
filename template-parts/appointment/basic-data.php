@@ -16,15 +16,23 @@
   //$fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0];
   $fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
   $newDate = "";
-  //acf retoran la fecha asi:20191128 en vez de 2019-11-28 que es como el input[date] requiere
+  //acf retoran la fecha asi:20191128 en vez de 2019-11-28 que es como el input[date] requiere, x eso tranformo el valor
   if ($fecha_de_nacimiento != ""){ $newDate = date("Y-m-d", strtotime($fecha_de_nacimiento));}
 
   $departamento = $patient_fields['departamento'][0];
   $ciudad = $patient_fields['ciudad'][0];
   $direccion = $patient_fields['direccion'][0];
+  $metodo_anticonceptivo = $patient_fields['metodo_anticonceptivo'][0];
+  // return value es un array conteniendo strings con los values en el bkend de acf i,e: "inyectables"
+  $checkbox_metodo_anti = get_field('metodo_anticonceptivo', $patient_id); // esto no usamos para guardar, si no para 
+  // mostrar los campos que estan ya guardados en un paciente creado
 
-  //var_dump($departamento);
-  
+  if ($checkbox_metodo_anti) {
+    # code...
+    var_dump($checkbox_metodo_anti);
+  }else{
+    echo "checkox anti esta vacio";
+  }
 
   $fullname = $name.' '.$lastname;
  ?> 
@@ -41,6 +49,7 @@
   <!-- <div class="appform tabcontent white-tab"> -->
   <div class="appform tabcontent">
     <form id="create-patient-form" name="create-patient-form" method="post" >
+          <input type="hidden" name="action" value="sw_create_patient_ajax">
           <fieldset row>
             <div class="floated-label-wrapper large-6 columns">
               <label for="nombre">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -105,14 +114,28 @@
 
             <div class="floated-label-wrapper large-6 columns">
               <legend>Metodo anticonceptivo actual</legend>
+                <fieldset>
                 <div>
-                  <input type="checkbox" id="inyectable" name="metodo_anticonceptivo" value="inyectable">
+                  <input type="checkbox" id="inyectable" name="metodo_anticonceptivo[]" value="inyectable" 
+                  <?php 
+                  if( $checkbox_metodo_anti != NULL || $checkbox_metodo_anti != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
+                    if(in_array("inyectable", $checkbox_metodo_anti)) echo "checked";
+                  }
+                  ?> >
                   <label for="inyectable">Inyectable</label>
                 </div>
+
                 <div>
-                  <input type="checkbox" id="preservativos" name="metodo_anticonceptivo" value="preservativos">
+                  <input type="checkbox" id="preservativos" name="metodo_anticonceptivo[]" value="preservativos"
+                  <?php 
+                  if( $checkbox_metodo_anti != NULL || $checkbox_metodo_anti != ""){ //si esta vacio genera un error, por eso hay que 
+                    if(in_array("preservativos", $checkbox_metodo_anti)) echo "checked";
+                  }
+                  ?> >
                   <label for="preservativos">Preservativos</label>
                 </div>
+              </fieldset>
+
             </div>
             <!-- <div class="floated-label-wrapper large-12 columns text-center">
               <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">Crear</button>

@@ -22,6 +22,8 @@ function sw_create_patient_ajax(){
     $direccion = isset($_POST['direccion']) && $_POST['direccion'] != '' ? $_POST['direccion'] : NULL;
     $metodo_anticonceptivo = isset($_POST['metodo_anticonceptivo']) && $_POST['metodo_anticonceptivo'] != '' ? $_POST['metodo_anticonceptivo'] : NULL;
 
+    error_log(json_encode($_POST), 0);
+
     $params = array(
         "patient_name" => $patient_name,
         "patient_last_name" => $patient_last_name,
@@ -61,6 +63,9 @@ function sw_create_patient($params){
       $ciudad = $params['ciudad'];
       $direccion = $params['direccion'];
       $metodo_anticonceptivo = $params['metodo_anticonceptivo'];
+
+      //$metodo_anticonceptivo = array("inyectable", "preservativos");
+      //wp_die(var_dump($metodo_anticonceptivo));
 
       $post_author = $params['post_author'];
       $patient_owner = sw_get_patient_owner();
