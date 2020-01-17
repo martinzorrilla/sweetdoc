@@ -22,7 +22,7 @@ function sw_create_patient_ajax(){
     $direccion = isset($_POST['direccion']) && $_POST['direccion'] != '' ? $_POST['direccion'] : NULL;
     $metodo_anticonceptivo = isset($_POST['metodo_anticonceptivo']) && $_POST['metodo_anticonceptivo'] != '' ? $_POST['metodo_anticonceptivo'] : NULL;
 
-    error_log(json_encode($_POST), 0);
+    //error_log(json_encode($_POST), 0);
 
     $params = array(
         "patient_name" => $patient_name,

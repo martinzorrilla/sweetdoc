@@ -29,9 +29,9 @@
 
   if ($checkbox_metodo_anti) {
     # code...
-    var_dump($checkbox_metodo_anti);
+    //var_dump($checkbox_metodo_anti);
   }else{
-    echo "checkox anti esta vacio";
+    //echo "checkbox anti esta vacio";
   }
 
   $fullname = $name.' '.$lastname;
