@@ -116,6 +116,18 @@
         padding: 0.5em 0;
       }
     }
+    .floated-label-wrapper.checkbox-radio{
+      span{
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      label{
+        text-align: left;
+        font-weight: normal;
+        padding: 0.5em 0;
+      }
+    }
   }
   
   .tabcontent.white-tab{

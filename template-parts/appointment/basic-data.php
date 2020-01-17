@@ -1,7 +1,7 @@
 <?php
 
-// si el argumento es valido, aceptarlo, sino forzarlo a que sea string vacio
-//$patient_id = $template_args["patient_id"] !="" && $template_args["patient_id"] !=NULL ? $template_args["patient_id"] : "";
+  // si el argumento es valido, aceptarlo, sino forzarlo a que sea string vacio
+  //$patient_id = $template_args["patient_id"] !="" && $template_args["patient_id"] !=NULL ? $template_args["patient_id"] : "";
 
   //get data from template if any
   $patient_id = $template_args["patient_id"];
@@ -26,19 +26,15 @@
   // return value es un array conteniendo strings con los values en el bkend de acf i,e: "inyectables"
   $checkbox_metodo_anti = get_field('metodo_anticonceptivo', $patient_id); // esto no usamos para guardar, si no para 
   // mostrar los campos que estan ya guardados en un paciente creado
+  $radiobox_metodo_anti = get_field('epitelio_escamoso', $patient_id); 
   $telefono = $patient_fields['telefono'][0];
   $celular = $patient_fields['celular'][0];
   $establecimiento = $patient_fields['establecimiento'][0];
   $region_sanitaria = $patient_fields['region_sanitaria'][0];
-
-  if ($checkbox_metodo_anti) {
-    # code...
-    //var_dump($checkbox_metodo_anti);
-  }else{
-    //echo "checkbox anti esta vacio";
-  }
-
+  
   $fullname = $name.' '.$lastname;
+  //if ($radiobox_metodo_anti) { var_dump($radiobox_metodo_anti); } else { echo "checkbox anti esta vacio"; }
+
  ?> 
 
 <!-- crear-editar paciente -->
@@ -116,8 +112,8 @@
               <input type="text" id="direccion" name="direccion" value="<?php echo $direccion ?>" placeholder="Ingrese al dirección del paciente..." required>
             </div>
 
-            <div class="floated-label-wrapper large-12 columns">
-              <legend>Metodo anticonceptivo actual</legend>
+            <div class="floated-label-wrapper large-12 columns checkbox-radio">
+              <span>Metodo anticonceptivo actual</span>
                 <fieldset>
                 <div>
                   <input type="checkbox" id="inyectable" name="metodo_anticonceptivo[]" value="inyectable" 
@@ -162,16 +158,16 @@
               <input type="text" id="region_sanitaria" name="region_sanitaria" value="<?php echo $region_sanitaria ?>" placeholder="Ingrese la region sanitaria..." required>
             </div>
 
-            <div class="floated-label-wrapper large-6 columns">
-              <span>Epitelio escamoso original:</span>
+            <div class="floated-label-wrapper large-6 columns checkbox-radio">
+              <span>Epitelio escamoso original</span>
               <div>
-                <input type="radio" id="maduro" name="epitelio_escamoso" value="maduro"
-                      >
+                <input type="radio" id="maduro" name="epitelio_escamoso" value="maduro" <?php if ($radiobox_metodo_anti == "maduro") echo "checked"; ?>
+                >
                 <label for="maduro">Maduro</label>
               </div>
 
               <div>
-                <input type="radio" id="atrofico" name="epitelio_escamoso" value="atrofico">
+                <input type="radio" id="atrofico" name="epitelio_escamoso" value="atrofico" <?php if ($radiobox_metodo_anti == "atrofico") echo "checked"; ?>>
                 <label for="atrofico">Atrófico</label>
               </div>
             </div>
