@@ -1,11 +1,11 @@
 <?php get_header();/* Template Name: Create Patient*/?>
 
+
 <div data-closable class="callout alert-callout-border secondary text-center">
   <h3>Agregar Paciente</h3>
 </div>
-
-
 <?php $patient_id = ""; hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id]); ?>
+
 
 <?php get_footer(); ?>
 
@@ -14,15 +14,9 @@
 
     //global vars
     var $ = jQuery;
-
     
     var createPatientBtn;
-
-/*    var createAppointmentForm;
-    var createProfileClose;
-    //added
-    var myInputFile;
-    var myFile;*/
+    var createPatientForm;
 
     function init(){
       $(document).ready(function () {
@@ -42,44 +36,10 @@
       });
     }
 
-    // function populateFormData() {
-    //   //var inputs = createAppointmentForm.serializeArray();
-    //   var inputs = createPatientForm.find(":input");
-    //   var serializedInputs = createPatientForm.serialize();
-    //   var formData = new FormData();
-
-
-    //   console.log("serializedInputs", serializedInputs);
-
-
-    //   //$.each(serializedInputs, function (i, element) {
-    //     // formData.append(element.name, element.value);
-    //     //console.log("name: "+ element.name + " - value: " + element.value);
-    //  // });
-
-    //   //formData.append("app_id", "<?php //echo $appointment_id ?>");
-    //   //formData.append("patient_id", "<?php //echo $patient_id ?>");
-    //   //formData.append("app_id", "55");
-
-    //   formData.append("action", "sw_create_patient_ajax");
-
-    //   return formData;
-    // }
-
     function saveProfileData(e) {
       e.preventDefault();
-
       //alert("Se guardaran los datos");
       var $ = jQuery;
-      //var formData = populateFormData();
-
-      //console.log("formData = ", formData);
-      // Display the key/value pairs
-      // for (var pair of formData.entries())
-      // {
-      //  //console.log(pair[0]+ ', '+ pair[1]); 
-      // }
-
 
       $.ajax({
         type: "POST",
@@ -119,12 +79,10 @@
       });// $.ajax
     }
 
-
   return{
     init:init
   }
 
   }();
-
   CreatePatientModule.init();
 </script>

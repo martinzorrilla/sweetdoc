@@ -21,6 +21,12 @@ function sw_create_patient_ajax(){
     $ciudad = isset($_POST['ciudad']) && $_POST['ciudad'] != '' ? $_POST['ciudad'] : NULL;
     $direccion = isset($_POST['direccion']) && $_POST['direccion'] != '' ? $_POST['direccion'] : NULL;
     $metodo_anticonceptivo = isset($_POST['metodo_anticonceptivo']) && $_POST['metodo_anticonceptivo'] != '' ? $_POST['metodo_anticonceptivo'] : NULL;
+    $telefono = isset($_POST['telefono']) && $_POST['telefono'] != '' ? $_POST['telefono'] : NULL;
+    $celular = isset($_POST['celular']) && $_POST['celular'] != '' ? $_POST['celular'] : NULL;
+    $establecimiento = isset($_POST['establecimiento']) && $_POST['establecimiento'] != '' ? $_POST['establecimiento'] : NULL;
+    $region_sanitaria = isset($_POST['region_sanitaria']) && $_POST['region_sanitaria'] != '' ? $_POST['region_sanitaria'] : NULL;
+    $epitelio_escamoso = isset($_POST['epitelio_escamoso']) && $_POST['epitelio_escamoso'] != '' ? $_POST['epitelio_escamoso'] : NULL;
+
 
     //error_log(json_encode($_POST), 0);
 
@@ -33,7 +39,13 @@ function sw_create_patient_ajax(){
         "departamento" => $departamento,
         "ciudad" => $ciudad,
         "direccion" => $direccion,
-        "metodo_anticonceptivo" => $metodo_anticonceptivo
+        "metodo_anticonceptivo" => $metodo_anticonceptivo,
+        "telefono" => $telefono,
+        "celular" => $celular,
+        "establecimiento" => $establecimiento,
+        "region_sanitaria" => $region_sanitaria,
+        "epitelio_escamoso" => $epitelio_escamoso
+        
     );
 
     $result = sw_create_patient($params);
@@ -63,6 +75,12 @@ function sw_create_patient($params){
       $ciudad = $params['ciudad'];
       $direccion = $params['direccion'];
       $metodo_anticonceptivo = $params['metodo_anticonceptivo'];
+      $telefono = $params['telefono'];
+      $celular = $params['celular'];
+      $establecimiento = $params['establecimiento'];
+      $region_sanitaria = $params['region_sanitaria'];
+      $epitelio_escamoso = $params['epitelio_escamoso'];
+
 
       //$metodo_anticonceptivo = array("inyectable", "preservativos");
       //wp_die(var_dump($metodo_anticonceptivo));
@@ -95,7 +113,12 @@ function sw_create_patient($params){
             "departamento" => $departamento,
             "ciudad" => $ciudad,
             "direccion" => $direccion,
-            "metodo_anticonceptivo" => $metodo_anticonceptivo
+            "metodo_anticonceptivo" => $metodo_anticonceptivo,
+            "telefono" => $telefono,
+            "celular" => $celular,
+            "establecimiento" => $establecimiento,
+            "region_sanitaria" => $region_sanitaria,
+            "epitelio_escamoso" => $epitelio_escamoso
 
         );
 

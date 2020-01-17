@@ -22,10 +22,14 @@
   $departamento = $patient_fields['departamento'][0];
   $ciudad = $patient_fields['ciudad'][0];
   $direccion = $patient_fields['direccion'][0];
-  $metodo_anticonceptivo = $patient_fields['metodo_anticonceptivo'][0];
+  //$metodo_anticonceptivo = $patient_fields['metodo_anticonceptivo'][0];
   // return value es un array conteniendo strings con los values en el bkend de acf i,e: "inyectables"
   $checkbox_metodo_anti = get_field('metodo_anticonceptivo', $patient_id); // esto no usamos para guardar, si no para 
   // mostrar los campos que estan ya guardados en un paciente creado
+  $telefono = $patient_fields['telefono'][0];
+  $celular = $patient_fields['celular'][0];
+  $establecimiento = $patient_fields['establecimiento'][0];
+  $region_sanitaria = $patient_fields['region_sanitaria'][0];
 
   if ($checkbox_metodo_anti) {
     # code...
@@ -52,23 +56,23 @@
           <input type="hidden" name="action" value="sw_create_patient_ajax">
           <fieldset row>
             <div class="floated-label-wrapper large-6 columns">
-              <label for="nombre">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="patient_name">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="patient_name" name="patient_name" value="<?php echo $name ?>" placeholder="Ingrese el nombre del paciente..." required>
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
-              <label for="apellido">Apellido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="patient_last_name">Apellido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="patient_last_name" name="patient_last_name" value="<?php echo $lastname ?>" placeholder="Ingrese el apellido del paciente..." required>
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
-              <label for="cedula">Cedula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="patient_ci">Cedula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Ingrese el documento del paciente..." required>
             </div>
 
             <!-- email del paciente -->
             <div class="floated-label-wrapper large-6 columns">
-              <label for="email">email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="email_paciente">email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="email" id="email_paciente" name="email_paciente" value="<?php echo $email_paciente ?>" placeholder="Ingrese el email del paciente..." required>
             </div>
 
@@ -112,7 +116,7 @@
               <input type="text" id="direccion" name="direccion" value="<?php echo $direccion ?>" placeholder="Ingrese al dirección del paciente..." required>
             </div>
 
-            <div class="floated-label-wrapper large-6 columns">
+            <div class="floated-label-wrapper large-12 columns">
               <legend>Metodo anticonceptivo actual</legend>
                 <fieldset>
                 <div>
@@ -137,6 +141,41 @@
               </fieldset>
 
             </div>
+
+            <div class="floated-label-wrapper large-6 columns">
+              <label for="telefono">Telefono &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="tel" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Ingrese el numero de telefono del paciente..." required>
+            </div>
+
+            <div class="floated-label-wrapper large-6 columns">
+              <label for="celular">Celular &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="tel" id="celular" name="celular" value="<?php echo $celular ?>" placeholder="Ingrese el numero de celular del paciente..." required>
+            </div>
+
+            <div class="floated-label-wrapper large-6 columns">
+              <label for="establecimiento">Establecimiento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="text" id="establecimiento" name="establecimiento" value="<?php echo $establecimiento ?>" placeholder="Ingrese el establecimiento..." required>
+            </div>
+
+            <div class="floated-label-wrapper large-6 columns">
+              <label for="region_sanitaria">Region Sanitaria &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="text" id="region_sanitaria" name="region_sanitaria" value="<?php echo $region_sanitaria ?>" placeholder="Ingrese la region sanitaria..." required>
+            </div>
+
+            <div class="floated-label-wrapper large-6 columns">
+              <span>Epitelio escamoso original:</span>
+              <div>
+                <input type="radio" id="maduro" name="epitelio_escamoso" value="maduro"
+                      >
+                <label for="maduro">Maduro</label>
+              </div>
+
+              <div>
+                <input type="radio" id="atrofico" name="epitelio_escamoso" value="atrofico">
+                <label for="atrofico">Atrófico</label>
+              </div>
+            </div>
+
             <!-- <div class="floated-label-wrapper large-12 columns text-center">
               <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">Crear</button>
               <p class="errorWrapper">
