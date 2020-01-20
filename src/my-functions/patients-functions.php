@@ -12,6 +12,8 @@ function sw_create_patient_ajax(){
 
     $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
     //$result = [];
+    $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
+    
     $patient_name = isset($_POST['patient_name']) && $_POST['patient_name'] != '' ? $_POST['patient_name'] : NULL;
     $patient_last_name = isset($_POST['patient_last_name']) && $_POST['patient_last_name'] != '' ? $_POST['patient_last_name'] : NULL;
     $patient_ci = isset($_POST['patient_ci']) && $_POST['patient_ci'] != '' ? $_POST['patient_ci'] : NULL;
@@ -31,6 +33,7 @@ function sw_create_patient_ajax(){
     error_log(json_encode($_POST), 0);
 
     $params = array(
+        "patient_id" => $patient_id,
         "patient_name" => $patient_name,
         "patient_last_name" => $patient_last_name,
         "patient_ci" => $patient_ci,
@@ -48,10 +51,10 @@ function sw_create_patient_ajax(){
         
     );
 
-    $result = sw_create_patient($params);
+    if($patient_id === 'new'){
+      $result = sw_create_patient($params);
+    }
 
-    //if(algun tipo de control)
-      //$result['success'] = TRUE;
     wp_die(json_encode($result));
 }
 

@@ -64,25 +64,25 @@
 
             <div class="floated-label-wrapper large-6 columns">
               <label for="patient_ci">Cedula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Ingrese el documento del paciente..." required>
+              <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Ingrese el documento del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <!-- email del paciente -->
             <div class="floated-label-wrapper large-6 columns">
               <label for="email_paciente">email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="email" id="email_paciente" name="email_paciente" value="<?php echo $email_paciente ?>" placeholder="Ingrese el email del paciente..." required>
+              <input type="email" id="email_paciente" name="email_paciente" value="<?php echo $email_paciente ?>" placeholder="Ingrese el email del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <!-- Fecha de nacimiento del paciente -->
             <div class="floated-label-wrapper large-6 columns">
               <label for="fecha_de_nacimiento">Fecha de nacimiento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="date" id="fecha_de_nacimiento" name="fecha_de_nacimiento" value="<?php echo $newDate ?>" >
+              <input type="date" id="fecha_de_nacimiento" name="fecha_de_nacimiento" value="<?php echo $newDate ?>" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
             </div>
 
             <!-- Departamento del paciente -->
             <div class="floated-label-wrapper large-6 columns">
               <label for="departamento">Departamento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <select name="departamento">
+              <select name="departamento" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>>
                     <option value="guaira">Guaira</option>
                     <option value="concepcion">Concepción</option>
                     <option value="san_pedro">San Pedro</option>
@@ -105,19 +105,19 @@
 
             <div class="floated-label-wrapper large-6 columns">
               <label for="ciudad">Ciudad &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="ciudad" name="ciudad" value="<?php echo $ciudad ?>" placeholder="Ingrese la ciudad del paciente..." required>
+              <input type="text" id="ciudad" name="ciudad" value="<?php echo $ciudad ?>" placeholder="Ingrese la ciudad del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
               <label for="direccion">Dirección &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="direccion" name="direccion" value="<?php echo $direccion ?>" placeholder="Ingrese al dirección del paciente..." required>
+              <input type="text" id="direccion" name="direccion" value="<?php echo $direccion ?>" placeholder="Ingrese al dirección del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <div class="floated-label-wrapper large-12 columns checkbox-radio">
               <span>Metodo anticonceptivo actual</span>
                 <fieldset>
                 <div>
-                  <input type="checkbox" id="inyectable" name="metodo_anticonceptivo[]" value="inyectable" 
+                  <input type="checkbox" id="inyectable" name="metodo_anticonceptivo[]" value="inyectable" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                   <?php 
                   if( $checkbox_metodo_anti != NULL || $checkbox_metodo_anti != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
                     if(in_array("inyectable", $checkbox_metodo_anti)) echo "checked";
@@ -127,7 +127,7 @@
                 </div>
 
                 <div>
-                  <input type="checkbox" id="preservativos" name="metodo_anticonceptivo[]" value="preservativos"
+                  <input type="checkbox" id="preservativos" name="metodo_anticonceptivo[]" value="preservativos" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>
                   <?php 
                   if( $checkbox_metodo_anti != NULL || $checkbox_metodo_anti != ""){ //si esta vacio genera un error, por eso hay que 
                     if(in_array("preservativos", $checkbox_metodo_anti)) echo "checked";
@@ -141,34 +141,34 @@
 
             <div class="floated-label-wrapper large-6 columns">
               <label for="telefono">Telefono &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="tel" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Ingrese el numero de telefono del paciente..." required>
+              <input type="tel" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Ingrese el numero de telefono del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
               <label for="celular">Celular &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="tel" id="celular" name="celular" value="<?php echo $celular ?>" placeholder="Ingrese el numero de celular del paciente..." required>
+              <input type="tel" id="celular" name="celular" value="<?php echo $celular ?>" placeholder="Ingrese el numero de celular del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
               <label for="establecimiento">Establecimiento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="establecimiento" name="establecimiento" value="<?php echo $establecimiento ?>" placeholder="Ingrese el establecimiento..." required>
+              <input type="text" id="establecimiento" name="establecimiento" value="<?php echo $establecimiento ?>" placeholder="Ingrese el establecimiento..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
               <label for="region_sanitaria">Region Sanitaria &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="region_sanitaria" name="region_sanitaria" value="<?php echo $region_sanitaria ?>" placeholder="Ingrese la region sanitaria..." required>
+              <input type="text" id="region_sanitaria" name="region_sanitaria" value="<?php echo $region_sanitaria ?>" placeholder="Ingrese la region sanitaria..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <div class="floated-label-wrapper large-12 columns checkbox-radio">
               <span>Epitelio escamoso original</span>
               <div>
-                <input type="radio" id="maduro" name="epitelio_escamoso" value="maduro" <?php if ($radiobox_metodo_anti == "maduro") echo "checked"; ?>
+                <input type="radio" id="maduro" name="epitelio_escamoso" value="maduro" <?php if ($radiobox_metodo_anti == "maduro") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>
                 >
                 <label for="maduro">Maduro</label>
               </div>
 
               <div>
-                <input type="radio" id="atrofico" name="epitelio_escamoso" value="atrofico" <?php if ($radiobox_metodo_anti == "atrofico") echo "checked"; ?>>
+                <input type="radio" id="atrofico" name="epitelio_escamoso" value="atrofico" <?php if ($radiobox_metodo_anti == "atrofico") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                 <label for="atrofico">Atrófico</label>
               </div>
             </div>

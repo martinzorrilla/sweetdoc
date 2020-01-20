@@ -67,11 +67,14 @@
       e.preventDefault();
       //alert("Se guardaran los datos");
       var $ = jQuery;
+      var myData = createPatientForm.serialize() + '&patient_id=' + '<?php echo $patient_id ?>';
+      //myData.push({name: "test_field", value: "prueba"});
+      //myData.append("test_field", "prueba");
 
       $.ajax({
         type: "POST",
         url:window.homeUrl + "/wp-admin/admin-ajax.php",
-        data: createPatientForm.serialize(),
+        data: myData,
         dataType: "json",
         success: function(data) {
           //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
