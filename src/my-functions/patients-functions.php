@@ -28,7 +28,7 @@ function sw_create_patient_ajax(){
     $epitelio_escamoso = isset($_POST['epitelio_escamoso']) && $_POST['epitelio_escamoso'] != '' ? $_POST['epitelio_escamoso'] : NULL;
 
 
-    //error_log(json_encode($_POST), 0);
+    error_log(json_encode($_POST), 0);
 
     $params = array(
         "patient_name" => $patient_name,

@@ -64,7 +64,7 @@
 	<!-- we need this so the side bar will know how to redirect to the correspondings urls -->
 	<?php  
 		$all_patient_url = home_url().'/pacientes/';
-		$create_patient_url = home_url().'/crear-paciente/';
+		$create_patient_url = home_url().'/crear-paciente/?patient_id=new';
 		$create_secretary_url = home_url().'/crear-asistente/';
 		$current_user = wp_get_current_user();
 	?>

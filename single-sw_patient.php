@@ -1,12 +1,13 @@
 <?php get_header();?>
 
 <?php  
-  $all_patient_url = home_url().'/pacientes/';
-  $create_patient_url = home_url().'/crear-paciente/';
-  $create_secretary_url = home_url().'/crear-asistente/';
-?>
 
-<?php
+$all_patient_url = home_url().'/pacientes/';
+$create_patient_url = home_url().'/crear-paciente/';
+$create_secretary_url = home_url().'/crear-asistente/';
+
+// ************************************ separador *******************************************
+
 $appointment_url = home_url().'/consulta/?patient_id=';
 $prescription_url = home_url().'/prescripcion/?patient_id=';
   //the id of the post in the current loop. witch is the patient
@@ -39,7 +40,10 @@ $result = sw_get_current_user_role();
 //if($result == "doctor"){
 if(true){
 
-  hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
+  //hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
+  
+  //$patient_id = ""; 
+  hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id]);
   ?> 
 
   <h2 style="text-align: center; margin-left: 50px;">Consultas</h2>

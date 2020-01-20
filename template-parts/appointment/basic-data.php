@@ -5,6 +5,7 @@
 
   //get data from template if any
   $patient_id = $template_args["patient_id"];
+  $is_editable = $template_args["is_editable"];
   
   //load all the data we need from the Patient Post
   $patient_fields = get_post_custom($patient_id);
@@ -53,12 +54,12 @@
           <fieldset row>
             <div class="floated-label-wrapper large-6 columns">
               <label for="patient_name">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_name" name="patient_name" value="<?php echo $name ?>" placeholder="Ingrese el nombre del paciente..." required>
+              <input type="text" id="patient_name" name="patient_name" value="<?php echo $name ?>" placeholder="Ingrese el nombre del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
               <label for="patient_last_name">Apellido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_last_name" name="patient_last_name" value="<?php echo $lastname ?>" placeholder="Ingrese el apellido del paciente..." required>
+              <input type="text" id="patient_last_name" name="patient_last_name" value="<?php echo $lastname ?>" placeholder="Ingrese el apellido del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
@@ -158,7 +159,7 @@
               <input type="text" id="region_sanitaria" name="region_sanitaria" value="<?php echo $region_sanitaria ?>" placeholder="Ingrese la region sanitaria..." required>
             </div>
 
-            <div class="floated-label-wrapper large-6 columns checkbox-radio">
+            <div class="floated-label-wrapper large-12 columns checkbox-radio">
               <span>Epitelio escamoso original</span>
               <div>
                 <input type="radio" id="maduro" name="epitelio_escamoso" value="maduro" <?php if ($radiobox_metodo_anti == "maduro") echo "checked"; ?>
@@ -178,13 +179,6 @@
               </p>
             </div> -->
 
-            <div class="floated-label-wrapper large-12 columns text-center" style="padding-top: 1rem;">
-              <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">
-              <i class="fas fa-save fa-lg"></i><span class="app-dashboard-sidebar-text"></span>
-              </button>
-              <p class="errorWrapper">
-              </p>
-            </div>
 
           </fieldset>
         </form>
