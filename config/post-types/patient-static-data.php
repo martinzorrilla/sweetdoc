@@ -6,7 +6,7 @@ function create_post_type_static_data() {
     register_post_type( 'sw_static_data',
     array(
       'labels' => array(
-        'name' => __( 'Private Data' ),
+        'name' => __( 'Static Data - AGO' ),
         'singular_name' => __( 'private_data_s' )
       ),
       'public' => true,

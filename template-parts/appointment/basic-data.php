@@ -51,6 +51,7 @@
   <div class="appform tabcontent">
     <form id="create-patient-form" name="create-patient-form" method="post" >
           <input type="hidden" name="action" value="sw_create_patient_ajax">
+          <input type="hidden" name="patient_id" value="<?= $patient_id?>">
           <fieldset row>
             <div class="floated-label-wrapper large-6 columns">
               <label for="patient_name">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -83,23 +84,23 @@
             <div class="floated-label-wrapper large-6 columns">
               <label for="departamento">Departamento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <select name="departamento" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>>
-                    <option value="guaira">Guaira</option>
-                    <option value="concepcion">Concepción</option>
-                    <option value="san_pedro">San Pedro</option>
-                    <option value="cordillera">Cordillera</option>
-                    <option value="caaguazu">Caaguazú</option>
-                    <option value="caazapa">Caazapá</option>
-                    <option value="itapua ">Itapúa</option>
-                    <option value="misiones">Misiones</option>
-                    <option value="paraguari">Paraguarí</option>
-                    <option value="alto_parana">Alto Paraná</option>
-                    <option value="central">Central</option>
-                    <option value="neembucu">Ñeembucú</option>
-                    <option value="amambay">Amambay</option>
-                    <option value="canindeyu">Canindeyú</option>
-                    <option value="presidente_hayes ">Presidente Hayes</option>
-                    <option value="boqueron">Boquerón</option>
-                    <option value="alto_paraguay">Alto Paraguay</option>
+                    <option value="guaira" <?php if($departamento == "guaira") echo "selected"?>>Guaira</option>
+                    <option value="concepcion" <?php if($departamento == "concepcion") echo "selected"?>>Concepción</option>
+                    <option value="san_pedro" <?php if($departamento == "san_pedro") echo "selected"?>>San Pedro</option>
+                    <option value="cordillera" <?php if($departamento == "cordillera") echo "selected"?>>Cordillera</option>
+                    <option value="caaguazu" <?php if($departamento == "caaguazu") echo "selected"?>>Caaguazú</option>
+                    <option value="caazapa" <?php if($departamento == "caazapa") echo "selected"?>>Caazapá</option>
+                    <option value="itapua" <?php if($departamento == "itapua") echo "selected"?>>Itapúa</option>
+                    <option value="misiones" <?php if($departamento == "misiones") echo "selected"?>>Misiones</option>
+                    <option value="paraguari" <?php if($departamento == "paraguari") echo "selected"?>>Paraguarí</option>
+                    <option value="alto_parana" <?php if($departamento == "alto_parana") echo "selected"?>>Alto Paraná</option>
+                    <option value="central" <?php if($departamento == "central") echo "selected"?>>Central</option>
+                    <option value="neembucu" <?php if($departamento == "neembucu") echo "selected"?>>Ñeembucú</option>
+                    <option value="amambay" <?php if($departamento == "amambay") echo "selected"?>>Amambay</option>
+                    <option value="canindeyu" <?php if($departamento == "canindeyu") echo "selected"?>>Canindeyú</option>
+                    <option value="presidente_hayes" <?php if($departamento == "presidente_hayes") echo "selected"?>>Presidente Hayes</option>
+                    <option value="boqueron" <?php if($departamento == "boqueron") echo "selected"?>>Boquerón</option>
+                    <option value="alto_paraguay"<?php if($departamento == "alto_paraguay") echo "selected"?>>Alto Paraguay</option>
                 </select>
             </div>
 

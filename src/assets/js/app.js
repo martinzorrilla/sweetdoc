@@ -12,6 +12,7 @@ import Foundation from 'foundation-sites';
 //import './lib/custom';
 //import './lib/custom';
 import './components/buttons';
+import './my-custom-js/create-patient';
 
 $(document).foundation();
 

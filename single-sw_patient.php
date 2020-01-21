@@ -43,8 +43,11 @@ if(true){
   //hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
   
   //$patient_id = ""; 
-  hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id]);
+  hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id, 'is_editable' => "false" ]);
   ?> 
+  
+  <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id]); ?>
+  
 
   <h2 style="text-align: center; margin-left: 50px;">Consultas</h2>
   <!-- <a href="#"><strong>Nombre paciente</strong></a> -->
