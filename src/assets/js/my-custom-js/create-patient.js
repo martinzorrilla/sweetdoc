@@ -5,6 +5,7 @@ var CreatePatientModule = function(){
     
     var createPatientBtn;
     var createPatientForm;
+    var editPatientBtn;
 
     function init(){
       $(document).ready(function () {
