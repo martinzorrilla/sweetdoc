@@ -14,7 +14,7 @@
   <ul id="myUL">
     <?php foreach ($latest_patients as $patient): ?>
       <li>
-        <div data-closable class="callout alert-callout-border primary list-patients">
+        <div data-closable class="callout alert-callout-border secondary list-patients">
           
           <a href="<?php echo get_permalink( $patient->ID ); ?> " class="name">
             <strong><?php echo $patient->post_title;?></strong>           

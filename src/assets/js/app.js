@@ -16,13 +16,14 @@ import './my-custom-js/create-patient';
 
 $(document).foundation();
 
+//this is for the sidebar arrow icon to work
 //this is for the dashboard from dashboard kit but should move it to a custom js file
 $('[data-app-dashboard-toggle-shrink]').on('click', function(e) {
   e.preventDefault();
   $(this).parents('.app-dashboard').toggleClass('shrink-medium').toggleClass('shrink-large');
 });
 
-//card for the patients-all
+//card for patients-all or static-data AGO arrow down icon to togle display none
 // more click
 $('.card-profile-stats-more-link').click(function(e){
   e.preventDefault();

@@ -19,7 +19,7 @@
 }
 
 .static-data-slide{
-  display: none;
+  //display: none;
 }
 
 .patient-row {
@@ -110,6 +110,10 @@
       cursor: pointer;
     } // .card-profile-stats-more-link
 
+    p.card-profile-stats-more-link {
+      //margin-bottom: 0px !important ;
+      //background: red;
+    }
     .card-profile-stats-more-content {
       display: none;
     } // .card-profile-stats-more-content

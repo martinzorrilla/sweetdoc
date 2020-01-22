@@ -39,27 +39,21 @@
   }
 ?>
 
-  <div class="callout secondary">
+  <div class="callout secondary" style="display: <?php if ($app_id === 'new') echo 'none' ?> " >
     <h3 style="text-align: center; margin-left: 50px;">Fecha de la Consulta: <strong> <?php echo $app_creation_date ?> </strong></h3>
   </div>
   
-  <div class="tab">
+  <!-- <div class="tab">
     <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
-  </div>
-  <div class="appform tabcontent">
-    <?php hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]); ?>
-  </div>
+  </div> -->
+  <!-- <div class="appform tabcontent">
+    <?php //hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]); ?>
+  </div> -->
 
   <div class="appform">
     <form id="create-appointment-form" name="create-appointment-form" method="post" class="text-center">
           
-
-          <div class="tab">
-            <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
-          </div>
-          <div class="appform tabcontent">
             <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id]); ?>
-          </div>
 
           <fieldset>
             <?php //hm_get_template_part('template-parts/appointment/common-data', ['appointment_id' => $appointment_id]); ?>

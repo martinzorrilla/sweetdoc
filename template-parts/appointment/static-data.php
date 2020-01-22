@@ -25,12 +25,8 @@
     <div class="card profile-card-action-icons">
       <div class="card-section">
         <div class="profile-card-header static-data-click-to-show">
-          <div class="profile-card-avatar">
-            <img class="avatar-image" src="<?php bloginfo('template_url')?>/src/assets/images/pepaicon.jpg" alt="Peppa Pig">
-          </div>
           <div class="profile-card-author">
-            <h5 class="author-title">AGO</h5>
-          
+            <h5 class="author-title">AGO</h5>          
             <p class="card-profile-stats-more-link"><a href="#"><i class="fa fa-angle-down fa-2x" aria-hidden="true"></i></a></p>
           </div>
         </div>

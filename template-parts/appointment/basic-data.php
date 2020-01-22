@@ -38,7 +38,7 @@
 
  ?> 
 
-<!-- crear-editar paciente -->
+<!-- creo que este div no es necesario para que funcione correctamente el form del paciente -->
 <div class="form-tab-style">
 
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
