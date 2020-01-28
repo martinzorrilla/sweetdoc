@@ -16,19 +16,19 @@
   <div class="appform tabcontent">
     <form id="create-secretary-form" name="create-patient-form" method="post" class="text-center">
           <fieldset>
-            <div class="floated-label-wrapper">
+            <div class="floated-label-wrapper large-6 columns">
               <label for="nombre">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_name" name="patient_name" value="<?php echo $nombre ?>" placeholder="Type..." required>
+              <input type="text" id="patient_name" name="patient_name" value="<?php echo $nombre ?>" placeholder="Escribir..." required>
             </div>
 
-            <div class="floated-label-wrapper">
+            <div class="floated-label-wrapper large-6 columns">
               <label for="apellido">Apellido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_last_name" name="patient_last_name" value="<?php echo $apellido ?>" placeholder="Type..." required>
+              <input type="text" id="patient_last_name" name="patient_last_name" value="<?php echo $apellido ?>" placeholder="Escribir..." required>
             </div>
 
-            <div class="floated-label-wrapper">
+            <div class="floated-label-wrapper large-12 columns">
               <label for="cedula">Cedula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Type..." required>
+              <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Escribir..." required>
             </div>
 
             <button id="create-secretary" class="submit_button save-button-expanded" type="submit" value="create-patient">Guardar</button>
@@ -50,6 +50,7 @@
     var $ = jQuery;
     
     var createSecretaryBtn;
+    var createSecretaryForm;
 
     function init(){
       $(document).ready(function () {
