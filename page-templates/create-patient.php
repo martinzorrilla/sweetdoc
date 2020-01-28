@@ -30,6 +30,7 @@
   </div>
 </div>
 
+
 <?php get_footer(); ?>
 
 <!-- <script > aca iba el JS que ahora esta en src/assets/js/my-custom-js  </script> -->

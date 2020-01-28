@@ -29,8 +29,8 @@ function sw_create_patient_ajax(){
     $region_sanitaria = isset($_POST['region_sanitaria']) && $_POST['region_sanitaria'] != '' ? $_POST['region_sanitaria'] : NULL;
     $epitelio_escamoso = isset($_POST['epitelio_escamoso']) && $_POST['epitelio_escamoso'] != '' ? $_POST['epitelio_escamoso'] : NULL;
 
-
-    error_log(json_encode($_POST), 0);
+    //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
+    // error_log(json_encode($_POST), 0);
 
     $params = array(
         "patient_id" => $patient_id,
@@ -62,10 +62,7 @@ function sw_create_patient_ajax(){
 
 add_action( 'wp_ajax_sw_create_patient_ajax', 'sw_create_patient_ajax');
 
-//deberia recibir el parametro ''post_author' asi si si la que creo el paciente
-//fue la secretaria, solo le paso como parametro el meta de la secre "post_author"
-//que va coincidir con el doctor que la creo, de esa forma al traer los pacientes
-// puedo usar ese parametro para que traiga todos los pacientes de ese doctor.
+//crea un paciente nuevo y tbm crea el post del tipo static-data-ago que le corresponde al paciente nuevo
 function sw_create_patient($params){
 
     $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
@@ -91,9 +88,12 @@ function sw_create_patient($params){
       //wp_die(var_dump($metodo_anticonceptivo));
 
       $post_author = $params['post_author'];
+      //sw_get_patient_owner: devuelve el id del doctor directamente, o si el rol del usuario actual es secretaty 
+      //devuelve el id del doctor que le corresponde 
       $patient_owner = sw_get_patient_owner();
 
       $my_post = array(
+        'ID'   => 0,
         'post_title'    => wp_strip_all_tags( $patient_name.' '. $patient_last_name ),
         'post_status'   => 'publish',
         //'post_author'   => get_current_user_id(),
@@ -137,6 +137,7 @@ function sw_create_patient($params){
       //create the patient static data post type
       //send param array with name , lastname and $post_id wich is the receently created patient
       $static_values = ['patient_name'=>$patient_name,
+                        'static_data_id'=> 0,
                         'patient_last_name'=>$patient_last_name, 
                         'patient_id'=>$post_id
                        ];
@@ -148,14 +149,7 @@ function sw_create_patient($params){
       return $result;
 }
 
-
-
-
-
-
-
-
-
+//actualiza un paciente que ya existe y tbm actualiza el nombre del post del tipo static-data-ago que le corresponde
 function sw_update_patient($params){
 
   $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
@@ -177,28 +171,27 @@ function sw_update_patient($params){
     $region_sanitaria = $params['region_sanitaria'];
     $epitelio_escamoso = $params['epitelio_escamoso'];
 
+    $post_author = $params['post_author'];
+    //sw_get_patient_owner: devuelve el id del doctor directamente, o si el rol del usuario actual es secretaty 
+    //devuelve el id del doctor que le corresponde 
+    $patient_owner = sw_get_patient_owner();
 
-    //$metodo_anticonceptivo = array("inyectable", "preservativos");
-    //wp_die(var_dump($metodo_anticonceptivo));
-
-    // $post_author = $params['post_author'];
-    // $patient_owner = sw_get_patient_owner();
-
-    // $my_post = array(
-    //   'post_title'    => wp_strip_all_tags( $patient_name.' '. $patient_last_name ),
-    //   'post_status'   => 'publish',
-    //   //'post_author'   => get_current_user_id(),
-    //   'post_author'   => $patient_owner,
-    //   'post_type' => 'sw_patient',
-    //   //'meta_input' => ["related_patient", $patient_post ]
-    //   //'post_category' => array( 8,39 )
-    // );
+    $my_post = array(
+      'ID'   => $patient_id,
+      'post_title'    => wp_strip_all_tags( $patient_name.' '. $patient_last_name ),
+      'post_status'   => 'publish',
+      //'post_author'   => get_current_user_id(),
+      'post_author'   => $patient_owner,
+      'post_type' => 'sw_patient'
+      //'meta_input' => ["related_patient", $patient_post ]
+      //'post_category' => array( 8,39 )
+    );
 
     // Insert the post into the database // returns post id on succes. 0 on fail
-    // $post_id = wp_insert_post( $my_post );
-    // if ($post_id == 0) {
-    // //  wp_die( "Error creating a new Patient" );
-    // }
+    $post_id = wp_insert_post( $my_post );
+    if ($post_id == 0) {
+    //  wp_die( "Error creating a new Patient" );
+    }
 
     $acf_fields = array(
           "nombre" => $patient_name,
@@ -224,14 +217,19 @@ function sw_update_patient($params){
       }
 
 
+    // returns an array containing the ID of the static data post related to this patient id.
+    $the_query = sw_get_patient_static_data_ago($patient_id);
+    $patient_ago_id =  $the_query[0];      
+
     //create the patient static data post type
     //send param array with name , lastname and $post_id wich is the receently created patient
-    // $static_values = ['patient_name'=>$patient_name,
-    //                   'patient_last_name'=>$patient_last_name, 
-    //                   'patient_id'=>$post_id
-    //                  ];
+     $static_values = ['patient_name'=>$patient_name,
+                       'static_data_id'=>$patient_ago_id, 
+                       'patient_last_name'=>$patient_last_name, 
+                       'patient_id'=>$patient_id
+                      ];
 
-    // $static_data = sw_create_static_data($static_values);
+     $static_data = sw_create_static_data($static_values);
 
     $result['success'] = TRUE;
     $result['msg'] = 'Datos del paciente actualizados';
@@ -240,9 +238,33 @@ function sw_update_patient($params){
 
 
 
+// recibe el id del paciente y retorna el post tipo static_data-Ago asociado a el
+//retorna una array  
+function sw_get_patient_static_data_ago($patient_id){
+    
+  $myquery = new WP_Query(  
+    array( 
+      'id' => $patient_id,
+      'post_type'  => 'sw_static_data',
+      'meta_query' => array(
+        array(
+          'key'     => 'patients_static_data',
+          'value'   => array($patient_id),
+          'compare' => 'IN',
+        ),
+      ),
+    )
+  );
 
-
-
+  //returns a fucking array
+  $related =  wp_list_pluck( $myquery->posts, 'ID' );
+  wp_reset_postdata(); //always reset the post data!
+  
+  //if want to return an array of id's
+  return $related;
+  //if want to return the query object
+  //return $myquery;
+}
 
 
 //Create post type static data and relate it to the created patient
@@ -253,11 +275,14 @@ function sw_create_static_data($params){
     $patient_name = $params['patient_name'];
     $patient_last_name = $params['patient_last_name'];
     $patient_id = $params['patient_id'];
+    //if static_data_id == 0, it will create a new post, else it will update the post with the id passed to it
+    $static_data_id = $params['static_data_id'];
 
     $fullname = $patient_name.' '.$patient_last_name;
 
       $my_post = array(
-        'post_title'    => wp_strip_all_tags( $fullname.' ID: '.$patient_id),
+        'ID'   => $static_data_id,
+        'post_title'    => wp_strip_all_tags( $fullname.' - Owner ID: '.$patient_id),
         'post_status'   => 'publish',
         'post_author'   => get_current_user_id(),
         'post_type'     => 'sw_static_data',
@@ -271,7 +296,7 @@ function sw_create_static_data($params){
         wp_die( "Error creating a new static data post for this patient" );
       }
 
-/*      $acf_fields = array(
+      /*$acf_fields = array(
             "menarca" => $menarca,
             "irs" => $irs
         );
@@ -282,7 +307,14 @@ function sw_create_static_data($params){
             }
         }*/
 
-      add_post_meta( $app_post, 'patients_static_data', $patient_id );
+        //if $static_data_id == 0 means is a new patient and needs to link the  newly created static ago post
+        // to the patient id. else means its a patient thats being updated
+        if($static_data_id == 0){
+          add_post_meta( $app_post, 'patients_static_data', $patient_id );
+          //add_post_meta( $patient_id, 'patients_static_data', $app_post );
+        }
+      
+      
       $result['success'] = TRUE;
       $result['patient_id'] = $patient_id;
       //$result['app_id'] = $app_post;
@@ -290,10 +322,4 @@ function sw_create_static_data($params){
       return $result;
 }
 
-/*
-*
-*/
-function print_hello_world(){
-  echo "Hello World from function";
-}
 ?>
