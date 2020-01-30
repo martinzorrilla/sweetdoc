@@ -3,7 +3,7 @@
   //retreive data from the url
   $patient_id = $_GET['patient_id'];
   //si el parametro patient_id == new, el formulario debe ser editable por defecto, si no debe no ser editable
-  $is_editable = $patient_id == "new" ? "true" : "false"; 
+  $is_editable = $patient_id == "new" ? "true" : "false";
 ?>
 
 <div data-closable class="callout alert-callout-border secondary text-center">
@@ -11,6 +11,8 @@
 </div>
 
 <?php hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id, 'is_editable' => $is_editable ]); ?>
+
+<!-- if(role == doctor){ show AGO form} -->
 
 <!-- we set the buttons outside the form so the form template remains independent to use in other places -->
 <div class="row">  
