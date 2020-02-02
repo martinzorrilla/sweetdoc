@@ -23,13 +23,16 @@
     $menarca = isset($_POST['menarca']) && $_POST['menarca'] != '' ? $_POST['menarca'] : NULL;
     $irs = isset($_POST['irs']) && $_POST['irs'] != '' ? $_POST['irs'] : NULL; 
     $static_data_post_id = isset($_POST['static_data_post_id']) && $_POST['static_data_post_id'] != '' ? $_POST['static_data_post_id'] : NULL;
-
+    $vacuna_hpv = isset($_POST['vacuna_hpv']) && $_POST['vacuna_hpv'] != '' ? $_POST['vacuna_hpv'] : NULL;
     
     //colposcopia data
     $colpo_post_id = isset($_POST['colpo_post_id']) && $_POST['colpo_post_id'] != '' ? $_POST['colpo_post_id'] : NULL;
     $macroscopia = isset($_POST['macroscopia']) && $_POST['macroscopia'] != '' ? $_POST['macroscopia'] : NULL;
     
     //wp_die(var_dump($_FILES));
+    
+    //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
+    error_log(json_encode($_POST), 0);
 
     $params = array(
         "app_id" => $app_id,
@@ -42,7 +45,8 @@
         "irs" => $irs,
         "cesareas" => $cesareas,
         "macroscopia" => $macroscopia,
-        "checkbox_values" => $checkbox_values
+        "checkbox_values" => $checkbox_values,
+        "vacuna_hpv" => $vacuna_hpv
     );
 
     //wp_die(var_dump($params));
@@ -76,6 +80,7 @@ function sw_create_new_appointment($params){
     $cesareas = $params['cesareas'];
     $menarca = $params['menarca'];
     $irs = $params['irs'];
+    $vacuna_hpv = $params['vacuna_hpv'];
 
     //common fields
     $motivo_de_consulta = $params['motivo_de_consulta'];
@@ -98,6 +103,8 @@ function sw_create_new_appointment($params){
 
     $timeStamp = date("Y-m-d H:i:s"); 
 
+    //creamos el post type consulta, el que tiene motivo de consulta y antecedente actual.
+    //static_data/AGO ya se crea al momento de crear el paciente
     if ($app_id === 'new' && $patient_id != NULL) {
       $my_post = array(
         'post_title'    => wp_strip_all_tags( $fullname."-".$timeStamp),
@@ -131,7 +138,8 @@ function sw_create_new_appointment($params){
         $acf_fields = array(
             "cesareas" => $cesareas,
             "menarca" => $menarca,
-            "irs" => $irs
+            "irs" => $irs,
+            "vacuna_hpv" => $vacuna_hpv
         );
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)
@@ -237,7 +245,8 @@ function sw_update_single_appointment($params){
     $cesareas = $params['cesareas'];
     $menarca = $params['menarca'];
     $irs = $params['irs'];
-
+    $vacuna_hpv = $params['vacuna_hpv'];
+    
     //colposcopia data
     $colpo_post_id  = $params["colpo_post_id"];
     $macroscopia = $params['macroscopia'];
@@ -248,7 +257,8 @@ function sw_update_single_appointment($params){
         $acf_fields = array(
             "cesareas" => $cesareas,
             "menarca" => $menarca,
-            "irs" => $irs
+            "irs" => $irs,
+            "vacuna_hpv" => $vacuna_hpv
         );
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)

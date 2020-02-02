@@ -51,9 +51,9 @@
   </div> -->
 
   <div class="appform">
-    <form id="create-appointment-form" name="create-appointment-form" method="post" class="text-center">
+    <form id="create-appointment-form" name="create-appointment-form" method="post"  class="text-center" enctype="multipart/form-data">
           
-            <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id]); ?>
+            <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id]); ?>
 
           <fieldset>
             <?php //hm_get_template_part('template-parts/appointment/common-data', ['appointment_id' => $appointment_id]); ?>
@@ -136,124 +136,115 @@
       });
     }//function init
 
-    //-------------- FUNCTIONS
 
-    /* function oncreateAppBtnClose() {
-      $('#interests').foundation('open');
-    }
+  function populateFormData() {
+    //var inputs = createAppointmentForm.serializeArray();
+    var inputs = createAppointmentForm.find("input, select, textarea");
+    var serializedInputs = createAppointmentForm.serializeArray();
+    //var serializedInputs = createAppointmentForm.serialize();
+    var formData = new FormData();
 
-    function onDropdownChange(OrgDrop) {
-      var rolesDropdownContainer = $(".create-div .roles-dropdown-container");
-      var spinnerIcon = $(".create-div .roles-dropdown-container .roles-dropdown-spinner-icon");
-      var selected = OrgDrop.find(":selected").text();
-      var params = { action: "get_roles_options", selected: selected };
 
-      spinnerIcon.attr("loading", true);
-      rolesDropdownContainer.attr("dropdown-disabled", true);
+    //console.log("serializedInputs", serializedInputs);
 
-      $.get(window.homeUrl + "/wp-admin/admin-ajax.php", params, function(data){
-        var results = JSON.parse(data);
-
-        $(rolesDropdown).html("");
-        $(rolesDropdown).append("<option value='*' selected='selected'>Select Your Role</option>");
-
-        for (var i = 0; i < results.length; i++) {
-          $(rolesDropdown).append("<option value='"+results[i].term_id+"'>"+results[i].name+"</option>");
-        }
-
-        spinnerIcon.attr("loading", false);
-        if(selected !== "Select Organization Type"){
-          rolesDropdownContainer.attr("dropdown-disabled", false);
-        }
-
-        $(rolesDropdown).trigger("liszt:updated");
+    
+    //-- code section to get the file
+    $.each(inputs.filter('[type="file"]'), function (i, element) {
+      var input = $(element)[0].files;
+      $.each(input, function (j, file) {
+        //console.log("file", file);
+        formData.append(file.name, file);
       });
-    }*/
+    });
+    //--
+    
+    $.each(serializedInputs, function (i, element) {
+      formData.append(element.name, element.value);
+    });
 
-    function populateFormData() {
-      //var inputs = createAppointmentForm.serializeArray();
-      var inputs = createAppointmentForm.find("input, select, textarea");
-      var serializedInputs = createAppointmentForm.serializeArray();
-      var formData = new FormData();
+    //append the checkbox values to the form
+    // var checkbox_values = [];
+    // checkbox_values = get_checkbox_values();
+    // alert( typeof checkbox_values);
+    // formData.append("checkbox_values", checkbox_values);
+    
 
+    formData.append("app_id", "<?php echo $appointment_id ?>");
+    formData.append("patient_id", "<?php echo $patient_id ?>");
+    formData.append("static_data_post_id", "<?php echo $static_data_post_id ?>");
+    formData.append("colpo_post_id", "<?php echo $colpo_post_id ?>");
 
-      console.log("serializedInputs", serializedInputs);
+    formData.append("action", "sw_create_appointment_ajax");
 
-      
-      //-- code section to get the file
-      $.each(inputs.filter('[type="file"]'), function (i, element) {
-        var input = $(element)[0].files;
-        $.each(input, function (j, file) {
-          //console.log("file", file);
-          formData.append(file.name, file);
-        });
-      });
-      //--
-      
-      $.each(serializedInputs, function (i, element) {
-        formData.append(element.name, element.value);
-      });
+    return formData;
+  }
 
-      //append the checkbox values to the form
-      var checkbox_values = [];
-      checkbox_values = get_checkbox_values();
-      alert( typeof checkbox_values);
-      formData.append("checkbox_values", checkbox_values);
-      
+  function saveProfileData(e) {
+    e.preventDefault();
 
-      formData.append("app_id", "<?php echo $appointment_id ?>");
-      formData.append("patient_id", "<?php echo $patient_id ?>");
-      formData.append("static_data_post_id", "<?php echo $static_data_post_id ?>");
-      formData.append("colpo_post_id", "<?php echo $colpo_post_id ?>");
+    //alert("Se guardaran los datos");
+    var $ = jQuery;
+    var formData = populateFormData();
 
-      formData.append("action", "sw_create_appointment_ajax");
-
-      return formData;
-    }
-
-    function saveProfileData(e) {
-      e.preventDefault();
-
-      //alert("Se guardaran los datos");
-      var $ = jQuery;
-      var formData = populateFormData();
-
-      //console.log("formData = ", formData);
-      // Display the key/value pairs
-      for (var pair of formData.entries())
-      {
+    //console.log("formData = ", formData);
+    //Display the key/value pairs
+    for (var pair of formData.entries())
+    {
        console.log(pair[0]+ ', '+ pair[1]); 
-      }
-
-      $.ajax({
-        url: window.homeUrl + "/wp-admin/admin-ajax.php",
-        data: formData,
-        processData: false,
-        contentType: false,
-        type: 'POST',
-        success: function(data){
-          var result = JSON.parse(data);
-          console.log("result", result);
-          //handle error
-          if(result.error.length >0){
-          //if(result.error){
-            //alert(result.error.msg);
-            alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> sw_create_appointment_ajax ');
-            //let errorMsg = result.error.msg;
-            //jQuery('form#create-appointment-form .errorWrapper').prepend(errorMsg);
-          }
-          if(result.success){
-            alert(result['msg']);
-            //$('#interests').foundation('open');
-            var oldUrl = window.location.href; 
-            var replaceId = "app_id="+result['app_id'];
-            var newUrl = oldUrl.replace("app_id=new", replaceId);
-            window.location.replace(newUrl);
-            //window.location.reload();
-          }
-        }
-      });
     }
+
+    
+    //var myData = createAppointmentForm.serialize();
+    // var myData = createAppointmentForm.serialize() + 
+    // '&patient_id=' + '<?php //echo $patient_id?>' + 
+    // '&app_id=' + '<?php //echo $appointment_id ?>' + 
+    // '&static_data_post_id=' + '<?php //echo $static_data_post_id ?>' + 
+    // '&colpo_post_id=' + '<?php //echo $colpo_post_id ?>' + 
+    // '&action=' + 'sw_create_appointment_ajax';
+
+    // var inputs = createAppointmentForm.find("input");
+    // //-- code section to get the file
+    // $.each(inputs.filter('[type="file"]'), function (i, element) {
+    //   var input = $(element)[0].files;
+    //   $.each(input, function (j, file) {
+    //     //console.log("file", file);
+    //     //formData.append(file.name, file);
+    //     myData +=  '&' + file.name  + '=' + file[];
+    //   });
+    // });
+
+    $.ajax({
+
+      type: "POST",
+      enctype: 'multipart/form-data',
+      url: window.homeUrl + "/wp-admin/admin-ajax.php",
+      data: formData,
+      //dataType: "json",
+      processData: false,
+      contentType: false,
+      success: function(data){
+        var result = JSON.parse(data);
+        //console.log("result", result);
+        //handle error
+        if(result.error.length >0){
+        //if(result.error){
+          //alert(result.error.msg);
+          alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> sw_create_appointment_ajax ');
+          //let errorMsg = result.error.msg;
+          //jQuery('form#create-appointment-form .errorWrapper').prepend(errorMsg);
+        }
+        if(result.success){
+          alert(result['msg']);
+          //$('#interests').foundation('open');
+          var oldUrl = window.location.href; 
+          var replaceId = "app_id="+result['app_id'];
+          var newUrl = oldUrl.replace("app_id=new", replaceId);
+          window.location.replace(newUrl);
+          //window.location.reload();
+        }
+      }
+    });
+  }
 
   /*--------------------------------------*/
   function updateImageDisplay(preview, fileInput) {

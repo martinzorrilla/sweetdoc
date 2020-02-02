@@ -30,7 +30,7 @@ function sw_create_patient_ajax(){
     $epitelio_escamoso = isset($_POST['epitelio_escamoso']) && $_POST['epitelio_escamoso'] != '' ? $_POST['epitelio_escamoso'] : NULL;
 
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
-    // error_log(json_encode($_POST), 0);
+     error_log(json_encode($_POST), 0);
 
     $params = array(
         "patient_id" => $patient_id,
