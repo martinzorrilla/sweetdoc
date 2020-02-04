@@ -69,7 +69,7 @@
         </form>
   </div>
 
-  <div class="button-div">
+  <div class="button-div" style="margin-bottom:70px">
     <button id="create-appointment" class="save-button-expanded" type="submit" value="Next">Guardar</button>
     <p class="errorWrapper"></p>
   </div>

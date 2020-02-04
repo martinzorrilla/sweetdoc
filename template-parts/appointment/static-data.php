@@ -87,16 +87,15 @@
           </div>
 
           <!-- ritmo menstrual -->
-          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left">
-              <span class="separator-left">Ritmo menstrual &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <div class="grid-content">
-                <input type="radio" id="regular" name="ritmo_menstrual" value="regular" <?php if ($radiobox_ritmo_menstrual == "regular") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>
-                >
+          <div class="floated-label-wrapper small-12 medium-6 columns checkbox-radio text-left grid-content">
+              <label class="separator-left">Ritmo menstrual </label>
+              
+                <input type="radio" id="regular" name="ritmo_menstrual" value="regular" <?php if ($radiobox_ritmo_menstrual == "regular") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                 <label for="regular">Regular</label>
 
                 <input type="radio" id="irregular" name="ritmo_menstrual" value="irregular" <?php if ($radiobox_ritmo_menstrual == "irregular") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                 <label for="irregular">Irregular</label>
-              </div>
+              
           </div>
 
           <!-- FUM -->
@@ -136,9 +135,9 @@
           </div>
 
           <!-- vacuna VPH radio -->
-          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left">
-              <span class="separator-left">Vacuna VPH</span>
-              <div class="grid-content">
+          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left grid-content">
+              <label class="separator-left">Vacuna VPH</label>
+              
                 <input type="radio" id="ninguna" name="vacuna_vph" value="ninguna" <?php if ($radiobox_vacuna_vph == "ninguna") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>
                 >
                 <label for="ninguna">Ninguna</label>
@@ -155,7 +154,7 @@
               
                 <input type="radio" id="tres_dosis" name="vacuna_vph" value="tres_dosis" <?php if ($radiobox_vacuna_vph == "tres_dosis") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                 <label for="tres_dosis">3 dosis</label>
-              </div>
+              
           </div>
 
           <!-- edad VPH -->
@@ -165,10 +164,10 @@
           </div>
 
           <!-- metodo anticonceptivo - checkbox -->
-          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left">
-              <span class="separator-left">Metodo anticonceptivo actual</span>
+          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left grid-content">
+              <label class="separator-left">Metodo anticonceptivo actual</label>
             
-                <div class="grid-content">
+
                   <input type="checkbox" id="inyectable" name="metodo_anticonceptivo[]" value="inyectable" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                   <?php 
                   if( $checkbox_metodo_anti != NULL || $checkbox_metodo_anti != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
@@ -184,7 +183,7 @@
                   }
                   ?> >
                   <label for="preservativos">Preservativos</label>
-                </div>
+
             
           </div>
 
@@ -195,9 +194,9 @@
           </div>
 
           <!-- Terapia de reposicion hormonal - checkbox -->
-          <div class="floated-label-wrapper large-12 columns checkbox-radio text-left">
-              <span class="separator-left">Terapia de reposicion hormonal</span>
-                <div class="grid-content">
+          <div class="floated-label-wrapper large-12 columns checkbox-radio text-left grid-content">
+              <label class="separator-left">Terapia de reposicion hormonal</label>
+                
                   <input type="checkbox" id="terapia_si" name="terapia_hormonal[]" value="si" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                   <?php 
                   if( $checkbox_terapia_hormonal != NULL || $checkbox_terapia_hormonal != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
@@ -205,7 +204,7 @@
                   }
                   ?> >
                   <label for="terapia_si">Si</label>
-                </div>
+                
           </div>
 
           <!-- Resultado del pap anterior -->
@@ -221,9 +220,9 @@
           </div>
 
           <!-- Fumador - checkbox -->
-          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left">
-              <span class="separator-left">Fumador</span>
-                <div class="grid-content">
+          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left grid-content">
+              <label class="separator-left">Fumador</label>
+                
                   <input type="checkbox" id="fumador_si" name="fumador[]" value="si" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                   <?php 
                   if( $checkbox_fumador != NULL || $checkbox_fumador != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
@@ -231,7 +230,7 @@
                   }
                   ?> >
                   <label for="fumador_si">Si</label>
-                </div>
+                
           </div>
 
           <!-- cigarrillos por dia -->
