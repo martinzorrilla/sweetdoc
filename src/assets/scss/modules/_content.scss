@@ -110,7 +110,7 @@
 
 
     .floated-label-wrapper{
-      min-height: 110px !important;
+      //min-height: 110px !important;
       label{
         text-align: left;
         font-weight: bold;
@@ -118,6 +118,7 @@
       }
     }
     .floated-label-wrapper.checkbox-radio{
+      //padding-bottom: 1rem;
       span{
         font-weight: bold;
         font-size: 14px;
@@ -128,6 +129,13 @@
         font-weight: normal;
         padding: 0.5em 0;
       }
+    }
+    .floated-label-wrapper.checkbox-radio .separator-left{
+      font-weight: bold !important;
+    }
+
+    .floated-label-wrapper.small-12.medium-6.columns.checkbox-radio.text-left.grid-content {
+    padding-bottom: 1rem;
     }
   }
   
