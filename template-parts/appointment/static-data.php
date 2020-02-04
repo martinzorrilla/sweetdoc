@@ -87,8 +87,8 @@
           </div>
 
           <!-- ritmo menstrual -->
-          <div class="floated-label-wrapper large-12 columns checkbox-radio text-left">
-              <span class="separator-left">Ritmo menstrual</span>
+          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left">
+              <span class="separator-left">Ritmo menstrual &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
               <div class="grid-content">
                 <input type="radio" id="regular" name="ritmo_menstrual" value="regular" <?php if ($radiobox_ritmo_menstrual == "regular") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>
                 >
@@ -112,7 +112,7 @@
           </div>
 
           <!-- Parto normal -->
-          <div class="floated-label-wrapper large-12 columns">
+          <div class="floated-label-wrapper large-6 columns">
             <label for="parto_normal" class="separator-left">Parto normal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="number" id="parto_normal" name="parto_normal" value="<?php echo $parto_normal ?>" placeholder="Ingrese el numero de partos normales.." required>
           </div>
@@ -136,7 +136,7 @@
           </div>
 
           <!-- vacuna VPH radio -->
-          <div class="floated-label-wrapper large-12 columns checkbox-radio text-left">
+          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left">
               <span class="separator-left">Vacuna VPH</span>
               <div class="grid-content">
                 <input type="radio" id="ninguna" name="vacuna_vph" value="ninguna" <?php if ($radiobox_vacuna_vph == "ninguna") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>
@@ -165,9 +165,9 @@
           </div>
 
           <!-- metodo anticonceptivo - checkbox -->
-          <div class="floated-label-wrapper large-12 columns checkbox-radio text-left">
+          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left">
               <span class="separator-left">Metodo anticonceptivo actual</span>
-                <fieldset>
+            
                 <div class="grid-content">
                   <input type="checkbox" id="inyectable" name="metodo_anticonceptivo[]" value="inyectable" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                   <?php 
@@ -185,7 +185,7 @@
                   ?> >
                   <label for="preservativos">Preservativos</label>
                 </div>
-              </fieldset>
+            
           </div>
 
           <!-- Marca del anticonceptivo -->
@@ -195,7 +195,7 @@
           </div>
 
           <!-- Terapia de reposicion hormonal - checkbox -->
-          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left">
+          <div class="floated-label-wrapper large-12 columns checkbox-radio text-left">
               <span class="separator-left">Terapia de reposicion hormonal</span>
                 <div class="grid-content">
                   <input type="checkbox" id="terapia_si" name="terapia_hormonal[]" value="si" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
@@ -241,7 +241,7 @@
           </div>
 
           <!-- observaciones -->
-          <div class="floated-label-wrapper large-6 columns">
+          <div class="floated-label-wrapper large-12 columns">
             <label for="observaciones" class="separator-left">Observaciones</label>
             <input type="text" id="observaciones" name="observaciones" value="<?php echo $observaciones ?>" placeholder="Ingrese las observaciones de la paciente" required>
           </div>
