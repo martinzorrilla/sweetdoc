@@ -37,6 +37,10 @@
     $terapia_hormonal = isset($_POST['terapia_hormonal']) && $_POST['terapia_hormonal'] != '' ? $_POST['terapia_hormonal'] : NULL; 
     $pap_anterior = isset($_POST['pap_anterior']) && $_POST['pap_anterior'] != '' ? $_POST['pap_anterior'] : NULL; 
 
+    $fecha_pap = isset($_POST['fecha_pap']) && $_POST['fecha_pap'] != '' ? $_POST['fecha_pap'] : NULL; 
+    $fumador = isset($_POST['fumador']) && $_POST['fumador'] != '' ? $_POST['fumador'] : NULL; 
+    $cigarrillos_por_dia = isset($_POST['cigarrillos_por_dia']) && $_POST['cigarrillos_por_dia'] != '' ? $_POST['cigarrillos_por_dia'] : NULL;
+    $observaciones = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : NULL;
 
 
     //colposcopia data
@@ -71,8 +75,12 @@
         "metodo_anticonceptivo" => $metodo_anticonceptivo,
         "marca_anticonceptivo" => $marca_anticonceptivo,
         "terapia_hormonal" => $terapia_hormonal,
-        "pap_anterior" => $pap_anterior
-    
+        "pap_anterior" => $pap_anterior,
+
+        "fecha_pap" => $fecha_pap,
+        "fumador" => $fumador,
+        "cigarrillos_por_dia" => $cigarrillos_por_dia,
+        "observaciones" => $observaciones
         
     );
 
@@ -120,6 +128,13 @@ function sw_create_new_appointment($params){
     $terapia_hormonal = $params['terapia_hormonal'];
     $pap_anterior = $params['pap_anterior'];    
 
+    $fecha_pap = $params['fecha_pap'];    
+    $fumador = $params['fumador'];    
+    $cigarrillos_por_dia = $params['cigarrillos_por_dia'];    
+    $observaciones = $params['observaciones'];    
+
+    
+        
 
 
     //common fields
@@ -190,7 +205,12 @@ function sw_create_new_appointment($params){
             "metodo_anticonceptivo" => $metodo_anticonceptivo,
             "marca_anticonceptivo" => $marca_anticonceptivo,
             "terapia_hormonal" => $terapia_hormonal,
-            "pap_anterior" => $pap_anterior
+            "pap_anterior" => $pap_anterior,
+ 
+            "fecha_pap" => $fecha_pap,
+            "fumador" => $fumador,
+            "cigarrillos_por_dia" => $cigarrillos_por_dia,
+            "observaciones" => $observaciones
 
 
             
@@ -312,7 +332,11 @@ function sw_update_single_appointment($params){
     $terapia_hormonal = $params['terapia_hormonal'];
     $pap_anterior = $params['pap_anterior'];  
     
-    
+    $fecha_pap = $params['fecha_pap'];    
+    $fumador = $params['fumador'];    
+    $cigarrillos_por_dia = $params['cigarrillos_por_dia'];    
+    $observaciones = $params['observaciones'];  
+
     //colposcopia data
     $colpo_post_id  = $params["colpo_post_id"];
     $macroscopia = $params['macroscopia'];
@@ -335,7 +359,12 @@ function sw_update_single_appointment($params){
             "metodo_anticonceptivo" => $metodo_anticonceptivo,
             "marca_anticonceptivo" => $marca_anticonceptivo,
             "terapia_hormonal" => $terapia_hormonal,
-            "pap_anterior" => $pap_anterior
+            "pap_anterior" => $pap_anterior,
+
+            "fecha_pap" => $fecha_pap,
+            "fumador" => $fumador,
+            "cigarrillos_por_dia" => $cigarrillos_por_dia,
+            "observaciones" => $observaciones
 
         );
         foreach ($acf_fields as $field => $value) {

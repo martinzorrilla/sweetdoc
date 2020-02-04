@@ -37,8 +37,19 @@
     
     $pap_anterior = $static_data_post['pap_anterior'][0];
     
+    $fecha_pap = $static_data_post['fecha_pap'][0] !="" && $static_data_post['fecha_pap'][0] !=NULL ? $static_data_post['fecha_pap'][0] : "";
+    $new_fecha_pap = "";
+    //acf retoran la fecha asi:20191128 en vez de 2019-11-28 que es como el input[date] requiere, x eso tranformo el valor
+    if ($fecha_pap != ""){ $new_fecha_pap = date("Y-m-d", strtotime($fecha_pap));}
+
+    $checkbox_fumador = get_field('fumador', $static_data_post_id); // esto no usamos para guardar, si no paraa mostrar los campos guardados
+    $cigarrillos_por_dia = $static_data_post['cigarrillos_por_dia'][0];
+    $observaciones = $static_data_post['observaciones'][0];
+
+    
+
     //var_dump($static_data_post_id);
-    var_dump($checkbox_metodo_anti);
+    //var_dump($checkbox_metodo_anti);
  ?>
 <!-- <h3>Datos Estaticos del Paciente</h3> -->
 
@@ -187,13 +198,13 @@
           <div class="floated-label-wrapper large-6 columns checkbox-radio text-left">
               <span class="separator-left">Terapia de reposicion hormonal</span>
                 <div class="grid-content">
-                  <input type="checkbox" id="si" name="terapia_hormonal[]" value="si" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                  <input type="checkbox" id="terapia_si" name="terapia_hormonal[]" value="si" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                   <?php 
                   if( $checkbox_terapia_hormonal != NULL || $checkbox_terapia_hormonal != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
                     if(in_array("si", $checkbox_terapia_hormonal)) echo "checked";
                   }
                   ?> >
-                  <label for="inyectable">Si</label>
+                  <label for="terapia_si">Si</label>
                 </div>
           </div>
 
@@ -201,6 +212,38 @@
           <div class="floated-label-wrapper large-6 medium-6 columns">
             <label for="pap_anterior" class="separator-left">Resultado del PAP anterior &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="text" id="pap_anterior" name="pap_anterior" value="<?php echo $pap_anterior ?>" placeholder="Ingrese el resultado del PAP anterior.." required>
+          </div>
+
+          <!-- Fecha PAP -->
+          <div class="floated-label-wrapper large-6 columns">
+            <label for="fecha_pap" class="separator-left">Fecha del PAP &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="date" id="fecha_pap" name="fecha_pap" value="<?php echo $new_fecha_pap ?>" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+          </div>
+
+          <!-- Fumador - checkbox -->
+          <div class="floated-label-wrapper large-6 columns checkbox-radio text-left">
+              <span class="separator-left">Fumador</span>
+                <div class="grid-content">
+                  <input type="checkbox" id="fumador_si" name="fumador[]" value="si" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                  <?php 
+                  if( $checkbox_fumador != NULL || $checkbox_fumador != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
+                    if(in_array("si", $checkbox_fumador)) echo "checked";
+                  }
+                  ?> >
+                  <label for="fumador_si">Si</label>
+                </div>
+          </div>
+
+          <!-- cigarrillos por dia -->
+          <div class="floated-label-wrapper large-6 columns">
+            <label for="cigarrillos_por_dia" class="separator-left">Numero de cigarrillos por dia</label>
+            <input type="number" id="cigarrillos_por_dia" name="cigarrillos_por_dia" value="<?php echo $cigarrillos_por_dia ?>" placeholder="Ingrese el numero de cigarrillos por dia" required>
+          </div>
+
+          <!-- observaciones -->
+          <div class="floated-label-wrapper large-6 columns">
+            <label for="observaciones" class="separator-left">Observaciones</label>
+            <input type="text" id="observaciones" name="observaciones" value="<?php echo $observaciones ?>" placeholder="Ingrese las observaciones de la paciente" required>
           </div>
 
         </div>
