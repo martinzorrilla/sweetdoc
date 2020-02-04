@@ -19,7 +19,6 @@
   $newDate = "";
   //acf retoran la fecha asi:20191128 en vez de 2019-11-28 que es como el input[date] requiere, x eso tranformo el valor
   if ($fecha_de_nacimiento != ""){ $newDate = date("Y-m-d", strtotime($fecha_de_nacimiento));}
-
   $departamento = $patient_fields['departamento'][0];
   $ciudad = $patient_fields['ciudad'][0];
   $direccion = $patient_fields['direccion'][0];

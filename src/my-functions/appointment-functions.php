@@ -23,13 +23,34 @@
     $menarca = isset($_POST['menarca']) && $_POST['menarca'] != '' ? $_POST['menarca'] : NULL;
     $irs = isset($_POST['irs']) && $_POST['irs'] != '' ? $_POST['irs'] : NULL; 
     $static_data_post_id = isset($_POST['static_data_post_id']) && $_POST['static_data_post_id'] != '' ? $_POST['static_data_post_id'] : NULL;
+    $vacuna_vph = isset($_POST['vacuna_vph']) && $_POST['vacuna_vph'] != '' ? $_POST['vacuna_vph'] : NULL;    
+    $edad_vph = isset($_POST['edad_vph']) && $_POST['edad_vph'] != '' ? $_POST['edad_vph'] : NULL;
+    $ritmo_menstrual = isset($_POST['ritmo_menstrual']) && $_POST['ritmo_menstrual'] != '' ? $_POST['ritmo_menstrual'] : NULL;    
+    $fum = isset($_POST['fum']) && $_POST['fum'] != '' ? $_POST['fum'] : NULL; 
 
     
+    $numero_embarazos = isset($_POST['numero_embarazos']) && $_POST['numero_embarazos'] != '' ? $_POST['numero_embarazos'] : NULL; 
+    $parto_normal = isset($_POST['parto_normal']) && $_POST['parto_normal'] != '' ? $_POST['parto_normal'] : NULL; 
+    $abortos = isset($_POST['abortos']) && $_POST['abortos'] != '' ? $_POST['abortos'] : NULL; 
+    $metodo_anticonceptivo = isset($_POST['metodo_anticonceptivo']) && $_POST['metodo_anticonceptivo'] != '' ? $_POST['metodo_anticonceptivo'] : NULL; 
+    $marca_anticonceptivo = isset($_POST['marca_anticonceptivo']) && $_POST['marca_anticonceptivo'] != '' ? $_POST['marca_anticonceptivo'] : NULL; 
+    $terapia_hormonal = isset($_POST['terapia_hormonal']) && $_POST['terapia_hormonal'] != '' ? $_POST['terapia_hormonal'] : NULL; 
+    $pap_anterior = isset($_POST['pap_anterior']) && $_POST['pap_anterior'] != '' ? $_POST['pap_anterior'] : NULL; 
+
+    $fecha_pap = isset($_POST['fecha_pap']) && $_POST['fecha_pap'] != '' ? $_POST['fecha_pap'] : NULL; 
+    $fumador = isset($_POST['fumador']) && $_POST['fumador'] != '' ? $_POST['fumador'] : NULL; 
+    $cigarrillos_por_dia = isset($_POST['cigarrillos_por_dia']) && $_POST['cigarrillos_por_dia'] != '' ? $_POST['cigarrillos_por_dia'] : NULL;
+    $observaciones = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : NULL;
+
+
     //colposcopia data
     $colpo_post_id = isset($_POST['colpo_post_id']) && $_POST['colpo_post_id'] != '' ? $_POST['colpo_post_id'] : NULL;
     $macroscopia = isset($_POST['macroscopia']) && $_POST['macroscopia'] != '' ? $_POST['macroscopia'] : NULL;
     
     //wp_die(var_dump($_FILES));
+    
+    //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
+    error_log(json_encode($_POST), 0);
 
     $params = array(
         "app_id" => $app_id,
@@ -42,7 +63,25 @@
         "irs" => $irs,
         "cesareas" => $cesareas,
         "macroscopia" => $macroscopia,
-        "checkbox_values" => $checkbox_values
+        "checkbox_values" => $checkbox_values,
+        "vacuna_vph" => $vacuna_vph,
+        "edad_vph" => $edad_vph,
+        "ritmo_menstrual" => $ritmo_menstrual,
+        "fum" => $fum,
+        
+        "numero_embarazos" => $numero_embarazos,
+        "parto_normal" => $parto_normal,
+        "abortos" => $abortos,
+        "metodo_anticonceptivo" => $metodo_anticonceptivo,
+        "marca_anticonceptivo" => $marca_anticonceptivo,
+        "terapia_hormonal" => $terapia_hormonal,
+        "pap_anterior" => $pap_anterior,
+
+        "fecha_pap" => $fecha_pap,
+        "fumador" => $fumador,
+        "cigarrillos_por_dia" => $cigarrillos_por_dia,
+        "observaciones" => $observaciones
+        
     );
 
     //wp_die(var_dump($params));
@@ -76,6 +115,27 @@ function sw_create_new_appointment($params){
     $cesareas = $params['cesareas'];
     $menarca = $params['menarca'];
     $irs = $params['irs'];
+    $vacuna_vph = $params['vacuna_vph'];
+    $edad_vph = $params['edad_vph'];
+    $ritmo_menstrual = $params['ritmo_menstrual'];
+    $fum = $params['fum'];
+
+    $numero_embarazos = $params['numero_embarazos'];
+    $parto_normal = $params['parto_normal'];
+    $abortos = $params['abortos'];
+    $metodo_anticonceptivo = $params['metodo_anticonceptivo'];
+    $marca_anticonceptivo = $params['marca_anticonceptivo'];
+    $terapia_hormonal = $params['terapia_hormonal'];
+    $pap_anterior = $params['pap_anterior'];    
+
+    $fecha_pap = $params['fecha_pap'];    
+    $fumador = $params['fumador'];    
+    $cigarrillos_por_dia = $params['cigarrillos_por_dia'];    
+    $observaciones = $params['observaciones'];    
+
+    
+        
+
 
     //common fields
     $motivo_de_consulta = $params['motivo_de_consulta'];
@@ -98,6 +158,8 @@ function sw_create_new_appointment($params){
 
     $timeStamp = date("Y-m-d H:i:s"); 
 
+    //creamos el post type consulta, el que tiene motivo de consulta y antecedente actual.
+    //static_data/AGO ya se crea al momento de crear el paciente
     if ($app_id === 'new' && $patient_id != NULL) {
       $my_post = array(
         'post_title'    => wp_strip_all_tags( $fullname."-".$timeStamp),
@@ -131,7 +193,27 @@ function sw_create_new_appointment($params){
         $acf_fields = array(
             "cesareas" => $cesareas,
             "menarca" => $menarca,
-            "irs" => $irs
+            "irs" => $irs,
+            "vacuna_vph" => $vacuna_vph,
+            "edad_vph" => $edad_vph,
+            "ritmo_menstrual" => $ritmo_menstrual,
+            "fum" => $fum,
+
+            "numero_embarazos" => $numero_embarazos,
+            "parto_normal" => $parto_normal,
+            "abortos" => $abortos,
+            "metodo_anticonceptivo" => $metodo_anticonceptivo,
+            "marca_anticonceptivo" => $marca_anticonceptivo,
+            "terapia_hormonal" => $terapia_hormonal,
+            "pap_anterior" => $pap_anterior,
+ 
+            "fecha_pap" => $fecha_pap,
+            "fumador" => $fumador,
+            "cigarrillos_por_dia" => $cigarrillos_por_dia,
+            "observaciones" => $observaciones
+
+
+            
         );
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)
@@ -237,6 +319,23 @@ function sw_update_single_appointment($params){
     $cesareas = $params['cesareas'];
     $menarca = $params['menarca'];
     $irs = $params['irs'];
+    $vacuna_vph = $params['vacuna_vph'];
+    $edad_vph = $params['edad_vph'];
+    $ritmo_menstrual = $params['ritmo_menstrual'];
+    $fum = $params['fum'];
+    
+    $numero_embarazos = $params['numero_embarazos'];
+    $parto_normal = $params['parto_normal'];
+    $abortos = $params['abortos'];
+    $metodo_anticonceptivo = $params['metodo_anticonceptivo'];
+    $marca_anticonceptivo = $params['marca_anticonceptivo'];
+    $terapia_hormonal = $params['terapia_hormonal'];
+    $pap_anterior = $params['pap_anterior'];  
+    
+    $fecha_pap = $params['fecha_pap'];    
+    $fumador = $params['fumador'];    
+    $cigarrillos_por_dia = $params['cigarrillos_por_dia'];    
+    $observaciones = $params['observaciones'];  
 
     //colposcopia data
     $colpo_post_id  = $params["colpo_post_id"];
@@ -248,7 +347,25 @@ function sw_update_single_appointment($params){
         $acf_fields = array(
             "cesareas" => $cesareas,
             "menarca" => $menarca,
-            "irs" => $irs
+            "irs" => $irs,
+            "vacuna_vph" => $vacuna_vph,
+            "edad_vph" => $edad_vph,
+            "ritmo_menstrual" => $ritmo_menstrual,
+            "fum" => $fum,
+            
+            "numero_embarazos" => $numero_embarazos,
+            "parto_normal" => $parto_normal,
+            "abortos" => $abortos,
+            "metodo_anticonceptivo" => $metodo_anticonceptivo,
+            "marca_anticonceptivo" => $marca_anticonceptivo,
+            "terapia_hormonal" => $terapia_hormonal,
+            "pap_anterior" => $pap_anterior,
+
+            "fecha_pap" => $fecha_pap,
+            "fumador" => $fumador,
+            "cigarrillos_por_dia" => $cigarrillos_por_dia,
+            "observaciones" => $observaciones
+
         );
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)

@@ -1,10 +1,9 @@
 <?php get_header();?>
 
 <?php  
-
-$all_patient_url = home_url().'/pacientes/';
-$create_patient_url = home_url().'/crear-paciente/';
-$create_secretary_url = home_url().'/crear-asistente/';
+// $all_patient_url = home_url().'/pacientes/';
+// $create_patient_url = home_url().'/crear-paciente/';
+// $create_secretary_url = home_url().'/crear-asistente/';
 
 // ************************************ separador *******************************************
 
@@ -29,8 +28,10 @@ $patient_id = $post_id;
 ?>
 
 
-
-<h1 style="text-align: center; margin-left: 50px;">Perfil del Paciente</h1>
+<div data-closable class="callout alert-callout-border secondary text-center">
+  <h3 style="font-weight: bold;">Perfil de la Paciente</h3>
+</div>
+<!-- <h1 style="text-align: center; margin-left: 50px;">Perfil del Paciente</h1> -->
 <?php 
 //como prueba de concepto. si el usuario es doctor muestra estos campos si no, no
 $result = "";
@@ -39,19 +40,18 @@ $result = sw_get_current_user_role();
 //en produccion: verificar que el usuario sea doctor
 //if($result == "doctor"){
 if(true){
-
-  //hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
-  
+  hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
   //$patient_id = ""; 
   hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id, 'is_editable' => "false" ]);
-  ?> 
-  
-  <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id]); ?>
+  hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id]); 
+  ?>
   
 
-  <h2 style="text-align: center; margin-left: 50px;">Consultas</h2>
+  <!-- <h2 style="text-align: center; margin-left: 50px;">Consultas</h2> -->
   <!-- <a href="#"><strong>Nombre paciente</strong></a> -->
-  <br/>
+  <div data-closable class="callout alert-callout-border secondary text-center" style="margin-top: 2rem;">
+    <h3 style="font-weight: bold;">Consultas Previas</h3>
+  </div>
 
   <?php 
   $related = sw_get_related_appointments($patient_id);
@@ -88,15 +88,10 @@ if(true){
   } //foreach 
   ?>
   
-  <!-- COLPOSCOPIAS DEL PACIENTE -->
+  <!-- esta seccion trae todas las COLPOSCOPIAS DE UN PACIENTE -->
 
-  <h2 style="text-align: center; margin-left: 50px;">Colposcopias</h2>
-    <?php 
-        // to do
-        // crear la funcion get patients_colpos la cual es igual a la que ya tengo pero
-        // le tengo que pasar el paciente en vez del app_id
-        // luego hacer un for each y por cada colpo id traer su href ya sea a la consulta
-        // o al colposcopia en si, en ese caso deberia crear una pagina para las colpos
+  <h2 style="text-align: center; margin-left: 50px;">Colposcopias de la paciente</h2>
+  <?php 
     $patients_colpos = sw_patiente_colpos($patient_id);
     //  var_dump($patients_colpos);
     foreach ($patients_colpos as $p){
