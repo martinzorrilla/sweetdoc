@@ -22,10 +22,7 @@
   $departamento = $patient_fields['departamento'][0];
   $ciudad = $patient_fields['ciudad'][0];
   $direccion = $patient_fields['direccion'][0];
-  //$metodo_anticonceptivo = $patient_fields['metodo_anticonceptivo'][0];
-  // return value es un array conteniendo strings con los values en el bkend de acf i,e: "inyectables"
-  $checkbox_metodo_anti = get_field('metodo_anticonceptivo', $patient_id); // esto no usamos para guardar, si no para 
-  // mostrar los campos que estan ya guardados en un paciente creado
+  
   $radiobox_metodo_anti = get_field('epitelio_escamoso', $patient_id); 
   $telefono = $patient_fields['telefono'][0];
   $celular = $patient_fields['celular'][0];
@@ -111,32 +108,6 @@
             <div class="floated-label-wrapper large-6 columns">
               <label for="direccion">Dirección &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="direccion" name="direccion" value="<?php echo $direccion ?>" placeholder="Ingrese al dirección del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
-            </div>
-
-            <div class="floated-label-wrapper large-12 columns checkbox-radio">
-              <span>Metodo anticonceptivo actual</span>
-                <fieldset>
-                <div>
-                  <input type="checkbox" id="inyectable" name="metodo_anticonceptivo[]" value="inyectable" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
-                  <?php 
-                  if( $checkbox_metodo_anti != NULL || $checkbox_metodo_anti != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
-                    if(in_array("inyectable", $checkbox_metodo_anti)) echo "checked";
-                  }
-                  ?> >
-                  <label for="inyectable">Inyectable</label>
-                </div>
-
-                <div>
-                  <input type="checkbox" id="preservativos" name="metodo_anticonceptivo[]" value="preservativos" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>
-                  <?php 
-                  if( $checkbox_metodo_anti != NULL || $checkbox_metodo_anti != ""){ //si esta vacio genera un error, por eso hay que 
-                    if(in_array("preservativos", $checkbox_metodo_anti)) echo "checked";
-                  }
-                  ?> >
-                  <label for="preservativos">Preservativos</label>
-                </div>
-              </fieldset>
-
             </div>
 
             <div class="floated-label-wrapper large-6 columns">

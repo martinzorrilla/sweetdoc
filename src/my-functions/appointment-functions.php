@@ -40,9 +40,11 @@
     $fecha_pap = isset($_POST['fecha_pap']) && $_POST['fecha_pap'] != '' ? $_POST['fecha_pap'] : NULL; 
     $fumador = isset($_POST['fumador']) && $_POST['fumador'] != '' ? $_POST['fumador'] : NULL; 
     $cigarrillos_por_dia = isset($_POST['cigarrillos_por_dia']) && $_POST['cigarrillos_por_dia'] != '' ? $_POST['cigarrillos_por_dia'] : NULL;
+    
+    $tratamientos_anteriores = isset($_POST['tratamientos_anteriores']) && $_POST['tratamientos_anteriores'] != '' ? $_POST['tratamientos_anteriores'] : NULL; 
+    $fecha_de_tratamiento = isset($_POST['fecha_de_tratamiento']) && $_POST['fecha_de_tratamiento'] != '' ? $_POST['fecha_de_tratamiento'] : NULL; 
     $observaciones = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : NULL;
-
-
+    
     //colposcopia data
     $colpo_post_id = isset($_POST['colpo_post_id']) && $_POST['colpo_post_id'] != '' ? $_POST['colpo_post_id'] : NULL;
     $macroscopia = isset($_POST['macroscopia']) && $_POST['macroscopia'] != '' ? $_POST['macroscopia'] : NULL;
@@ -80,8 +82,10 @@
         "fecha_pap" => $fecha_pap,
         "fumador" => $fumador,
         "cigarrillos_por_dia" => $cigarrillos_por_dia,
+        "tratamientos_anteriores" => $tratamientos_anteriores,
+        "fecha_de_tratamiento" => $fecha_de_tratamiento,
         "observaciones" => $observaciones
-        
+
     );
 
     //wp_die(var_dump($params));
@@ -131,10 +135,10 @@ function sw_create_new_appointment($params){
     $fecha_pap = $params['fecha_pap'];    
     $fumador = $params['fumador'];    
     $cigarrillos_por_dia = $params['cigarrillos_por_dia'];    
+    $tratamientos_anteriores = $params['tratamientos_anteriores'];    
+    $fecha_de_tratamiento = $params['fecha_de_tratamiento'];    
     $observaciones = $params['observaciones'];    
 
-    
-        
 
 
     //common fields
@@ -210,10 +214,10 @@ function sw_create_new_appointment($params){
             "fecha_pap" => $fecha_pap,
             "fumador" => $fumador,
             "cigarrillos_por_dia" => $cigarrillos_por_dia,
+            "tratamientos_anteriores" => $tratamientos_anteriores,
+            "fecha_de_tratamiento" => $fecha_de_tratamiento,
             "observaciones" => $observaciones
 
-
-            
         );
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)
@@ -334,7 +338,9 @@ function sw_update_single_appointment($params){
     
     $fecha_pap = $params['fecha_pap'];    
     $fumador = $params['fumador'];    
-    $cigarrillos_por_dia = $params['cigarrillos_por_dia'];    
+    $cigarrillos_por_dia = $params['cigarrillos_por_dia'];   
+    $tratamientos_anteriores = $params['tratamientos_anteriores'];    
+    $fecha_de_tratamiento = $params['fecha_de_tratamiento'];   
     $observaciones = $params['observaciones'];  
 
     //colposcopia data
@@ -364,6 +370,8 @@ function sw_update_single_appointment($params){
             "fecha_pap" => $fecha_pap,
             "fumador" => $fumador,
             "cigarrillos_por_dia" => $cigarrillos_por_dia,
+            "tratamientos_anteriores" => $tratamientos_anteriores,
+            "fecha_de_tratamiento" => $fecha_de_tratamiento,
             "observaciones" => $observaciones
 
         );
