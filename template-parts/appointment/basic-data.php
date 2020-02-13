@@ -23,7 +23,7 @@
   $ciudad = $patient_fields['ciudad'][0];
   $direccion = $patient_fields['direccion'][0];
   
-  $radiobox_metodo_anti = get_field('epitelio_escamoso', $patient_id); 
+  //$radiobox_metodo_anti = get_field('epitelio_escamoso', $patient_id); 
   $telefono = $patient_fields['telefono'][0];
   $celular = $patient_fields['celular'][0];
   $establecimiento = $patient_fields['establecimiento'][0];

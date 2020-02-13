@@ -47,8 +47,18 @@
     
     //colposcopia data
     $colpo_post_id = isset($_POST['colpo_post_id']) && $_POST['colpo_post_id'] != '' ? $_POST['colpo_post_id'] : NULL;
-    $macroscopia = isset($_POST['macroscopia']) && $_POST['macroscopia'] != '' ? $_POST['macroscopia'] : NULL;
     
+    $macroscopia = isset($_POST['macroscopia']) && $_POST['macroscopia'] != '' ? $_POST['macroscopia'] : NULL;
+    $colposcopia = isset($_POST['colposcopia']) && $_POST['colposcopia'] != '' ? $_POST['colposcopia'] : NULL;
+    $epitelio_escamoso = isset($_POST['epitelio_escamoso']) && $_POST['epitelio_escamoso'] != '' ? $_POST['epitelio_escamoso'] : NULL;
+    $evaluacion_general = isset($_POST['evaluacion_general']) && $_POST['evaluacion_general'] != '' ? $_POST['evaluacion_general'] : NULL;
+    $colposcopicos_normales = isset($_POST['colposcopicos_normales']) && $_POST['colposcopicos_normales'] != '' ? $_POST['colposcopicos_normales'] : NULL;
+    $colposcopicos_anormales = isset($_POST['colposcopicos_anormales']) && $_POST['colposcopicos_anormales'] != '' ? $_POST['colposcopicos_anormales'] : NULL;
+    $sospecha_de_invasion = isset($_POST['sospecha_de_invasion']) && $_POST['sospecha_de_invasion'] != '' ? $_POST['sospecha_de_invasion'] : NULL;
+    $hallazgos_varios = isset($_POST['hallazgos_varios']) && $_POST['hallazgos_varios'] != '' ? $_POST['hallazgos_varios'] : NULL;
+    $examen_de_vyv = isset($_POST['examen_de_vyv']) && $_POST['examen_de_vyv'] != '' ? $_POST['examen_de_vyv'] : NULL;
+    
+
     //wp_die(var_dump($_FILES));
     
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
@@ -64,13 +74,11 @@
         "menarca" => $menarca,
         "irs" => $irs,
         "cesareas" => $cesareas,
-        "macroscopia" => $macroscopia,
         "checkbox_values" => $checkbox_values,
         "vacuna_vph" => $vacuna_vph,
         "edad_vph" => $edad_vph,
         "ritmo_menstrual" => $ritmo_menstrual,
         "fum" => $fum,
-        
         "numero_embarazos" => $numero_embarazos,
         "parto_normal" => $parto_normal,
         "abortos" => $abortos,
@@ -78,13 +86,23 @@
         "marca_anticonceptivo" => $marca_anticonceptivo,
         "terapia_hormonal" => $terapia_hormonal,
         "pap_anterior" => $pap_anterior,
-
         "fecha_pap" => $fecha_pap,
         "fumador" => $fumador,
         "cigarrillos_por_dia" => $cigarrillos_por_dia,
         "tratamientos_anteriores" => $tratamientos_anteriores,
         "fecha_de_tratamiento" => $fecha_de_tratamiento,
-        "observaciones" => $observaciones
+        "observaciones" => $observaciones,
+        
+        //colposcopia
+        "macroscopia" => $macroscopia,
+        "colposcopia" => $colposcopia,
+        "epitelio_escamoso" => $epitelio_escamoso,
+        "evaluacion_general" => $evaluacion_general,
+        "colposcopicos_normales" => $colposcopicos_normales,
+        "colposcopicos_anormales" => $colposcopicos_anormales,
+        "sospecha_de_invasion" => $sospecha_de_invasion,
+        "hallazgos_varios" => $hallazgos_varios,
+        "examen_de_vyv" => $examen_de_vyv
 
     );
 
@@ -147,6 +165,14 @@ function sw_create_new_appointment($params){
     
     //colposcopia data
     $macroscopia = $params['macroscopia'];
+    $colposcopia = $params['colposcopia'];
+    $epitelio_escamoso = $params['epitelio_escamoso'];
+    $evaluacion_general = $params['evaluacion_general'];
+    $colposcopicos_normales = $params['colposcopicos_normales'];
+    $colposcopicos_anormales = $params['colposcopicos_anormales'];
+    $sospecha_de_invasion = $params['sospecha_de_invasion'];
+    $hallazgos_varios = $params['hallazgos_varios'];
+    $examen_de_vyv = $params['examen_de_vyv'];
 
     //$app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
 
@@ -210,7 +236,6 @@ function sw_create_new_appointment($params){
             "marca_anticonceptivo" => $marca_anticonceptivo,
             "terapia_hormonal" => $terapia_hormonal,
             "pap_anterior" => $pap_anterior,
- 
             "fecha_pap" => $fecha_pap,
             "fumador" => $fumador,
             "cigarrillos_por_dia" => $cigarrillos_por_dia,
@@ -247,7 +272,16 @@ function sw_create_new_appointment($params){
       }
 
       $acf_fields = array(
-            "macroscopia" => $macroscopia
+            "macroscopia" => $macroscopia,
+            "colposcopia" => $colposcopia,
+            "epitelio_escamoso" => $epitelio_escamoso,
+            "evaluacion_general" => $evaluacion_general,
+            "colposcopicos_normales" => $colposcopicos_normales,
+            "colposcopicos_anormales" => $colposcopicos_anormales,
+            "sospecha_de_invasion" => $sospecha_de_invasion,
+            "hallazgos_varios" => $hallazgos_varios,
+            "examen_de_vyv" => $examen_de_vyv
+
         );
 
         foreach ($acf_fields as $field => $value) {
@@ -346,6 +380,14 @@ function sw_update_single_appointment($params){
     //colposcopia data
     $colpo_post_id  = $params["colpo_post_id"];
     $macroscopia = $params['macroscopia'];
+    $colposcopia = $params['colposcopia'];
+    $epitelio_escamoso = $params['epitelio_escamoso'];
+    $evaluacion_general = $params['evaluacion_general'];
+    $colposcopicos_normales = $params['colposcopicos_normales'];
+    $colposcopicos_anormales = $params['colposcopicos_anormales'];
+    $sospecha_de_invasion = $params['sospecha_de_invasion'];
+    $hallazgos_varios = $params['hallazgos_varios'];
+    $examen_de_vyv = $params['examen_de_vyv'];
 
     if ($app_id != NULL && $app_id != '') {
 
@@ -422,7 +464,15 @@ function sw_update_single_appointment($params){
         }//if colpo_post_id === NULL
         
         $acf_fields = array(
-            "macroscopia" => $macroscopia         
+          "macroscopia" => $macroscopia,
+          "colposcopia" => $colposcopia,
+          "epitelio_escamoso" => $epitelio_escamoso,
+          "evaluacion_general" => $evaluacion_general,
+          "colposcopicos_normales" => $colposcopicos_normales,
+          "colposcopicos_anormales" => $colposcopicos_anormales,
+          "sospecha_de_invasion" => $sospecha_de_invasion,
+          "hallazgos_varios" => $hallazgos_varios,
+          "examen_de_vyv" => $examen_de_vyv        
         );
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)

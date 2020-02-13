@@ -2,7 +2,7 @@
     $colpo_post_id = $template_args["colpo_post_id"]; 
     $colpo_data_post = get_post_custom($colpo_post_id);
     //var_dump($colpo_data_post);
-    
+    $radiobox_epitelio = get_field('epitelio_escamoso', $colpo_post_id); 
     //load all the data we need from the colpscopy post-------
     
     //image files
@@ -42,6 +42,18 @@
     
     //field files
     $macroscopia = $colpo_data_post['macroscopia'][0];
+    $colposcopia = $colpo_data_post['colposcopia'][0];
+
+    $evaluacion_general = $colpo_data_post['evaluacion_general'][0];
+    $colposcopicos_normales = $colpo_data_post['colposcopicos_normales'][0];
+    $colposcopicos_anormales = $colpo_data_post['colposcopicos_anormales'][0];
+    $sospecha_de_invasion = $colpo_data_post['sospecha_de_invasion'][0];
+    $hallazgos_varios = $colpo_data_post['hallazgos_varios'][0];
+    $examen_de_vyv = $colpo_data_post['examen_de_vyv'][0];
+    
+    
+    
+    
  ?>
 
 <div class="card profile-card-action-icons">
@@ -51,15 +63,65 @@
         <h5 class="author-title">Colposcopia</h5>
       </div>
     </div>
-    <div class="profile-card-about">
+    <div class="profile-card-about row">
       <h5 class="about-title separator-left"> Ingresar datos de la Colposcopia <?php //echo $name?></h5>
 
-      <div class="floated-label-wrapper">
+      <div class="floated-label-wrapper large-6 columns ">
         <label for="macroscopia">Macroscopia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <input type="text" id="macroscopia" name="macroscopia" value="<?php echo $macroscopia ?>" placeholder="Escribir..." required>
       </div>
 
-      <br>
+      <div class="floated-label-wrapper large-6 columns">
+        <label for="colposcopia">Colposcopia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" id="colposcopia" name="colposcopia" value="<?php echo $colposcopia ?>" placeholder="Escribir..." required>
+      </div>
+
+      <div class="floated-label-wrapper small-12 medium-12 columns checkbox-radio text-left grid-content">
+              <label class="separator-left">Epitelio escamoso original</label>
+              
+                <input type="radio" id="maduro" name="epitelio_escamoso" value="maduro" <?php if ($radiobox_epitelio == "maduro") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                <label for="maduro">Maduro</label>
+
+                <input type="radio" id="atrofico" name="epitelio_escamoso" value="atrofico" <?php if ($radiobox_epitelio == "atrofico") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                <label for="atrofico">Atrófico</label>         
+      </div>
+
+      <!-- evaluacion general -->
+      <div class="floated-label-wrapper large-6 columns ">
+        <label for="evaluacion_general">Evaluacion general</label>
+        <input type="text" id="evaluacion_general" name="evaluacion_general" value="<?php echo $evaluacion_general ?>" placeholder="Escribir..." required>
+      </div>
+
+      <!-- Colposcopicos normales -->
+      <div class="floated-label-wrapper large-6 columns ">
+        <label for="colposcopicos_normales">Colposcopicos normales &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" id="colposcopicos_normales" name="colposcopicos_normales" value="<?php echo $colposcopicos_normales ?>" placeholder="Escribir..." required>
+      </div>
+
+      <!-- Hallazgos colposcopicos anormales -->
+      <div class="floated-label-wrapper large-6 columns ">
+        <label for="colposcopicos_anormales">Hallazgos colposcopicos anormales &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" id="colposcopicos_anormales" name="colposcopicos_anormales" value="<?php echo $colposcopicos_anormales ?>" placeholder="Escribir..." required>
+      </div>
+
+      <!-- Sospecha de invasion -->
+      <div class="floated-label-wrapper large-6 columns ">
+        <label for="sospecha_de_invasion">Sospecha de invasion &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" id="sospecha_de_invasion" name="sospecha_de_invasion" value="<?php echo $sospecha_de_invasion ?>" placeholder="Escribir..." required>
+      </div>
+
+      <!-- hallazgos_varios -->
+      <div class="floated-label-wrapper large-6 columns ">
+        <label for="hallazgos_varios">Hallazgos varios &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" id="hallazgos_varios" name="hallazgos_varios" value="<?php echo $hallazgos_varios ?>" placeholder="Escribir..." required>
+      </div>
+
+      <!-- Examen de vagina y vulva -->
+      <div class="floated-label-wrapper large-6 columns ">
+        <label for="examen_de_vyv">Examen de vagina y vulva &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" id="examen_de_vyv" name="examen_de_vyv" value="<?php echo $examen_de_vyv ?>" placeholder="Escribir..." required>
+      </div>
+
       <!-- Testing the image uploader -->
       <!-- 
       <div class="floated-label-wrapper">
@@ -72,7 +134,7 @@
       -->
       <!-- Testing the image uploader -->
 
-      <div class="archivos">
+      <div class="archivos large-12 columns">
 
         <div class="subir-colpo test">
           <label for="image_uploads">Seleccionar imagenes (png, jpg )</label>

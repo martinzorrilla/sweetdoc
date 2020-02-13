@@ -25,6 +25,11 @@ $usersrole = sw_get_current_user_role();
 //echo "the users role : ". $usersrole;
 
 $patient_id = $post_id; 
+
+  //this is to get the id of the static_data post for this patient
+  //returns an array 
+  $static_data_array = sw_get_static_data_id($patient_id);
+  $static_data_post_id = $static_data_array[0];
 ?>
 
 
@@ -43,13 +48,13 @@ if(true){
   hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
   //$patient_id = ""; 
   hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id, 'is_editable' => "false" ]);
-  hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id]); 
+  hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id]); 
   ?>
   
 
   <!-- <h2 style="text-align: center; margin-left: 50px;">Consultas</h2> -->
   <!-- <a href="#"><strong>Nombre paciente</strong></a> -->
-  <div data-closable class="callout alert-callout-border secondary text-center" style="margin-top: 2rem;">
+  <div data-closable class="callout alert-callout-border primary text-center" style="margin-top: 2rem;">
     <h3 style="font-weight: bold;">Consultas Previas</h3>
   </div>
 
@@ -69,7 +74,7 @@ if(true){
         //echo the_date('Y-m-d', '<h2>', '</h2>');
         //var_dump($the_app->post_date);
     ?>
-    <div data-closable class="callout alert-callout-border primary">
+    <div data-closable class="callout alert-callout-border secondary">
       <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id='.$r; ?>"> - Consulta en fecha <strong> <?php echo $creation_date ?> </strong> - Codigo: <?php echo $r ?>
       </a>
       
@@ -90,18 +95,18 @@ if(true){
   
   <!-- esta seccion trae todas las COLPOSCOPIAS DE UN PACIENTE -->
 
-  <h2 style="text-align: center; margin-left: 50px;">Colposcopias de la paciente</h2>
+  <!-- <h2 style="text-align: center; margin-left: 50px;">Colposcopias de la paciente</h2> -->
   <?php 
-    $patients_colpos = sw_patiente_colpos($patient_id);
-    //  var_dump($patients_colpos);
-    foreach ($patients_colpos as $p){
-      //$colpo_post =get_post($p);
-      $creation_date = get_the_date( 'd-M-Y', $p );?>
-        <div data-closable class="callout alert-callout-border success">
-          <a href="<?php echo get_permalink( $p ); ?> "> - Colposcopia en fecha <strong> <?php echo $creation_date ?> </strong> - iD: <?php echo $p ?></a>
-        </div>
+    // $patients_colpos = sw_patiente_colpos($patient_id);
+    // //  var_dump($patients_colpos);
+    // foreach ($patients_colpos as $p){
+    //   //$colpo_post =get_post($p);
+    //   $creation_date = get_the_date( 'd-M-Y', $p );?>
+        <!-- <div data-closable class="callout alert-callout-border success"> -->
+          <!-- <a href="<?php //echo get_permalink( $p ); ?> "> - Colposcopia en fecha <strong> <?php //echo $creation_date ?> </strong> - iD: <?php //echo $p ?></a> -->
+        <!-- </div> -->
     <?php 
-    } //foreach patient_colpos ?>
+    // } //foreach patient_colpos ?>
 
 <?php
 }//if is a doctor
