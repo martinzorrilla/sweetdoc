@@ -399,7 +399,7 @@ function sw_get_patient_owner(){
   }
 }
 
-//Cuando se crea un usuario del tipo secretaria es importante saber el id del doctor que 
+//Cuando se crea un usuario del tipo secretary es importante saber el id del doctor que 
 //creo este usuario para poder despues filtrar los pacientes por doctor.
 //(en caso que la secretraria cree pacientes).
 function save_custom_user_profile_fields($user_id){
@@ -451,3 +451,34 @@ return $post_id;
 }
 
 add_filter('acf/pre_save_post' , 'my_acf_pre_save_post');
+
+
+
+/**
+ * WordPress function for redirecting users on login based on user role
+ */
+
+ // redirect del login de wordpress. wordpress login redirect 
+// solo si es admin envia al wp-admin luego del logueo. en otros casos envia a la home del sitio
+
+ function my_login_redirect( $url, $request, $user ){
+  if( $user && is_object( $user ) && is_a( $user, 'WP_User' ) ) {
+      if( $user->has_cap( 'administrator' ) ) {
+          $url = admin_url();
+      } else {
+        $url = home_url('');
+        // $url = home_url('/members-only/');
+      }
+  }
+  return $url;
+}
+add_filter('login_redirect', 'my_login_redirect', 10, 3 );
+
+//Disable admin bar for specific user roles
+add_action('after_setup_theme', 'remove_admin_bar_for_roles');
+function remove_admin_bar_for_roles() {
+    // if (current_user_can('doctor') && !is_admin()) {
+    if (!is_admin()) {
+        show_admin_bar(false);
+    }
+}
