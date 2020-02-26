@@ -125,31 +125,6 @@
               <input type="text" id="establecimiento" name="establecimiento" value="<?php echo $establecimiento ?>" placeholder="Ingrese el establecimiento..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
-            <div class="floated-label-wrapper large-6 columns">
-              <label for="region_sanitaria">Region Sanitaria &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="region_sanitaria" name="region_sanitaria" value="<?php echo $region_sanitaria ?>" placeholder="Ingrese la region sanitaria..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
-            </div>
-
-            <div class="floated-label-wrapper large-12 columns checkbox-radio">
-              <span>Epitelio escamoso original</span>
-              <div>
-                <input type="radio" id="maduro" name="epitelio_escamoso" value="maduro" <?php if ($radiobox_metodo_anti == "maduro") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>
-                >
-                <label for="maduro">Maduro</label>
-              </div>
-
-              <div>
-                <input type="radio" id="atrofico" name="epitelio_escamoso" value="atrofico" <?php if ($radiobox_metodo_anti == "atrofico") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
-                <label for="atrofico">Atrófico</label>
-              </div>
-            </div>
-
-            <!-- <div class="floated-label-wrapper large-12 columns text-center">
-              <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">Crear</button>
-              <p class="errorWrapper">
-              </p>
-            </div> -->
-
 
           </fieldset>
         </form>

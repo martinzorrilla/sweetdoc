@@ -9,6 +9,7 @@
 
 $appointment_url = home_url().'/consulta/?patient_id=';
 $prescription_url = home_url().'/prescripcion/?patient_id=';
+// $edit_patient_url = home_url().'/crear-paciente/?patient_id=new';
   //the id of the post in the current loop. witch is the patient
 $post_id = get_the_ID(); 
 //echo $post_id;
@@ -42,6 +43,15 @@ $patient_id = $post_id;
 $result = "";
 $result = sw_get_current_user_role();
 
+  //check permissions for the user
+  //this page should be visible only for a doctor role. else redirect to home page
+  $the_role = sw_get_current_user_role(); // antes usaba esta funcion pero puedo hacer lo mismo con 'current_user_can()'
+   if(!current_user_can('doctor') && !current_user_can('administrator')){
+     echo "El usuario no es doctor o admin. no puede ver esta pagina";
+      //wp_redirect( esc_url( wp_login_url() ), 307);
+      //wp_redirect('http://example.com/'); exit;
+   }
+   
 //en produccion: verificar que el usuario sea doctor
 //if($result == "doctor"){
 if(true){

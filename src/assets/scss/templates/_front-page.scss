@@ -59,6 +59,9 @@ $app-dashboard-top-nav-height: 55px;
   align-items: center;
   display: flex;
 
+  a{
+    color: $sweet-white;
+  } 
   button {
     margin-bottom: 0;
     margin-right: 2rem;

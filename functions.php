@@ -482,3 +482,6 @@ function remove_admin_bar_for_roles() {
         show_admin_bar(false);
     }
 }
+
+
+// redirect users that are not doctor or admin to home page when trying to acces special pages like appointment and others

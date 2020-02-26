@@ -322,4 +322,67 @@ function sw_create_static_data($params){
       return $result;
 }
 
+
+
+/*
+********************************************************************************
+*
+      deletePatient
+*
+********************************************************************************
+*/
+
+function sw_delete_patient_ajax(){
+
+  $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+  //$result = [];
+  $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
+  
+  $patient_name = isset($_POST['patient_name']) && $_POST['patient_name'] != '' ? $_POST['patient_name'] : NULL;
+  $patient_last_name = isset($_POST['patient_last_name']) && $_POST['patient_last_name'] != '' ? $_POST['patient_last_name'] : NULL;
+  $patient_ci = isset($_POST['patient_ci']) && $_POST['patient_ci'] != '' ? $_POST['patient_ci'] : NULL;
+  $email = isset($_POST['email_paciente']) && $_POST['email_paciente'] != '' ? $_POST['email_paciente'] : NULL;
+  $fecha_de_nacimiento = isset($_POST['fecha_de_nacimiento']) && $_POST['fecha_de_nacimiento'] != '' ? $_POST['fecha_de_nacimiento'] : NULL;
+  $departamento = isset($_POST['departamento']) && $_POST['departamento'] != '' ? $_POST['departamento'] : NULL;
+  $ciudad = isset($_POST['ciudad']) && $_POST['ciudad'] != '' ? $_POST['ciudad'] : NULL;
+  $direccion = isset($_POST['direccion']) && $_POST['direccion'] != '' ? $_POST['direccion'] : NULL;
+  $metodo_anticonceptivo = isset($_POST['metodo_anticonceptivo']) && $_POST['metodo_anticonceptivo'] != '' ? $_POST['metodo_anticonceptivo'] : NULL;
+  $telefono = isset($_POST['telefono']) && $_POST['telefono'] != '' ? $_POST['telefono'] : NULL;
+  $celular = isset($_POST['celular']) && $_POST['celular'] != '' ? $_POST['celular'] : NULL;
+  $establecimiento = isset($_POST['establecimiento']) && $_POST['establecimiento'] != '' ? $_POST['establecimiento'] : NULL;
+  $region_sanitaria = isset($_POST['region_sanitaria']) && $_POST['region_sanitaria'] != '' ? $_POST['region_sanitaria'] : NULL;
+  $epitelio_escamoso = isset($_POST['epitelio_escamoso']) && $_POST['epitelio_escamoso'] != '' ? $_POST['epitelio_escamoso'] : NULL;
+
+  //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
+   //error_log(json_encode($_POST), 0);
+
+  $params = array(
+      "patient_id" => $patient_id,
+      "patient_name" => $patient_name,
+      "patient_last_name" => $patient_last_name,
+      "patient_ci" => $patient_ci,
+      "email" => $email,
+      "fecha_de_nacimiento" => $fecha_de_nacimiento,
+      "departamento" => $departamento,
+      "ciudad" => $ciudad,
+      "direccion" => $direccion,
+      "metodo_anticonceptivo" => $metodo_anticonceptivo,
+      "telefono" => $telefono,
+      "celular" => $celular,
+      "establecimiento" => $establecimiento,
+      "region_sanitaria" => $region_sanitaria,
+      "epitelio_escamoso" => $epitelio_escamoso
+      
+  );
+
+  if($patient_id === 'new'){
+    // $result = sw_create_patient($params);
+  }else{
+    // $result = sw_update_patient($params);
+  }
+
+  wp_die(json_encode($result));
+}
+add_action( 'wp_ajax_sw_delete_patient_ajax', 'sw_delete_patient_ajax');
+
 ?>
