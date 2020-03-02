@@ -16,6 +16,7 @@
   $diff = $today->diff($bday);
   //printf(' Edad : %d años, %d meses, %d dias', $diff->y, $diff->m, $diff->d);
   
+  //var_dump($patient_id);
 
  ?> 
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
@@ -34,7 +35,15 @@
           </div>
         </div>
         <div class="profile-card-about">
+          
+          
+          <form id="delete-patient-form" name="delete-patient-form" method="post" >
+          <input type="hidden" name="action" value="sw_delete_patient_ajax">
+          <input type="hidden" name="patient_id" value="<?= $patient_id?>">
+          </form>
+
           <h5 class="about-title separator-left">Acerca de <?php echo $name?></h5>
+
           <p class="about-content">
             <p><?php echo("Cedula : ".$cedula);?></p>
             <p><?php printf(' Edad : %d años, %d meses, %d dias', $diff->y, $diff->m, $diff->d); ?></p>
@@ -68,7 +77,7 @@
               <a href="<?php echo $edit_patient_url ?>">
 
                 <button id="edit-patient" class="submit_button save-button-expanded" type="submit" value="">
-                <i class="fas fa-save 2x"></i>  <span class="app-dashboard-sidebar-text"> Editar </span>
+                <i class="fas fa-edit 2x"></i>  <span class="app-dashboard-sidebar-text"> Editar </span>
                 </button>
 
               </a>
@@ -78,7 +87,7 @@
               </div>
               <div class="floated-label-wrapper large-6 columns text-center" style="padding-top: 1rem;">
               <button id="delete-patient" class="toggle-input submit_button save-button-expanded" type="submit" value="delete-patient">
-              <i class="fas fa-edit 2x"></i>  <span class="app-dashboard-sidebar-text"> Borrar </span>
+              <i class="fas fa-trash-alt 2x"></i>  <span class="app-dashboard-sidebar-text"> Borrar </span>
               </button>
               <p class="errorWrapper">
               </p>

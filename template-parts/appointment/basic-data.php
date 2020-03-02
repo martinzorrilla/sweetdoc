@@ -120,7 +120,7 @@
               <input type="tel" id="celular" name="celular" value="<?php echo $celular ?>" placeholder="Ingrese el numero de celular del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
-            <div class="floated-label-wrapper large-6 columns">
+            <div class="floated-label-wrapper large-6 columns end">
               <label for="establecimiento">Establecimiento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="establecimiento" name="establecimiento" value="<?php echo $establecimiento ?>" placeholder="Ingrese el establecimiento..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
