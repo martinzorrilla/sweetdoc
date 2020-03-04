@@ -68,7 +68,7 @@
           <div class="appform tabcontent">
             <?php hm_get_template_part('template-parts/appointment/colposcopia', ['colpo_post_id' => $colpo_post_id]); ?>
           </div>
-        </form>
+    </form>
   </div>
 
   <div class="button-div" style="margin-bottom:70px">

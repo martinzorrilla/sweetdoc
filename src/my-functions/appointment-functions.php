@@ -50,14 +50,48 @@
     
     $macroscopia = isset($_POST['macroscopia']) && $_POST['macroscopia'] != '' ? $_POST['macroscopia'] : NULL;
     $colposcopia = isset($_POST['colposcopia']) && $_POST['colposcopia'] != '' ? $_POST['colposcopia'] : NULL;
-    $epitelio_escamoso = isset($_POST['epitelio_escamoso']) && $_POST['epitelio_escamoso'] != '' ? $_POST['epitelio_escamoso'] : NULL;
     $evaluacion_general = isset($_POST['evaluacion_general']) && $_POST['evaluacion_general'] != '' ? $_POST['evaluacion_general'] : NULL;
+   
+    $motivo_inadecuada = isset($_POST['motivo_inadecuada']) && $_POST['motivo_inadecuada'] != '' ? $_POST['motivo_inadecuada'] : NULL;
+    $union_escamo_columnar = isset($_POST['union_escamo_columnar']) && $_POST['union_escamo_columnar'] != '' ? $_POST['union_escamo_columnar'] : NULL;
+    $zona_de_transformacion = isset($_POST['zona_de_transformacion']) && $_POST['zona_de_transformacion'] != '' ? $_POST['zona_de_transformacion'] : NULL;
     $colposcopicos_normales = isset($_POST['colposcopicos_normales']) && $_POST['colposcopicos_normales'] != '' ? $_POST['colposcopicos_normales'] : NULL;
-    $colposcopicos_anormales = isset($_POST['colposcopicos_anormales']) && $_POST['colposcopicos_anormales'] != '' ? $_POST['colposcopicos_anormales'] : NULL;
+    $colposcopicos_anormales_grado_1 = isset($_POST['colposcopicos_anormales_grado_1']) && $_POST['colposcopicos_anormales_grado_1'] != '' ? $_POST['colposcopicos_anormales_grado_1'] : NULL;
+    $colposcopicos_anormales_grado_2 = isset($_POST['colposcopicos_anormales_grado_2']) && $_POST['colposcopicos_anormales_grado_2'] != '' ? $_POST['colposcopicos_anormales_grado_2'] : NULL;
+    
+
+    $colposcopicos_anormales_no_especificos = isset($_POST['colposcopicos_anormales_no_especificos']) && $_POST['colposcopicos_anormales_no_especificos'] != '' ? $_POST['colposcopicos_anormales_no_especificos'] : NULL;
+    $colposcopicos_anormales_test_de_schiller = isset($_POST['colposcopicos_anormales_test_de_schiller']) && $_POST['colposcopicos_anormales_test_de_schiller'] != '' ? $_POST['colposcopicos_anormales_test_de_schiller'] : NULL;
+    $colposcopicos_anormales_ubicacion = isset($_POST['colposcopicos_anormales_ubicacion']) && $_POST['colposcopicos_anormales_ubicacion'] != '' ? $_POST['colposcopicos_anormales_ubicacion'] : NULL;
     $sospecha_de_invasion = isset($_POST['sospecha_de_invasion']) && $_POST['sospecha_de_invasion'] != '' ? $_POST['sospecha_de_invasion'] : NULL;
     $hallazgos_varios = isset($_POST['hallazgos_varios']) && $_POST['hallazgos_varios'] != '' ? $_POST['hallazgos_varios'] : NULL;
     $examen_de_vyv = isset($_POST['examen_de_vyv']) && $_POST['examen_de_vyv'] != '' ? $_POST['examen_de_vyv'] : NULL;
-    
+    $examen_de_vyv_descripcion = isset($_POST['examen_de_vyv_descripcion']) && $_POST['examen_de_vyv_descripcion'] != '' ? $_POST['examen_de_vyv_descripcion'] : NULL;
+
+
+    // motivo_inadecuada
+    // union_escamo_columnar
+    // zona_de_transformacion
+    // colposcopicos_normales
+    // colposcopicos_anormales_grado_1
+    // colposcopicos_anormales_grado_2
+    // colposcopicos_anormales_no_especificos
+    // colposcopicos_anormales_test_de_schiller
+    // colposcopicos_anormales_ubicacion
+    // sospecha_de_invasion
+    // hallazgos_varios
+    // examen_de_vyv
+    // examen_de_vyv_descripcion
+
+
+
+
+
+
+
+
+
+
 
     //wp_die(var_dump($_FILES));
     
@@ -96,13 +130,35 @@
         //colposcopia
         "macroscopia" => $macroscopia,
         "colposcopia" => $colposcopia,
-        "epitelio_escamoso" => $epitelio_escamoso,
         "evaluacion_general" => $evaluacion_general,
+        "motivo_inadecuada" => $motivo_inadecuada,
+        "union_escamo_columnar" => $union_escamo_columnar,
+        "zona_de_transformacion" => $zona_de_transformacion,
         "colposcopicos_normales" => $colposcopicos_normales,
-        "colposcopicos_anormales" => $colposcopicos_anormales,
+        "colposcopicos_anormales_grado_1" => $colposcopicos_anormales_grado_1,
+        "colposcopicos_anormales_grado_2" => $colposcopicos_anormales_grado_2,
+        "colposcopicos_anormales_no_especificos" => $colposcopicos_anormales_no_especificos,
+        "colposcopicos_anormales_test_de_schiller" => $colposcopicos_anormales_test_de_schiller,
+        "colposcopicos_anormales_ubicacion" => $colposcopicos_anormales_ubicacion,
         "sospecha_de_invasion" => $sospecha_de_invasion,
         "hallazgos_varios" => $hallazgos_varios,
-        "examen_de_vyv" => $examen_de_vyv
+        "examen_de_vyv" => $examen_de_vyv,
+        "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion
+
+
+        // motivo_inadecuada
+        // union_escamo_columnar
+        // zona_de_transformacion
+        // colposcopicos_normales
+        // colposcopicos_anormales_grado_1
+        // colposcopicos_anormales_grado_2
+        // colposcopicos_anormales_no_especificos
+        // colposcopicos_anormales_test_de_schiller
+        // colposcopicos_anormales_ubicacion
+        // sospecha_de_invasion
+        // hallazgos_varios
+        // examen_de_vyv
+        // examen_de_vyv_descripcion
 
     );
 
@@ -166,13 +222,22 @@ function sw_create_new_appointment($params){
     //colposcopia data
     $macroscopia = $params['macroscopia'];
     $colposcopia = $params['colposcopia'];
-    $epitelio_escamoso = $params['epitelio_escamoso'];
     $evaluacion_general = $params['evaluacion_general'];
+    $motivo_inadecuada = $params['motivo_inadecuada'];
+    $union_escamo_columnar = $params['union_escamo_columnar'];
+    $zona_de_transformacion = $params['zona_de_transformacion'];
     $colposcopicos_normales = $params['colposcopicos_normales'];
-    $colposcopicos_anormales = $params['colposcopicos_anormales'];
+    $colposcopicos_anormales_grado_1 = $params['colposcopicos_anormales_grado_1'];
+    $colposcopicos_anormales_grado_2 = $params['colposcopicos_anormales_grado_2'];
+    $colposcopicos_anormales_no_especificos = $params['colposcopicos_anormales_no_especificos'];
+    $colposcopicos_anormales_test_de_schiller = $params['colposcopicos_anormales_test_de_schiller'];
+    $colposcopicos_anormales_ubicacion = $params['colposcopicos_anormales_ubicacion'];
+    $examen_de_vyv_descripcion = $params['examen_de_vyv_descripcion'];
     $sospecha_de_invasion = $params['sospecha_de_invasion'];
     $hallazgos_varios = $params['hallazgos_varios'];
     $examen_de_vyv = $params['examen_de_vyv'];
+
+
 
     //$app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
 
@@ -274,13 +339,21 @@ function sw_create_new_appointment($params){
       $acf_fields = array(
             "macroscopia" => $macroscopia,
             "colposcopia" => $colposcopia,
-            "epitelio_escamoso" => $epitelio_escamoso,
             "evaluacion_general" => $evaluacion_general,
+            "motivo_inadecuada" => $motivo_inadecuada,
+            "union_escamo_columnar" => $union_escamo_columnar,
+            "zona_de_transformacion" => $zona_de_transformacion,
             "colposcopicos_normales" => $colposcopicos_normales,
-            "colposcopicos_anormales" => $colposcopicos_anormales,
+            "colposcopicos_anormales_grado_1" => $colposcopicos_anormales_grado_1,
+            "colposcopicos_anormales_grado_2" => $colposcopicos_anormales_grado_2,
+            "colposcopicos_anormales_no_especificos" => $colposcopicos_anormales_no_especificos,
+            "colposcopicos_anormales_test_de_schiller" => $colposcopicos_anormales_test_de_schiller,
+            "colposcopicos_anormales_ubicacion" => $colposcopicos_anormales_ubicacion,
             "sospecha_de_invasion" => $sospecha_de_invasion,
             "hallazgos_varios" => $hallazgos_varios,
-            "examen_de_vyv" => $examen_de_vyv
+            "examen_de_vyv" => $examen_de_vyv,
+            "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion
+
 
         );
 
@@ -378,13 +451,20 @@ function sw_update_single_appointment($params){
     $observaciones = $params['observaciones'];  
 
     //colposcopia data
-    $colpo_post_id  = $params["colpo_post_id"];
+    $colpo_post_id = $params['colpo_post_id'];
     $macroscopia = $params['macroscopia'];
     $colposcopia = $params['colposcopia'];
-    $epitelio_escamoso = $params['epitelio_escamoso'];
     $evaluacion_general = $params['evaluacion_general'];
+    $motivo_inadecuada = $params['motivo_inadecuada'];
+    $union_escamo_columnar = $params['union_escamo_columnar'];
+    $zona_de_transformacion = $params['zona_de_transformacion'];
     $colposcopicos_normales = $params['colposcopicos_normales'];
-    $colposcopicos_anormales = $params['colposcopicos_anormales'];
+    $colposcopicos_anormales_grado_1 = $params['colposcopicos_anormales_grado_1'];
+    $colposcopicos_anormales_grado_2 = $params['colposcopicos_anormales_grado_2'];
+    $colposcopicos_anormales_no_especificos = $params['colposcopicos_anormales_no_especificos'];
+    $colposcopicos_anormales_test_de_schiller = $params['colposcopicos_anormales_test_de_schiller'];
+    $colposcopicos_anormales_ubicacion = $params['colposcopicos_anormales_ubicacion'];
+    $examen_de_vyv_descripcion = $params['examen_de_vyv_descripcion'];
     $sospecha_de_invasion = $params['sospecha_de_invasion'];
     $hallazgos_varios = $params['hallazgos_varios'];
     $examen_de_vyv = $params['examen_de_vyv'];
@@ -466,13 +546,20 @@ function sw_update_single_appointment($params){
         $acf_fields = array(
           "macroscopia" => $macroscopia,
           "colposcopia" => $colposcopia,
-          "epitelio_escamoso" => $epitelio_escamoso,
           "evaluacion_general" => $evaluacion_general,
+          "motivo_inadecuada" => $motivo_inadecuada,
+          "union_escamo_columnar" => $union_escamo_columnar,
+          "zona_de_transformacion" => $zona_de_transformacion,
           "colposcopicos_normales" => $colposcopicos_normales,
-          "colposcopicos_anormales" => $colposcopicos_anormales,
+          "colposcopicos_anormales_grado_1" => $colposcopicos_anormales_grado_1,
+          "colposcopicos_anormales_grado_2" => $colposcopicos_anormales_grado_2,
+          "colposcopicos_anormales_no_especificos" => $colposcopicos_anormales_no_especificos,
+          "colposcopicos_anormales_test_de_schiller" => $colposcopicos_anormales_test_de_schiller,
+          "colposcopicos_anormales_ubicacion" => $colposcopicos_anormales_ubicacion,
           "sospecha_de_invasion" => $sospecha_de_invasion,
           "hallazgos_varios" => $hallazgos_varios,
-          "examen_de_vyv" => $examen_de_vyv        
+          "examen_de_vyv" => $examen_de_vyv,
+          "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion      
         );
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)
