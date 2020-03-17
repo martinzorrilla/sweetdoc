@@ -75,7 +75,7 @@
           </div>
         </div>
         <div class="profile-card-about">
-          <h5 class="about-title separator-left"> Ingresar datos de la Colposcopia <?php //echo $name?></h5>
+          <h5 class="about-title separator-left"> Datos de la Colposcopia <?php //echo $name?></h5>
 
           <!-- macroscopia -->
           <div class="floated-label-wrapper large-6 columns ">
@@ -489,56 +489,6 @@
             <input type="text" id="examen_de_vyv_descripcion" name="examen_de_vyv_descripcion" value="<?php echo $examen_de_vyv_descripcion ?>" placeholder="Escribir..." required>
           </div>
 
-          <!-- Testing the image uploader -->
-          <!-- 
-          <div class="floated-label-wrapper">
-
-          <input type="file" accepts="jpg,jpeg,png" name="profile_photo" id="profile_photo" class="inputfile" multiple style="opacity: 0;" />
-        
-          <label class="filelabel" for="file" style="border: 2px solid black;">
-          Choose file</label>
-          </div> 
-          -->
-          <!-- Testing the image uploader -->
-
-
-          <div class="archivos large-12 columns">
-          
-            <div class="profile-card-about">
-              <h5 class="about-title separator-left"> Ingresar imagenes de la colposcopia </h5>
-            </div>
-            <div class="subir-colpo test">
-              <label for="image_uploads">Seleccionar imagenes (png, jpg )</label>
-              <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
-            </div>
-
-            <?php 
-            //if ($image) { cerrar el php
-            if (sizeof($images_ids_array)>0) { ?>
-              <div class="preview test">
-              <ol>
-                <?php  
-                $k = 0; 
-                foreach ($images_array as $image) { ?>        
-                  <li>  
-                      <img class="image-class" alt="" src="<?php echo $image[0]; ?>" />
-                      <p>Nombre del archivo <?php echo $images_names[$k]; ?> </p>
-                  </li>
-                
-                <?php
-                $k++;
-                } ?>
-
-              </ol>
-              </div> <?php
-            }else{ ?>
-              <div class="preview no-files">
-                <p>No hay archivos seleccionados</p>
-              </div> <?php  
-            } 
-            ?>
-          </div> <!-- div.archivos -->
-        
         </div>
       </div>
     </div>

@@ -64,7 +64,7 @@
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
   <!-- <div class="tab white-tab"> -->
   <div class="tab">
-    <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
+    <button class="tablinks active" >Datos Básicos</button>
   </div>
 
   <!-- <div class="appform tabcontent white-tab"> -->
@@ -82,9 +82,9 @@
         
         <div class="profile-card-about static-data-slide">
           <h5 class="about-title separator-left"> Ingresar datos AGO <?php //echo $name?></h5>
-          <p class="about-content large-12 columns">
+          <!-- <p class="about-content large-12 columns">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet autem eveniet nulla quae ullam sit iure voluptatum, nesciunt voluptas perferendis, minus natus in quaerat?
-          </p>
+          </p> -->
 
           <!-- menarca -->
           <div class="floated-label-wrapper large-6 columns">

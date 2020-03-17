@@ -22,7 +22,7 @@
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
   <!-- <div class="tab white-tab"> -->
   <div class="tab">
-    <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
+    <button class="tablinks active">Datos Básicos</button>
   </div>
 
     <!-- <div class="appform tabcontent white-tab"> -->
@@ -49,7 +49,7 @@
             <p><?php printf(' Edad : %d años, %d meses, %d dias', $diff->y, $diff->m, $diff->d); ?></p>
           </p>
 
-          <br>
+          <!-- <br>
           <h5 class="about-title separator-left">Ultimo estudios</h5>
           
           <div class="row about-skills">
@@ -67,30 +67,25 @@
                 <li>Colposcopia</li>
               </ul>
             </div>
-          </div>
+          </div> -->
+
           <br>
           <h5 class="about-title separator-left">Editar paciente</h5>
 
             <div class="row">  
-              <div class="floated-label-wrapper large-6 columns text-center" style="padding-top: 1rem;">
-              
+              <div class="floated-label-wrapper large-6 medium-6 columns text-center" style="padding-top: 1rem;">
               <a href="<?php echo $edit_patient_url ?>">
-
                 <button id="edit-patient" class="submit_button save-button-expanded" type="submit" value="">
-                <i class="fas fa-edit 2x"></i>  <span class="app-dashboard-sidebar-text"> Editar </span>
+                  <i class="fas fa-edit 2x"></i>  <span class="app-dashboard-sidebar-text"> Editar </span>
                 </button>
-
               </a>
-
-              <p class="errorWrapper">
-              </p>
+  
               </div>
-              <div class="floated-label-wrapper large-6 columns text-center" style="padding-top: 1rem;">
-              <button id="delete-patient" class="toggle-input submit_button save-button-expanded" type="submit" value="delete-patient">
-              <i class="fas fa-trash-alt 2x"></i>  <span class="app-dashboard-sidebar-text"> Borrar </span>
-              </button>
-              <p class="errorWrapper">
-              </p>
+                <div class="floated-label-wrapper large-6 medium-6 columns text-center" style="padding-top: 1rem;">
+                  <button id="delete-patient" class="toggle-input submit_button save-button-expanded" type="submit" value="delete-patient">
+                    <i class="fas fa-trash-alt 2x"></i>  <span class="app-dashboard-sidebar-text"> Borrar </span>
+                  </button>
+                <p class="errorWrapper"></p>
               </div>
             </div>
 

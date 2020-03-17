@@ -569,18 +569,26 @@ function sw_update_single_appointment($params){
                 update_post_meta( $colpo_post_id, $field, $value );
         }
 
-        //test: empty all image fields before update
-        $image_fields = array(
-            "colpo_imagen_1" => "",         
-            "colpo_imagen_2" => "",         
-            "colpo_imagen_3" => "",         
-            "colpo_imagen_4" => "",         
-            "colpo_imagen_5" => ""         
-        );
-        foreach ($image_fields as $field => $value) {
-          update_post_meta( $colpo_post_id, $field, $value );
+        //test: empty all image fields before update. but only if image files has been selected to replace the old ones.
+        $update_colpo_images = false;
+        foreach ($_FILES as $file ) {
+          if($file['name'] != "") {
+            $update_colpo_images = true;
+            }
         }
 
+        if ($update_colpo_images) {         
+          $image_fields = array(
+              "colpo_imagen_1" => "",         
+              "colpo_imagen_2" => "",         
+              "colpo_imagen_3" => "",         
+              "colpo_imagen_4" => "",         
+              "colpo_imagen_5" => ""         
+          );
+          foreach ($image_fields as $field => $value) {
+            update_post_meta( $colpo_post_id, $field, $value );
+          }
+        }
         //file upload test
         $i = 1;   
         foreach ($_FILES as $file ) {

@@ -61,13 +61,9 @@
             <?php //hm_get_template_part('template-parts/appointment/common-data', ['appointment_id' => $appointment_id]); ?>
             <?php hm_get_template_part('template-parts/appointment/motivo-consulta', ['appointment_id' => $appointment_id]); ?>
           </fieldset>
-
-          <div class="tab">
-            <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
-          </div>
-          <div class="appform tabcontent">
+          
             <?php hm_get_template_part('template-parts/appointment/colposcopia', ['colpo_post_id' => $colpo_post_id]); ?>
-          </div>
+
     </form>
   </div>
 

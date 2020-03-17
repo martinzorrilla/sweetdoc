@@ -29,7 +29,7 @@
     //var_dump($images_ids_array);
 
     //$image_post_id = $colpo_data_post['colpo_imagen_1'][0];
-    $size = "large"; // (thumbnail, medium, large, full or custom size)
+    $size = "medium"; // (thumbnail, medium, large, full or custom size)
     $images_array = array();
     $images_names = array();
     for ($i=0; $i < sizeof($images_ids_array); $i++) {
@@ -62,8 +62,10 @@
 
   </style>
 
+  <div class="callout secondary">
+    <h3 style="text-align: center; margin-left: 50px;">Colposcopia del Paciente</h3>
+  </div>      
 
-<h1 style="text-align: center; margin-left: 50px;">Colposcopia del PacienteX</h1>
 
 <?php 
   //como prueba de concepto. si el usuario es doctor muestra estos campos si no, no
@@ -73,43 +75,20 @@ $result = sw_get_current_user_role();
 //en produccion: verificar que el usuario sea doctor
 //if($result == "doctor"){
 if(true){
-  hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
+  //hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
+  hm_get_template_part('template-parts/appointment/colposcopia-no-img', ['colpo_post_id' => $colpo_post_id]);
+
 ?>
-
-
-<div class="card profile-card-action-icons">
-  <div class="card-section">
-    <div class="profile-card-header">
-      <div class="profile-card-avatar">
-        <img class="avatar-image" src="<?php bloginfo('template_url')?>/src/assets/images/pepaicon.jpg" alt="Peppa Pig">
-      </div>
-      <div class="profile-card-author">
-        <h5 class="author-title">Colposcopia</h5>
-        <p class="author-description">Paciente</p>
-      </div>
-    </div>
-    <div class="profile-card-about">
-      <h5 class="about-title separator-left">Aca van los campos de la Colposcopia <?php //echo $name?></h5>
-      <p class="about-content">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet autem eveniet nulla quae ullam sit iure voluptatum, nesciunt voluptas perferendis, minus natus in quaerat?
-      </p>
-
-      <div class="floated-label-wrapper">
-        <label for="macroscopia">Macroscopia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <input type="text" id="macroscopia" name="macroscopia" value="<?php echo $macroscopia ?>" placeholder="Type..." readonly="readonly">
-      </div>
-    
-    </div>
-  </div>
-</div>
 
 
 <!-- imagenes -->
 
 <div class="colpo-imagenes">
-      
-          <h4>Imagenes</h4>
 
+  <div class="callout secondary" style="margin-top:50px; margin-bottom:50px;">
+    <h3 style="text-align: center;">Imágenes</h3>
+  </div>      
+  
         <?php 
         //if ($image) { cerrar el php
         if (sizeof($images_ids_array)>0) { ?>
@@ -125,11 +104,9 @@ if(true){
               <div class="card profile-card-action-icons">
                 <div class="card-section">
                   <div class="profile-card-header">
-                    <div class="profile-card-avatar">
-                      <img class="avatar-image" src="<?php bloginfo('template_url')?>/src/assets/images/pepaicon.jpg" alt="Peppa Pig">
-                    </div>
+                    
                     <div class="profile-card-author">
-                      <h5 class="author-title">Imagen</h5>
+                      <!-- <h5 class="author-title">Imagen</h5> -->
                       <!-- <p class="author-description">Paciente</p> -->
                     </div>
                   </div>
