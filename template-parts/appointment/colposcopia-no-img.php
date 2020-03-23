@@ -3,6 +3,8 @@
     $colpo_data_post = get_post_custom($colpo_post_id);
     //var_dump($colpo_data_post);
     //load all the data we need from the colpscopy post-------
+    $is_editable = $template_args["is_editable"];
+    
   
     //image files
     //store the ids of the images post
@@ -80,7 +82,7 @@
           <!-- macroscopia -->
           <div class="floated-label-wrapper large-6 columns ">
             <label class="separator-left" for="macroscopia">Macroscopia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="macroscopia" name="macroscopia" value="<?php echo $macroscopia ?>" placeholder="Escribir..." required>
+            <input type="text" id="macroscopia" name="macroscopia" value="<?php echo $macroscopia ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
           </div>
 
           <!-- colposcopia -->

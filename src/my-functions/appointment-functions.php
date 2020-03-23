@@ -61,12 +61,14 @@
     
 
     $colposcopicos_anormales_no_especificos = isset($_POST['colposcopicos_anormales_no_especificos']) && $_POST['colposcopicos_anormales_no_especificos'] != '' ? $_POST['colposcopicos_anormales_no_especificos'] : NULL;
-    $colposcopicos_anormales_test_de_schiller = isset($_POST['colposcopicos_anormales_test_de_schiller']) && $_POST['colposcopicos_anormales_test_de_schiller'] != '' ? $_POST['colposcopicos_anormales_test_de_schiller'] : NULL;
     $colposcopicos_anormales_ubicacion = isset($_POST['colposcopicos_anormales_ubicacion']) && $_POST['colposcopicos_anormales_ubicacion'] != '' ? $_POST['colposcopicos_anormales_ubicacion'] : NULL;
     $sospecha_de_invasion = isset($_POST['sospecha_de_invasion']) && $_POST['sospecha_de_invasion'] != '' ? $_POST['sospecha_de_invasion'] : NULL;
     $hallazgos_varios = isset($_POST['hallazgos_varios']) && $_POST['hallazgos_varios'] != '' ? $_POST['hallazgos_varios'] : NULL;
     $examen_de_vyv = isset($_POST['examen_de_vyv']) && $_POST['examen_de_vyv'] != '' ? $_POST['examen_de_vyv'] : NULL;
     $examen_de_vyv_descripcion = isset($_POST['examen_de_vyv_descripcion']) && $_POST['examen_de_vyv_descripcion'] != '' ? $_POST['examen_de_vyv_descripcion'] : NULL;
+    $colposcopicos_anormales_test_de_schiller = isset($_POST['colposcopicos_anormales_test_de_schiller']) && $_POST['colposcopicos_anormales_test_de_schiller'] != '' ? $_POST['colposcopicos_anormales_test_de_schiller'] : NULL;
+    $test_de_schiller_lugol = isset($_POST['test_de_schiller_lugol']) && $_POST['test_de_schiller_lugol'] != '' ? $_POST['test_de_schiller_lugol'] : NULL;
+    $sugerencias = isset($_POST['sugerencias']) && $_POST['sugerencias'] != '' ? $_POST['sugerencias'] : NULL;
 
 
     // motivo_inadecuada
@@ -76,12 +78,14 @@
     // colposcopicos_anormales_grado_1
     // colposcopicos_anormales_grado_2
     // colposcopicos_anormales_no_especificos
-    // colposcopicos_anormales_test_de_schiller
     // colposcopicos_anormales_ubicacion
     // sospecha_de_invasion
     // hallazgos_varios
     // examen_de_vyv
     // examen_de_vyv_descripcion
+    // colposcopicos_anormales_test_de_schiller
+    // test_de_schiller_lugol
+    // sugerencias
 
 
 
@@ -138,12 +142,14 @@
         "colposcopicos_anormales_grado_1" => $colposcopicos_anormales_grado_1,
         "colposcopicos_anormales_grado_2" => $colposcopicos_anormales_grado_2,
         "colposcopicos_anormales_no_especificos" => $colposcopicos_anormales_no_especificos,
-        "colposcopicos_anormales_test_de_schiller" => $colposcopicos_anormales_test_de_schiller,
         "colposcopicos_anormales_ubicacion" => $colposcopicos_anormales_ubicacion,
         "sospecha_de_invasion" => $sospecha_de_invasion,
         "hallazgos_varios" => $hallazgos_varios,
         "examen_de_vyv" => $examen_de_vyv,
-        "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion
+        "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion,
+        "colposcopicos_anormales_test_de_schiller" => $colposcopicos_anormales_test_de_schiller,
+        "test_de_schiller_lugol" => $test_de_schiller_lugol,
+        "sugerencias" => $sugerencias
 
 
         // motivo_inadecuada
@@ -153,12 +159,14 @@
         // colposcopicos_anormales_grado_1
         // colposcopicos_anormales_grado_2
         // colposcopicos_anormales_no_especificos
-        // colposcopicos_anormales_test_de_schiller
         // colposcopicos_anormales_ubicacion
         // sospecha_de_invasion
         // hallazgos_varios
         // examen_de_vyv
         // examen_de_vyv_descripcion
+        // colposcopicos_anormales_test_de_schiller
+        // test_de_schiller_lugol
+        // sugerencias
 
     );
 
@@ -230,13 +238,14 @@ function sw_create_new_appointment($params){
     $colposcopicos_anormales_grado_1 = $params['colposcopicos_anormales_grado_1'];
     $colposcopicos_anormales_grado_2 = $params['colposcopicos_anormales_grado_2'];
     $colposcopicos_anormales_no_especificos = $params['colposcopicos_anormales_no_especificos'];
-    $colposcopicos_anormales_test_de_schiller = $params['colposcopicos_anormales_test_de_schiller'];
     $colposcopicos_anormales_ubicacion = $params['colposcopicos_anormales_ubicacion'];
     $examen_de_vyv_descripcion = $params['examen_de_vyv_descripcion'];
     $sospecha_de_invasion = $params['sospecha_de_invasion'];
     $hallazgos_varios = $params['hallazgos_varios'];
-    $examen_de_vyv = $params['examen_de_vyv'];
-
+    $examen_de_vyv = $params['examen_de_vyv'];    
+    $colposcopicos_anormales_test_de_schiller = $params['colposcopicos_anormales_test_de_schiller'];
+    $test_de_schiller_lugol = $params['test_de_schiller_lugol'];
+    $sugerencias = $params['sugerencias'];
 
 
     //$app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
@@ -352,9 +361,12 @@ function sw_create_new_appointment($params){
             "sospecha_de_invasion" => $sospecha_de_invasion,
             "hallazgos_varios" => $hallazgos_varios,
             "examen_de_vyv" => $examen_de_vyv,
-            "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion
+            "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion,
+            "test_de_schiller_lugol" => $test_de_schiller_lugol,
+            "sugerencias" => $sugerencias
 
-
+        // test_de_schiller_lugol
+        // sugerencias
         );
 
         foreach ($acf_fields as $field => $value) {
@@ -468,6 +480,8 @@ function sw_update_single_appointment($params){
     $sospecha_de_invasion = $params['sospecha_de_invasion'];
     $hallazgos_varios = $params['hallazgos_varios'];
     $examen_de_vyv = $params['examen_de_vyv'];
+    $test_de_schiller_lugol = $params['test_de_schiller_lugol'];
+    $sugerencias = $params['sugerencias'];
 
     if ($app_id != NULL && $app_id != '') {
 
@@ -559,7 +573,9 @@ function sw_update_single_appointment($params){
           "sospecha_de_invasion" => $sospecha_de_invasion,
           "hallazgos_varios" => $hallazgos_varios,
           "examen_de_vyv" => $examen_de_vyv,
-          "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion      
+          "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion,
+          "test_de_schiller_lugol" => $test_de_schiller_lugol,
+          "sugerencias" => $sugerencias      
         );
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)

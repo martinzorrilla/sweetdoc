@@ -111,11 +111,6 @@
         fileInput.addEventListener('change', updateImageDisplay);
 
 
-        //to toggle slide of the private data section in appointment page
-        $(".static-data-click-to-show").click(function(){
-            $(".static-data-slide").slideToggle( "slow" );
-        });
-
 
         createAppBtn.on("click", function (e) {
           //get_checkbox_values();

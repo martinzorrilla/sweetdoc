@@ -1,12 +1,13 @@
 <?php get_header();?>
 
 <?php
-  $colposcopy_pdf_url = home_url().'/pdf-colpo/?colpo_id='; 
   //the id of the post in the current loop. witch is the patient
   $post_id = get_the_ID(); 
   //echo $post_id;
   $colpo_data_post = get_post_custom($post_id);
+  $colposcopy_pdf_url = home_url()."/pdf-colpo/?colpo_id=".$post_id; 
   //var_dump($colpo_data_post);
+  $is_editable = "false";
 
   $patient_id = $colpo_data_post['colpo_related_patient'][0]; 
   //var_dump($patient_id);
@@ -42,7 +43,7 @@
 
 
   //actual data of the colposcopy
-  $macroscopia = $colpo_data_post['macroscopia'][0];
+  //$macroscopia = $colpo_data_post['macroscopia'][0];
 ?>
 
   <style>
@@ -76,7 +77,7 @@ $result = sw_get_current_user_role();
 //if($result == "doctor"){
 if(true){
   //hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
-  hm_get_template_part('template-parts/appointment/colposcopia-no-img', ['colpo_post_id' => $colpo_post_id]);
+  hm_get_template_part('template-parts/appointment/colposcopia-no-img', ['colpo_post_id' => $colpo_post_id, 'is_editable' => $is_editable ]);
 
 ?>
 
@@ -136,11 +137,9 @@ if(true){
       </div> <!-- div.archivos -->
 
   <div class="button-div">
-
     <a href="<?php echo esc_url( $colposcopy_pdf_url ).$r; ?>" target="_blank" 
-      <button id="create-colposcopy-pdf" class="save-button-expanded" type="submit" value="Next">Generar Colposcopia PDF</button>
-    </a>
-    
+      <button id="create-colposcopy-pdf" class="save-button-expanded" type="submit" value="Next">Generar informe colposcopico</button>
+    </a>  
     <p class="errorWrapper"></p>
   </div>
 
