@@ -14,26 +14,47 @@ function Header()
 
 
     $this->SetFont('Arial','B',15);
+    $this->Ln(30);
     $w = $this->GetStringWidth($title)+6;
     $this->SetX((210-$w)/2);
     $this->SetDrawColor(157,165,170); 
     $this->SetFillColor(255, 255, 255);
     $this->SetTextColor(0,0,0);
     $this->SetLineWidth(1);
-    //$this->Ln(40);
-    $this->Cell($w,9,$title,1,1,'C',true);
-    $this->Ln(10);
+    //$this->Cell($w,9,$title,1,1,'C',true);
+    $this->Ln(20);
     // Guardar ordenada
     $this->y0 = $this->GetY();
 }
 
+// function Footer()
+// {
+//     // Pie de página
+//     $this->SetY(-15);
+//     $this->SetFont('Arial','I',8);
+//     $this->SetTextColor(128);
+//     $this->Cell(0,10,'Dra. Andrea Zorrilla - Pagina '.$this->PageNo(),0,0,'C');
+// }
+
 function Footer()
 {
     // Pie de página
-    $this->SetY(-15);
-    $this->SetFont('Arial','I',8);
-    $this->SetTextColor(128);
-    $this->Cell(0,10,'Dra. Andrea Zorrilla - Pagina '.$this->PageNo(),0,0,'C');
+    $this->SetY(-45);
+//    $this->SetFont('Arial','I',8);
+    $this->SetFont('Times','',12);
+
+    //$this->SetTextColor(128);
+    $this->SetX(110);
+    $this->Cell(0,12,'...............................................',0,2);
+    $this->SetX(118);
+    $this->Cell(0,5,'Dra. Andrea Zorrilla',0,2);
+    $this->SetX(114);
+    $this->Cell(0,5,utf8_decode('Ginecología y Obstetricia'),0,2);
+    $this->SetX(106);
+    $this->Cell(0,5,utf8_decode('Especialista en TGI y colposcopia'),0,2);
+    $this->SetX(125);
+    $this->Cell(0,5,utf8_decode('RP: 11.220'),0,2);
+    $this->SetX(0);
 }
 
 function SetCol($col)
@@ -72,8 +93,8 @@ function ChapterTitle($num, $label)
     // Título
     $this->SetFont('Arial','',12);
     $this->SetFillColor(200,220,255);
-    $this->Cell(0,6,"PARTE $num : $label",0,1,'L',true);
-    // $this->Cell(0,6,"$label",0,1,'L',true);
+    //$this->Cell(0,6,"PARTE $num : $label",0,1,'L',true);
+    $this->Cell(0,6,"$label",0,1,'C',true);
     $this->Ln(4);
     // Guardar ordenada
     $this->y0 = $this->GetY();
@@ -170,6 +191,19 @@ function PrintElement($num, $title, $file)
     }
 }
 
+function PrintSecondaryTitle($num, $title, $file)
+{
+        
+        // Fuente
+        $this->SetFont('Times','B',12);
+        // Imprimir texto en una columna de 6 cm de ancho (si el valor es 60)
+        $this->MultiCell(190,7,$title);
+        //$this->Cell(0,5,$txt);
+        //$this->Ln();
+        // Guardar ordenada
+        $this->y0 = $this->GetY();
+}
+
 function PrintArray($num, $title, $array)
 {
 
@@ -212,13 +246,12 @@ function PrintEvaluacionGeneral($num, $radiobox_evaluacion_general, $checkbox_mo
         //$pdf->PrintElement(2,$title,$arrayToString);
     }
     
-    $txt = " - Evaluacion general: ".$radiobox_evaluacion_general.$arrayToString;;
-    // Fuente
-    $this->SetFont('Times','',12);
-    // Imprimir texto en una columna de 6 cm de ancho (si el valor es 60)
-    $this->MultiCell(190,7,$txt);
-
-    $this->y0 = $this->GetY();
+    if (!empty($radiobox_evaluacion_general)) {
+        $txt = " - Evaluacion general: ".$radiobox_evaluacion_general.$arrayToString;;
+        $this->SetFont('Times','',12);
+        $this->MultiCell(190,7,$txt);
+        $this->y0 = $this->GetY();
+    }
 }
 
 
@@ -230,7 +263,8 @@ function PrintImage($num, $eje_y, $file)
 function CheckPageSpaceLeft($page_height, $current_y)
 {
     //$this->GetPageHeight();
-    $espacio_min_inferior = 100;
+    $espacio_min_inferior = 115;
+    //$espacio_min_inferior = 95;
     $space_left = $page_height - $current_y;
     if ($space_left < $espacio_min_inferior) {
         $this->AddPage();
@@ -251,6 +285,18 @@ $name = $patient_fields['nombre'][0];
 $lastname = $patient_fields['apellido'][0];
 $cedula = $patient_fields['cedula'][0];
 $fullname = $name.' '.$lastname;
+$fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
+//$bday = new DateTime('23.8.1988'); // Your date of birth
+$bday = new Datetime(date('d.m.y'));
+if ($fecha_de_nacimiento != ""){ $bday = new Datetime(date('d.m.y', strtotime($fecha_de_nacimiento)));}
+$today = new Datetime(date('d.m.y'));
+$diff = $today->diff($bday);
+$edad_paciente = $diff->y;
+$creation_date = get_the_date( 'd-m-Y', $colpo_post_id ); //fecha de creacion de colpo puede no ser == a fecha de la consulta debido a que se puede crear una consulta sin colpo y luego editar
+$datos_personales = $fullname."        Edad: ".$edad_paciente."        Ci: ".$cedula."        Fecha: ".$creation_date;
+//$datos_personales1 = $fullname."                        Edad: ".$edad_paciente;
+//$datos_personales2 = $cedula."                        Fecha de consulta: ".$creation_date;
+
 
 $macroscopia = $colpo_data_post['macroscopia'][0];
 $colposcopia = $colpo_data_post['colposcopia'][0];
@@ -271,12 +317,10 @@ $examen_de_vyv_descripcion = $colpo_data_post['examen_de_vyv_descripcion'][0];
 $radiobox_colposcopicos_anormales_test_de_schiller = get_field('colposcopicos_anormales_test_de_schiller', $colpo_post_id);
 $checkbox_test_de_schiller_lugol = get_field('test_de_schiller_lugol', $colpo_post_id);
 $sugerencias = $colpo_data_post['sugerencias'][0];
-//$indicaciones = "indicaciones de la colpo";
-//$medicamentos = "medicamentos de la colpo";
 //wp_die(var_dump($checkbox_motivo_inadecuada));
 
 
-//get images ----------------------------------------------------------------
+//Get images ----------------------------------------------------------------
 //image files
 //store the ids of the images post
 $max_images = 5;
@@ -313,18 +357,23 @@ $pdf = new PDF();
 $pdf->SetAutoPageBreak(true, 0);
 $pdf->SetAuthor('Dra. Andrea Zorrilla');
 $title = 'Informe Colposcopico';
+//$title = $fullname;
 //$pdf->SetTitle($title);
 
 $pdf->AddPage();
 $page_height = $pdf->GetPageHeight();
-$pdf->PrintSection(1,'HALLAZGOS', $fullname);
+$pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
+$pdf->PrintElement(2,utf8_decode(' - Nombre'),$datos_personales);
+
+$pdf->Ln(4);
+$pdf->PrintSection(2,'HALLAZGOS', $fullname);
 $pdf->PrintElement(2,' - Macroscopia',$macroscopia);
 $pdf->PrintElement(2,' - Colposcopia',$colposcopia);
 $pdf->PrintEvaluacionGeneral(2,$radiobox_evaluacion_general,$checkbox_motivo_inadecuada);
 $pdf->PrintElement(2,utf8_decode(' - Visibilidad de la unión escamo columnar'),$radiobox_union_escamo_columnar);
 $pdf->PrintElement(2,utf8_decode(' - Tipo de zona de transformación'), str_replace("_", " ", $radiobox_zona_de_transformacion));
 $pdf->PrintArray(2,utf8_decode(' - Hallazgos colposcopicos normales'),$checkbox_colposcopicos_normales);
-$pdf->PrintElement(2,utf8_decode(' - Hallazgos colposcopicos anormales'), str_replace("_", " ", ""));
+$pdf->PrintSecondaryTitle(2,utf8_decode(' - Hallazgos colposcopicos anormales'), "");
 $pdf->PrintArray(2,utf8_decode(' - Grado 1'),$checkbox_colposcopicos_anormales_grado_1);
 $pdf->PrintArray(2,utf8_decode(' - Grado 2'),$checkbox_colposcopicos_anormales_grado_2);
 $pdf->PrintArray(2,utf8_decode(' - No especificos'),$checkbox_colposcopicos_anormales_no_especificos);
@@ -332,23 +381,10 @@ $pdf->PrintElement(2,utf8_decode(' - Ubicación'), str_replace("_", " ", $colpos
 $pdf->PrintArray(2,utf8_decode(' - Sospecha de invasión'),$checkbox_sospecha_de_invasion);
 $pdf->PrintArray(2,utf8_decode(' - Hallazgos varios'),$checkbox_hallazgos_varios);
 $pdf->PrintArray(2,utf8_decode(' - Exámen de vulva y vagina'),$checkbox_examen_de_vyv);
-
 $pdf->PrintElement(2,utf8_decode(' - Descripción del exámen'),$examen_de_vyv_descripcion);
 $pdf->PrintElement(2,utf8_decode(' - Test de Schiller '),$radiobox_colposcopicos_anormales_test_de_schiller);
 $pdf->PrintArray(2,utf8_decode(' - Lugol'),$checkbox_test_de_schiller_lugol);
 $pdf->PrintElement(2,utf8_decode(' - Sugerencias'),$sugerencias);
-
-// $pdf->PrintElement(2,' - page_height',$page_height);
-//  $pdf->PrintElement(2,' - Indicaciones1',$indicaciones);
-//  $pdf->PrintElement(2,' - Indicaciones2',$indicaciones);
-//  $pdf->PrintElement(2,' - Indicaciones3',$indicaciones);
-//  $pdf->PrintElement(2,' - Indicaciones4',$indicaciones);
-//  $pdf->PrintElement(2,' - Indicaciones5',$indicaciones);
-// $pdf->PrintElement(2,' - Indicaciones6',$indicaciones);
-// $pdf->PrintElement(2,' - Indicaciones7',$indicaciones);
-// $pdf->PrintElement(2,' - Indicaciones8',$indicaciones);
-// $pdf->PrintElement(2,' - Indicaciones9',$indicaciones);
-// $pdf->PrintElement(2,' - Indicaciones10',$indicaciones);
 
 //El autoPagaBreak esta desactivado y lo hago manualmente para la seccion de imagenes. esi implica que si el texto de la seccion hallazgos es muy larga no hara el salto de pagian automaticamente
 //$pdf->AddPage();
@@ -362,8 +398,8 @@ if (sizeof($images_ids_array)>0) {
         if ($k == 0 || $k == 2) {
             $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY());
             if ($k == 0) {
-                $pdf->Ln(10);
-                $pdf->PrintSection(2,'IMAGENES', $fullname);
+                $pdf->Ln(6);
+                $pdf->PrintSection(3,utf8_decode(' IMÁGENES'), $fullname);
             }   
             $custom_y = $pdf->GetY(); 
         }

@@ -80,82 +80,22 @@
 
     function init(){
       $(document).ready(function () {
-        //dom queries 
-        //OrgTypeDropdown = $('.org-type-dropdown select');
-        //rolesDropdown = $('.role-type-dropdown select');
+
         createPrescriptionBtn = $("#create-prescription");
         createPrescriptionForm = $("#create-prescription-form");
         createPrescriptionClose = $("#create-prescription-close");
 
-        //console.log("createProfileForm", createAppointmentForm);
 
-        //added
-        //myInputFile = $(".filelabel");
-        //myFile = $("#profile_photo");
-
-        //to toggle slide of the private data section in appointment page
-        /*$(".static-data-click-to-show").click(function(){
-            $(".static-data-slide").slideToggle( "slow" );
-        });*/
-
-        //define events
-/*        OrgTypeDropdown.on("change", function () {
-          onDropdownChange($(this));
-        });*/
 
         createPrescriptionBtn.on("click", function (e) {
           createPrescriptionBtn.fadeOut( "slow" );
           //saveProfileData(e);
         })
 
-/*        createProfileClose.on("click" ,function (e) {
-          oncreateAppBtnClose();
-        })
-
-        //added
-        myInputFile.on("click" ,function (e) {
-          onUploadFile();
-        })
-
-        myFile.on("change" ,function (e) {
-          onFileChange(e);
-        })*/
-
 
       });
     }
 
-/*    function oncreateAppBtnClose() {
-      $('#interests').foundation('open');
-    }
-
-    function onDropdownChange(OrgDrop) {
-      var rolesDropdownContainer = $(".create-div .roles-dropdown-container");
-      var spinnerIcon = $(".create-div .roles-dropdown-container .roles-dropdown-spinner-icon");
-      var selected = OrgDrop.find(":selected").text();
-      var params = { action: "get_roles_options", selected: selected };
-
-      spinnerIcon.attr("loading", true);
-      rolesDropdownContainer.attr("dropdown-disabled", true);
-
-      $.get(window.homeUrl + "/wp-admin/admin-ajax.php", params, function(data){
-        var results = JSON.parse(data);
-
-        $(rolesDropdown).html("");
-        $(rolesDropdown).append("<option value='*' selected='selected'>Select Your Role</option>");
-
-        for (var i = 0; i < results.length; i++) {
-          $(rolesDropdown).append("<option value='"+results[i].term_id+"'>"+results[i].name+"</option>");
-        }
-
-        spinnerIcon.attr("loading", false);
-        if(selected !== "Select Organization Type"){
-          rolesDropdownContainer.attr("dropdown-disabled", false);
-        }
-
-        $(rolesDropdown).trigger("liszt:updated");
-      });
-    }*/
 
     function populateFormData() {
       //var inputs = createAppointmentForm.serializeArray();
@@ -165,14 +105,6 @@
 
 
       console.log("serializedInputs", serializedInputs);
-
-      /*$.each(inputs.filter('[type="file"]'), function (i, element) {
-        var input = $(element)[0].files;
-        $.each(input, function (j, file) {
-          //console.log("file", file);
-          formData.append(file.name, file);
-        });
-      });*/
 
       $.each(serializedInputs, function (i, element) {
         formData.append(element.name, element.value);
@@ -232,21 +164,6 @@
       });
     }
 
-   /* function onUploadFile() {
-      $("#profile_photo").trigger("click");
-    }
-
-    function onFileChange(e) {
-      //$( "div#success span.user-email" ).html(reset_pass);
-      var fileName = '';
-
-      //fileName =  $('#profile_photo').val();
-      
-      let file = $("#profile_photo")[0].files[0]; 
-
-      //$( "p.filetext" ).html("File changed");
-      $( "p.filetext" ).html(file.name);
-    }*/
 
   return{
     init:init
