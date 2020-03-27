@@ -13,6 +13,7 @@ import Foundation from 'foundation-sites';
 //import './lib/custom';
 import './components/buttons';
 import './my-custom-js/create-patient';
+import './my-custom-js/create-indication';
 import './my-custom-js/globals-module';
 
 $(document).foundation();

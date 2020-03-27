@@ -11,7 +11,7 @@
       //wp_redirect('http://example.com/'); exit;
    }
   
-  //The patient id is send from patients-all through the url so we grab here with $_GET
+  //The patient id is sent from patients-all through the url so we grab here with $_GET
   $patient_id = $_GET['patient_id'];
   $app_id =  $_GET['app_id'];
   $app_creation_date = get_the_date( 'd-M-Y', $app_id );

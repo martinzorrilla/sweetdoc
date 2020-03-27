@@ -3,14 +3,15 @@
 <?php
   
   $prescription_pdf_url = home_url().'/test';
+
   //check permissions for the user
   //this page should be visible only for a doctor role. else redirect to home page
-  $the_role = sw_get_current_user_role();
-  
-  //if($the_role != "doctor"){
-  if(false){
-    wp_redirect(home_url());
-  }
+  $the_role = sw_get_current_user_role(); // antes usaba esta funcion pero puedo hacer lo mismo con 'current_user_can()'
+   if(!current_user_can('doctor') && !current_user_can('administrator')){
+     echo "El usuario no es doctor o admin. no puede ver esta pagina";
+      //wp_redirect( esc_url( wp_login_url() ), 307);
+      //wp_redirect('http://example.com/'); exit;
+   }
   
   //The patient id is send from patients-all through the url so we grab here with $_GET
   $patient_id = $_GET['patient_id'];
