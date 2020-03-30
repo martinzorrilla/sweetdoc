@@ -1,8 +1,8 @@
 <?php get_header();/* Template Name: Create Indication*/?>
 <?php 
   //retreive data from the url
-  //$patient_id = "new";
-  $patient_id = $_GET['patient_id'];
+  $patient_id = "new";
+  //$patient_id = $_GET['patient_id'];
   $app_id =  $_GET['app_id'];
   //si el parametro patient_id == new, el formulario debe ser editable por defecto, si no debe no ser editable
   $is_editable = $patient_id == "new" ? "true" : "false";
@@ -15,7 +15,7 @@
   <h3> <?= $title ?> </h3>
 </div>
 
-<?php hm_get_template_part('template-parts/indication/indication-data', ['patient_id' => $patient_id, 'app_id' => $app_id, 'is_editable' => $is_editable ]); ?>
+<?php hm_get_template_part('template-parts/indication/indication-data', ['app_id' => $app_id, 'is_editable' => $is_editable ]); ?>
 
 <!-- if(role == doctor){ show AGO form} -->
 

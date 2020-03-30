@@ -12,7 +12,7 @@ function sw_create_indication_ajax(){
 
     $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
     //$result = [];
-    $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
+    //$patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
     $app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
     
     $rp = isset($_POST['rp']) && $_POST['rp'] != '' ? $_POST['rp'] : NULL;
@@ -22,7 +22,7 @@ function sw_create_indication_ajax(){
      //error_log(json_encode($_POST), 0);
 
     $params = array(
-        "patient_id" => $patient_id,
+        //"patient_id" => $patient_id,
         "app_id" => $app_id,
         "rp" => $rp,
         "indicaciones" => $indicaciones
