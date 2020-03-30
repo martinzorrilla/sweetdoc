@@ -1,4 +1,4 @@
-<?php get_header();/* Template Name: Create Indication*/?>
+<?php get_header();?>
 <?php 
   //retreive data from the url
   //$patient_id = "new";

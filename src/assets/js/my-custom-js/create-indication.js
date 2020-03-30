@@ -3,11 +3,11 @@ var CreateIndicationModule = function(){
     //global vars
     var $ = jQuery;
     
-    var createPatientBtn;
+    var createIndicationBtn;
     var editPatientBtn;
     var deletePatientBtn;
     
-    var createPatientForm;
+    var createIndicationForm;
     var deletePatientForm;
 
 
@@ -17,16 +17,16 @@ var CreateIndicationModule = function(){
         
         //createProfileClose = $("#create-profile-close");
         
-        createPatientBtn = $("#create-patient");
+        createIndicationBtn = $("#create-indication");
         deletePatientBtn = $("#delete-patient");
         editPatientBtn = $("#toggle-input");
         
-        createPatientForm = $("#create-patient-form");
+        createIndicationForm = $("#create-indication-form");
         deletePatientForm = $("#delete-patient-form");
 
-        createPatientBtn.on("click", function (e) {
-          createPatientBtn.fadeOut( "slow" );
-          // alert("se creara un paciente nuevo");
+        createIndicationBtn.on("click", function (e) {
+          createIndicationBtn.fadeOut( "slow" );
+           alert("se creara una nueva indicacion");
           saveProfileData(e);
         })
 
@@ -53,7 +53,7 @@ var CreateIndicationModule = function(){
       //alert("Se guardaran los datos");
       var $ = jQuery;
       //var myData = createPatientForm.serialize() + '&patient_id=' + '<?php echo $patient_id ?>';
-      var myData = createPatientForm.serialize();
+      var myData = createIndicationForm.serialize();
       
       $.ajax({
         type: "POST",
@@ -84,7 +84,7 @@ var CreateIndicationModule = function(){
           }
         },
         error: function() {
-            alert('error handling here');
+            alert('error handling the indication creation');
         }
       });// $.ajax
     }

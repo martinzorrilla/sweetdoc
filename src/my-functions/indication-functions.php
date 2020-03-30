@@ -8,80 +8,49 @@
 ********************************************************************************
 */
 
-function sw_create_patient_ajax(){
+function sw_create_indication_ajax(){
 
     $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
     //$result = [];
     $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
+    $app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
     
-    $patient_name = isset($_POST['patient_name']) && $_POST['patient_name'] != '' ? $_POST['patient_name'] : NULL;
-    $patient_last_name = isset($_POST['patient_last_name']) && $_POST['patient_last_name'] != '' ? $_POST['patient_last_name'] : NULL;
-    $patient_ci = isset($_POST['patient_ci']) && $_POST['patient_ci'] != '' ? $_POST['patient_ci'] : NULL;
-    $email = isset($_POST['email_paciente']) && $_POST['email_paciente'] != '' ? $_POST['email_paciente'] : NULL;
-    $fecha_de_nacimiento = isset($_POST['fecha_de_nacimiento']) && $_POST['fecha_de_nacimiento'] != '' ? $_POST['fecha_de_nacimiento'] : NULL;
-    $departamento = isset($_POST['departamento']) && $_POST['departamento'] != '' ? $_POST['departamento'] : NULL;
-    $ciudad = isset($_POST['ciudad']) && $_POST['ciudad'] != '' ? $_POST['ciudad'] : NULL;
-    $direccion = isset($_POST['direccion']) && $_POST['direccion'] != '' ? $_POST['direccion'] : NULL;
-    $metodo_anticonceptivo = isset($_POST['metodo_anticonceptivo']) && $_POST['metodo_anticonceptivo'] != '' ? $_POST['metodo_anticonceptivo'] : NULL;
-    $telefono = isset($_POST['telefono']) && $_POST['telefono'] != '' ? $_POST['telefono'] : NULL;
-    $celular = isset($_POST['celular']) && $_POST['celular'] != '' ? $_POST['celular'] : NULL;
-    $establecimiento = isset($_POST['establecimiento']) && $_POST['establecimiento'] != '' ? $_POST['establecimiento'] : NULL;
-    $region_sanitaria = isset($_POST['region_sanitaria']) && $_POST['region_sanitaria'] != '' ? $_POST['region_sanitaria'] : NULL;
-    $epitelio_escamoso = isset($_POST['epitelio_escamoso']) && $_POST['epitelio_escamoso'] != '' ? $_POST['epitelio_escamoso'] : NULL;
+    $rp = isset($_POST['rp']) && $_POST['rp'] != '' ? $_POST['rp'] : NULL;
+    $indicaciones = isset($_POST['indicaciones']) && $_POST['indicaciones'] != '' ? $_POST['indicaciones'] : NULL;
 
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
      //error_log(json_encode($_POST), 0);
 
     $params = array(
         "patient_id" => $patient_id,
-        "patient_name" => $patient_name,
-        "patient_last_name" => $patient_last_name,
-        "patient_ci" => $patient_ci,
-        "email" => $email,
-        "fecha_de_nacimiento" => $fecha_de_nacimiento,
-        "departamento" => $departamento,
-        "ciudad" => $ciudad,
-        "direccion" => $direccion,
-        "metodo_anticonceptivo" => $metodo_anticonceptivo,
-        "telefono" => $telefono,
-        "celular" => $celular,
-        "establecimiento" => $establecimiento,
-        "region_sanitaria" => $region_sanitaria,
-        "epitelio_escamoso" => $epitelio_escamoso
+        "app_id" => $app_id,
+        "rp" => $rp,
+        "indicaciones" => $indicaciones
         
     );
 
-    if($patient_id === 'new'){
-      $result = sw_create_patient($params);
-    }else{
-      $result = sw_update_patient($params);
-    }
+    //if($patient_id === 'new'){
+      $result = sw_create_indication($params);
+    //}
+    // else{
+    //   $result = sw_update_patient($params);
+    // }
 
     wp_die(json_encode($result));
 }
 
-add_action( 'wp_ajax_sw_create_patient_ajax', 'sw_create_patient_ajax');
+add_action( 'wp_ajax_sw_create_indication_ajax', 'sw_create_indication_ajax');
 
 //crea un paciente nuevo y tbm crea el post del tipo static-data-ago que le corresponde al paciente nuevo
-function sw_create_patient($params){
+function sw_create_indication($params){
 
-    $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
-    $static_values = [];
+      $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+      $static_values = [];
 
-      $patient_name = $params['patient_name'];
-      $patient_last_name = $params['patient_last_name'];
-      $patient_ci = $params['patient_ci'];
-      $email = $params['email'];
-      $fecha_de_nacimiento = $params['fecha_de_nacimiento'];
-      $departamento = $params['departamento'];
-      $ciudad = $params['ciudad'];
-      $direccion = $params['direccion'];
-      $metodo_anticonceptivo = $params['metodo_anticonceptivo'];
-      $telefono = $params['telefono'];
-      $celular = $params['celular'];
-      $establecimiento = $params['establecimiento'];
-      $region_sanitaria = $params['region_sanitaria'];
-      $epitelio_escamoso = $params['epitelio_escamoso'];
+      $app_id = $params['app_id'];
+      
+      $rp = $params['rp'];
+      $indicaciones = $params['indicaciones'];
 
 
       //$metodo_anticonceptivo = array("inyectable", "preservativos");
@@ -94,11 +63,11 @@ function sw_create_patient($params){
 
       $my_post = array(
         'ID'   => 0,
-        'post_title'    => wp_strip_all_tags( $patient_name.' '. $patient_last_name ),
+        'post_title'    => wp_strip_all_tags( $rp.' '. $indicaciones." App ID: ".$app_id),
         'post_status'   => 'publish',
         //'post_author'   => get_current_user_id(),
         'post_author'   => $patient_owner,
-        'post_type' => 'sw_patient',
+        'post_type' => 'sw_indication',
         //'meta_input' => ["related_patient", $patient_post ]
         //'post_category' => array( 8,39 )
       );
@@ -110,21 +79,8 @@ function sw_create_patient($params){
       }
 
       $acf_fields = array(
-            "nombre" => $patient_name,
-            "apellido" => $patient_last_name,
-            "cedula" => $patient_ci,
-            "email_paciente" => $email,
-            "fecha_de_nacimiento" => $fecha_de_nacimiento,
-            "departamento" => $departamento,
-            "ciudad" => $ciudad,
-            "direccion" => $direccion,
-            "metodo_anticonceptivo" => $metodo_anticonceptivo,
-            "telefono" => $telefono,
-            "celular" => $celular,
-            "establecimiento" => $establecimiento,
-            "region_sanitaria" => $region_sanitaria,
-            "epitelio_escamoso" => $epitelio_escamoso
-
+            "rp" => $rp,
+            "indicaciones" => $indicaciones
         );
 
         foreach ($acf_fields as $field => $value) {
@@ -133,24 +89,25 @@ function sw_create_patient($params){
             }
         }
 
+        add_post_meta( $post_id, 'related_indication', $app_id );
 
       //create the patient static data post type
       //send param array with name , lastname and $post_id wich is the receently created patient
-      $static_values = ['patient_name'=>$patient_name,
-                        'static_data_id'=> 0,
-                        'patient_last_name'=>$patient_last_name, 
-                        'patient_id'=>$post_id
-                       ];
+    //   $static_values = ['patient_name'=>$patient_name,
+    //                     'static_data_id'=> 0,
+    //                     'patient_last_name'=>$patient_last_name, 
+    //                     'patient_id'=>$post_id
+    //                    ];
 
-      $static_data = sw_create_static_data($static_values);
+    //   $static_data = sw_create_static_data($static_values);
 
       $result['success'] = TRUE;
-      $result['msg'] = 'Nuevo Paciente creado';
+      $result['msg'] = 'Nueva Indicacion creada';
       return $result;
 }
 
 //actualiza un paciente que ya existe y tbm actualiza el nombre del post del tipo static-data-ago que le corresponde
-function sw_update_patient($params){
+function sw_update_indication($params){
 
   $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
   $static_values = [];
@@ -240,7 +197,7 @@ function sw_update_patient($params){
 
 // recibe el id del paciente y retorna el post tipo static_data-Ago asociado a el
 //retorna una array  
-function sw_get_patient_static_data_ago($patient_id){
+function sw_get_patient_static_data_agoxxx($patient_id){
     
   $myquery = new WP_Query(  
     array( 
@@ -268,7 +225,7 @@ function sw_get_patient_static_data_ago($patient_id){
 
 
 //Create post type static data and relate it to the created patient
-function sw_create_static_data($params){
+function sw_create_static_dataxxx($params){
 
     $result = array('error'=>[], 'success'=>FALSE, 'patient_id'=>'','msg'=>'');
 
@@ -332,7 +289,7 @@ function sw_create_static_data($params){
 ********************************************************************************
 */
 
-function sw_delete_patient_ajax(){
+function sw_delete_patient_ajaxxxx(){
 
   $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
   //$result = [];
@@ -351,7 +308,7 @@ function sw_delete_patient_ajax(){
 }
 add_action( 'wp_ajax_sw_delete_patient_ajax', 'sw_delete_patient_ajax');
 
-function sw_delete_patient($params){
+function sw_delete_patientxxx($params){
 
   $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
   $patient_id = $params['patient_id'];

@@ -1,11 +1,15 @@
 <?php
 
   //get data from template if any
+  //$patient_id = "new";
   $patient_id = $template_args["patient_id"];
   $app_id = $template_args["app_id"];
-  $is_editable = $template_args["is_editable"];
-
+  //$is_editable = $template_args["is_editable"];
+  $is_editable = "true";
   
+  $indication_id = $template_args["indication_id"]; // uso??
+  $rp = "ovulos";
+  $indicaciones = "cada 8hs";
 
 
   //load all the data we need from the Patient Post
@@ -50,15 +54,16 @@
     <form id="create-indication-form" name="create-indication-form" method="post" >
           <input type="hidden" name="action" value="sw_create_indication_ajax">
           <input type="hidden" name="patient_id" value="<?= $patient_id?>">
+          <input type="hidden" name="app_id" value="<?= $app_id?>">
           <fieldset row>
             <div class="floated-label-wrapper large-6 columns">
-              <label for="indication_name">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="indication_name" name="indication_name" value="<?php echo $name ?>" placeholder="Ingrese el nombre del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
+              <label for="rp">R.P. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="text" id="rp" name="rp" value="<?php echo $rp ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
-              <label for="indication_last_name">Apellido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="indication_last_name" name="indication_last_name" value="<?php echo $lastname ?>" placeholder="Ingrese el apellido del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
+              <label for="indicaciones">Indicaciónes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="text" id="indicaciones" name="indicaciones" value="<?php echo $indicaciones ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
           </fieldset>

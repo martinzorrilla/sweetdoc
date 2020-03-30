@@ -1,7 +1,6 @@
-<?php get_header();/* Template Name: Create Indication*/?>
+<?php get_header();/* Template Name: Create Studies*/?>
 <?php 
   //retreive data from the url
-  //$patient_id = "new";
   $patient_id = $_GET['patient_id'];
   $app_id =  $_GET['app_id'];
   //si el parametro patient_id == new, el formulario debe ser editable por defecto, si no debe no ser editable
@@ -22,7 +21,7 @@
 <!-- we set the buttons outside the form so the form template remains independent to use in other places -->
 <div class="row">  
   <div class="floated-label-wrapper large-6 columns text-center" style="padding-top: 1rem;">
-    <button id="create-indication" class="submit_button save-button-expanded" type="submit" value="create-indication">
+    <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">
     <i class="fas fa-save 2x"></i>  <span class="app-dashboard-sidebar-text"> Guardar </span>
     </button>
     <p class="errorWrapper">

@@ -8,7 +8,8 @@
 // ************************************ separador *******************************************
 
 $appointment_url = home_url().'/consulta/?patient_id=';
-$prescription_url = home_url().'/prescripcion/?patient_id=';
+$indicacion_url = home_url().'/indicacion/?patient_id=';
+$estudios_url = home_url().'/estudios/?patient_id=';
 // $edit_patient_url = home_url().'/crear-paciente/?patient_id=new';
   //the id of the post in the current loop. witch is the patient
 $post_id = get_the_ID(); 
@@ -83,18 +84,25 @@ if(true){
         //echo $creation_date;
         //echo the_date('Y-m-d', '<h2>', '</h2>');
         //var_dump($the_app->post_date);
+        $indication_array = sw_get_indication_id($r);
+        $indication_id = $indication_array[0];
     ?>
     <div data-closable class="callout alert-callout-border secondary">
       <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id='.$r; ?>"> - Consulta en fecha <strong> <?php echo $creation_date ?> </strong> - Codigo: <?php echo $r ?>
       </a>
       
       <br/>
-      <a href="<?php echo get_permalink( $colpo_post_id ); ?> ">- Colposcopia: <?php echo $colpo_post_id; ?></a>
+      <a href="<?php echo get_permalink( $colpo_post_id ); ?> ">- Colposcopía: <?php echo $colpo_post_id; ?></a>
 
       <br/>
-      <a href="<?php echo esc_url( $prescription_url ).$patient_id.'&app_id='.$r; ?>"> - Solicitar Nueva Prescripción </a>
+      <a href="<?php echo esc_url( $indicacion_url ).$patient_id.'&app_id='.$r; ?>"> - Crear indicación </a>
+      <a href="<?php echo get_permalink( $indication_id ); ?> ">- Ver indicación: <?php echo $indication_id; ?></a>
+      
       <br/>
       
+      <a href="<?php echo esc_url( $estudios_url ).$patient_id.'&app_id='.$r; ?>"> - Crear solicitud de estudios </a>
+      <br/>
+
       <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
         <span aria-hidden="true">&times;</span>
       </button>

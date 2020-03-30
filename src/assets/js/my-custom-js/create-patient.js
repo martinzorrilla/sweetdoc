@@ -26,7 +26,7 @@ var CreatePatientModule = function(){
 
         createPatientBtn.on("click", function (e) {
           createPatientBtn.fadeOut( "slow" );
-          // alert("se creara un paciente nuevo");
+           alert("Se creara un paciente nuevo");
           saveProfileData(e);
         })
 
