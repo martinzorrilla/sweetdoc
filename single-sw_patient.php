@@ -65,6 +65,11 @@ if(true){
 
   <!-- <h2 style="text-align: center; margin-left: 50px;">Consultas</h2> -->
   <!-- <a href="#"><strong>Nombre paciente</strong></a> -->
+  <div data-closable class="callout alert-callout-border secondary text-center" style="margin-top: 2rem;">
+    <h3 style="font-weight: bold;">
+      <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id=new'; ?>" class="crete-app">  Crear nueva consulta</a>
+    </h3>
+  </div>
   <div data-closable class="callout alert-callout-border primary text-center" style="margin-top: 2rem;">
     <h3 style="font-weight: bold;">Consultas Previas</h3>
   </div>
@@ -86,18 +91,27 @@ if(true){
         //var_dump($the_app->post_date);
         $indication_array = sw_get_indication_id($r);
         $indication_id = $indication_array[0];
+        $indication_title = $indication_id === NULL ? "- Crear indicación" : " - Editar indicación";
+
     ?>
     <div data-closable class="callout alert-callout-border secondary">
       <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id='.$r; ?>"> - Consulta en fecha <strong> <?php echo $creation_date ?> </strong> - Codigo: <?php echo $r ?>
       </a>
-      
       <br/>
-      <a href="<?php echo get_permalink( $colpo_post_id ); ?> ">- Colposcopía: <?php echo $colpo_post_id; ?></a>
 
+      <a href="<?php echo get_permalink( $colpo_post_id ); ?> ">- Colposcopía: <?php echo $colpo_post_id; ?></a>
       <br/>
-      <a href="<?php echo esc_url( $indicacion_url ).$patient_id.'&app_id='.$r; ?>"> - Crear indicación </a>
-      <a href="<?php echo get_permalink( $indication_id ); ?> ">- Ver indicación: <?php echo $indication_id; ?></a>
-      
+
+      <a href="<?php echo esc_url( $indicacion_url ).$patient_id.'&app_id='.$r; ?>"> <?= $indication_title ?></a>
+
+      <!-- solo si existe una indicacion para esta app (consulta) debemos mostrar las opcion ver indicacion ya que si el valor es null aun no se creo una indicacion. -->
+      <?php 
+      if ($indication_id) {
+        ?>  
+        <a href="<?php echo get_permalink( $indication_id ); ?> ">- Ver indicación: <?php echo $indication_id; ?></a>
+        <?php 
+      }
+      ?>
       <br/>
       
       <a href="<?php echo esc_url( $estudios_url ).$patient_id.'&app_id='.$r; ?>"> - Crear solicitud de estudios </a>

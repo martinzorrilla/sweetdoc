@@ -4,6 +4,7 @@
   //$patient_id = "new";
   //$patient_id = $template_args["patient_id"];
   $app_id = $template_args["app_id"];
+  $indication_id = $template_args["indication_id"];
   $is_editable = $template_args["is_editable"];
   //$is_editable = "true";
   

@@ -22,6 +22,12 @@
   $static_data_post_id = $static_data_array[0];
 
 
+  $patient_fields = get_post_custom($patient_id);
+  $name = $patient_fields['nombre'][0];
+  $lastname = $patient_fields['apellido'][0];
+  $cedula = $patient_fields['cedula'][0];
+  $fullname = $name.' '.$lastname;
+
   //ACF get field IS NOT WORKING for the app posst type when it's just been created so we use geet_post_custom instead to retrieve the data.
   $stored_fields = get_post_custom($app_id);
 
@@ -41,6 +47,10 @@
   }
 ?>
 
+  <div class="callout secondary">
+    <h3 style="text-align: center; margin-left: 50px;"> <strong> <?php echo $fullname." - Ci: ".$cedula; ?> </strong></h3>
+  </div>
+ 
   <div class="callout secondary" style="display: <?php if ($app_id === 'new') echo 'none' ?> " >
     <h3 style="text-align: center; margin-left: 50px;">Fecha de la Consulta: <strong> <?php echo $app_creation_date ?> </strong></h3>
   </div>
