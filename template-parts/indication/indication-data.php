@@ -7,14 +7,9 @@
   $indication_id = $template_args["indication_id"];
   $is_editable = $template_args["is_editable"];
   //$is_editable = "true";
-  
   $indication_fields = get_post_custom($indication_id);
-  
   $rp = $indication_fields['rp'][0];
   $indicaciones = $indication_fields['indicaciones'][0];
-
-
-
  ?> 
 
 <!-- creo que este div no es necesario para que funcione correctamente el form del paciente -->

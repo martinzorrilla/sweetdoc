@@ -6,12 +6,12 @@
   $app_id =  $_GET['app_id'];
   //si el parametro patient_id == new, el formulario debe ser editable por defecto, si no debe no ser editable
   $is_editable = $patient_id == "new" ? "true" : "false";
-  $prescription_pdf_url = home_url().'/test';
+  // $prescription_pdf_url = home_url().'/test';
   
   
   $indication_array = sw_get_indication_id($app_id);
   $indication_id = $indication_array[0];
-  var_dump($indication_id);
+  //var_dump($indication_id);
   $title = $indication_id === NULL ? "Crear indicación médica" : "Editar indicación médica";
 ?>
 

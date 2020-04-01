@@ -3,10 +3,10 @@ var CreateIndicationModule = function(){
     //global vars
     var $ = jQuery;
     
-    var createIndicationBtn;
+    var createStudiesBtn;
     var editPatientBtn;
     
-    var createIndicationForm;
+    var createStudiesForm;
     
 
     function init(){
@@ -15,14 +15,14 @@ var CreateIndicationModule = function(){
         
         //createProfileClose = $("#create-profile-close");
         
-        createIndicationBtn = $("#create-indication");
+        createStudiesBtn = $("#create-studies");
         editPatientBtn = $("#toggle-input");
         
-        createIndicationForm = $("#create-indication-form");
+        createStudiesForm = $("#create-studies-form");
 
-        createIndicationBtn.on("click", function (e) {
-          createIndicationBtn.fadeOut( "slow" );
-          //  alert("se creara una nueva indicacion");
+        createStudiesBtn.on("click", function (e) {
+          createStudiesBtn.fadeOut( "slow" );
+            alert("se creara una solicitud de estudio");
           saveProfileData(e);
         })
       });
@@ -33,7 +33,7 @@ var CreateIndicationModule = function(){
       //alert("Se guardaran los datos");
       var $ = jQuery;
       //var myData = createPatientForm.serialize() + '&patient_id=' + '<?php echo $patient_id ?>';
-      var myData = createIndicationForm.serialize();
+      var myData = createStudiesForm.serialize();
       
       $.ajax({
         type: "POST",
