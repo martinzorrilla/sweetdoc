@@ -60,7 +60,7 @@
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
-              <label for="patient_ci">Cedula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="patient_ci">Cédula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Ingrese el documento del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
@@ -111,7 +111,7 @@
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
-              <label for="telefono">Telefono &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="telefono">Teléfono &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="tel" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Ingrese el numero de telefono del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
