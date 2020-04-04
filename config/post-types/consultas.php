@@ -10,6 +10,8 @@ function create_post_type_consulta() {
         'singular_name' => __( 'Consulta' )
       ),
       'public' => true,
+      'menu_icon' => 'dashicons-portfolio',
+      'menu_position' => 82,
       'has_archive' => true,
     )
   );

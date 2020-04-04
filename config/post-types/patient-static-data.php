@@ -6,10 +6,12 @@ function create_post_type_static_data() {
     register_post_type( 'sw_static_data',
     array(
       'labels' => array(
-        'name' => __( 'Private Data' ),
-        'singular_name' => __( 'private_data_s' )
+        'name' => __( 'Static Data - AGO' ),
+        'singular_name' => __( 'static_data_ago' )
       ),
       'public' => true,
+      'menu_icon' => 'dashicons-id',
+      'menu_position' => 81,
       'has_archive' => true,
     )
   );

@@ -10,6 +10,8 @@ function create_post_type_colposcopia() {
         'singular_name' => __( 'Colposcopia' )
       ),
       'public' => true,
+      'menu_icon' => 'dashicons-video-alt',
+      'menu_position' => 83,
       'has_archive' => true,
     )
   );

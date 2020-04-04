@@ -10,6 +10,8 @@ function create_post_type_patient() {
         'singular_name' => __( 'Paciente' )
       ),
       'public' => true,
+      'menu_icon' => 'dashicons-groups',
+      'menu_position' => 80,
       'has_archive' => true,
     )
   );
