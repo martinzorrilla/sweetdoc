@@ -62,7 +62,15 @@
 	<div class="patient-div">
 
 	<!-- we need this so the side bar will know how to redirect to the correspondings urls -->
-	<?php  
+	<?php
+		
+		// login redirect wp-login
+		// esto es para que en cualquier pagina, redireccione al login page si no es un usuario registrado
+		if ( !is_user_logged_in() ) {
+			auth_redirect();
+		}
+
+		// esto es para que el menu lateral pueda redireccionar correctamente
 		$all_patient_url = home_url().'/pacientes/';
 		$create_patient_url = home_url().'/crear-paciente/?patient_id=new';
 		$create_secretary_url = home_url().'/crear-asistente/';
@@ -104,10 +112,9 @@
 				<div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
 				<!-- the content starts here! -->
 
-				<!-- <ul class="menu align-center">
-					<li><a href="#">One</a></li>
-					<li><a href="#">Two</a></li>
-					<li><a href="#">Three</a></li>
+				<!-- <ul class="menu align-right">
+					<li><a href="#"> <?php //echo  $current_user->user_login; ?> </a></li>
+					<a href="<?php //echo wp_logout_url(); ?>">Salir</a>
 				</ul> -->
 
 				<?php //hm_get_template_part('template-parts/sweet-navbar'); ?>

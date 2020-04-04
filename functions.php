@@ -399,7 +399,7 @@ function sw_get_patient_owner(){
   }
 }
 
-//Cuando se crea un usuario del tipo secretaria es importante saber el id del doctor que 
+//Cuando se crea un usuario del tipo secretary es importante saber el id del doctor que 
 //creo este usuario para poder despues filtrar los pacientes por doctor.
 //(en caso que la secretraria cree pacientes).
 function save_custom_user_profile_fields($user_id){
@@ -451,3 +451,98 @@ return $post_id;
 }
 
 add_filter('acf/pre_save_post' , 'my_acf_pre_save_post');
+
+
+
+/**
+ * WordPress function for redirecting users on login based on user role
+ */
+
+ // redirect del login de wordpress. wordpress login redirect 
+// solo si es admin envia al wp-admin luego del logueo. en otros casos envia a la home del sitio
+
+ function my_login_redirect( $url, $request, $user ){
+  if( $user && is_object( $user ) && is_a( $user, 'WP_User' ) ) {
+      if( $user->has_cap( 'administrator' ) ) {
+          $url = admin_url();
+      } else {
+        $url = home_url('');
+        // $url = home_url('/members-only/');
+      }
+  }
+  return $url;
+}
+add_filter('login_redirect', 'my_login_redirect', 10, 3 );
+
+//Disable admin bar for specific user roles
+add_action('after_setup_theme', 'remove_admin_bar_for_roles');
+function remove_admin_bar_for_roles() {
+    // if (current_user_can('doctor') && !is_admin()) {
+    if (!is_admin()) {
+        show_admin_bar(false);
+    }
+}
+// redirect users that are not doctor or admin to home page when trying to acces special pages like appointment and others
+
+
+//get indication_id post of a given app_id of a patient
+//returns NULL if the app_id does not have a indication
+function sw_get_indication_id($app_id){
+
+  $args = array(
+    'post_type'  => 'sw_indication',
+    'meta_key'   => 'related_indication',
+    'posts_per_page' => -1,
+  //'orderby'    => 'meta_value_num',
+  //'order'      => 'ASC',
+    'meta_query' => array(
+      array(
+        'key'     => 'related_indication',
+        'value'   => array($app_id),
+        'compare' => 'IN',
+      ),
+    ),
+  );
+  $myquery = new WP_Query( $args );
+
+  //returns a fucking array
+  $related =  wp_list_pluck( $myquery->posts, 'ID' );
+
+  wp_reset_postdata(); //always reset the post data!
+  
+  //if want to return an array of id's
+  return $related;
+  //if want to return the query object
+  //return $myquery;
+}
+
+//get indication_id post of a given app_id of a patient
+//returns NULL if the app_id does not have a indication
+function sw_get_studies_id($app_id){
+
+  $args = array(
+    'post_type'  => 'sw_study',
+    'meta_key'   => 'related_study',
+    'posts_per_page' => -1,
+  //'orderby'    => 'meta_value_num',
+  //'order'      => 'ASC',
+    'meta_query' => array(
+      array(
+        'key'     => 'related_study',
+        'value'   => array($app_id),
+        'compare' => 'IN',
+      ),
+    ),
+  );
+  $myquery = new WP_Query( $args );
+
+  //returns a fucking array
+  $related =  wp_list_pluck( $myquery->posts, 'ID' );
+
+  wp_reset_postdata(); //always reset the post data!
+  
+  //if want to return an array of id's
+  return $related;
+  //if want to return the query object
+  //return $myquery;
+}

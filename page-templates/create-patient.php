@@ -4,10 +4,12 @@
   $patient_id = $_GET['patient_id'];
   //si el parametro patient_id == new, el formulario debe ser editable por defecto, si no debe no ser editable
   $is_editable = $patient_id == "new" ? "true" : "false";
+  $title = $patient_id == "new" ? "Agregar Paciente" : "Editar Paciente";
+  
 ?>
 
 <div data-closable class="callout alert-callout-border secondary text-center">
-  <h3>Agregar Paciente</h3>
+  <h3> <?= $title ?> </h3>
 </div>
 
 <?php hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id, 'is_editable' => $is_editable ]); ?>

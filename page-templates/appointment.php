@@ -4,12 +4,14 @@
   
   //check permissions for the user
   //this page should be visible only for a doctor role. else redirect to home page
-  $the_role = sw_get_current_user_role();
-/*   if($the_role != "doctor"){
-    wp_redirect(home_url());
-  } */
+  $the_role = sw_get_current_user_role(); // antes usaba esta funcion pero puedo hacer lo mismo con 'current_user_can()'
+   if(!current_user_can('doctor') && !current_user_can('administrator')){
+     echo "El usuario no es doctor o admin. no puede ver esta pagina";
+      //wp_redirect( esc_url( wp_login_url() ), 307);
+      //wp_redirect('http://example.com/'); exit;
+   }
   
-  //The patient id is send from patients-all through the url so we grab here with $_GET
+  //The patient id is sent from patients-all through the url so we grab here with $_GET
   $patient_id = $_GET['patient_id'];
   $app_id =  $_GET['app_id'];
   $app_creation_date = get_the_date( 'd-M-Y', $app_id );
@@ -19,6 +21,12 @@
   $static_data_array = sw_get_static_data_id($patient_id);
   $static_data_post_id = $static_data_array[0];
 
+
+  $patient_fields = get_post_custom($patient_id);
+  $name = $patient_fields['nombre'][0];
+  $lastname = $patient_fields['apellido'][0];
+  $cedula = $patient_fields['cedula'][0];
+  $fullname = $name.' '.$lastname;
 
   //ACF get field IS NOT WORKING for the app posst type when it's just been created so we use geet_post_custom instead to retrieve the data.
   $stored_fields = get_post_custom($app_id);
@@ -39,6 +47,10 @@
   }
 ?>
 
+  <div class="callout secondary">
+    <h3 style="text-align: center; margin-left: 50px;"> <strong> <?php echo $fullname." - Ci: ".$cedula; ?> </strong></h3>
+  </div>
+ 
   <div class="callout secondary" style="display: <?php if ($app_id === 'new') echo 'none' ?> " >
     <h3 style="text-align: center; margin-left: 50px;">Fecha de la Consulta: <strong> <?php echo $app_creation_date ?> </strong></h3>
   </div>
@@ -59,14 +71,10 @@
             <?php //hm_get_template_part('template-parts/appointment/common-data', ['appointment_id' => $appointment_id]); ?>
             <?php hm_get_template_part('template-parts/appointment/motivo-consulta', ['appointment_id' => $appointment_id]); ?>
           </fieldset>
-
-          <div class="tab">
-            <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
-          </div>
-          <div class="appform tabcontent">
+          
             <?php hm_get_template_part('template-parts/appointment/colposcopia', ['colpo_post_id' => $colpo_post_id]); ?>
-          </div>
-        </form>
+
+    </form>
   </div>
 
   <div class="button-div" style="margin-bottom:70px">
@@ -112,11 +120,6 @@
         //fileInput.addEventListener('change', updateImageDisplay(preview, fileInput));
         fileInput.addEventListener('change', updateImageDisplay);
 
-
-        //to toggle slide of the private data section in appointment page
-        $(".static-data-click-to-show").click(function(){
-            $(".static-data-slide").slideToggle( "slow" );
-        });
 
 
         createAppBtn.on("click", function (e) {

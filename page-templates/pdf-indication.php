@@ -1,4 +1,4 @@
-<?php /* Template Name: pdf-prescription*/
+<?php /* Template Name: pdf-indication*/
 class PDF extends FPDF
 {
 protected $col = 0; // Columna actual
@@ -110,18 +110,18 @@ function PrintPrescription($num, $title, $file)
 }
 }//class
 
-//$indicaciones = "INDICACIONES: Organic sustainable lomo, +1 irony McSweeneys skateboard Portland PBR tattooed farm-to-table Terry Richardson Williamsburg. Organic farm-to-table wolf, next level shit put a bird on it freegan American Apparel Williamsburg chambray gentrify viral you probably haven’t heard of them keffiyeh Cosby sweater. Pitchfork photo booth fuck, DIY cardigan messenger bag butcher Thundercats tofu you probably havent heard of them whatever squid VHS put a bird on it. Thundercats fixie Williamsburg, photo booth synth vinyl dreamcatcher Wes Anderson cliche. You probably havent heard of them DIY mlkshk biodiesel McSweeneys raw denim. Skateboard Pitchfork Etsy, photo booth messenger bag artisan raw denim beard Tumblr retro Austin. Wes Anderson sustainable keffiyeh, blog lomo craft beer cliche brunch homo skateboard biodiesel fanny pack Pitchfork you probably havent heard of them Stumptown.";
+$indication_id = $_GET['indication_id'];
+$indication_fields = get_post_custom($indication_id);
+  
+$rp = $indication_fields['rp'][0];
+$indicaciones = $indication_fields['indicaciones'][0];
 
-//$medicamentos = "MEDICAMENTOS: Organic sustainable lomo, +1 irony McSweeneys skateboard Portland PBR tattooed farm-to-table Terry Richardson Williamsburg. Organic farm-to-table wolf, next level shit put a bird on it freegan American Apparel Williamsburg chambray gentrify viral you probably haven’t heard of them keffiyeh Cosby sweater. Pitchfork photo booth fuck, DIY cardigan messenger bag butcher Thundercats tofu you probably havent heard of them whatever squid VHS put a bird on it. Thundercats fixie Williamsburg, photo booth synth vinyl dreamcatcher Wes Anderson cliche. You probably havent heard of them DIY mlkshk biodiesel McSweeneys raw denim. Skateboard Pitchfork Etsy, photo booth messenger bag artisan raw denim beard Tumblr retro Austin. Wes Anderson sustainable keffiyeh, blog lomo craft beer cliche brunch homo skateboard biodiesel fanny pack Pitchfork you probably havent heard of them Stumptown.";
-
-$indicaciones = "dolanet cada 8 horas";
-$medicamentos = "dolanet";
 $pdf = new PDF();
 $title = 'Dra. Diana Andrea Zorrilla';
 $pdf->SetTitle($title);
 $pdf->SetAuthor('Andrea Zorrilla');
-$pdf->PrintChapter(1,'        INDICACIONES                                          -                           MEDICAMENTOS', $myfile);
-$pdf->PrintPrescription(1,'INDICACIONES', $indicaciones);
-$pdf->PrintPrescription(2,'MEDICAMENTOS',$medicamentos);
+$pdf->PrintChapter(1,' R.P.                                                                   -            INDICACIONES', $myfile);
+$pdf->PrintPrescription(1,'R.P.', $rp);
+$pdf->PrintPrescription(2,'INDICACIONES',$indicaciones);
 $pdf->Output();
 ?>

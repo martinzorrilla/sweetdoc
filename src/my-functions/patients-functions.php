@@ -30,7 +30,7 @@ function sw_create_patient_ajax(){
     $epitelio_escamoso = isset($_POST['epitelio_escamoso']) && $_POST['epitelio_escamoso'] != '' ? $_POST['epitelio_escamoso'] : NULL;
 
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
-     error_log(json_encode($_POST), 0);
+     //error_log(json_encode($_POST), 0);
 
     $params = array(
         "patient_id" => $patient_id,
@@ -320,6 +320,68 @@ function sw_create_static_data($params){
       //$result['app_id'] = $app_post;
       $result['msg'] = 'Patient Static Data Created.';
       return $result;
+}
+
+
+
+/*
+********************************************************************************
+*
+      deletePatient
+*
+********************************************************************************
+*/
+
+function sw_delete_patient_ajax(){
+
+  $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+  //$result = [];
+  $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
+  
+  //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
+  //error_log(json_encode($_POST), 0);
+
+  $params = array(
+      "patient_id" => $patient_id
+  );
+
+  $result = sw_delete_patient($params);
+
+  wp_die(json_encode($result));
+}
+add_action( 'wp_ajax_sw_delete_patient_ajax', 'sw_delete_patient_ajax');
+
+function sw_delete_patient($params){
+
+  $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+  $patient_id = $params['patient_id'];
+  
+  
+  //obtener la lista de consultas, por cada consulta obtener su colpo y borrarla. luego borrar la consulta
+  $related = sw_get_related_appointments($patient_id);
+  //r is the current app_id 
+  foreach ($related as $r){
+        //get the colposcopy id and href of this app
+        $colpo_patient_array = sw_get_colpo_id($r);
+        $colpo_post_id = $colpo_patient_array[0];
+
+        wp_trash_post($colpo_post_id);
+        wp_trash_post($r);
+  }
+
+  // FALTA AGREGAR LO QUE SEA QUE RE RELACIONE CON EL PACIENTE Y NO ESTE AGREGADO ACA COMO PRESCRIPCIONES ETC
+
+  // returns an array containing the ID of the static data post related to this patient id.
+  $the_query = sw_get_patient_static_data_ago($patient_id);
+  $patient_ago_id =  $the_query[0];
+  // borrar el post del tipo static-data/AGO
+  wp_trash_post($patient_ago_id);
+  //borrar el post del tipo paciente
+  wp_trash_post($patient_id);
+
+  $result['success'] = TRUE;
+  $result['msg'] = 'Paciente eliminado en el backend - ID eliminado:  '.$patient_id ;
+  return $result;
 }
 
 ?>

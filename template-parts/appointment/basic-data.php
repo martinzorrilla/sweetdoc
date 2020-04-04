@@ -22,11 +22,8 @@
   $departamento = $patient_fields['departamento'][0];
   $ciudad = $patient_fields['ciudad'][0];
   $direccion = $patient_fields['direccion'][0];
-  //$metodo_anticonceptivo = $patient_fields['metodo_anticonceptivo'][0];
-  // return value es un array conteniendo strings con los values en el bkend de acf i,e: "inyectables"
-  $checkbox_metodo_anti = get_field('metodo_anticonceptivo', $patient_id); // esto no usamos para guardar, si no para 
-  // mostrar los campos que estan ya guardados en un paciente creado
-  $radiobox_metodo_anti = get_field('epitelio_escamoso', $patient_id); 
+  
+  //$radiobox_metodo_anti = get_field('epitelio_escamoso', $patient_id); 
   $telefono = $patient_fields['telefono'][0];
   $celular = $patient_fields['celular'][0];
   $establecimiento = $patient_fields['establecimiento'][0];
@@ -43,7 +40,7 @@
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
   <!-- <div class="tab white-tab"> -->
   <div class="tab">
-    <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
+    <button class="tablinks active" >Datos Básicos</button>
   </div>
 
   <!-- <div class="appform tabcontent white-tab"> -->
@@ -63,7 +60,7 @@
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
-              <label for="patient_ci">Cedula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="patient_ci">Cédula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Ingrese el documento del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
@@ -113,34 +110,8 @@
               <input type="text" id="direccion" name="direccion" value="<?php echo $direccion ?>" placeholder="Ingrese al dirección del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
-            <div class="floated-label-wrapper large-12 columns checkbox-radio">
-              <span>Metodo anticonceptivo actual</span>
-                <fieldset>
-                <div>
-                  <input type="checkbox" id="inyectable" name="metodo_anticonceptivo[]" value="inyectable" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
-                  <?php 
-                  if( $checkbox_metodo_anti != NULL || $checkbox_metodo_anti != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
-                    if(in_array("inyectable", $checkbox_metodo_anti)) echo "checked";
-                  }
-                  ?> >
-                  <label for="inyectable">Inyectable</label>
-                </div>
-
-                <div>
-                  <input type="checkbox" id="preservativos" name="metodo_anticonceptivo[]" value="preservativos" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>
-                  <?php 
-                  if( $checkbox_metodo_anti != NULL || $checkbox_metodo_anti != ""){ //si esta vacio genera un error, por eso hay que 
-                    if(in_array("preservativos", $checkbox_metodo_anti)) echo "checked";
-                  }
-                  ?> >
-                  <label for="preservativos">Preservativos</label>
-                </div>
-              </fieldset>
-
-            </div>
-
             <div class="floated-label-wrapper large-6 columns">
-              <label for="telefono">Telefono &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="telefono">Teléfono &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="tel" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Ingrese el numero de telefono del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
@@ -149,35 +120,10 @@
               <input type="tel" id="celular" name="celular" value="<?php echo $celular ?>" placeholder="Ingrese el numero de celular del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
-            <div class="floated-label-wrapper large-6 columns">
+            <div class="floated-label-wrapper large-6 columns end">
               <label for="establecimiento">Establecimiento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="establecimiento" name="establecimiento" value="<?php echo $establecimiento ?>" placeholder="Ingrese el establecimiento..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
-
-            <div class="floated-label-wrapper large-6 columns">
-              <label for="region_sanitaria">Region Sanitaria &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="region_sanitaria" name="region_sanitaria" value="<?php echo $region_sanitaria ?>" placeholder="Ingrese la region sanitaria..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
-            </div>
-
-            <div class="floated-label-wrapper large-12 columns checkbox-radio">
-              <span>Epitelio escamoso original</span>
-              <div>
-                <input type="radio" id="maduro" name="epitelio_escamoso" value="maduro" <?php if ($radiobox_metodo_anti == "maduro") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>
-                >
-                <label for="maduro">Maduro</label>
-              </div>
-
-              <div>
-                <input type="radio" id="atrofico" name="epitelio_escamoso" value="atrofico" <?php if ($radiobox_metodo_anti == "atrofico") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
-                <label for="atrofico">Atrófico</label>
-              </div>
-            </div>
-
-            <!-- <div class="floated-label-wrapper large-12 columns text-center">
-              <button id="create-patient" class="submit_button save-button-expanded" type="submit" value="create-patient">Crear</button>
-              <p class="errorWrapper">
-              </p>
-            </div> -->
 
 
           </fieldset>
