@@ -2,7 +2,7 @@
 
 <?php  
 
-// $appointment_url = home_url().'/consulta/?patient_id=';
+ $appointment_url = home_url().'/consulta/?patient_id=';
 // $indicacion_url = home_url().'/indicacion/?patient_id=';
 // $estudios_url = home_url().'/estudios/?patient_id=';
 
