@@ -73,21 +73,21 @@
       <div class="card-section">
         <div class="profile-card-header">
           <div class="profile-card-author">
-            <h5 class="author-title">Informe Colposcopico</h5>
+            <h5 class="author-title">Colposcopía</h5>
           </div>
         </div>
         <div class="profile-card-about">
-          <h5 class="about-title separator-left"> Ingresar datos de la Colposcopia <?php //echo $name?></h5>
+          <h5 class="about-title separator-left"> Ingresar datos de la Colposcopía <?php //echo $name?></h5>
 
           <!-- macroscopia -->
           <div class="floated-label-wrapper large-6 columns ">
-            <label class="separator-left" for="macroscopia">Macroscopia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label class="separator-left" for="macroscopia">Macroscopía &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="text" id="macroscopia" name="macroscopia" value="<?php echo $macroscopia ?>" placeholder="Escribir..." required>
           </div>
 
           <!-- colposcopia -->
           <div class="floated-label-wrapper large-6 columns">
-            <label class="separator-left" for="colposcopia">Colposcopia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label class="separator-left" for="colposcopia">Colposcopía &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="text" id="colposcopia" name="colposcopia" value="<?php echo $colposcopia ?>" placeholder="Escribir..." required>
           </div>
 
@@ -532,7 +532,7 @@
 
           <!-- sugerencias -->
           <div class="floated-label-wrapper large-12 columns end">
-            <label for="sugerencias_col">Sugerencias</label>
+            <label class="separator-left" for="sugerencias_col">Sugerencias</label>
             <input type="text" id="sugerencias_col" name="sugerencias" value="<?php echo $sugerencias ?>" placeholder="Escribir..." required>
           </div>
 
@@ -550,13 +550,13 @@
           <!-- Testing the image uploader -->
 
 
-          <div class="archivos large-12 columns">
+          <div class="archivos large-12 columns" style="margin-top: 1.5rem;">
           
             <div class="profile-card-about">
-              <h5 class="about-title separator-left"> Ingresar imagenes de la colposcopia </h5>
+              <h5 class="about-title separator-left"> Ingresar imágenes de la colposcopía </h5>
             </div>
             <div class="subir-colpo test">
-              <label for="image_uploads">Seleccionar imagenes (png, jpg )</label>
+              <label for="image_uploads">Seleccionar imágenes (png, jpg )</label>
               <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
             </div>
 

@@ -15,8 +15,16 @@
     //common-variable data
     $motivo_de_consulta = isset($_POST['motivo_de_consulta']) && $_POST['motivo_de_consulta'] != '' ? $_POST['motivo_de_consulta'] : NULL;
     $antecedente_actual = isset($_POST['antecedente_actual']) && $_POST['antecedente_actual'] != '' ? $_POST['antecedente_actual'] : NULL;
+
+    $diagnostico_consulta = isset($_POST['diagnostico_consulta']) && $_POST['diagnostico_consulta'] != '' ? $_POST['diagnostico_consulta'] : NULL;
+    $codigo_diagnostico = isset($_POST['codigo_diagnostico']) && $_POST['codigo_diagnostico'] != '' ? $_POST['codigo_diagnostico'] : NULL;
+    $procedimiento = isset($_POST['procedimiento']) && $_POST['procedimiento'] != '' ? $_POST['procedimiento'] : NULL;
+    $codigo_procedimiento = isset($_POST['codigo_procedimiento']) && $_POST['codigo_procedimiento'] != '' ? $_POST['codigo_procedimiento'] : NULL;
+    $plan_tratamiento = isset($_POST['plan_tratamiento']) && $_POST['plan_tratamiento'] != '' ? $_POST['plan_tratamiento'] : NULL;
+    
     //agregar aca el mismo codigo que arriba pero para los valores del checkbox el cual deberia ser un array
-    $checkbox_values = isset($_POST['checkbox_values']) && $_POST['checkbox_values'] != '' ? $_POST['checkbox_values'] : NULL;
+    //$checkbox_values = isset($_POST['checkbox_values']) && $_POST['checkbox_values'] != '' ? $_POST['checkbox_values'] : NULL;
+
 
     //private/static data
     $cesareas = isset($_POST['cesareas']) && $_POST['cesareas'] != '' ? $_POST['cesareas'] : NULL; 
@@ -107,8 +115,17 @@
         "patient_id" => $patient_id,
         "static_data_post_id" => $static_data_post_id,
         "colpo_post_id" => $colpo_post_id,
+
+        //consulta
         "motivo_de_consulta" => $motivo_de_consulta,
         "antecedente_actual" => $antecedente_actual,
+        "diagnostico_consulta" => $diagnostico_consulta,
+        "codigo_diagnostico" => $codigo_diagnostico,
+        "procedimiento" => $procedimiento,
+        "codigo_procedimiento" => $codigo_procedimiento,
+        "plan_tratamiento" => $plan_tratamiento,
+
+        //ago
         "menarca" => $menarca,
         "irs" => $irs,
         "cesareas" => $cesareas,
@@ -151,23 +168,6 @@
         "test_de_schiller_lugol" => $test_de_schiller_lugol,
         "sugerencias" => $sugerencias
 
-
-        // motivo_inadecuada
-        // union_escamo_columnar
-        // zona_de_transformacion
-        // colposcopicos_normales
-        // colposcopicos_anormales_grado_1
-        // colposcopicos_anormales_grado_2
-        // colposcopicos_anormales_no_especificos
-        // colposcopicos_anormales_ubicacion
-        // sospecha_de_invasion
-        // hallazgos_varios
-        // examen_de_vyv
-        // examen_de_vyv_descripcion
-        // colposcopicos_anormales_test_de_schiller
-        // test_de_schiller_lugol
-        // sugerencias
-
     );
 
     //wp_die(var_dump($params));
@@ -196,7 +196,7 @@ function sw_create_new_appointment($params){
     $app_id  = $params['app_id'];
     $patient_id = $params['patient_id'];
 
-    //private/static data
+    //private/static data AGO
     $static_data_post_id  = $params["static_data_post_id"];
     $cesareas = $params['cesareas'];
     $menarca = $params['menarca'];
@@ -205,7 +205,6 @@ function sw_create_new_appointment($params){
     $edad_vph = $params['edad_vph'];
     $ritmo_menstrual = $params['ritmo_menstrual'];
     $fum = $params['fum'];
-
     $numero_embarazos = $params['numero_embarazos'];
     $parto_normal = $params['parto_normal'];
     $abortos = $params['abortos'];
@@ -213,7 +212,6 @@ function sw_create_new_appointment($params){
     $marca_anticonceptivo = $params['marca_anticonceptivo'];
     $terapia_hormonal = $params['terapia_hormonal'];
     $pap_anterior = $params['pap_anterior'];    
-
     $fecha_pap = $params['fecha_pap'];    
     $fumador = $params['fumador'];    
     $cigarrillos_por_dia = $params['cigarrillos_por_dia'];    
@@ -223,10 +221,16 @@ function sw_create_new_appointment($params){
 
 
 
-    //common fields
+    //common fields CONSULTA
     $motivo_de_consulta = $params['motivo_de_consulta'];
     $antecedente_actual = $params['antecedente_actual'];
-    
+    $diagnostico_consulta = $params['diagnostico_consulta'];
+    $codigo_diagnostico = $params['codigo_diagnostico'];
+    $procedimiento = $params['procedimiento'];
+    $codigo_procedimiento = $params['codigo_procedimiento'];
+    $plan_tratamiento = $params['plan_tratamiento'];
+
+
     //colposcopia data
     $macroscopia = $params['macroscopia'];
     $colposcopia = $params['colposcopia'];
@@ -282,7 +286,12 @@ function sw_create_new_appointment($params){
 
       $acf_fields = array(
             "motivo_de_consulta" => $motivo_de_consulta,
-            "antecedente_actual" => $antecedente_actual
+            "antecedente_actual" => $antecedente_actual,
+            "diagnostico_consulta" => $diagnostico_consulta,
+            "codigo_diagnostico" => $codigo_diagnostico,
+            "procedimiento" => $procedimiento,
+            "codigo_procedimiento" => $codigo_procedimiento,
+            "plan_tratamiento" => $plan_tratamiento
         );
 
         foreach ($acf_fields as $field => $value) {
@@ -432,10 +441,14 @@ function sw_update_single_appointment($params){
     //$cedula = $patient_fields['cedula'][0];
     $fullname = $name.'-'.$lastname;
 
-    //common fields 
+    //common fields CONSULTA
     $motivo_de_consulta = $params['motivo_de_consulta'];
     $antecedente_actual = $params['antecedente_actual'];
-    $checkbox_values = $params['checkbox_values'];
+    $diagnostico_consulta = $params['diagnostico_consulta'];
+    $codigo_diagnostico = $params['codigo_diagnostico'];
+    $procedimiento = $params['procedimiento'];
+    $codigo_procedimiento = $params['codigo_procedimiento'];
+    $plan_tratamiento = $params['plan_tratamiento'];
     
     //private/static data
     $static_data_post_id  = $params["static_data_post_id"];
@@ -522,9 +535,15 @@ function sw_update_single_appointment($params){
 
         //update the common fields
         $acf_fields = array(
-            "motivo_de_consulta" => $motivo_de_consulta,           
-            "antecedente_actual" => $antecedente_actual           
-        );
+          "motivo_de_consulta" => $motivo_de_consulta,
+          "antecedente_actual" => $antecedente_actual,
+          "diagnostico_consulta" => $diagnostico_consulta,
+          "codigo_diagnostico" => $codigo_diagnostico,
+          "procedimiento" => $procedimiento,
+          "codigo_procedimiento" => $codigo_procedimiento,
+          "plan_tratamiento" => $plan_tratamiento
+      );
+      
         foreach ($acf_fields as $field => $value) {
             if($value != NULL)
                 //var_dump("clave: ".$field." valor: ".$value)."<br>";

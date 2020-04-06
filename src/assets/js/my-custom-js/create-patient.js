@@ -76,7 +76,7 @@ var CreatePatientModule = function(){
 
           if(data.error.length >0){
             if(data.error){
-              //alert(data.error.msg);
+              alert(data.error.msg);
               alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> sw_create_appointment_ajax ');
               //let errorMsg = result.error.msg;
               //jQuery('form#create-appointment-form .errorWrapper').prepend(errorMsg);
