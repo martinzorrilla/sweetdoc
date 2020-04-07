@@ -50,17 +50,17 @@
           <input type="hidden" name="patient_id" value="<?= $patient_id?>">
           <fieldset row>
             <div class="floated-label-wrapper large-6 columns">
-              <label for="patient_name">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="patient_name">Nombre* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="patient_name" name="patient_name" value="<?php echo $name ?>" placeholder="Ingrese el nombre del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
-              <label for="patient_last_name">Apellido &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="patient_last_name">Apellido* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="patient_last_name" name="patient_last_name" value="<?php echo $lastname ?>" placeholder="Ingrese el apellido del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
-              <label for="patient_ci">Cédula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="patient_ci">Cédula* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="patient_ci" name="patient_ci" value="<?php echo $cedula ?>" placeholder="Ingrese el documento del paciente..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
             </div>
 

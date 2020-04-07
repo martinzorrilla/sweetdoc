@@ -11,7 +11,7 @@
 function sw_create_studies_ajax(){
 
     $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
-    //$patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
+    $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
     $app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;    
     $egcv = isset($_POST['egcv']) && $_POST['egcv'] != '' ? $_POST['egcv'] : NULL;
     $egcv_dx = isset($_POST['egcv_dx']) && $_POST['egcv_dx'] != '' ? $_POST['egcv_dx'] : NULL;
@@ -20,7 +20,7 @@ function sw_create_studies_ajax(){
      //error_log(json_encode($_POST), 0);
 
     $params = array(
-        //"patient_id" => $patient_id,
+        "patient_id" => $patient_id,
         "app_id" => $app_id,
         "egcv" => $egcv,
         "egcv_dx" => $egcv_dx
@@ -43,14 +43,19 @@ add_action( 'wp_ajax_sw_create_studies_ajax', 'sw_create_studies_ajax');
 function sw_create_studies($params){
 
       $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+      $patient_id = $params['patient_id'];
       $app_id = $params['app_id'];
       $egcv = $params['egcv'];
       $egcv_dx = $params['egcv_dx'];
 
 
-      //$metodo_anticonceptivo = array("inyectable", "preservativos");
-      //wp_die(var_dump($metodo_anticonceptivo));
 
+
+      $patient_fields = get_post_custom($patient_id);
+      $name = $patient_fields['nombre'][0];
+      $lastname = $patient_fields['apellido'][0];
+      //$cedula = $patient_fields['cedula'][0];
+      $fullname = $name.'-'.$lastname;
       $post_author = $params['post_author'];
       //sw_get_patient_owner: devuelve el id del doctor directamente, o si el rol del usuario actual es secretaty 
       //devuelve el id del doctor que le corresponde 
@@ -58,7 +63,7 @@ function sw_create_studies($params){
 
       $my_post = array(
         'ID'   => 0,
-        'post_title'    => wp_strip_all_tags( $egcv.' '. $egcv_dx." App ID: ".$app_id),
+        'post_title'    => wp_strip_all_tags( $fullname."- app_id: ".$app_id),
         'post_status'   => 'publish',
         //'post_author'   => get_current_user_id(),
         'post_author'   => $patient_owner,

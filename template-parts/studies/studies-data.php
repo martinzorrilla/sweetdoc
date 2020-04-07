@@ -2,7 +2,7 @@
 
   //get data from template if any
   //$patient_id = "new";
-  //$patient_id = $template_args["patient_id"];
+  $patient_id = $template_args["patient_id"];
   $app_id = $template_args["app_id"];
   $studies_id = $template_args["studies_id"];
   $is_editable = $template_args["is_editable"];
@@ -122,7 +122,7 @@
   <div class="appform tabcontent">
     <form id="create-studies-form" name="create-studies-form" method="post" >
           <input type="hidden" name="action" value="sw_create_studies_ajax">
-          <!-- <input type="hidden" name="patient_id" value="<?php //echo $patient_id;?>"> -->
+          <input type="hidden" name="patient_id" value="<?php echo $patient_id;?>">
           <input type="hidden" name="app_id" value="<?= $app_id?>">
           <fieldset row>
             <div class="floated-label-wrapper large-6 columns">

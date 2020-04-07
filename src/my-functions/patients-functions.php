@@ -51,17 +51,20 @@ function sw_create_patient_ajax(){
         
     );
 
-    //before creating or updating a patient we should validate the data (ie Cedula doesnt exist)
     //call validate_patient()
+    //before creating or updating a patient we should validate the data (ie Cedula doesnt exist)
     $validate_result = validate_patient($params);
-    if ( $validate_result['success'] == false){
-      wp_die(json_encode($result));
+    if ( $validate_result['error'][0] == true ){
+      $result = $validate_result; 
+      //wp_die(json_encode($result));
+      //echo "error al crear el paciente. ya existe el numero de cedula"
     }
-    
-    if($patient_id === 'new'){
-      $result = sw_create_patient($params);
-    }else{
-      $result = sw_update_patient($params);
+    else{
+      if($patient_id === 'new'){
+        $result = sw_create_patient($params);
+      }else{
+        $result = sw_update_patient($params);
+      }
     }
 
     wp_die(json_encode($result));
@@ -387,57 +390,6 @@ function sw_delete_patient($params){
 
   $result['success'] = TRUE;
   $result['msg'] = 'Paciente eliminado en el backend - ID eliminado:  '.$patient_id ;
-  return $result;
-}
-
-/*
-********************************************************************************
-*
-      validate_patient()
-*
-********************************************************************************
-*/
-
-function validate_patient($params){
-
-  $result = array('error'=>[], 'success'=>FALSE, 'patient_id'=>'','msg'=>'');
-  
-  $patient_id = $params['patient_id'];
-  $patient_name = $params['patient_name'];
-  $patient_last_name = $params['patient_last_name'];
-  $patient_ci = $params['patient_ci'];
-  
-  
-  $myquery = new WP_Query(  
-    array( 
-      //'id' => $patient_id,
-      'post_type'  => 'sw_patient',
-      'meta_query' => array(
-        array(
-          'key'     => 'cedula',
-          'value'   => array($patient_ci),
-          'compare' => 'IN',
-        ),
-      ),
-    )
-  );
-
-  //returns a fucking array
-  $related =  wp_list_pluck( $myquery->posts, 'ID' );
-  wp_reset_postdata(); //always reset the post data!
-
-  // it this is true it means that Cedula already exists
-  if(sizeof($related)>0){
-    $result['error'][0] = TRUE;
-    $result['msg'] = 'Ya existe el numero de cédula';
-    return $result;
-  }
-    
-    
-  $result['success'] = TRUE;
-  $result['patient_id'] = $patient_id;
-  //$result['app_id'] = $app_post;
-  $result['msg'] = 'Patient Static Data Created.';
   return $result;
 }
 
