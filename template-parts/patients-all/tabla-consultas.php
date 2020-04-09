@@ -6,6 +6,7 @@
   $appointment_url = home_url().'/consulta/?patient_id=';
   $indicacion_url = home_url().'/indicacion/?patient_id=';
   $estudios_url = home_url().'/estudios/?patient_id=';
+  $laboratorios_url = home_url().'/laboratorios/?patient_id=';
   $patient_id = $template_args["patient_id"];
   $related = sw_get_related_appointments($patient_id);
   
@@ -41,7 +42,13 @@
 
               $studies_array = sw_get_studies_id($r);
               $studies_id = $studies_array[0];
-              $studies_title = $studies_id === NULL ? "Crear" : "Editar";?>
+              $studies_title = $studies_id === NULL ? "Crear" : "Editar";
+              
+              $laboratories_array = sw_get_laboratories_id($r);
+              $laboratories_id = $laboratories_array[0];
+              $laboratories_title = $laboratories_id === NULL ? "Crear" : "Editar";
+
+              ?>
               
               <tr> <!--cada tr es una fila en la tabla -->
                   <!-- consulta -->
@@ -86,11 +93,21 @@
                   }
                   ?>
                   </td>
+
                   <!-- Laboratorio -->
                   <td>
-                    <a href="#">Crear</a>      
+                  <a href="<?php echo esc_url( $laboratorios_url ).$patient_id.'&app_id='.$r; ?>"><?= $laboratories_title?></a>
+                  <!-- solo si existe una solicitud de estudios para esta app (consulta) debemos mostrar las opcion ver indicacion ya que si el valor es null aun no se creo una indicacion. -->
+                  <?php 
+                  if ($laboratories_id) {
+                      ?>
+                      <br>  
+                      <a href="<?php echo get_permalink( $laboratories_id ); ?> "> Imprimir <?php //echo $studies_id; ?></a>
+                      <?php 
+                  }
+                  ?>
                   </td>
-                <!-- Ecografia -->
+                  <!-- Ecografia -->
                   <td>
                     <a href="#">No disponible</a>      
                   </td>

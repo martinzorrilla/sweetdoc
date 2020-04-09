@@ -547,6 +547,37 @@ function sw_get_studies_id($app_id){
   //return $myquery;
 }
 
+//get indication_id post of a given app_id of a patient
+//returns NULL if the app_id does not have a indication
+function sw_get_laboratories_id($app_id){
+
+  $args = array(
+    'post_type'  => 'sw_laboratory',
+    'meta_key'   => 'related_laboratory',
+    'posts_per_page' => -1,
+  //'orderby'    => 'meta_value_num',
+  //'order'      => 'ASC',
+    'meta_query' => array(
+      array(
+        'key'     => 'related_laboratory',
+        'value'   => array($app_id),
+        'compare' => 'IN',
+      ),
+    ),
+  );
+  $myquery = new WP_Query( $args );
+
+  //returns a fucking array
+  $related =  wp_list_pluck( $myquery->posts, 'ID' );
+
+  wp_reset_postdata(); //always reset the post data!
+  
+  //if want to return an array of id's
+  return $related;
+  //if want to return the query object
+  //return $myquery;
+}
+
 /*
 ********************************************************************************
 *
