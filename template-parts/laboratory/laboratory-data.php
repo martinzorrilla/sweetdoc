@@ -4,12 +4,12 @@
   //$patient_id = "new";
   $patient_id = $template_args["patient_id"];
   $app_id = $template_args["app_id"];
-  $studies_id = $template_args["studies_id"];
+  $laboratories_id = $template_args["laboratories_id"];
   $is_editable = $template_args["is_editable"];
   //$is_editable = "true";
-  $studies_fields = get_post_custom($studies_id);
-  $lab1 = $studies_fields['lab1'][0];
-  $lab2 = $studies_fields['lab2'][0];
+  $laboratories_fields = get_post_custom($laboratories_id);
+  $lab1 = $laboratories_fields['lab1'][0];
+  $lab2 = $laboratories_fields['lab2'][0];
 
 
  ?> 

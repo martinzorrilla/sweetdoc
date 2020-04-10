@@ -12,7 +12,7 @@
   
   $laboratories_array = sw_get_laboratories_id($app_id);
   $laboratories_id = $laboratories_array[0];
-  // var_dump($laboratories_id);
+  //var_dump($laboratories_id);
   $title = $laboratories_id === NULL ? "Crear solicitud de laboratorio" : "Editar solicitud de laboratorio";
 ?>
 

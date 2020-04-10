@@ -12,7 +12,18 @@ var CreateLaboratoriesModule = function(){
     function init(){
       $(document).ready(function () {
         //dom queries 
+        if(performance.navigation.type == 2){
+          console.log("se presiono el boton atras");
+          location.reload(true);
+       }
         
+        // console.log("home: ", window.location.hostname);
+        // console.log("path: ", window.location.pathname);
+        // var hostnamePAthLocal= "/sweetdoc/";
+        // var patientPathLocal = "/pacientes/";
+        // console.log("search: ", window.location.search);
+        // console.log("hash: ", window.location.hash);
+
         //createProfileClose = $("#create-profile-close");
         //alert("hola");
         createLaboratoriesBtn = $("#create-laboratory");
@@ -57,8 +68,10 @@ var CreateLaboratoriesModule = function(){
           }
           if(data.success){
             alert(data['msg']);
-            window.location.reload();
-
+            //window.history.go(-1) //funciona, lleva a la pagina anterior.
+            window.location.reload();          
+           //window.location.replace("https://www.tutorialrepublic.com");
+ 
           }
         },
         error: function() {
