@@ -10,7 +10,7 @@ function create_post_type_laboratory() {
         'singular_name' => __( 'Laboratory' )
       ),
       'public' => true,
-      'menu_icon' => 'dashicons-clipboard',
+      'menu_icon' => 'dashicons-shield',
       'menu_position' => 86,
       'has_archive' => true,
     )

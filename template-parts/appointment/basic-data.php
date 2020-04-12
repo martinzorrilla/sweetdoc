@@ -45,14 +45,7 @@
   <!-- <div class="appform tabcontent white-tab"> -->
   <div class="appform tabcontent">
     <div class="card profile-card-action-icons">
-      <div class="card-section">
-          <div class="profile-card-header">
-            <div class="profile-card-author">
-              <h5 class="author-title">Paciente</h5>
-              <!-- <p class="author-description">Paciente</p> -->
-            </div>
-          </div>
-          
+      <div class="card-section">          
           <div class="profile-card-about large-12 columns">
             <h5 class="about-title separator-left"> Ingresar datos de la paciente <?php //echo $name?></h5>
 
