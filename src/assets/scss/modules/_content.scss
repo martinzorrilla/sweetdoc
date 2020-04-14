@@ -101,7 +101,8 @@
   /* Style the tab content */
   .tabcontent {
     /* display: none; */
-    padding: 6px 12px;
+    min-height: 250px;
+    padding: 20px 12px;
     border: 1px solid $sweet-single-tab-background;
     border-top: none;
     background-color: $sweet-single-tab-background;
@@ -146,6 +147,9 @@
   }
 
 
+  .top-bottom-spacer{
+    min-height: 30px;
+  }
   // Colposcopias.css ----------------------------- ####### *************************************************
   
   .archivos {

@@ -64,11 +64,12 @@ function sw_create_studies_ajax(){
     $pyc_dx = isset($_POST['pyc_dx']) && $_POST['pyc_dx'] != '' ? $_POST['pyc_dx'] : NULL;
     $bcl = isset($_POST['bcl']) && $_POST['bcl'] != '' ? $_POST['bcl'] : NULL;
     $bcl_dx = isset($_POST['bcl_dx']) && $_POST['bcl_dx'] != '' ? $_POST['bcl_dx'] : NULL;
+    $otros_st = isset($_POST['otros_st']) && $_POST['otros_st'] != '' ? $_POST['otros_st'] : NULL;
 
 
-
+    
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
-     error_log(json_encode($_POST), 0);
+    // error_log(json_encode($_POST), 0);
 
     $params = array(
         "patient_id" => $patient_id,
@@ -122,7 +123,10 @@ function sw_create_studies_ajax(){
         "pyc" => $pyc,
         "pyc_dx" => $pyc_dx,
         "bcl" => $bcl,
-        "bcl_dx" => $bcl_dx
+        "bcl_dx" => $bcl_dx,
+        "otros_st" => $otros_st
+
+        
     );
 
     //if($patient_id === 'new'){
@@ -192,7 +196,9 @@ function sw_create_studies($params){
       $pyc = $params['pyc'];
       $pyc_dx = $params['pyc_dx'];
       $bcl = $params['bcl'];
-      $bcl_dx = $params['bcl_dx'];
+      $bcl_dx = $params['bcl_dx']; 
+      
+      $otros_st = $params['otros_st']; 
 
 
       $patient_fields = get_post_custom($patient_id);
@@ -270,7 +276,8 @@ function sw_create_studies($params){
             "pyc" => $pyc,
             "pyc_dx" => $pyc_dx,
             "bcl" => $bcl,
-            "bcl_dx" => $bcl_dx
+            "bcl_dx" => $bcl_dx,
+            "otros_st" => $otros_st
 
         );
 

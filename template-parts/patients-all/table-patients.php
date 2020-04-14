@@ -15,12 +15,14 @@ $latest_patients = sw_get_patients($search_param);
 <table class="sw-table-patients my-table-stack">
   <thead>
     <tr>
-      <th>Código Paciente</th>
+      <!-- <th>Código Paciente</th> -->
       <th>Nombre</th>
       <th>Cédula</th>
       <th>Perfil</th>
       <th>Consultas</th>
       <th>Nueva consulta</th>
+      <th>Consultas del día</th>
+
     </tr>
   </thead>
   <tbody id="table-Search">
@@ -54,9 +56,9 @@ $latest_patients = sw_get_patients($search_param);
         
         <tr> <!--cada tr es una fila en la tabla -->
             <!-- Codigo paciente -->
-            <td>
-                <a href="#"> <?php echo $patient->ID;?></a>      
-            </td>
+            <!-- <td>
+                <a href="#"> < ? php// echo $patient->ID;?></a>      
+            </td> -->
 
             <!-- Nombre -->
             <td>
@@ -82,6 +84,11 @@ $latest_patients = sw_get_patients($search_param);
             <!-- Nueva consulta -->
             <td>
                 <a href="<?php echo esc_url( $appointment_url ).$patient->ID.'&app_id=new'; ?>" class="crete-app">Crear</a>      
+            </td>
+
+            <!-- Consultas del dia -->
+            <td>
+                <a href="#"> Agregar </a>      
             </td>
         </tr>
     <?php

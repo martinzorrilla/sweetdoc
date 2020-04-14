@@ -105,11 +105,16 @@
 					<li><a href="<?php echo $create_secretary_url ?>">
 						<i class="fas fa-user-md fa-2x"></i><span class="app-dashboard-sidebar-text"> Crear Asistente</span>
 					</a></li>
+					<li><a href="#">
+						<i class="fas fa-calendar-check fa-2x"></i><span class="app-dashboard-sidebar-text"> Consultas del día</span>
+					</a></li>
 					</ul>
 				</div>
 				</div>
 
 				<div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+
+				<div class="top-bottom-spacer"></div>
 				<!-- the content starts here! -->
 
 				<!-- <ul class="menu align-right">

@@ -83,7 +83,9 @@
   $checkbox_bcl = get_field('bcl', $studies_id);
   $bcl_dx = $studies_fields['bcl_dx'][0];
 
+  $otros_st = $studies_fields['otros_st'][0];
 
+  
 
  ?> 
 
@@ -264,9 +266,9 @@
             <input type="text" id="emdm_dx" name="emdm_dx" value="<?php echo $emdm_dx ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
           </div>
 
-          <!-- checkbox_Ecografía obstétrica para marcadores cromosomicos + Doppler materno -->
+          <!-- checkbox_ Ecografía obstétrica para marcadores cromosomicos + Doppler materno -->
           <div class="floated-label-wrapper small-12 large-6 columns checkbox-radio text-left ">
-              <label class="separator-left"> Ecografía obstétrica para marcadores cromosomicos + Doppler materno </label>
+              <label class="separator-left"> Marcadores cromosomicos + Doppler materno </label>
                   <input type="checkbox" id="eomcdm" name="eomcdm[]" value="eomcdm_si" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                   <?php 
                   if( $checkbox_eomcdm != NULL || $checkbox_eomcdm != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
@@ -488,6 +490,11 @@
             <input type="text" id="bcl_dx" name="bcl_dx" value="<?php echo $bcl_dx ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
           </div>
 
+          <!-- otros estudios -->
+          <div class="floated-label-wrapper small-12 large-12 columns">
+            <label class="separator-left" for="otros_st">Otros estudios</label>
+            <input type="text" id="otros_st" name="otros_st" value="<?php echo $otros_st ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
+          </div>
 
           </fieldset>
         </form>
