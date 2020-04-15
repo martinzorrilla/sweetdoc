@@ -5,7 +5,7 @@
   $create_secretary_url = home_url().'/crear-asistente/';
   $current_user = wp_get_current_user();
 ?>
- 
+  
 <div class="the-content">
 
   <?php hm_get_template_part('template-parts/doctor/doctor-intro', ['data' => ""]); ?>
