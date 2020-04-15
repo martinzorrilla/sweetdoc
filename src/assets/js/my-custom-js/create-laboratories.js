@@ -1,28 +1,35 @@
-var CreateIndicationModule = function(){
+var CreateLaboratoriesModule = function(){
 
     //global vars
     var $ = jQuery;
     
-    var createIndicationBtn;
-    var editPatientBtn;
+    var createLaboratoriesBtn;
+    //var editPatientBtn;
     
-    var createIndicationForm;
+    var createLaboratoriesForm;
     
 
     function init(){
       $(document).ready(function () {
         //dom queries 
         
-        //createProfileClose = $("#create-profile-close");
-        
-        createIndicationBtn = $("#create-indication");
-        editPatientBtn = $("#toggle-input");
-        
-        createIndicationForm = $("#create-indication-form");
+        // console.log("home: ", window.location.hostname);
+        // console.log("path: ", window.location.pathname);
+        // var hostnamePAthLocal= "/sweetdoc/";
+        // var patientPathLocal = "/pacientes/";
+        // console.log("search: ", window.location.search);
+        // console.log("hash: ", window.location.hash);
 
-        createIndicationBtn.on("click", function (e) {
-          createIndicationBtn.fadeOut( "slow" );
-          //  alert("se creara una nueva indicacion");
+        //createProfileClose = $("#create-profile-close");
+        //alert("hola");
+        createLaboratoriesBtn = $("#create-laboratory");
+        //editPatientBtn = $("#toggle-input");
+        
+        createLaboratoriesForm = $("#create-laboratories-form");
+
+        createLaboratoriesBtn.on("click", function (e) {
+          createLaboratoriesBtn.fadeOut( "slow" );
+            //alert("se creara una solicitud de laboratorio");
           saveProfileData(e);
         })
       });
@@ -33,7 +40,7 @@ var CreateIndicationModule = function(){
       //alert("Se guardaran los datos");
       var $ = jQuery;
       //var myData = createPatientForm.serialize() + '&patient_id=' + '<?php echo $patient_id ?>';
-      var myData = createIndicationForm.serialize();
+      var myData = createLaboratoriesForm.serialize();
       
       $.ajax({
         type: "POST",
@@ -57,14 +64,15 @@ var CreateIndicationModule = function(){
           }
           if(data.success){
             alert(data['msg']);
-            // window.location.reload();
             window.history.back();
-
-
+            //window.history.go(-1) //funciona, lleva a la pagina anterior.
+            //window.location.reload();          
+           //window.location.replace("https://www.tutorialrepublic.com");
+ 
           }
         },
         error: function() {
-            alert('error handling the indication creation');
+            alert('error handling the Laboratory creation');
         }
       });// $.ajax
     }
@@ -74,4 +82,4 @@ var CreateIndicationModule = function(){
   }
 
   }();
-  CreateIndicationModule.init();
+  CreateLaboratoriesModule.init();

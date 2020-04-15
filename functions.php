@@ -546,3 +546,100 @@ function sw_get_studies_id($app_id){
   //if want to return the query object
   //return $myquery;
 }
+
+//get indication_id post of a given app_id of a patient
+//returns NULL if the app_id does not have a indication
+function sw_get_laboratories_id($app_id){
+
+  $args = array(
+    'post_type'  => 'sw_laboratory',
+    'meta_key'   => 'related_laboratory',
+    'posts_per_page' => -1,
+  //'orderby'    => 'meta_value_num',
+  //'order'      => 'ASC',
+    'meta_query' => array(
+      array(
+        'key'     => 'related_laboratory',
+        'value'   => array($app_id),
+        'compare' => 'IN',
+      ),
+    ),
+  );
+  $myquery = new WP_Query( $args );
+
+  //returns a fucking array
+  $related =  wp_list_pluck( $myquery->posts, 'ID' );
+
+  wp_reset_postdata(); //always reset the post data!
+  
+  //if want to return an array of id's
+  return $related;
+  //if want to return the query object
+  //return $myquery;
+}
+
+/*
+********************************************************************************
+*
+      validate_patient()
+*
+********************************************************************************
+*/
+//validar los valores antes de crear el paciente. ie. que no exista la cedula en la base de datos
+function validate_patient($params){
+
+  $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+  
+  $patient_id = $params['patient_id'];
+  $patient_name = $params['patient_name'];
+  $patient_last_name = $params['patient_last_name'];
+  $patient_ci = $params['patient_ci'];
+  
+  
+  $myquery = new WP_Query(  
+    array( 
+      //'id' => $patient_id,
+      'post_type'  => 'sw_patient',
+      'meta_query' => array(
+        array(
+          'key'     => 'cedula',
+          'value'   => array($patient_ci),
+          'compare' => 'IN',
+        ),
+      ),
+    )
+  );
+
+  //returns a fucking array
+  $related =  wp_list_pluck( $myquery->posts, 'ID' );
+  wp_reset_postdata(); //always reset the post data!
+  //return $related;
+
+  $error_msg_1 = "";
+  $error_msg_2 = "";
+  $empty_fields = false;
+  $ci_exists =false;
+
+  if( $patient_name =="" || $patient_last_name =="" || $patient_ci ==""){
+    $empty_fields = true;
+    $error_msg_1 = "Completar los campos obligatorios. ";
+  }
+
+  if(sizeof($related)>0){
+    $ci_exists = true;
+    $error_msg_2 = "El numero de cédula ya existe";
+  }
+  // it sizeof($related)>0 true it means that Cedula already exists
+  if($ci_exists == true || $empty_fields){
+    $result['error'][0] = TRUE;
+    $result['msg'] = $error_msg_1.$error_msg_2;
+    return $result;
+  }
+    
+    
+  $result['success'] = TRUE;
+  //$result['patient_id'] = $patient_id;
+  //$result['app_id'] = $app_post;
+  $result['msg'] = 'No existe el nro de cedula en la base de datos.';
+  return $result;
+}

@@ -1,17 +1,18 @@
 <?php get_header();/* Template Name: Create Studies*/?>
 <?php 
   //retreive data from the url
-  $patient_id = "new";
-  //$patient_id = $_GET['patient_id'];
+  //$patient_id = "new";
+  $patient_id = $_GET['patient_id'];
   $app_id =  $_GET['app_id'];
   //si el parametro patient_id == new, el formulario debe ser editable por defecto, si no debe no ser editable
-  $is_editable = $patient_id == "new" ? "true" : "false";
+  // $is_editable = $patient_id == "new" ? "true" : "false";
+  $is_editable = "true"; 
   // $prescription_pdf_url = home_url().'/test';
   
   
   $studies_array = sw_get_studies_id($app_id);
   $studies_id = $studies_array[0];
-  var_dump($studies_id);
+  // var_dump($studies_id);
   $title = $studies_id === NULL ? "Crear solicitud de estudios" : "Editar solicitud de estudios";
 ?>
 
@@ -19,7 +20,7 @@
   <h3> <?= $title ?> </h3>
 </div>
 
-<?php hm_get_template_part('template-parts/studies/studies-data', ['app_id' => $app_id, 'studies_id' => $studies_id, 'is_editable' => $is_editable ]); ?>
+<?php hm_get_template_part('template-parts/studies/studies-data', ['patient_id' => $patient_id, 'app_id' => $app_id, 'studies_id' => $studies_id, 'is_editable' => $is_editable ]); ?>
 
 <!-- if(role == doctor){ show AGO form} -->
 

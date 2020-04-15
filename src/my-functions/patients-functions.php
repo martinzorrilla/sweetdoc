@@ -51,10 +51,20 @@ function sw_create_patient_ajax(){
         
     );
 
-    if($patient_id === 'new'){
-      $result = sw_create_patient($params);
-    }else{
-      $result = sw_update_patient($params);
+    //call validate_patient()
+    //before creating or updating a patient we should validate the data (ie Cedula doesnt exist)
+    $validate_result = validate_patient($params);
+    if ( $validate_result['error'][0] == true ){
+      $result = $validate_result; 
+      //wp_die(json_encode($result));
+      //echo "error al crear el paciente. ya existe el numero de cedula"
+    }
+    else{
+      if($patient_id === 'new'){
+        $result = sw_create_patient($params);
+      }else{
+        $result = sw_update_patient($params);
+      }
     }
 
     wp_die(json_encode($result));
@@ -321,7 +331,6 @@ function sw_create_static_data($params){
       $result['msg'] = 'Patient Static Data Created.';
       return $result;
 }
-
 
 
 /*

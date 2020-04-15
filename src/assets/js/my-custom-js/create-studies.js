@@ -57,7 +57,9 @@ var CreateIndicationModule = function(){
           }
           if(data.success){
             alert(data['msg']);
-            window.location.reload();
+//            window.location.reload();
+            window.history.back();
+
 
           }
         },

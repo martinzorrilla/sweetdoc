@@ -2,7 +2,7 @@
 
 <?php  
 
-// $appointment_url = home_url().'/consulta/?patient_id=';
+ $appointment_url = home_url().'/consulta/?patient_id=';
 // $indicacion_url = home_url().'/indicacion/?patient_id=';
 // $estudios_url = home_url().'/estudios/?patient_id=';
 
@@ -79,3 +79,20 @@ if(true){
 ?>
 
 <?php get_footer();?>
+
+<script>
+// EL PROBLEMA: AL CREAR un nuevo post_type UN (ESTUDIO, INDICACION, LABORATORIO ETC) Y VOLVER ATRAS A LA PAGINA single-sw_patient, esta se debe recargar manualmente, de lo contrario no se ve que se creo un nuevo post type o si se edito tovia esta linkeado al post anterior.
+
+// LA SOLUCION: este codigo detecta que se presiono el boton atras del navegador y fuerza el reload de la pagina de manera a solucionar el problema mencionado
+// source: https://stackoverflow.com/questions/43043113/how-to-force-reloading-a-page-when-using-browser-back-button
+
+window.addEventListener( "pageshow", function ( event ) {
+  var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
+  if ( historyTraversal ) {
+    // Handle page restore. 
+    //alert("Everything is ready now!");
+    window.location.reload();
+  }
+});
+</script>
+

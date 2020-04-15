@@ -11,16 +11,16 @@
 function sw_create_indication_ajax(){
 
     $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
-    //$patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
+    $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
     $app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;    
     $rp = isset($_POST['rp']) && $_POST['rp'] != '' ? $_POST['rp'] : NULL;
     $indicaciones = isset($_POST['indicaciones']) && $_POST['indicaciones'] != '' ? $_POST['indicaciones'] : NULL;
 
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
-     //error_log(json_encode($_POST), 0);
+     error_log(json_encode($_POST), 0);
 
     $params = array(
-        //"patient_id" => $patient_id,
+        "patient_id" => $patient_id,
         "app_id" => $app_id,
         "rp" => $rp,
         "indicaciones" => $indicaciones
@@ -44,12 +44,19 @@ function sw_create_indication($params){
 
       $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
       $app_id = $params['app_id'];
+      $patient_id = $params['patient_id'];
+
+      //datos del formulario en si
       $rp = $params['rp'];
       $indicaciones = $params['indicaciones'];
 
-
-      //$metodo_anticonceptivo = array("inyectable", "preservativos");
-      //wp_die(var_dump($metodo_anticonceptivo));
+      // $patient_id =  sw_get_patient_id_by_app($app_id);
+      $patient_fields = get_post_custom($patient_id);
+      $name = $patient_fields['nombre'][0];
+      $lastname = $patient_fields['apellido'][0];
+      //$cedula = $patient_fields['cedula'][0];
+      $fullname = $name.'-'.$lastname;
+      //$fullname = "no anda";
 
       $post_author = $params['post_author'];
       //sw_get_patient_owner: devuelve el id del doctor directamente, o si el rol del usuario actual es secretaty 
@@ -58,7 +65,7 @@ function sw_create_indication($params){
 
       $my_post = array(
         'ID'   => 0,
-        'post_title'    => wp_strip_all_tags( $rp.' '. $indicaciones." App ID: ".$app_id),
+        'post_title'    => wp_strip_all_tags( $fullname."- app_id: ".$app_id),
         'post_status'   => 'publish',
         //'post_author'   => get_current_user_id(),
         'post_author'   => $patient_owner,
@@ -92,6 +99,7 @@ function sw_create_indication($params){
 }
 
 //POR EL MOMENTO NO USO YA QUE ESTOY CREANDO UN NUEVO POST POR CADA UPDATE DE INDICACION, DE MANERA A TENER UN HISTORIAL DE CAMBIOS. ESTA FUNCION ES UNA COPIA SIN MODIFICAR DE UPDATE_PATIENT
+//SI QUIERO USAR TENGO QUE MODIFICAR LA FUNCION
 function sw_update_indication($params){
 
   $result = array('error'=>[], 'success'=>FALSE,'msg'=>'');

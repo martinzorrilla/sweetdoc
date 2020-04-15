@@ -238,8 +238,78 @@ $app-dashboard-top-nav-height: 55px;
   }
 }
 
-my-table-data{
+//CUSTOM CODE FOR STACKING THE TABLE
+// scss para las tablas en todos los pacientes y las consultas en single patient. 
+// la clase stack que trae table por default esconde la fila que contiene los titulos de cada columna
+// al ir a screen size mobile, por lo tanto agregue este codigo para que muestte los titulos
+// Foundation's table.stack only shows the first th, but I want all of them.
+// .
+// .
+// .
+@mixin my-table-stack {
+  thead {
+    th {
+      display: block;
+    }
+  }
+
+  tfoot {
+    display: none;
+  }
+
+  tr,
+  th,
+  td {
+    display: block;
+  }
+
+  td {
+    border-top: 0;
+  }
+}
+
+table.my-stack {
+   @include breakpoint(medium down) {
+      @include my-table-stack;
+   }
+}
+
+// CUSTOM CODE PARA LA TABLA EN GENERAL
+// .
+// .
+// .
+
+.sw-tabla-consultas, .sw-table-patients{
+  //text-align: center;
   a{
     color:black;
+    &:hover {
+      color:$sweet-sidebar-hover;
+      //font-weight: bold;
+      font-style: italic;
+    }
   }
+
+  thead{
+    background-color: $sweet-blue; 
+    color: $sweet-white;
+    border: 0.5px solid $sweet-blue;
+    &:hover {
+      font-style: italic;
+    }
+    tr{
+      th{
+        //text-align: center;
+      }
+    }
+  }
+
+  tbody{
+    tr{
+      td{
+        text-transform: capitalize;
+      }
+    }
+  }
+
 }

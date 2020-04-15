@@ -25,7 +25,7 @@ var CreatePatientModule = function(){
         deletePatientForm = $("#delete-patient-form");
 
         createPatientBtn.on("click", function (e) {
-          createPatientBtn.fadeOut( "slow" );
+          //createPatientBtn.fadeOut( "slow" );
            alert("Se creara un paciente nuevo");
           saveProfileData(e);
         })
@@ -76,8 +76,10 @@ var CreatePatientModule = function(){
 
           if(data.error.length >0){
             if(data.error){
+              console.log(data);
               //alert(data.error.msg);
-              alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> sw_create_appointment_ajax ');
+              alert(data['msg']);
+              //alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> sw_create_appointment_ajax ');
               //let errorMsg = result.error.msg;
               //jQuery('form#create-appointment-form .errorWrapper').prepend(errorMsg);
             }
