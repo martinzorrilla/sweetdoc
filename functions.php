@@ -280,6 +280,38 @@ function sw_get_colpo_id($app_id){
   //return $myquery;
 }
 
+// como deberia funcionar
+// recibe la app_id y devuelve el patient_id
+function sw_get_patient_id_from_app_id($app_id){
+
+  $args = array(
+    'post_type'  => 'sw_consulta',
+    'meta_key'   => 'related_appointment',
+    'posts_per_page' => -1,
+  //'orderby'    => 'meta_value_num',
+  //'order'      => 'ASC',
+    'meta_query' => array(
+      array(
+        'key'     => 'related_appointment',
+        'value'   => array($app_id),
+        'compare' => 'IN',
+      ),
+    ),
+  );
+  $myquery = new WP_Query( $args );
+
+  //returns a fucking array
+  $related =  wp_list_pluck( $myquery->posts, 'ID' );
+
+  wp_reset_postdata(); //always reset the post data!
+  
+  //if want to return an array of id's
+  return $related;
+  //if want to return the query object
+  //return $myquery;
+}
+
+
 //get static_data post of a given app_id of a patient
 //returns NULL if the app_id does not have a colposcopy
 function sw_patiente_colpos($patient_id){
@@ -625,11 +657,12 @@ function validate_patient($params){
     $error_msg_1 = "Completar los campos obligatorios. ";
   }
 
-  if(sizeof($related)>0){
+  // it sizeof($related)>0 true it means that Cedula already exists
+  //if(sizeof($related)>0){
+  if(sizeof($related)>0 && $patient_id=="new"){
     $ci_exists = true;
     $error_msg_2 = "El numero de cédula ya existe";
   }
-  // it sizeof($related)>0 true it means that Cedula already exists
   if($ci_exists == true || $empty_fields){
     $result['error'][0] = TRUE;
     $result['msg'] = $error_msg_1.$error_msg_2;

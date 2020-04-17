@@ -88,7 +88,7 @@
           <!-- colposcopia -->
           <div class="floated-label-wrapper large-6 columns">
             <label class="separator-left" for="colposcopia">Colposcopia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="colposcopia" name="colposcopia" value="<?php echo $colposcopia ?>" placeholder="Escribir..." required>
+            <input type="text" id="colposcopia" name="colposcopia" value="<?php echo $colposcopia ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
           </div>
 
           <!-- evaluacion_general -->
@@ -358,7 +358,7 @@
           <!-- colposcopicos_anormales_ubicacion -->
             <div class="floated-label-wrapper large-6 columns ">
             <label for="colposcopicos_anormales_ubicacion">colposcopicos_anormales_ubicacion &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="colposcopicos_anormales_ubicacion" name="colposcopicos_anormales_ubicacion" value="<?php echo $colposcopicos_anormales_ubicacion ?>" placeholder="Escribir..." required>
+            <input type="text" id="colposcopicos_anormales_ubicacion" name="colposcopicos_anormales_ubicacion" value="<?php echo $colposcopicos_anormales_ubicacion ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
           </div>
 
           <!-- sospecha_de_invasion - checkbox -->
@@ -488,7 +488,7 @@
           <!-- Descripcio Examen de vagina y vulva -->
           <div class="floated-label-wrapper large-12 columns end">
             <label for="examen_de_vyv_descripcion">Descripción del examen &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="examen_de_vyv_descripcion" name="examen_de_vyv_descripcion" value="<?php echo $examen_de_vyv_descripcion ?>" placeholder="Escribir..." required>
+            <input type="text" id="examen_de_vyv_descripcion" name="examen_de_vyv_descripcion" value="<?php echo $examen_de_vyv_descripcion ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
           </div>
 
         </div>

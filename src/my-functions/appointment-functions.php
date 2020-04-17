@@ -299,7 +299,13 @@ function sw_create_new_appointment($params){
                 update_field( $field, $value, $app_post );
             }
         }
+        // esta es la que originalmente ya estaba
+      //esta realcion permite que: teniendo el id del paciente se pueda buscar sus apps
       add_post_meta( $app_post, 'related_patient', $patient_id );
+
+      // esta agregue mucho despues cuando necesite en el momento de crear el pdf para la indicion, cosa que aun no funciona
+      // esta relacion es para que funcione sw_get_patient_id_from_app_id y se pueda obtener el id del paciente a partir de la app_id. no se si funciona bien ya que solo guardaria en el la ultima app que se relaciono con el paciente.
+      add_post_meta($patient_id, 'related_appointment', $app_post );
       
       //update the private/static data
       //WARNING: the post type static_data is created when the patient is created

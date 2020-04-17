@@ -123,5 +123,7 @@ $pdf->SetAuthor('Andrea Zorrilla');
 $pdf->PrintChapter(1,' R.P.                                                                   -            INDICACIONES', $myfile);
 $pdf->PrintPrescription(1,'R.P.', $rp);
 $pdf->PrintPrescription(2,'INDICACIONES',$indicaciones);
+ob_start();
 $pdf->Output();
+ob_end_flush();
 ?>

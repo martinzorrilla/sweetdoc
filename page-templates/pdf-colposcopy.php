@@ -273,7 +273,6 @@ function CheckPageSpaceLeft($page_height, $current_y)
 
 }//class
 
- $indicaciones = "INDICACIONES: Organic sustainable lomo, +1 irony McSweeneys skateboard Portland PBR tattooed farm-to-table Terry Richardson Williamsburg. Organic farm-to-table wolf, next level shit put a bird on it freegan American Apparel Williamsburg chambray gentrify viral you probably haven’t.";
 
 // pure php data ----------------------------------------------
 $colpo_post_id = $_GET['colpo_id'];
@@ -408,6 +407,7 @@ if (sizeof($images_ids_array)>0) {
     $k++;
     } 
 }
-
+ob_start();
 $pdf->Output();
+ob_end_flush();
 ?>

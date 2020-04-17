@@ -123,5 +123,7 @@ $pdf->SetAuthor('Andrea Zorrilla');
 $pdf->PrintChapter(1,' lab1.                                                                   -            lab2', $myfile);
 $pdf->PrintPrescription(1,'lab1', $lab1);
 $pdf->PrintPrescription(2,'lab2',$lab2);
+ob_start();
 $pdf->Output();
+ob_end_flush();
 ?>
