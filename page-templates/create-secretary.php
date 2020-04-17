@@ -1,5 +1,9 @@
 <?php get_header();/* Template Name: Create Secretary*/?>
-
+<?php 
+$nombre = "";
+$apellido = "";
+$cedula = "";
+?>
 <div data-closable class="callout alert-callout-border secondary text-center">
   <h3>Crear Asistente</h3>
 </div>
@@ -17,7 +21,7 @@
     <form id="create-secretary-form" name="create-patient-form" method="post" class="text-center">
           <fieldset>
             <div class="floated-label-wrapper large-6 columns">
-              <label for="nombre">Nombre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label for="nombre">Nombre </label>
               <input type="text" id="patient_name" name="patient_name" value="<?php echo $nombre ?>" placeholder="Escribir..." required>
             </div>
 

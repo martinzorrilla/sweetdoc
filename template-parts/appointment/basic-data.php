@@ -9,25 +9,39 @@
   
   //load all the data we need from the Patient Post
   $patient_fields = get_post_custom($patient_id);
-  $name = $patient_fields['nombre'][0];
-  $lastname = $patient_fields['apellido'][0];
-  $cedula = $patient_fields['cedula'][0];
-  $email_paciente = $patient_fields['email_paciente'][0];
+  $name = isset($patient_fields['nombre'][0]) ? $patient_fields['nombre'][0] : NULL;
+  // $name = $patient_fields['nombre'][0];
+  
+  $lastname = isset($patient_fields['apellido'][0]) ? $patient_fields['apellido'][0] : NULL;
+  $cedula = isset($patient_fields['cedula'][0]) ? $patient_fields['cedula'][0] : NULL;
+  $email_paciente = isset($patient_fields['email_paciente'][0]) ? $patient_fields['email_paciente'][0] : NULL;
+  $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
+  $departamento = isset($patient_fields['departamento'][0]) ? $patient_fields['departamento'][0] : NULL;
+  $ciudad = isset($patient_fields['ciudad'][0]) ? $patient_fields['ciudad'][0] : NULL;
+  $direccion = isset($patient_fields['direccion'][0]) ? $patient_fields['direccion'][0] : NULL;
+  $telefono = isset($patient_fields['telefono'][0]) ? $patient_fields['telefono'][0] : NULL;
+  $celular = isset($patient_fields['celular'][0]) ? $patient_fields['celular'][0] : NULL;
+  $establecimiento = isset($patient_fields['establecimiento'][0]) ? $patient_fields['establecimiento'][0] : NULL;
+  $region_sanitaria = isset($patient_fields['region_sanitaria'][0]) ? $patient_fields['region_sanitaria'][0] : NULL;
 
+  // var_dump($fecha_de_nacimiento);
+  // $lastname = $patient_fields['apellido'][0];
+  // $cedula = $patient_fields['cedula'][0];
+  // $email_paciente = $patient_fields['email_paciente'][0];
   //$fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0];
-  $fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
+  // $fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
   $newDate = "";
   //acf retoran la fecha asi:20191128 en vez de 2019-11-28 que es como el input[date] requiere, x eso tranformo el valor
-  if ($fecha_de_nacimiento != ""){ $newDate = date("Y-m-d", strtotime($fecha_de_nacimiento));}
-  $departamento = $patient_fields['departamento'][0];
-  $ciudad = $patient_fields['ciudad'][0];
-  $direccion = $patient_fields['direccion'][0];
+  if ($fecha_de_nacimiento != "" && $fecha_de_nacimiento != NULL){ $newDate = date("Y-m-d", strtotime($fecha_de_nacimiento));}
+  // $departamento = $patient_fields['departamento'][0];
+  // $ciudad = $patient_fields['ciudad'][0];
+  // $direccion = $patient_fields['direccion'][0];
   
   //$radiobox_metodo_anti = get_field('epitelio_escamoso', $patient_id); 
-  $telefono = $patient_fields['telefono'][0];
-  $celular = $patient_fields['celular'][0];
-  $establecimiento = $patient_fields['establecimiento'][0];
-  $region_sanitaria = $patient_fields['region_sanitaria'][0];
+  // $telefono = $patient_fields['telefono'][0];
+  // $celular = $patient_fields['celular'][0];
+  // $establecimiento = $patient_fields['establecimiento'][0];
+  // $region_sanitaria = $patient_fields['region_sanitaria'][0];
   
   $fullname = $name.' '.$lastname;
   //if ($radiobox_metodo_anti) { var_dump($radiobox_metodo_anti); } else { echo "checkbox anti esta vacio"; }

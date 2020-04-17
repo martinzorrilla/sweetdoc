@@ -5,6 +5,7 @@
   //si el parametro patient_id == new, el formulario debe ser editable por defecto, si no debe no ser editable
   $is_editable = $patient_id == "new" ? "true" : "false";
   $title = $patient_id == "new" ? "Agregar Paciente" : "Editar Paciente";
+  //var_dump($patient_id);
   
 ?>
 

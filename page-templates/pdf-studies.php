@@ -278,8 +278,11 @@ function CheckPageSpaceLeft($page_height, $current_y)
 $studies_id = $_GET['studies_id'];
 $studies_fields = get_post_custom($studies_id);
 
-$colpo_data_post = get_post_custom($colpo_post_id);
-$patient_id = $studies_fields['related_study'][0];
+//$colpo_data_post = get_post_custom($colpo_post_id);
+$app_id = $studies_fields['related_study'][0];
+$patient_id = sw_get_patient_id_from_app_id($app_id);
+
+// $patient_id = $studies_fields['related_study'][0];
 
 $patient_fields = get_post_custom($patient_id);
 $name = $patient_fields['nombre'][0];
@@ -302,7 +305,8 @@ $datos_personales = $fullname."        Edad: ".$edad_paciente."        Ci: ".$ce
 
 $checkbox_egcv = get_field('egcv', $studies_id);
 $egcv_dx = $studies_fields['egcv_dx'][0];
-wp_die(var_dump($patient_id));
+// wp_die(var_dump($app_id));
+// wp_die(var_dump($patient_id));
 
 
 // fpdf --------------------------------------------
@@ -328,6 +332,7 @@ $pdf->PrintElement(2,' - DESCRIPCION',$egcv_dx);
 //El autoPagaBreak esta desactivado y lo hago manualmente para la seccion de imagenes. esi implica que si el texto de la seccion hallazgos es muy larga no hara el salto de pagian automaticamente
 //$pdf->AddPage();
 
-
+ob_start();
 $pdf->Output();
+ob_end_flush();
 ?>
