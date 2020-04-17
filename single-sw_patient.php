@@ -5,6 +5,7 @@
  $appointment_url = home_url().'/consulta/?patient_id=';
 // $indicacion_url = home_url().'/indicacion/?patient_id=';
 // $estudios_url = home_url().'/estudios/?patient_id=';
+//$is_editable = FALSE;
 
 // $edit_patient_url = home_url().'/crear-paciente/?patient_id=new';
 //the id of the post in the current loop. witch is the patient
@@ -53,9 +54,9 @@ $result = sw_get_current_user_role();
 //en produccion: verificar que el usuario sea doctor
 //if($result == "doctor"){
 if(true){
-  hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
-  hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id, 'is_editable' => "false" ]);
-  hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id]); 
+  hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id, 'is_editable' => "false"]);
+  hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id, 'is_editable' => "false"]);
+  hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => "false"]); 
   ?>
 
   <!-- <h2 style="text-align: center; margin-left: 50px;">Consultas</h2> -->

@@ -36,23 +36,9 @@ $latest_patients = sw_get_patients($search_param);
     <!-- </tr>Fin de 1ra fila -->
 
     <?php
-    //r is the current app_id 
+     
     foreach ($latest_patients as $patient){
-        //get the appointment creation date
-        $creation_date = get_the_date( 'd-M-Y', $r );    
-        //get the colposcopy id and href of this app
-        $colpo_patient_array = sw_get_colpo_id($r);
-        $colpo_post_id = $colpo_patient_array[0];
-        $colpo_title = $colpo_post_id === NULL ? "No existe" : "Ver";
-
-
-        $indication_array = sw_get_indication_id($r);
-        $indication_id = $indication_array[0];
-        $indication_title = $indication_id === NULL ? "Crear" : "Editar";
-
-        $studies_array = sw_get_studies_id($r);
-        $studies_id = $studies_array[0];
-        $studies_title = $studies_id === NULL ? "Crear" : "Editar";?>
+    ?>
         
         <tr> <!--cada tr es una fila en la tabla -->
             <!-- Codigo paciente -->

@@ -1,5 +1,7 @@
 <?php
   $patient_id = $template_args["patient_id"];
+  $is_editable = $template_args["is_editable"];
+
   $edit_patient_url = home_url().'/crear-paciente/?patient_id='.$patient_id;
   //load all the data we need from the Patient Post
   $patient_fields = get_post_custom($patient_id);
@@ -7,7 +9,8 @@
   $lastname = $patient_fields['apellido'][0];
   $cedula = $patient_fields['cedula'][0];
   $fullname = $name.' '.$lastname;
-  $fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
+  $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
+  // $fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
   
   //$bday = new DateTime('23.8.1988'); // Your date of birth
   $bday = new Datetime(date('d.m.y'));
@@ -16,6 +19,15 @@
   $diff = $today->diff($bday);
   //printf(' Edad : %d años, %d meses, %d dias', $diff->y, $diff->m, $diff->d);
   
+  $static_data_array = sw_get_static_data_id($patient_id); 
+  $static_data_post = get_post_custom($static_data_array[0]);
+  $numero_embarazos = isset($static_data_post['numero_embarazos'][0]) ? $static_data_post['numero_embarazos'][0] : NULL;
+  $parto_normal = isset($static_data_post['parto_normal'][0]) ? $static_data_post['parto_normal'][0] : NULL;
+  $cesareas = isset($static_data_post['cesareas'][0]) ? $static_data_post['cesareas'][0] : NULL;
+
+  // $numero_embarazos = $static_data_post['numero_embarazos'][0];
+  // $parto_normal = $static_data_post['parto_normal'][0];
+  // $cesareas = $static_data_post['cesareas'][0];
   //var_dump($patient_id);
 
  ?> 
@@ -47,6 +59,9 @@
           <p class="about-content">
             <p><?php echo("Cedula : ".$cedula);?></p>
             <p><?php printf(' Edad : %d años, %d meses, %d dias', $diff->y, $diff->m, $diff->d); ?></p>
+            <p><?php echo("Embarazos : ".$numero_embarazos);?></p>
+            <p><?php echo("Parto normal : ".$parto_normal);?></p>
+            <p><?php echo("Cesareas : ".$cesareas);?></p>
           </p>
 
           <!-- <br>

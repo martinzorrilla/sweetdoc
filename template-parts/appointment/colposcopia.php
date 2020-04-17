@@ -1,5 +1,7 @@
 <?php
     $colpo_post_id = $template_args["colpo_post_id"]; 
+    $is_editable = $template_args["is_editable"];
+
     $colpo_data_post = get_post_custom($colpo_post_id);
     //var_dump($colpo_data_post);
     //load all the data we need from the colpscopy post-------
