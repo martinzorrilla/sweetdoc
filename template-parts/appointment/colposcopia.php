@@ -14,7 +14,10 @@
     for ($i=0; $i < $max_images; $i++) {
       $k = $i+1;
       $text = 'colpo_imagen_'.$k;
-      $the_image_id = $colpo_data_post[$text][0];
+      //$the_image_id = $colpo_data_post[$text][0]; // esta linea de codigo funciona pero da un warning the undefined  index cuando el elemento esta vacio
+      // $the_image_id = $colpo_data_post[$text][0];
+      $the_image_id = isset($colpo_data_post[$text][0]) ? $colpo_data_post[$text][0] : NULL;
+
 //       var_dump($the_image_id);
       if ($the_image_id != "" && $the_image_id != NULL) {
          $images_ids_array[$i] = $the_image_id;
@@ -42,26 +45,30 @@
 
     
     //field files
-    $macroscopia = $colpo_data_post['macroscopia'][0];
-    $colposcopia = $colpo_data_post['colposcopia'][0];
+    // $macroscopia = $colpo_data_post['macroscopia'][0];
+    $macroscopia = isset($colpo_data_post['macroscopia'][0]) ? $colpo_data_post['macroscopia'][0] : NULL;
+    // $colposcopia = $colpo_data_post['colposcopia'][0];
+    $colposcopia = isset($colpo_data_post['colposcopia'][0]) ? $colpo_data_post['colposcopia'][0] : NULL;
     $radiobox_evaluacion_general = get_field('evaluacion_general', $colpo_post_id); 
     $checkbox_motivo_inadecuada = get_field('motivo_inadecuada', $colpo_post_id);
     $radiobox_union_escamo_columnar = get_field('union_escamo_columnar', $colpo_post_id);
     $radiobox_zona_de_transformacion = get_field('zona_de_transformacion', $colpo_post_id);
     // $colposcopicos_normales = $colpo_data_post['colposcopicos_normales'][0];
     $checkbox_colposcopicos_normales = get_field('colposcopicos_normales', $colpo_post_id);
-
     $checkbox_colposcopicos_anormales_grado_1 = get_field('colposcopicos_anormales_grado_1', $colpo_post_id);
     $checkbox_colposcopicos_anormales_grado_2 = get_field('colposcopicos_anormales_grado_2', $colpo_post_id);
     $checkbox_colposcopicos_anormales_no_especificos = get_field('colposcopicos_anormales_no_especificos', $colpo_post_id);
-    $colposcopicos_anormales_ubicacion = $colpo_data_post['colposcopicos_anormales_ubicacion'][0]; 
+    // $colposcopicos_anormales_ubicacion = $colpo_data_post['colposcopicos_anormales_ubicacion'][0];
+    $colposcopicos_anormales_ubicacion = isset($colpo_data_post['colposcopicos_anormales_ubicacion'][0]) ? $colpo_data_post['colposcopicos_anormales_ubicacion'][0] : NULL;
     $checkbox_sospecha_de_invasion = get_field('sospecha_de_invasion', $colpo_post_id);
     $checkbox_hallazgos_varios = get_field('hallazgos_varios', $colpo_post_id);
     $checkbox_examen_de_vyv = get_field('examen_de_vyv', $colpo_post_id);
-    $examen_de_vyv_descripcion = $colpo_data_post['examen_de_vyv_descripcion'][0];
+    // $examen_de_vyv_descripcion = $colpo_data_post['examen_de_vyv_descripcion'][0];
+    $examen_de_vyv_descripcion = isset($colpo_data_post['examen_de_vyv_descripcion'][0]) ? $colpo_data_post['examen_de_vyv_descripcion'][0] : NULL;
     $radiobox_colposcopicos_anormales_test_de_schiller = get_field('colposcopicos_anormales_test_de_schiller', $colpo_post_id);
     $checkbox_test_de_schiller_lugol = get_field('test_de_schiller_lugol', $colpo_post_id);
-    $sugerencias = $colpo_data_post['sugerencias'][0];
+    // $sugerencias = $colpo_data_post['sugerencias'][0];
+    $sugerencias = isset($colpo_data_post['sugerencias'][0]) ? $colpo_data_post['sugerencias'][0] : NULL;
     
  ?>
 
