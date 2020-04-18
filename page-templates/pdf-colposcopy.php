@@ -284,7 +284,8 @@ $name = $patient_fields['nombre'][0];
 $lastname = $patient_fields['apellido'][0];
 $cedula = $patient_fields['cedula'][0];
 $fullname = $name.' '.$lastname;
-$fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
+$fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
+// $fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
 //$bday = new DateTime('23.8.1988'); // Your date of birth
 $bday = new Datetime(date('d.m.y'));
 if ($fecha_de_nacimiento != ""){ $bday = new Datetime(date('d.m.y', strtotime($fecha_de_nacimiento)));}
@@ -328,7 +329,9 @@ $images_ids_array = array();
 for ($i=0; $i < $max_images; $i++) {
     $k = $i+1;
     $text = 'colpo_imagen_'.$k;
-    $the_image_id = $colpo_data_post[$text][0];
+    // $the_image_id = $colpo_data_post[$text][0];
+    $the_image_id = isset($colpo_data_post[$text][0]) ? $colpo_data_post[$text][0] : NULL;
+
 //var_dump($text);
     if ($the_image_id != "" && $the_image_id != NULL) {
         $images_ids_array[$i] = $the_image_id;

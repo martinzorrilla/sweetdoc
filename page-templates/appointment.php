@@ -15,7 +15,7 @@
   $patient_id = $_GET['patient_id'];
   $app_id =  $_GET['app_id'];
   $app_creation_date = get_the_date( 'd-M-Y', $app_id );
-
+  $is_editable = "true";
   //this is to get the id of the static_data post for this patient
   //returns an array 
   $static_data_array = sw_get_static_data_id($patient_id);
@@ -40,8 +40,10 @@
     //echo "no es una nueva consulta";
     $appointment_id = $app_id;
     //get the colposcopia post id for this app
+
     $colpo_patient_array = sw_get_colpo_id($appointment_id);
-    $colpo_post_id = $colpo_patient_array[0];
+    $colpo_post_id = isset($colpo_patient_array[0]) ? $colpo_patient_array[0] : NULL;
+    
     //echo "Colpo Post Id = ";
     //var_dump($colpo_post_id);
   }
@@ -65,14 +67,14 @@
   <div class="appform">
     <form id="create-appointment-form" name="create-appointment-form" method="post"  class="text-center" enctype="multipart/form-data">
           
-            <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id]); ?>
+            <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => $is_editable]); ?>
 
           <fieldset>
             <?php //hm_get_template_part('template-parts/appointment/common-data', ['appointment_id' => $appointment_id]); ?>
-            <?php hm_get_template_part('template-parts/appointment/motivo-consulta', ['appointment_id' => $appointment_id]); ?>
+            <?php hm_get_template_part('template-parts/appointment/motivo-consulta', ['appointment_id' => $appointment_id,'is_editable' => $is_editable]); ?>
           </fieldset>
           
-            <?php hm_get_template_part('template-parts/appointment/colposcopia', ['colpo_post_id' => $colpo_post_id]); ?>
+            <?php hm_get_template_part('template-parts/appointment/colposcopia', ['colpo_post_id' => $colpo_post_id,'is_editable' => $is_editable]); ?>
 
     </form>
   </div>

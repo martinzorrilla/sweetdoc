@@ -1,5 +1,6 @@
 <?php
     $appointment_post_id = $template_args["appointment_id"]; 
+    $is_editable = $template_args["is_editable"];
     
     $stored_fields = get_post_custom($appointment_post_id);
     $motivo_de_consulta = $stored_fields['motivo_de_consulta'][0];

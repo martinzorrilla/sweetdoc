@@ -129,7 +129,7 @@
         "menarca" => $menarca,
         "irs" => $irs,
         "cesareas" => $cesareas,
-        "checkbox_values" => $checkbox_values,
+        // "checkbox_values" => $checkbox_values,
         "vacuna_vph" => $vacuna_vph,
         "edad_vph" => $edad_vph,
         "ritmo_menstrual" => $ritmo_menstrual,
@@ -558,7 +558,7 @@ function sw_update_single_appointment($params){
                 update_post_meta( $app_id, $field, $value );
         }
         //update_field('checkbox', array("blue"), $appointment_post_id);
-        update_field('checkbox', $checkbox_values, $app_id);
+        //update_field('checkbox', $checkbox_values, $app_id);
         
         //update the colposcopy fields
         

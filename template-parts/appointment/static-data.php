@@ -2,29 +2,43 @@
     //$is_editable = "false";
     $static_data_post_id = $template_args["static_data_post_id"];
     $patient_id = $template_args["patient_id"];
+    $is_editable = $template_args["is_editable"];
+
     //$static_data_array = sw_get_static_data_id($patient_id); 
     $static_data_post = get_post_custom($static_data_post_id);
     //var_dump($static_data_post);
     
     //load all the data we need from the static_data
-    $menarca = $static_data_post['menarca'][0];
-    $radiobox_ritmo_menstrual = get_field('ritmo_menstrual', $static_data_post_id);
-
-    $fum = $static_data_post['fum'][0] !="" && $static_data_post['fum'][0] !=NULL ? $static_data_post['fum'][0] : "";
+    //$menarca = $static_data_post['menarca'][0];
+    $menarca = isset($static_data_post['menarca'][0]) ? $static_data_post['menarca'][0] : NULL;
+    // $radiobox_ritmo_menstrual = get_field('ritmo_menstrual', $static_data_post_id);
+    $radiobox_ritmo_menstrual = isset($static_data_post['ritmo_menstrual'][0]) ? $static_data_post['ritmo_menstrual'][0] : NULL;
+    //ya tiene le control isset()
+    $fum = isset($static_data_post['fum'][0]) && $static_data_post['fum'][0] !="" ? $static_data_post['fum'][0] : "";
     $newDate = "";
     //acf retoran la fecha asi:20191128 en vez de 2019-11-28 que es como el input[date] requiere, x eso tranformo el valor
     if ($fum != ""){ $newDate = date("Y-m-d", strtotime($fum));}
-    
-    $numero_embarazos = $static_data_post['numero_embarazos'][0];
-    $parto_normal = $static_data_post['parto_normal'][0];
+    $numero_embarazos = isset($static_data_post['numero_embarazos'][0]) ? $static_data_post['numero_embarazos'][0] : NULL;
+    // $numero_embarazos = $static_data_post['numero_embarazos'][0];
+    // $parto_normal = $static_data_post['parto_normal'][0];
+    $parto_normal = isset($static_data_post['parto_normal'][0]) ? $static_data_post['parto_normal'][0] : NULL;
 
-    $cesareas = $static_data_post['cesareas'][0];
-    $abortos = $static_data_post['abortos'][0];
-    $irs = $static_data_post['irs'][0];
+    // $cesareas = $static_data_post['cesareas'][0];
+    $cesareas = isset($static_data_post['cesareas'][0]) ? $static_data_post['cesareas'][0] : NULL;
+
+    // $abortos = $static_data_post['abortos'][0];
+    $abortos = isset($static_data_post['abortos'][0]) ? $static_data_post['abortos'][0] : NULL;
+
+    // $irs = $static_data_post['irs'][0];
+    $irs = isset($static_data_post['irs'][0]) ? $static_data_post['irs'][0] : NULL;
     
 
-    $radiobox_vacuna_vph = get_field('vacuna_vph', $static_data_post_id); 
-    $edad_vph = $static_data_post['edad_vph'][0];    
+    // $radiobox_vacuna_vph = get_field('vacuna_vph', $static_data_post_id); 
+    $radiobox_vacuna_vph = isset($static_data_post['vacuna_vph'][0]) ? $static_data_post['vacuna_vph'][0] : NULL;
+
+    // $edad_vph = $static_data_post['edad_vph'][0];    
+    $edad_vph = isset($static_data_post['edad_vph'][0]) ? $static_data_post['edad_vph'][0] : NULL;
+
     //------------------
 
 
@@ -32,26 +46,32 @@
     // return value es un array conteniendo strings con los values en el bkend de acf i,e: "inyectables"
     $checkbox_metodo_anti = get_field('metodo_anticonceptivo', $static_data_post_id); // esto no usamos para guardar, si no para 
     // mostrar los campos que estan ya guardados en un paciente creado
-    $marca_anticonceptivo = $static_data_post['marca_anticonceptivo'][0];
+    // $marca_anticonceptivo = $static_data_post['marca_anticonceptivo'][0];
+    $marca_anticonceptivo = isset($static_data_post['marca_anticonceptivo'][0]) ? $static_data_post['marca_anticonceptivo'][0] : NULL;
+    
     $checkbox_terapia_hormonal = get_field('terapia_hormonal', $static_data_post_id); // esto no usamos para guardar, si no paraa mostrar los campos guardados
     
-    $pap_anterior = $static_data_post['pap_anterior'][0];
+    // // $pap_anterior = $static_data_post['pap_anterior'][0];
+    $pap_anterior = isset($static_data_post['pap_anterior'][0]) ? $static_data_post['pap_anterior'][0] : NULL;
     
-    $fecha_pap = $static_data_post['fecha_pap'][0] !="" && $static_data_post['fecha_pap'][0] !=NULL ? $static_data_post['fecha_pap'][0] : "";
+    $fecha_pap = isset($static_data_post['fecha_pap'][0]) && $static_data_post['fecha_pap'][0] !="" ? $static_data_post['fecha_pap'][0] : "";
     $new_fecha_pap = "";
     //acf retoran la fecha asi:20191128 en vez de 2019-11-28 que es como el input[date] requiere, x eso tranformo el valor
     if ($fecha_pap != ""){ $new_fecha_pap = date("Y-m-d", strtotime($fecha_pap));}
 
     $checkbox_fumador = get_field('fumador', $static_data_post_id); // esto no usamos para guardar, si no paraa mostrar los campos guardados
-    $cigarrillos_por_dia = $static_data_post['cigarrillos_por_dia'][0];
+    // $cigarrillos_por_dia = $static_data_post['cigarrillos_por_dia'][0];
+    $cigarrillos_por_dia = isset($static_data_post['cigarrillos_por_dia'][0]) ? $static_data_post['cigarrillos_por_dia'][0] : NULL;
+   
     $checkbox_tratamientos_anteriores = get_field('tratamientos_anteriores', $static_data_post_id);
 
-    $fecha_de_tratamiento = $static_data_post['fecha_de_tratamiento'][0] !="" && $static_data_post['fecha_de_tratamiento'][0] !=NULL ? $static_data_post['fecha_de_tratamiento'][0] : "";
+    $fecha_de_tratamiento = isset($static_data_post['fecha_de_tratamiento'][0]) && $static_data_post['fecha_de_tratamiento'][0] !="" ? $static_data_post['fecha_de_tratamiento'][0] : "";
     $new_fecha_de_tratamiento = "";
     //acf retoran la fecha asi:20191128 en vez de 2019-11-28 que es como el input[date] requiere, x eso tranformo el valor
     if ($fecha_de_tratamiento != ""){ $new_fecha_de_tratamiento = date("Y-m-d", strtotime($fecha_de_tratamiento));}
-    $observaciones = $static_data_post['observaciones'][0];
-
+    // $observaciones = $static_data_post['observaciones'][0];
+    $observaciones = isset($static_data_post['observaciones'][0]) ? $static_data_post['observaciones'][0] : NULL;
+    
     
 
     //var_dump($static_data_post_id);
@@ -89,7 +109,7 @@
           <!-- menarca -->
           <div class="floated-label-wrapper large-6 columns">
             <label for="menarca" class="separator-left">Menarca &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="number" id="menarca" name="menarca" value="<?php echo $menarca ?>" placeholder="Menarca" required>
+            <input type="number" id="menarca" name="menarca" value="<?php echo $menarca ?>" placeholder="Menarca" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>>
           </div>
 
           <!-- ritmo menstrual -->
@@ -113,31 +133,31 @@
           <!-- Numero de Embarazos -->
           <div class="floated-label-wrapper large-6 columns">
             <label for="numero_embarazos" class="separator-left">Numero de Embarazos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="number" id="numero_embarazos" name="numero_embarazos" value="<?php echo $numero_embarazos ?>" placeholder="Ingrese el numero de embarazos.." required>
+            <input type="number" id="numero_embarazos" name="numero_embarazos" value="<?php echo $numero_embarazos ?>" placeholder="Ingrese el numero de embarazos.." required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> > 
           </div>
 
           <!-- Parto normal -->
           <div class="floated-label-wrapper large-6 columns">
             <label for="parto_normal" class="separator-left">Parto normal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="number" id="parto_normal" name="parto_normal" value="<?php echo $parto_normal ?>" placeholder="Ingrese el numero de partos normales.." required>
+            <input type="number" id="parto_normal" name="parto_normal" value="<?php echo $parto_normal ?>" placeholder="Ingrese el numero de partos normales.." required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- cesareas -->
           <div class="floated-label-wrapper large-6 columns">
             <label for="cesareas" class="separator-left">Cesareas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="number" id="cesareas" name="cesareas" value="<?php echo $cesareas ?>" placeholder="Ingrese el numero de cesareas" required>
+            <input type="number" id="cesareas" name="cesareas" value="<?php echo $cesareas ?>" placeholder="Ingrese el numero de cesareas" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- abortos -->
           <div class="floated-label-wrapper large-6 columns">
             <label for="abortos" class="separator-left">Abortos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="number" id="abortos" name="abortos" value="<?php echo $abortos ?>" placeholder="Ingrese el numero de abortos..." required>
+            <input type="number" id="abortos" name="abortos" value="<?php echo $abortos ?>" placeholder="Ingrese el numero de abortos..." required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- IRS -->
           <div class="floated-label-wrapper large-6 columns">
             <label for="irs" class="separator-left">IRS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="number" id="irs" name="irs" value="<?php echo $irs ?>" placeholder="IRS" required>
+            <input type="number" id="irs" name="irs" value="<?php echo $irs ?>" placeholder="IRS" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- vacuna VPH radio -->
@@ -166,7 +186,7 @@
           <!-- edad VPH -->
           <div class="floated-label-wrapper large-6 columns">
             <label for="edad_vph" class="separator-left">Edad en la que se aplico la vacuna VPH &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="number" id="edad_vph" name="edad_vph" value="<?php echo $edad_vph ?>" placeholder="Ingrese la edad en la que se aplico la vacuna VPH" required>
+            <input type="number" id="edad_vph" name="edad_vph" value="<?php echo $edad_vph ?>" placeholder="Ingrese la edad en la que se aplico la vacuna VPH" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- metodo anticonceptivo - checkbox -->
@@ -249,7 +269,7 @@
           <!-- Marca del anticonceptivo -->
           <div class="floated-label-wrapper large-6 medium-6 columns">
             <label for="marca_anticonceptivo" class="separator-left">Marca del anticonceptivo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="marca_anticonceptivo" name="marca_anticonceptivo" value="<?php echo $marca_anticonceptivo ?>" placeholder="Ingrese la marca del anticonceptivo.." required>
+            <input type="text" id="marca_anticonceptivo" name="marca_anticonceptivo" value="<?php echo $marca_anticonceptivo ?>" placeholder="Ingrese la marca del anticonceptivo.." required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- Terapia de reposicion hormonal - checkbox -->
@@ -269,7 +289,7 @@
           <!-- Resultado del pap anterior -->
           <div class="floated-label-wrapper large-6 medium-6 columns">
             <label for="pap_anterior" class="separator-left">Resultado del PAP anterior &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="pap_anterior" name="pap_anterior" value="<?php echo $pap_anterior ?>" placeholder="Ingrese el resultado del PAP anterior.." required>
+            <input type="text" id="pap_anterior" name="pap_anterior" value="<?php echo $pap_anterior ?>" placeholder="Ingrese el resultado del PAP anterior.." required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- Fecha PAP -->
@@ -295,7 +315,7 @@
           <!-- cigarrillos por dia -->
           <div class="floated-label-wrapper large-6 columns">
             <label for="cigarrillos_por_dia" class="separator-left">Numero de cigarrillos por dia</label>
-            <input type="number" id="cigarrillos_por_dia" name="cigarrillos_por_dia" value="<?php echo $cigarrillos_por_dia ?>" placeholder="Ingrese el numero de cigarrillos por dia" required>
+            <input type="number" id="cigarrillos_por_dia" name="cigarrillos_por_dia" value="<?php echo $cigarrillos_por_dia ?>" placeholder="Ingrese el numero de cigarrillos por dia" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- tratamientos anteriores - checkbox -->
@@ -372,7 +392,7 @@
           <!-- observaciones -->
           <div class="floated-label-wrapper large-12 columns">
             <label for="observaciones" class="separator-left">Observaciones</label>
-            <input type="text" id="observaciones" name="observaciones" value="<?php echo $observaciones ?>" placeholder="Ingrese las observaciones de la paciente" required>
+            <input type="text" id="observaciones" name="observaciones" value="<?php echo $observaciones ?>" placeholder="Ingrese las observaciones de la paciente" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
         </div>

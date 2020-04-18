@@ -1,15 +1,22 @@
 <?php
     $appointment_post_id = $template_args["appointment_id"]; 
-    
+    $is_editable = $template_args["is_editable"];
     $stored_fields = get_post_custom($appointment_post_id);
-    $motivo_de_consulta = $stored_fields['motivo_de_consulta'][0];
-    $antecedente_actual = $stored_fields['antecedente_actual'][0];
 
-    $diagnostico_consulta = $stored_fields['diagnostico_consulta'][0];
-    $codigo_diagnostico = $stored_fields['codigo_diagnostico'][0];
-    $procedimiento = $stored_fields['procedimiento'][0];
-    $codigo_procedimiento = $stored_fields['codigo_procedimiento'][0];
-    $plan_tratamiento = $stored_fields['plan_tratamiento'][0];
+    //$motivo_de_consulta = $stored_fields['motivo_de_consulta'][0];
+    $motivo_de_consulta = isset($stored_fields['motivo_de_consulta'][0]) ? $stored_fields['motivo_de_consulta'][0] : NULL;
+    //$antecedente_actual = $stored_fields['antecedente_actual'][0];
+    $antecedente_actual = isset($stored_fields['antecedente_actual'][0]) ? $stored_fields['antecedente_actual'][0] : NULL;
+    //$diagnostico_consulta = $stored_fields['diagnostico_consulta'][0];
+    $diagnostico_consulta = isset($stored_fields['diagnostico_consulta'][0]) ? $stored_fields['diagnostico_consulta'][0] : NULL;
+    //$codigo_diagnostico = $stored_fields['codigo_diagnostico'][0];
+    $codigo_diagnostico = isset($stored_fields['codigo_diagnostico'][0]) ? $stored_fields['codigo_diagnostico'][0] : NULL;
+    //$procedimiento = $stored_fields['procedimiento'][0];
+    $procedimiento = isset($stored_fields['procedimiento'][0]) ? $stored_fields['procedimiento'][0] : NULL;
+    //$codigo_procedimiento = $stored_fields['codigo_procedimiento'][0];
+    $codigo_procedimiento = isset($stored_fields['codigo_procedimiento'][0]) ? $stored_fields['codigo_procedimiento'][0] : NULL;
+    //$plan_tratamiento = $stored_fields['plan_tratamiento'][0];
+    $plan_tratamiento = isset($stored_fields['plan_tratamiento'][0]) ? $stored_fields['plan_tratamiento'][0] : NULL;
 
 
  ?>

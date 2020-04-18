@@ -8,9 +8,11 @@
   $is_editable = $template_args["is_editable"];
   //$is_editable = "true";
   $indication_fields = get_post_custom($indication_id);
-  $rp = $indication_fields['rp'][0];
-  $indicaciones = $indication_fields['indicaciones'][0];
- ?> 
+  // $rp = $indication_fields['rp'][0];
+  $rp = isset($indication_fields['rp'][0]) ? $indication_fields['rp'][0] : NULL;
+  // $indicaciones = $indication_fields['indicaciones'][0];
+  $indicaciones = isset($indication_fields['indicaciones'][0]) ? $indication_fields['indicaciones'][0] : NULL;
+?> 
 
 <!-- creo que este div no es necesario para que funcione correctamente el form del paciente -->
 <div class="form-tab-style">

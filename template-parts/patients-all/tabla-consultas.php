@@ -4,6 +4,7 @@
 
 <?php
   $appointment_url = home_url().'/consulta/?patient_id=';
+  $colpo_url = home_url().'/colposcopia/?patient_id=';
   $indicacion_url = home_url().'/indicacion/?patient_id=';
   $estudios_url = home_url().'/estudios/?patient_id=';
   $laboratorios_url = home_url().'/laboratorios/?patient_id=';
@@ -32,20 +33,24 @@
               $creation_date = get_the_date( 'd-M-Y', $r );    
               //get the colposcopy id and href of this app
               $colpo_patient_array = sw_get_colpo_id($r);
-              $colpo_post_id = $colpo_patient_array[0];
-              $colpo_title = $colpo_post_id === NULL ? "No existe" : "Ver";
+              $colpo_post_id = isset($colpo_patient_array[0]) ? $colpo_patient_array[0] : NULL;
+              // $colpo_post_id = $colpo_patient_array[0];
+              $colpo_title = $colpo_post_id === NULL ? "Crear" : "Editar";
               $colpo_post_url = $colpo_post_id === NULL ? "&#35" : get_permalink( $colpo_post_id );
 
               $indication_array = sw_get_indication_id($r);
-              $indication_id = $indication_array[0];
+              $indication_id = isset($indication_array[0]) ? $indication_array[0] : NULL;
+              // $indication_id = $indication_array[0];
               $indication_title = $indication_id === NULL ? "Crear" : "Editar";
 
               $studies_array = sw_get_studies_id($r);
-              $studies_id = $studies_array[0];
+              $studies_id = isset($studies_array[0]) ? $studies_array[0] : NULL;
+              // $studies_id = $studies_array[0];
               $studies_title = $studies_id === NULL ? "Crear" : "Editar";
               
               $laboratories_array = sw_get_laboratories_id($r);
-              $laboratories_id = $laboratories_array[0];
+              $laboratories_id = isset($laboratories_array[0]) ? $laboratories_array[0] : NULL;
+              // $laboratories_id = $laboratories_array[0];
               $laboratories_title = $laboratories_id === NULL ? "Crear" : "Editar";
 
               ?>
@@ -63,7 +68,17 @@
 
                   <!-- COLPOSCOPIAS -->
                   <td>
-                      <a href="<?php echo $colpo_post_url;?>"> <?php echo $colpo_title; ?></a>
+                      <!-- <a href="< ?php //echo $colpo_post_url;?>"> < ?php //echo $colpo_title; ?></a> -->
+                  <a href="<?php echo esc_url( $colpo_url ).$patient_id.'&app_id='.$r; ?>"><?= $colpo_title?></a>
+                  <!-- solo si existe una indicacion para esta app (consulta) debemos mostrar las opcion ver indicacion ya que si el valor es null aun no se creo una indicacion. -->
+                  <?php 
+                  if ($colpo_post_id) {
+                      ?>
+                      <br>
+                      <a href="<?php echo get_permalink( $colpo_post_id ); ?> "> Imprimir <?php //echo $indication_id; ?></a>
+                      <?php 
+                  }
+                  ?>
                   </td>
 
                   <!-- INDICACION -->
