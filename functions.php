@@ -60,16 +60,30 @@ require_once 'library/fpdf/fpdf.php';
 // require_once( 'library/class-foundationpress-protocol-relative-theme-assets.php' );
 
 
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page(array(
+		'page_title' 	=> 'Theme General Settings',
+		'menu_title'	=> 'Theme Settings',
+		'menu_slug' 	=> 'theme-general-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Theme Header Settings',
+		'menu_title'	=> 'Header',
+		'parent_slug'	=> 'theme-general-settings',
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Theme Footer Settings',
+		'menu_title'	=> 'Footer',
+		'parent_slug'	=> 'theme-general-settings',
+	));
+	
+}
 
-//DEPRECATED: NO SE USA EN SWEETDOCTOR
-// returns person post id on succes, false on failure.
-  function cca_get_current_user_person_post_id(){
-    $current_user = wp_get_current_user();
-    $current_user_id = $current_user->ID;
-    //If the meta value does not exist and $single is true the function will return an empty string.
-    $user_person_id= get_user_meta( $current_user_id, 'person_post_id', true );
-    return $user_person_id;
-  }
 
 /**
  * Post Types Definitions - autoloader

@@ -24,7 +24,8 @@
     for ($i=0; $i < $max_images; $i++) {
       $k = $i+1;
       $text = 'colpo_imagen_'.$k;
-      $the_image_id = $colpo_data_post[$text][0];
+      // $the_image_id = $colpo_data_post[$text][0];
+      $the_image_id = isset($colpo_data_post[$text][0]) ? $colpo_data_post[$text][0] : NULL;
     //var_dump($text);
       if ($the_image_id != "" && $the_image_id != NULL) {
          $images_ids_array[$i] = $the_image_id;

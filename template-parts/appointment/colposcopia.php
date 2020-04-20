@@ -15,7 +15,6 @@
       $k = $i+1;
       $text = 'colpo_imagen_'.$k;
       //$the_image_id = $colpo_data_post[$text][0]; // esta linea de codigo funciona pero da un warning the undefined  index cuando el elemento esta vacio
-      // $the_image_id = $colpo_data_post[$text][0];
       $the_image_id = isset($colpo_data_post[$text][0]) ? $colpo_data_post[$text][0] : NULL;
 
 //       var_dump($the_image_id);
