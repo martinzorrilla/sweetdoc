@@ -685,6 +685,8 @@ function validate_patient($params){
     
     
   $result['success'] = TRUE;
+  $result['error'][0] = FALSE;
+
   //$result['patient_id'] = $patient_id;
   //$result['app_id'] = $app_post;
   $result['msg'] = 'No existe el nro de cedula en la base de datos.';

@@ -62,12 +62,7 @@
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem libero fugit, pariatur maxime! Optio enim, deserunt quia molestiae fugiat delectus, dolore et esse nostrum, quod autem necessitatibus fugit soluta repellendus.
       </p>
       <br>
-      <div>
-        <a href="<?php echo $create_patient_url ?>" rel="nofollow" target="_blank">
-            <button id="create-patient" class="submit_button create-button" type="submit" value="Crear">Crear Nuevo Paciente
-            </button>
-        </a>
-      </div>
+
     </div> <!-- /.card-profile-stats-more-content -->
   </div> <!-- /.card-profile-stats-more -->
 </div> <!-- /.card-profile-stats -->

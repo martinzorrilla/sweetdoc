@@ -53,6 +53,9 @@ function sw_create_patient_ajax(){
 
     //call validate_patient()
     //before creating or updating a patient we should validate the data (ie Cedula doesnt exist)
+    $validate_result = array('error'=>[], 'success'=>FALSE,'msg'=>'');
+    // $validate_result['error'][0] == false;
+
     $validate_result = validate_patient($params);
     if ( $validate_result['error'][0] == true ){
       $result = $validate_result; 
@@ -97,7 +100,7 @@ function sw_create_patient($params){
       //$metodo_anticonceptivo = array("inyectable", "preservativos");
       //wp_die(var_dump($metodo_anticonceptivo));
 
-      $post_author = $params['post_author'];
+      // $post_author = $params['post_author'];
       //sw_get_patient_owner: devuelve el id del doctor directamente, o si el rol del usuario actual es secretaty 
       //devuelve el id del doctor que le corresponde 
       $patient_owner = sw_get_patient_owner();
@@ -181,7 +184,7 @@ function sw_update_patient($params){
     $region_sanitaria = $params['region_sanitaria'];
     $epitelio_escamoso = $params['epitelio_escamoso'];
 
-    $post_author = $params['post_author'];
+    // $post_author = $params['post_author'];
     //sw_get_patient_owner: devuelve el id del doctor directamente, o si el rol del usuario actual es secretaty 
     //devuelve el id del doctor que le corresponde 
     $patient_owner = sw_get_patient_owner();
