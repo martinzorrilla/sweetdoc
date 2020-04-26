@@ -68,6 +68,7 @@
   
   .tablinks.active{
       border-radius: 10px 10px 0 0;
+      min-width: 164px;
     }
   
   /* Style the buttons inside the tab */
@@ -161,6 +162,7 @@
     padding: 20px;
     /* border: 1px solid #1779ba; */
     border: 10px dotted #eee;
+    text-align: center;
   }
 
   .archivos .preview ol{
@@ -168,7 +170,7 @@
   }
 
   .archivos .preview ol li{
-    background: $sweet-sidebar !important;
+    background: $sweet-sidebar ;
   }
 
   .archivos .preview ol li p{

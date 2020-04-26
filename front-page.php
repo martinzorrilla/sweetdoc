@@ -4,6 +4,9 @@
   $create_patient_url = home_url().'/crear-paciente/';
   $create_secretary_url = home_url().'/crear-asistente/';
   $current_user = wp_get_current_user();
+  $client_gender = get_field('client_gender', 'option');
+  $client_gender = isset($client_gender) && $client_gender !="" ? $client_gender : "Valor no ingresado";
+  $welcome_msg =  $client_gender =="female" ? "Bienvenida" : "Bienvenido";
 ?>
  
 <div class="the-content">
@@ -11,7 +14,7 @@
   <?php hm_get_template_part('template-parts/doctor/doctor-intro', ['data' => ""]); ?>
 
   <div class="callout primary">
-    <h1 class="text-center">Bienvenido!</h1>
+    <h1 class="text-center"> <?= $welcome_msg ?> </h1>
   </div>
 
   <div class="callout secondary">

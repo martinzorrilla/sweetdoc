@@ -34,7 +34,7 @@
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
   <!-- <div class="tab white-tab"> -->
   <div class="tab">
-    <button class="tablinks active">Datos Básicos</button>
+    <button class="tablinks active">Resumen</button>
   </div>
 
     <!-- <div class="appform tabcontent white-tab"> -->

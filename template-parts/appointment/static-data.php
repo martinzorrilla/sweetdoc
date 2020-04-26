@@ -84,7 +84,7 @@
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
   <!-- <div class="tab white-tab"> -->
   <div class="tab">
-    <button class="tablinks active" >Datos Básicos</button>
+    <button class="tablinks active"> AGO </button>
   </div>
 
   <!-- <div class="appform tabcontent white-tab"> -->
@@ -94,14 +94,14 @@
       <div class="card-section">
         <div class="profile-card-header static-data-click-to-show">
           <div class="profile-card-author">
-            <h5 class="author-title">AGO</h5>          
+            <h4 class="">Antecedentes Gineco-Obstétricos</h4>          
             <p class="card-profile-stats-more-link"><a href="#"><i class="fa fa-angle-down fa-2x" aria-hidden="true"></i></a></p>
           </div>
         </div>
         
         
         <div class="profile-card-about static-data-slide">
-          <h5 class="about-title separator-left"> Ingresar datos AGO <?php //echo $name?></h5>
+          <h5 class="about-title separator-left"> Ingresar AGO de la paciente <?php //echo $name?></h5>
           <!-- <p class="about-content large-12 columns">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet autem eveniet nulla quae ullam sit iure voluptatum, nesciunt voluptas perferendis, minus natus in quaerat?
           </p> -->

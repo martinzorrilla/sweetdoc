@@ -1,123 +1,25 @@
-<?php //acf_form_head(); ?>
-<?php get_header();/* Template Name: Appointment*/?>
-<?php
-  
-  //check permissions for the user
-  //this page should be visible only for a doctor role. else redirect to home page
-  $the_role = sw_get_current_user_role(); // antes usaba esta funcion pero puedo hacer lo mismo con 'current_user_can()'
-   if(!current_user_can('doctor') && !current_user_can('administrator')){
-     echo "El usuario no es doctor o admin. no puede ver esta pagina";
-      //wp_redirect( esc_url( wp_login_url() ), 307);
-      //wp_redirect('http://example.com/'); exit;
-   }
-  
-  //The patient id is sent from patients-all through the url so we grab here with $_GET
-  $patient_id = $_GET['patient_id'];
-  $app_id =  $_GET['app_id'];
-  $app_creation_date = get_the_date( 'd-M-Y', $app_id );
-  $is_editable = "true";
-  //this is to get the id of the static_data post for this patient
-  //returns an array 
-  $static_data_array = sw_get_static_data_id($patient_id);
-  $static_data_post_id = $static_data_array[0];
-
-
-  $patient_fields = get_post_custom($patient_id);
-  $name = $patient_fields['nombre'][0];
-  $lastname = $patient_fields['apellido'][0];
-  $cedula = $patient_fields['cedula'][0];
-  $fullname = $name.' '.$lastname;
-
-  //ACF get field IS NOT WORKING for the app posst type when it's just been created so we use geet_post_custom instead to retrieve the data.
-  $stored_fields = get_post_custom($app_id);
-
-  if ($app_id === 'new') {
-    //echo "  nueva consulta";
-    $appointment_id = $app_id;
-    $colpo_post_id = 'new';
-  }//if new patient = true
-  else{
-    //echo "no es una nueva consulta";
-    $appointment_id = $app_id;
-    //get the colposcopia post id for this app
-
-    $colpo_patient_array = sw_get_colpo_id($appointment_id);
-    $colpo_post_id = isset($colpo_patient_array[0]) ? $colpo_patient_array[0] : NULL;
-    
-    //echo "Colpo Post Id = ";
-    //var_dump($colpo_post_id);
-  }
-?>
-
-  <div class="callout secondary">
-    <h3 style="text-align: center; margin-left: 50px;"> <strong> <?php echo $fullname." - Ci: ".$cedula; ?> </strong></h3>
-  </div>
- 
-  <div class="callout secondary" style="display: <?php if ($app_id === 'new') echo 'none' ?> " >
-    <h3 style="text-align: center; margin-left: 50px;">Fecha de la Consulta: <strong> <?php echo $app_creation_date ?> </strong></h3>
-  </div>
-  
-  <!-- <div class="tab">
-    <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
-  </div> -->
-  <!-- <div class="appform tabcontent">
-    <?php //hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]); ?>
-  </div> -->
-
-  <div class="appform">
-    <form id="create-appointment-form" name="create-appointment-form" method="post"  class="text-center" enctype="multipart/form-data">
-          
-            <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => $is_editable]); ?>
-
-          <fieldset>
-            <?php //hm_get_template_part('template-parts/appointment/common-data', ['appointment_id' => $appointment_id]); ?>
-            <?php hm_get_template_part('template-parts/appointment/motivo-consulta', ['appointment_id' => $appointment_id,'is_editable' => $is_editable]); ?>
-          </fieldset>
-          
-            <?php //hm_get_template_part('template-parts/appointment/colposcopia', ['colpo_post_id' => $colpo_post_id,'is_editable' => $is_editable]); ?>
-
-    </form>
-  </div>
-
-  <div class="button-div" style="margin-bottom:70px">
-    <button id="create-appointment" class="save-button-expanded" type="submit" value="Next">Guardar</button>
-    <p class="errorWrapper"></p>
-  </div>
-
-
-<?php get_footer(); ?>
-
-<script >
-  var CreateProfileModule = function(){
+var CreateColposcopyModule = function(){
 
     //global vars
     var $ = jQuery;
-    var OrgTypeDropdown;
-    var rolesDropdown;
     
-    var createAppBtn;
-    var createAppointmentForm;
+    var createColpoBtn;
+    var createColpoForm;
     
-    var createProfileClose;
-
     //added
-    var myInputFile;
-    var myFile;
+    // var myInputFile;
+    // var myFile;
 
     function init(){
       $(document).ready(function () {
-        //dom queries 
-        OrgTypeDropdown = $('.org-type-dropdown select');
-        rolesDropdown = $('.role-type-dropdown select');
-        createAppBtn = $("#create-appointment");
-        createAppointmentForm = $("#create-appointment-form");
-        createProfileClose = $("#create-profile-close");
 
-        //console.log("createProfileForm", createAppointmentForm);
+        createColpoBtn = $("#create-colposcopy");
+        createColpoForm = $("#create-colposcopy-form");
+
 
         var fileInput = document.querySelector('input[type="file"]');
-        var preview = document.querySelector('.preview');
-
+        // var preview = document.querySelector('.preview');
+        
         if (fileInput != null) {
           fileInput.style.opacity = 0;
           //fileInput.addEventListener('change', updateImageDisplay(preview, fileInput));
@@ -126,9 +28,9 @@
 
 
 
-        createAppBtn.on("click", function (e) {
+        createColpoBtn.on("click", function (e) {
           //get_checkbox_values();
-          createAppBtn.fadeOut( "slow" );
+          createColpoBtn.fadeOut( "slow" );
           saveProfileData(e);
         })
 
@@ -143,8 +45,8 @@
   // El PROBLEMA es que de esa forma no se pueden enviar inputs del tipo FILE, los cuales necesitamos para poder agregar imagenes a las colposcopias, por eso nos vemos obligados a usar formData y añadir los demas inputs con el metodo populateFormData()   
   function populateFormData() {
     //var inputs = createAppointmentForm.serializeArray();
-    var inputs = createAppointmentForm.find("input, select, textarea");
-    var serializedInputs = createAppointmentForm.serializeArray();
+    var inputs = createColpoForm.find("input, select, textarea");
+    var serializedInputs = createColpoForm.serializeArray();
     //no recuerdo por que no logre hacer funcionar con serialize(); por eso uso serializeArray(); 
     //var serializedInputs = createAppointmentForm.serialize();
     var formData = new FormData();
@@ -174,16 +76,15 @@
     // que es lo que se necesita para que acf pueda guardar los cambios.
     // Solucion: 
     // Este procedimiento se encarga de generar dicho array por cada input del tipo checkbox y lo agrega al formData
-    $('#create-appointment-form input[type="checkbox"]:not(:checked)').each(function(i, e) {
+    $('#create-colposcopy-form input[type="checkbox"]:not(:checked)').each(function(i, e) {
         formData.append(e.name, "");
     });
 
-    formData.append("app_id", "<?php echo $appointment_id ?>");
-    formData.append("patient_id", "<?php echo $patient_id ?>");
-    formData.append("static_data_post_id", "<?php echo $static_data_post_id ?>");
-    formData.append("colpo_post_id", "<?php echo $colpo_post_id ?>");
-
-    formData.append("action", "sw_create_appointment_ajax");
+    // formData.append("app_id", "<?php echo $appointment_id ?>");
+    // formData.append("patient_id", "<?php echo $patient_id ?>");
+    // formData.append("static_data_post_id", "<?php echo $static_data_post_id ?>");
+    // formData.append("colpo_post_id", "<?php echo $colpo_post_id ?>");
+    // formData.append("action", "sw_create_appointment_ajax");
 
     return formData;
   }
@@ -197,10 +98,10 @@
 
     //console.log("formData = ", formData);
     //Display the key/value pairs
-    for (var pair of formData.entries())
-    {
-       console.log(pair[0]+ ', '+ pair[1]); 
-    }
+    // for (var pair of formData.entries())
+    // {
+    //    console.log(pair[0]+ ', '+ pair[1]); 
+    // }
 
     // SI USABAMODS serialize() en vez de serializeArray(), de esta forma debiamos apendar los campos extras
     //var myData = createAppointmentForm.serialize();
@@ -233,12 +134,12 @@
         }
         if(result.success){
           alert(result['msg']);
-          //$('#interests').foundation('open');
-          var oldUrl = window.location.href; 
-          var replaceId = "app_id="+result['app_id'];
-          var newUrl = oldUrl.replace("app_id=new", replaceId);
-          window.location.replace(newUrl);
-          //window.location.reload();
+        //   var oldUrl = window.location.href; 
+        //   var replaceId = "app_id="+result['app_id'];
+        //   var newUrl = oldUrl.replace("app_id=new", replaceId);
+        //   window.location.replace(newUrl);
+          
+          window.location.reload();
         }
       }
     });
@@ -246,7 +147,7 @@
 
   /*--------------------------------------*/
   function updateImageDisplay(preview, fileInput) {
-
+    // alert("se cambio la imagen");
     fileInput = document.querySelector('input[type="file"]');
     preview = document.querySelector('.preview');
     //cuando hay un cambio en input, remover todos los childs de preview
@@ -254,7 +155,7 @@
       preview.removeChild(preview.firstChild);
     }
 
-    console.log("fileInput", fileInput.files);
+    // console.log("fileInput", fileInput.files);
     var curFiles = fileInput.files;
     //si no se agregan o no hay ningun file, apendar a preview un parrafo con texto
     if(curFiles.length === 0) {
@@ -272,7 +173,7 @@
         
         //$( listItem ).wrap( "<div class='row'></div>" );
         
-        var para = document.createElement('p');
+        para = document.createElement('p');
         //para.classList.add("small-12");
         //si el tipo es validoy el tamnho no exede los 6MB
         if(validFileType(curFiles[i]) && curFiles[i].size < 6291456) {
@@ -293,14 +194,14 @@
           listItem.appendChild(liContainer);
 
           liContainer.appendChild(image);
-          $( image ).wrap( "<div class='large-6 medium-6 small-12 columns colpo-files-list'></div>" );
+          $( image ).wrap( "<div class='small-12 small-centered medium-6 large-6 columns colpo-files-list'></div>" );
           liContainer.appendChild(para);
-          $( para ).wrap( "<div class='large-6 medium-6 small-12 columns'></div>" );
+          $( para ).wrap( "<div class='small-12 small-centered medium-6 large-6 colpo-files-list'></div>" );
 
         } else {
           //agregar estilo para hacerlo de color rojo
           //$( listItem ).addClass( "listItem-error-color" );
-          $(listItem).css('background', '#cc4b37');
+          $(listItem).css('background', '#fc1303');
           para.textContent = 'Nombre del archivo: ' + curFiles[i].name + '  -   Tipo de archivo incorrecto. Actualice las seleccion.';
           listItem.appendChild(para);
         }
@@ -326,22 +227,6 @@
     return false;
   }
 
-  function hello_world(){
-    alert("hello_world");
-  }
-
-  function get_checkbox_values(){
-    
-    var checked_values = [];
-      $("input[type=checkbox]").each(function(){
-        if (this.checked) {
-          checked_values.push($(this).val());
-        }
-      });// each
-      console.log(checked_values);
-      //alert("check your console");
-      return checked_values;  
-  }
 
   function returnFileSize(number) {
     if(number < 1024) {
@@ -360,5 +245,4 @@
 
   }();
 
-  CreateProfileModule.init();
-</script>
+  CreateColposcopyModule.init();

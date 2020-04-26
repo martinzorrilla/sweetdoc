@@ -14,16 +14,13 @@
   $indicaciones = isset($indication_fields['indicaciones'][0]) ? $indication_fields['indicaciones'][0] : NULL;
 ?> 
 
-<!-- creo que este div no es necesario para que funcione correctamente el form del paciente -->
-<div class="form-tab-style">
-
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
   <!-- <div class="tab white-tab"> -->
   <div class="tab">
-    <button class="tablinks active" >Datos Básicos</button>
+    <button class="tablinks active" >Indicación</button>
   </div>
 
-<!-- //patient cambiar por indication aca y en el js que le corresponde -->
+  <!-- //patient cambiar por indication aca y en el js que le corresponde -->
   <!-- <div class="appform tabcontent white-tab"> -->
   <div class="appform tabcontent">
     <form id="create-indication-form" name="create-indication-form" method="post" >
@@ -44,6 +41,4 @@
           </fieldset>
         </form>
   </div>
-</div>
-<!-- fin de crear-editar paciente -->
 

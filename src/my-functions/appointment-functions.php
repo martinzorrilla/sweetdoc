@@ -341,84 +341,85 @@ function sw_create_new_appointment($params){
                 update_post_meta( $static_data_post_id, $field, $value );
         }
 
+
       //create colpo only if all the fields are not empty
-      if ($macroscopia != NULL /* && other_fields != NULL */) {
-      //crear el post colposcopia y actualizar. vincular el post con patient_id y con app_id
-      $colpo_post_data = array(
-        'post_title'    => wp_strip_all_tags( $fullname." App ID: ".$app_post),
-        'post_status'   => 'publish',
-        'post_author'   => get_current_user_id(),
-        'post_type' => 'sw_colposcopia',
-        //'meta_input' => ["related_patient", $patient_post ]
-        //'post_category' => array( 8,39 )
-      );
+      // if ($macroscopia != NULL /* && other_fields != NULL */) {
+      // //crear el post colposcopia y actualizar. vincular el post con patient_id y con app_id
+      // $colpo_post_data = array(
+      //   'post_title'    => wp_strip_all_tags( $fullname." App ID: ".$app_post),
+      //   'post_status'   => 'publish',
+      //   'post_author'   => get_current_user_id(),
+      //   'post_type' => 'sw_colposcopia',
+      //   //'meta_input' => ["related_patient", $patient_post ]
+      //   //'post_category' => array( 8,39 )
+      // );
 
-      // Insert the post into the database // returns post id on succes. 0 on fail
+      // // Insert the post into the database // returns post id on succes. 0 on fail
       
-      $colpo_post = wp_insert_post( $colpo_post_data );
-      if ($colpo_post == 0) {
-        wp_die( "Error creating a new Colposcopia" );
-      }
+      // $colpo_post = wp_insert_post( $colpo_post_data );
+      // if ($colpo_post == 0) {
+      //   wp_die( "Error creating a new Colposcopia" );
+      // }
 
-      $acf_fields = array(
-            "macroscopia" => $macroscopia,
-            "colposcopia" => $colposcopia,
-            "evaluacion_general" => $evaluacion_general,
-            "motivo_inadecuada" => $motivo_inadecuada,
-            "union_escamo_columnar" => $union_escamo_columnar,
-            "zona_de_transformacion" => $zona_de_transformacion,
-            "colposcopicos_normales" => $colposcopicos_normales,
-            "colposcopicos_anormales_grado_1" => $colposcopicos_anormales_grado_1,
-            "colposcopicos_anormales_grado_2" => $colposcopicos_anormales_grado_2,
-            "colposcopicos_anormales_no_especificos" => $colposcopicos_anormales_no_especificos,
-            "colposcopicos_anormales_test_de_schiller" => $colposcopicos_anormales_test_de_schiller,
-            "colposcopicos_anormales_ubicacion" => $colposcopicos_anormales_ubicacion,
-            "sospecha_de_invasion" => $sospecha_de_invasion,
-            "hallazgos_varios" => $hallazgos_varios,
-            "examen_de_vyv" => $examen_de_vyv,
-            "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion,
-            "test_de_schiller_lugol" => $test_de_schiller_lugol,
-            "sugerencias" => $sugerencias
+      // $acf_fields = array(
+      //       "macroscopia" => $macroscopia,
+      //       "colposcopia" => $colposcopia,
+      //       "evaluacion_general" => $evaluacion_general,
+      //       "motivo_inadecuada" => $motivo_inadecuada,
+      //       "union_escamo_columnar" => $union_escamo_columnar,
+      //       "zona_de_transformacion" => $zona_de_transformacion,
+      //       "colposcopicos_normales" => $colposcopicos_normales,
+      //       "colposcopicos_anormales_grado_1" => $colposcopicos_anormales_grado_1,
+      //       "colposcopicos_anormales_grado_2" => $colposcopicos_anormales_grado_2,
+      //       "colposcopicos_anormales_no_especificos" => $colposcopicos_anormales_no_especificos,
+      //       "colposcopicos_anormales_test_de_schiller" => $colposcopicos_anormales_test_de_schiller,
+      //       "colposcopicos_anormales_ubicacion" => $colposcopicos_anormales_ubicacion,
+      //       "sospecha_de_invasion" => $sospecha_de_invasion,
+      //       "hallazgos_varios" => $hallazgos_varios,
+      //       "examen_de_vyv" => $examen_de_vyv,
+      //       "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion,
+      //       "test_de_schiller_lugol" => $test_de_schiller_lugol,
+      //       "sugerencias" => $sugerencias
 
-        // test_de_schiller_lugol
-        // sugerencias
-        );
+      //   // test_de_schiller_lugol
+      //   // sugerencias
+      //   );
 
-        foreach ($acf_fields as $field => $value) {
-            if($value != NULL){
-                update_field( $field, $value, $colpo_post );
-            }
-        }
-      //agregar al post colpo el id de la app y del paciente que le corresponde.
-      add_post_meta( $colpo_post, 'colpo_related_patient', $patient_id );
-      add_post_meta( $colpo_post, 'colpo_related_app', $app_post );
-      }//if colpo fields are not empty
+      //   foreach ($acf_fields as $field => $value) {
+      //       if($value != NULL){
+      //           update_field( $field, $value, $colpo_post );
+      //       }
+      //   }
+      // //agregar al post colpo el id de la app y del paciente que le corresponde.
+      // add_post_meta( $colpo_post, 'colpo_related_patient', $patient_id );
+      // add_post_meta( $colpo_post, 'colpo_related_app', $app_post );
+      // }//if colpo fields are not empty
 
 
-      //file upload test
-      $i = 1;  
-      foreach ($_FILES as $file ) {
+      // //file upload test
+      // $i = 1;  
+      // foreach ($_FILES as $file ) {
 
-          $uploadedfile = $file;
-          $movefile = wp_handle_upload($uploadedfile, array('action' => 'sw_create_appointment_ajax'));
+      //     $uploadedfile = $file;
+      //     $movefile = wp_handle_upload($uploadedfile, array('action' => 'sw_create_appointment_ajax'));
 
-          //Guardamos la foto en la biblioteca multimedia
-          if ($movefile) {
-              $wp_upload_dir = wp_upload_dir();
-              $attachment = array(
-                  'guid' => $wp_upload_dir['url'].'/'.basename($movefile['file']),
-                  'post_mime_type' => $movefile['type'],
-                  'post_title' => preg_replace('/\.[^.]+$/', '', basename($movefile['file'])),
-                  'post_content' => '',
-                  'post_status' => 'inherit'
-              );
-              $attach_id = wp_insert_attachment($attachment, $movefile['file']);
+      //     //Guardamos la foto en la biblioteca multimedia
+      //     if ($movefile) {
+      //         $wp_upload_dir = wp_upload_dir();
+      //         $attachment = array(
+      //             'guid' => $wp_upload_dir['url'].'/'.basename($movefile['file']),
+      //             'post_mime_type' => $movefile['type'],
+      //             'post_title' => preg_replace('/\.[^.]+$/', '', basename($movefile['file'])),
+      //             'post_content' => '',
+      //             'post_status' => 'inherit'
+      //         );
+      //         $attach_id = wp_insert_attachment($attachment, $movefile['file']);
 
-              update_field('colpo_imagen_'.$i, $attach_id, $colpo_post);
-              //update_field('colpo_imagen', $attach_id, $colpo_post);
-              $i++;
-          }
-      }
+      //         update_field('colpo_imagen_'.$i, $attach_id, $colpo_post);
+      //         //update_field('colpo_imagen', $attach_id, $colpo_post);
+      //         $i++;
+      //     }
+      // }
 
 
       //---------------------------------------
@@ -564,98 +565,99 @@ function sw_update_single_appointment($params){
         
         //but if the id is null we have to create a new colpo bc
         //there was no previous colpo for this app_id
-        if ($colpo_post_id === NULL) {
-              $colpo_post_data = array(
-              'post_title'    => wp_strip_all_tags( $fullname." App ID: ".$app_id),
-              'post_status'   => 'publish',
-              'post_author'   => get_current_user_id(),
-              'post_type' => 'sw_colposcopia'
-            );
 
-          // Insert the post into the database // returns post id on succes. 0 on fail
-          $colpo_post_id = wp_insert_post( $colpo_post_data );
-          if ($colpo_post_id == 0) {
-            wp_die( "Error creating a new Colposcopia" );
-          }
-          //agregar al post colpo el id de la app y del paciente que le corresponde.
-          add_post_meta( $colpo_post_id, 'colpo_related_patient', $patient_id );
-          add_post_meta( $colpo_post_id, 'colpo_related_app', $app_id );
-        }//if colpo_post_id === NULL
+        // if ($colpo_post_id === NULL) {
+        //       $colpo_post_data = array(
+        //       'post_title'    => wp_strip_all_tags( $fullname." App ID: ".$app_id),
+        //       'post_status'   => 'publish',
+        //       'post_author'   => get_current_user_id(),
+        //       'post_type' => 'sw_colposcopia'
+        //     );
+
+        //   // Insert the post into the database // returns post id on succes. 0 on fail
+        //   $colpo_post_id = wp_insert_post( $colpo_post_data );
+        //   if ($colpo_post_id == 0) {
+        //     wp_die( "Error creating a new Colposcopia" );
+        //   }
+        //   //agregar al post colpo el id de la app y del paciente que le corresponde.
+        //   add_post_meta( $colpo_post_id, 'colpo_related_patient', $patient_id );
+        //   add_post_meta( $colpo_post_id, 'colpo_related_app', $app_id );
+        // }//if colpo_post_id === NULL
         
-        $acf_fields = array(
-          "macroscopia" => $macroscopia,
-          "colposcopia" => $colposcopia,
-          "evaluacion_general" => $evaluacion_general,
-          "motivo_inadecuada" => $motivo_inadecuada,
-          "union_escamo_columnar" => $union_escamo_columnar,
-          "zona_de_transformacion" => $zona_de_transformacion,
-          "colposcopicos_normales" => $colposcopicos_normales,
-          "colposcopicos_anormales_grado_1" => $colposcopicos_anormales_grado_1,
-          "colposcopicos_anormales_grado_2" => $colposcopicos_anormales_grado_2,
-          "colposcopicos_anormales_no_especificos" => $colposcopicos_anormales_no_especificos,
-          "colposcopicos_anormales_test_de_schiller" => $colposcopicos_anormales_test_de_schiller,
-          "colposcopicos_anormales_ubicacion" => $colposcopicos_anormales_ubicacion,
-          "sospecha_de_invasion" => $sospecha_de_invasion,
-          "hallazgos_varios" => $hallazgos_varios,
-          "examen_de_vyv" => $examen_de_vyv,
-          "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion,
-          "test_de_schiller_lugol" => $test_de_schiller_lugol,
-          "sugerencias" => $sugerencias      
-        );
-        foreach ($acf_fields as $field => $value) {
-            if($value != NULL)
-                //var_dump("clave: ".$field." valor: ".$value)."<br>";
-                //var_dump("app_id: ".$app_id)."<br>";
-                //update_field( $field, $value, $app_id );
-                update_post_meta( $colpo_post_id, $field, $value );
-        }
+        // $acf_fields = array(
+        //   "macroscopia" => $macroscopia,
+        //   "colposcopia" => $colposcopia,
+        //   "evaluacion_general" => $evaluacion_general,
+        //   "motivo_inadecuada" => $motivo_inadecuada,
+        //   "union_escamo_columnar" => $union_escamo_columnar,
+        //   "zona_de_transformacion" => $zona_de_transformacion,
+        //   "colposcopicos_normales" => $colposcopicos_normales,
+        //   "colposcopicos_anormales_grado_1" => $colposcopicos_anormales_grado_1,
+        //   "colposcopicos_anormales_grado_2" => $colposcopicos_anormales_grado_2,
+        //   "colposcopicos_anormales_no_especificos" => $colposcopicos_anormales_no_especificos,
+        //   "colposcopicos_anormales_test_de_schiller" => $colposcopicos_anormales_test_de_schiller,
+        //   "colposcopicos_anormales_ubicacion" => $colposcopicos_anormales_ubicacion,
+        //   "sospecha_de_invasion" => $sospecha_de_invasion,
+        //   "hallazgos_varios" => $hallazgos_varios,
+        //   "examen_de_vyv" => $examen_de_vyv,
+        //   "examen_de_vyv_descripcion" => $examen_de_vyv_descripcion,
+        //   "test_de_schiller_lugol" => $test_de_schiller_lugol,
+        //   "sugerencias" => $sugerencias      
+        // );
+        // foreach ($acf_fields as $field => $value) {
+        //     if($value != NULL)
+        //         //var_dump("clave: ".$field." valor: ".$value)."<br>";
+        //         //var_dump("app_id: ".$app_id)."<br>";
+        //         //update_field( $field, $value, $app_id );
+        //         update_post_meta( $colpo_post_id, $field, $value );
+        // }
 
-        //test: empty all image fields before update. but only if image files has been selected to replace the old ones.
-        $update_colpo_images = false;
-        foreach ($_FILES as $file ) {
-          if($file['name'] != "") {
-            $update_colpo_images = true;
-            }
-        }
+        // //test: empty all image fields before update. but only if image files has been selected to replace the old ones.
+        // $update_colpo_images = false;
+        // foreach ($_FILES as $file ) {
+        //   if($file['name'] != "") {
+        //     $update_colpo_images = true;
+        //     }
+        // }
 
-        if ($update_colpo_images) {         
-          $image_fields = array(
-              "colpo_imagen_1" => "",         
-              "colpo_imagen_2" => "",         
-              "colpo_imagen_3" => "",         
-              "colpo_imagen_4" => "",         
-              "colpo_imagen_5" => ""         
-          );
-          foreach ($image_fields as $field => $value) {
-            update_post_meta( $colpo_post_id, $field, $value );
-          }
-        }
-        //file upload test
-        $i = 1;   
-        foreach ($_FILES as $file ) {
+        // if ($update_colpo_images) {         
+        //   $image_fields = array(
+        //       "colpo_imagen_1" => "",         
+        //       "colpo_imagen_2" => "",         
+        //       "colpo_imagen_3" => "",         
+        //       "colpo_imagen_4" => "",         
+        //       "colpo_imagen_5" => ""         
+        //   );
+        //   foreach ($image_fields as $field => $value) {
+        //     update_post_meta( $colpo_post_id, $field, $value );
+        //   }
+        // }
+        // //file upload test
+        // $i = 1;   
+        // foreach ($_FILES as $file ) {
 
-          $uploadedfile = $file;
-          $movefile = wp_handle_upload($uploadedfile, array('action' => 'sw_create_appointment_ajax'));
+        //   $uploadedfile = $file;
+        //   $movefile = wp_handle_upload($uploadedfile, array('action' => 'sw_create_appointment_ajax'));
 
-          //Guardamos la foto en la biblioteca multimedia
-          if ($movefile) {
-            $wp_upload_dir = wp_upload_dir();
-            $attachment = array(
-              'guid' => $wp_upload_dir['url'].'/'.basename($movefile['file']),
-              'post_mime_type' => $movefile['type'],
-              'post_title' => preg_replace('/\.[^.]+$/', '', basename($movefile['file'])),
-              'post_content' => '',
-              'post_status' => 'inherit'
-            );
-            $attach_id = wp_insert_attachment($attachment, $movefile['file']);
+        //   //Guardamos la foto en la biblioteca multimedia
+        //   if ($movefile) {
+        //     $wp_upload_dir = wp_upload_dir();
+        //     $attachment = array(
+        //       'guid' => $wp_upload_dir['url'].'/'.basename($movefile['file']),
+        //       'post_mime_type' => $movefile['type'],
+        //       'post_title' => preg_replace('/\.[^.]+$/', '', basename($movefile['file'])),
+        //       'post_content' => '',
+        //       'post_status' => 'inherit'
+        //     );
+        //     $attach_id = wp_insert_attachment($attachment, $movefile['file']);
             
-            //update_post_meta( $colpo_post_id, 'colpo_imagen', $attach_id );  
-            update_post_meta( $colpo_post_id, 'colpo_imagen_'.$i, $attach_id );  
-            //update_field('colpo_imagen', $attach_id, $colpo_post_id);
-            $i++;
-          }
-        }
-        //end update colposcopy
+        //     //update_post_meta( $colpo_post_id, 'colpo_imagen', $attach_id );  
+        //     update_post_meta( $colpo_post_id, 'colpo_imagen_'.$i, $attach_id );  
+        //     //update_field('colpo_imagen', $attach_id, $colpo_post_id);
+        //     $i++;
+        //   }
+        // }
+        // //end update colposcopy
 
         $result['success'] = TRUE;
         $result['msg'] = 'Consulta Actualizada';

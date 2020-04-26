@@ -15,7 +15,7 @@
   // $is_editable = $patient_id == "new" ? "true" : "false";
   $is_editable = "true";  
   
-  //var_dump($indication_id);
+  var_dump($colpo_post_id);
   $title = $colpo_post_id === NULL ? "Crear informe colposcópico" : "Editar informe colposcópico";
 ?>
 
