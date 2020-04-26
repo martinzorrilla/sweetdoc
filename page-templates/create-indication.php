@@ -15,6 +15,7 @@
 
   //var_dump($indication_id);
   $title = $indication_id === NULL ? "Crear indicación médica" : "Editar indicación médica";
+  // var_dump($patient_id);
 ?>
 
 <div data-closable class="callout alert-callout-border secondary text-center">
