@@ -111,7 +111,31 @@ function PrintPrescription($num, $title, $file)
 }//class
 
 $laboratories_id = $_GET['laboratories_id'];
+
 $studies_fields = get_post_custom($laboratories_id);
+
+$patient_id = $studies_fields['laboratory_related_patient'][0];
+$patient_fields = get_post_custom($patient_id);
+$name = isset($patient_fields['nombre'][0]) ? $patient_fields['nombre'][0] : NULL;
+// $name = $patient_fields['nombre'][0];  
+$lastname = isset($patient_fields['apellido'][0]) ? $patient_fields['apellido'][0] : NULL;
+$cedula = isset($patient_fields['cedula'][0]) ? $patient_fields['cedula'][0] : NULL;
+$fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
+// $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
+// $fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
+//$bday = new DateTime('23.8.1988'); // Your date of birth
+$bday = new Datetime(date('d.m.y'));
+if ($fecha_de_nacimiento != ""){ $bday = new Datetime(date('d.m.y', strtotime($fecha_de_nacimiento)));}
+$today = new Datetime(date('d.m.y'));
+$diff = $today->diff($bday);
+$edad_paciente = $diff->y;
+$creation_date = get_the_date( 'd-m-Y', $colpo_post_id ); //fecha de creacion de colpo puede no ser == a fecha de la consulta debido a que se puede crear una consulta sin colpo y luego editar
+$fullname = $name.' '.$lastname;
+$datos_personales = $fullname."        Edad: ".$edad_paciente."        Ci: ".$cedula."        Fecha: ".$creation_date;
+//$datos_personales1 = $fullname."                        Edad: ".$edad_paciente;
+//$datos_personales2 = $cedula."                        Fecha de consulta: ".$creation_date;
+
+
   
 $lab1 = $studies_fields['lab1'][0];
 $lab2 = $studies_fields['lab2'][0];

@@ -22,7 +22,9 @@
   <h3> <?= $title ?> </h3>
 </div>
 
+
 <?php hm_get_template_part('template-parts/indication/indication-data', ['patient_id' => $patient_id, 'app_id' => $app_id, 'indication_id' => $indication_id, 'is_editable' => $is_editable ]); ?>
+
 
 <!-- if(role == doctor){ show AGO form} -->
 

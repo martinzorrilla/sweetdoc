@@ -27,21 +27,37 @@ var CreatePatientModule = function(){
         createPatientBtn.on("click", function (e) {
           //createPatientBtn.fadeOut( "slow" );
           //  alert("Se creara un paciente nuevo");
+          $("#overlay").fadeIn(300);
           saveProfileData(e);
         })
 
         deletePatientBtn.on("click", function (e) {
           // deletePatientBtn.fadeOut( "slow" );
 
-          if(confirm("Desea eliminar el paciente y todos sus datos??")) {
-            this.click;
-              //  alert("Paciente eliminado");
-               deletePatientData(e);
-           }
-           else
-           {
-               //alert("Cancel");
-           }
+          // ESTA NO ES LA MEJOR FORMA DE VALIDAR YA QUE NO PUEDO OCULTAR EL PASS.
+          // DEBERIA CREAR UN FORM HTML CON UN INPUT PASS Y ESO ENVIAR AL POPUP.
+          var pass = prompt("Se eliminara la paciente y todos los datos como consultas, colposcopias etc.", "Ingrese el código");
+          if (pass != null && pass != "") {
+            if(pass === "0009"){
+              $("#overlay").fadeIn(300);
+              deletePatientData(e);
+            }
+            else {
+             alert("Código incorrecto. Operación Cancelada.");
+            }
+          } 
+
+          // ESTO TAMBIEN FUNCIONA PERO SOLO PIDE CONFIRMACION PARA BORRAR EL PACIENTE
+          // if(confirm("Se eliminara la paciente y todos los datos como consultas, colposcopias etc.")) {
+          //   this.click;
+          //     //  alert("Paciente eliminado");
+          //     $("#overlay").fadeIn(300);
+          //      deletePatientData(e);
+          //  }
+          //  else
+          //  {
+          //      //alert("Cancel");
+          //  }
 
         })
 
@@ -79,20 +95,32 @@ var CreatePatientModule = function(){
               console.log(data);
               //alert(data.error.msg);
               alert(data['msg']);
+              setTimeout(function(){
+                $("#overlay").fadeOut(300);
+              },500);
               //alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> sw_create_appointment_ajax ');
               //let errorMsg = result.error.msg;
               //jQuery('form#create-appointment-form .errorWrapper').prepend(errorMsg);
             }
           }
           if(data.success){
-            alert(data['msg']);
+             alert('Nueva paciente creada: '+data['msg']);
+            //var singlePatient = toString(data['msg']);
+            //alert(singlePatient);
             //$('#interests').foundation('open');
             //var oldUrl = window.location.href;
             //var replaceId = "app_id="+result['app_id'];
             //var newUrl = oldUrl.replace("app_id=new", replaceId);
             //window.location.replace(newUrl);
             // window.location.replace(window.location.hostname);
-            window.location.reload();
+            // window.location.reload();
+            setTimeout(function(){
+              $("#overlay").fadeOut(300);
+            },500);
+            window.location.replace('/sweetdoc/sw_patient/'+data['msg']);
+            //var myPatientUrl = '/sweetdoc/sw_patient/'+singlePatient;
+            //window.location.replace(myPatientUrl);
+
           //  console.log(window.location.hostname);
           //  alert(window.location.hostname);
 
@@ -140,9 +168,9 @@ var CreatePatientModule = function(){
             }
           }
           if(data.success){
-            // alert(data['msg']);
+            //  alert('entro aca');
             //console.log(window.location.hostname);
-            console.log(data['msg']);
+            // console.log(data['msg']);
 
             //alert('data.success');
             //$('#interests').foundation('open');
@@ -156,6 +184,8 @@ var CreatePatientModule = function(){
             // window.location();
 
             window.location.replace('/sweetdoc/pacientes/');
+            // window.location.replace('/sweetdoc/sw_patient/'.data['msg']);
+
             // GoToHomePage();
             // window.location.reload();
 

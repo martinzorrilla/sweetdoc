@@ -158,7 +158,8 @@ function sw_create_patient($params){
       $static_data = sw_create_static_data($static_values);
 
       $result['success'] = TRUE;
-      $result['msg'] = 'Nuevo Paciente creado';
+      // $result['msg'] = 'Nuevo Paciente creado';
+      $result['msg'] = $patient_name.'-'. $patient_last_name;
       return $result;
 }
 

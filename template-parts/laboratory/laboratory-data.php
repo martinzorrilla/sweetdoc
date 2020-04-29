@@ -47,6 +47,8 @@
   $trigliceridos = get_field('trigliceridos', $laboratories_id);
   $lipidos_totales = get_field('lipidos_totales', $laboratories_id);
   $hepatograma = get_field('hepatograma', $laboratories_id);
+  $proteinas_tyf = get_field('proteinas_tyf', $laboratories_id);
+  
   $proteinas_tyfca_125 = get_field('proteinas_tyfca_125', $laboratories_id);
   $ca_125 = get_field('ca_125', $laboratories_id);
   $cea_lab = get_field('cea_lab', $laboratories_id);
@@ -68,9 +70,11 @@
   $vaginal_cultivo = get_field('vaginal_cultivo', $laboratories_id);
   $endocervical_cultivo = get_field('endocervical_cultivo', $laboratories_id);
   $cultivo_de_chla = get_field('cultivo_de_chla', $laboratories_id);
-  $otros_laboratorios = $laboratories_fields['otros_laboratorios'][0];
-  $diagnostico_laboratorios = $laboratories_fields['diagnostico_laboratorios'][0];
 
+  // $otros_laboratorios = $laboratories_fields['otros_laboratorios'][0];
+  $otros_laboratorios = isset($laboratories_fields['otros_laboratorios'][0]) ? $laboratories_fields['otros_laboratorios'][0] : NULL;
+  // $diagnostico_laboratorios = $laboratories_fields['diagnostico_laboratorios'][0];
+  $diagnostico_laboratorios = isset($laboratories_fields['diagnostico_laboratorios'][0]) ? $laboratories_fields['diagnostico_laboratorios'][0] : NULL;
   
 
  ?> 
@@ -595,7 +599,7 @@
 
                       <!-- ca_15_3 -->
                       <div class="floated-label-wrapper small-12 large-12 columns checkbox-radio text-left ">
-                            <input type="checkbox" id="ca_15_3" name="hepatograma[]" value="ca_15_3" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                            <input type="checkbox" id="ca_15_3" name="ca_15_3[]" value="ca_15_3" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                             <?php 
                             if( $ca_15_3 != NULL || $ca_15_3 != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
                               if(in_array("ca_15_3", $ca_15_3)) echo "checked";
@@ -700,7 +704,7 @@
                       <div class="floated-label-wrapper small-12 large-12 columns checkbox-radio text-left ">
                             <input type="checkbox" id="ac_anti_dna" name="ac_anti_dna[]" value="ac_anti_dna" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                             <?php 
-                            if( $hepatograma != NULL || $ac_anti_dna != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
+                            if( $ac_anti_dna != NULL || $ac_anti_dna != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
                               if(in_array("ac_anti_dna", $ac_anti_dna)) echo "checked";
                             }
                             ?> >
@@ -790,7 +794,7 @@
                               if(in_array("endocervical_cultivo", $endocervical_cultivo)) echo "checked";
                             }
                             ?> >
-                        <label for="endocervical_cultivo">Hepatograma</label>
+                        <label for="endocervical_cultivo"> Endocervical Cultivo </label>
                       </div>
 
                       <!-- cultivo_de_chla -->

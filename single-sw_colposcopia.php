@@ -1,7 +1,7 @@
 <?php get_header();?>
 
 <?php
-  //the id of the post in the current loop. witch is the patient
+  //the id of the post in the current loop. witch is the colpossopy
   $post_id = get_the_ID(); 
   //echo $post_id;
   $colpo_data_post = get_post_custom($post_id);

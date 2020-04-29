@@ -31,6 +31,8 @@ var CreateColposcopyModule = function(){
         createColpoBtn.on("click", function (e) {
           //get_checkbox_values();
           createColpoBtn.fadeOut( "slow" );
+            // metemos el div con el spinner hasta que se retonrne del ajaz request
+          $("#overlay").fadeIn(300);
           saveProfileData(e);
         })
 
@@ -139,7 +141,12 @@ var CreateColposcopyModule = function(){
         //   var newUrl = oldUrl.replace("app_id=new", replaceId);
         //   window.location.replace(newUrl);
           
-          window.location.reload();
+          // window.location.reload();
+          setTimeout(function(){
+            $("#overlay").fadeOut(300);
+          },500);
+          window.history.back();
+
         }
       }
     });

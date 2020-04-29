@@ -89,7 +89,7 @@
                   if ($indication_id) {
                       ?>
                       <br>
-                      <a href="<?php echo get_permalink( $indication_id ).$patient_id.'&app_id='.$r; ?> "> Imprimir <?php //echo $indication_id; ?></a>
+                      <a href="<?php echo get_permalink( $indication_id ) ?> "> Imprimir <?php //echo $indication_id; ?></a>
                       <?php 
                   }
                   ?>

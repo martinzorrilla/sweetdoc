@@ -2,7 +2,6 @@
 <?php 
     $post_id = get_the_ID();
     $indication_data_post = get_post_custom($post_id);
-   
     //get the app id that is related to this indiaction
     $app_id = $indication_data_post['related_indication'][0]; 
     //wp_die(var_dump($app_id));
@@ -22,12 +21,13 @@
   <h3> <?= $title ?> </h3>
 </div>
 
-<?php hm_get_template_part('template-parts/indication/indication-data', ['app_id' => $app_id, 'is_editable' => $is_editable ]); ?>
+<?php hm_get_template_part('template-parts/indication/indication-data', ['patient_id' => $patient_id, 'app_id' => $app_id, 'indication_id' => $post_id, 'is_editable' => $is_editable ]); ?>
+<?php //hm_get_template_part('template-parts/indication/indication-data', ['app_id' => $app_id, 'is_editable' => $is_editable ]); ?>
 
 <!-- if(role == doctor){ show AGO form} -->
 
 <div class="button-div">
-    <a href="<?php echo esc_url( $prescription_pdf_url ).$r; ?>" target="_blank" 
+    <a href="<?php echo esc_url( $prescription_pdf_url ); ?>" target="_blank" 
       <button id="create-indication-pdf" class="save-button-expanded" type="submit" value="Next">Generar indicación en PDF</button>
     </a>  
     <p class="errorWrapper"></p>

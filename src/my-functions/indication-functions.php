@@ -92,6 +92,8 @@ function sw_create_indication($params){
         }
 
         add_post_meta( $post_id, 'related_indication', $app_id );
+        add_post_meta( $post_id, 'indication_related_patient', $patient_id );
+
 
       $result['success'] = TRUE;
       $result['msg'] = 'Nueva Indicacion creada';

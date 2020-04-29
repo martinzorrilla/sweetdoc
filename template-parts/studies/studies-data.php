@@ -12,78 +12,127 @@
 
   // ACF FIELDS DATA --------------------------------------------
   $checkbox_egcv = get_field('egcv', $studies_id);
-  $egcv_dx = $studies_fields['egcv_dx'][0];
+  // $egcv_dx = $studies_fields['egcv_dx'][0];
+  $egcv_dx = isset($studies_fields['egcv_dx'][0]) ? $studies_fields['egcv_dx'][0] : NULL;
 
+  
   $checkbox_egva = get_field('egva', $studies_id);
-  $egva_dx = $studies_fields['egva_dx'][0];
+  // $egva_dx = $studies_fields['egva_dx'][0];
+  $egva_dx = isset($studies_fields['egva_dx'][0]) ? $studies_fields['egva_dx'][0] : NULL;
+
   
   $checkbox_ea_st = get_field('ea_st', $studies_id);
-  $ea_st_dx = $studies_fields['ea_st_dx'][0];
+  // $ea_st_dx = $studies_fields['ea_st_dx'][0];
+  $ea_st_dx = isset($studies_fields['ea_st_dx'][0]) ? $studies_fields['ea_st_dx'][0] : NULL;
+
   
   $checkbox_ecografia_renal = get_field('ecografia_renal', $studies_id);
-  $er_dx = $studies_fields['er_dx'][0];
+  // // $er_dx = $studies_fields['er_dx'][0];
+  $er_dx = isset($studies_fields['er_dx'][0]) ? $studies_fields['er_dx'][0] : NULL;
   
+
   $checkbox_mdb = get_field('mdb', $studies_id);
-  $mdb_dx = $studies_fields['mdb_dx'][0];
+  // $mdb_dx = $studies_fields['mdb_dx'][0];
+  $mdb_dx = isset($studies_fields['mdb_dx'][0]) ? $studies_fields['mdb_dx'][0] : NULL;
+
   
   $checkbox_ecografia_mamaria = get_field('ecografia_mamaria', $studies_id);
-  $em_dx = $studies_fields['em_dx'][0];
+  // $em_dx = $studies_fields['em_dx'][0];
+  $em_dx = isset($studies_fields['em_dx'][0]) ? $studies_fields['em_dx'][0] : NULL;
+
   
   $checkbox_ecografia_obstetrica = get_field('ecografia_obstetrica', $studies_id);
-  $eo_dx = $studies_fields['eo_dx'][0];
+  // $eo_dx = $studies_fields['eo_dx'][0];
+  $eo_dx = isset($studies_fields['eo_dx'][0]) ? $studies_fields['eo_dx'][0] : NULL;
+
   
   $checkbox_eodfp = get_field('eodfp', $studies_id);
-  $eodfp_dx = $studies_fields['eodfp_dx'][0];
+  // $eodfp_dx = $studies_fields['eodfp_dx'][0];
+  $eodfp_dx = isset($studies_fields['eodfp_dx'][0]) ? $studies_fields['eodfp_dx'][0] : NULL;
+
 
   $checkbox_emdm = get_field('emdm', $studies_id);
-  $emdm_dx = $studies_fields['emdm_dx'][0];
+  // $emdm_dx = $studies_fields['emdm_dx'][0];
+  $emdm_dx = isset($studies_fields['emdm_dx'][0]) ? $studies_fields['emdm_dx'][0] : NULL;
+
   
   $checkbox_eomcdm = get_field('eomcdm', $studies_id);
-  $eomcdm_dx = $studies_fields['eomcdm_dx'][0];
+  // $eomcdm_dx = $studies_fields['eomcdm_dx'][0];
+  $eomcdm_dx = isset($studies_fields['eomcdm_dx'][0]) ? $studies_fields['eomcdm_dx'][0] : NULL;
+
   
   $checkbox_colposcopia_st = get_field('colposcopia_st', $studies_id);
-  $colposcopia_st_dx = $studies_fields['colposcopia_st_dx'][0];
+  //$colposcopia_st_dx = $studies_fields['colposcopia_st_dx'][0];
+  $colposcopia_st_dx = isset($studies_fields['colposcopia_st_dx'][0]) ? $studies_fields['colposcopia_st_dx'][0] : NULL;
+
   
   $checkbox_lec_st = get_field('lec_st', $studies_id);
-  $lec_st_dx = $studies_fields['lec_st_dx'][0];
+  //$lec_st_dx = $studies_fields['lec_st_dx'][0];
+  $lec_st_dx = isset($studies_fields['lec_st_dx'][0]) ? $studies_fields['lec_st_dx'][0] : NULL;
+
   
   $checkbox_desintometria_osea = get_field('desintometria_osea', $studies_id);
-  $desintometria_osea_dx = $studies_fields['desintometria_osea_dx'][0];
+  //$desintometria_osea_dx = $studies_fields['desintometria_osea_dx'][0];
+  $desintometria_osea_dx = isset($studies_fields['desintometria_osea_dx'][0]) ? $studies_fields['desintometria_osea_dx'][0] : NULL;
+
   
   $checkbox_rtpa = get_field('rtpa', $studies_id);
-  $rtpa_dx = $studies_fields['rtpa_dx'][0];
+  //$rtpa_dx = $studies_fields['rtpa_dx'][0];
+  $rtpa_dx = isset($studies_fields['rtpa_dx'][0]) ? $studies_fields['rtpa_dx'][0] : NULL;
+
   
   $checkbox_electrocardiograma = get_field('electrocardiograma', $studies_id);
-  $electrocardiograma_dx = $studies_fields['electrocardiograma_dx'][0];
+  //$electrocardiograma_dx = $studies_fields['electrocardiograma_dx'][0];
+  $electrocardiograma_dx = isset($studies_fields['electrocardiograma_dx'][0]) ? $studies_fields['electrocardiograma_dx'][0] : NULL;
+
   
   $checkbox_tapc = get_field('tapc', $studies_id);
-  $tapc_dx = $studies_fields['tapc_dx'][0];
+  //$tapc_dx = $studies_fields['tapc_dx'][0];
+  $tapc_dx = isset($studies_fields['tapc_dx'][0]) ? $studies_fields['tapc_dx'][0] : NULL;
+
   
   $checkbox_tsts = get_field('tsts', $studies_id);
-  $tsts_dx = $studies_fields['tsts_dx'][0];
+  //$tsts_dx = $studies_fields['tsts_dx'][0];
+  $tsts_dx = isset($studies_fields['tsts_dx'][0]) ? $studies_fields['tsts_dx'][0] : NULL;
+
   
   $checkbox_tstc = get_field('tstc', $studies_id);
-  $tstc_dx = $studies_fields['tstc_dx'][0];
+  //$tstc_dx = $studies_fields['tstc_dx'][0];
+  $tstc_dx = isset($studies_fields['tstc_dx'][0]) ? $studies_fields['tstc_dx'][0] : NULL;
+
   
   $checkbox_emba = get_field('emba', $studies_id);
-  $emba_dx = $studies_fields['emba_dx'][0];
+  //$emba_dx = $studies_fields['emba_dx'][0];
+  $emba_dx = isset($studies_fields['emba_dx'][0]) ? $studies_fields['emba_dx'][0] : NULL;
+
   
   $checkbox_pbf = get_field('pbf', $studies_id);
-  $pbf_dx = $studies_fields['pbf_dx'][0];
+  //$pbf_dx = $studies_fields['pbf_dx'][0];
+  $pbf_dx = isset($studies_fields['pbf_dx'][0]) ? $studies_fields['pbf_dx'][0] : NULL;
+
   
   $checkbox_pbfdfp = get_field('pbfdfp', $studies_id);
-  $pbfdfp_dx = $studies_fields['pbfdfp_dx'][0];
+  //$pbfdfp_dx = $studies_fields['pbfdfp_dx'][0];
+  $pbfdfp_dx = isset($studies_fields['pbfdfp_dx'][0]) ? $studies_fields['pbfdfp_dx'][0] : NULL;
+
   
   $checkbox_mfne = get_field('mfne', $studies_id);
-  $mfne_dx = $studies_fields['mfne_dx'][0];
+  //$mfne_dx = $studies_fields['mfne_dx'][0];
+  $mfne_dx = isset($studies_fields['mfne_dx'][0]) ? $studies_fields['mfne_dx'][0] : NULL;
+
   
   $checkbox_pyc = get_field('pyc', $studies_id);
-  $pyc_dx = $studies_fields['pyc_dx'][0];
+  //$pyc_dx = $studies_fields['pyc_dx'][0];
+  $pyc_dx = isset($studies_fields['pyc_dx'][0]) ? $studies_fields['pyc_dx'][0] : NULL;
+
   
   $checkbox_bcl = get_field('bcl', $studies_id);
-  $bcl_dx = $studies_fields['bcl_dx'][0];
+  //$bcl_dx = $studies_fields['bcl_dx'][0];
+  $bcl_dx = isset($studies_fields['bcl_dx'][0]) ? $studies_fields['bcl_dx'][0] : NULL;
 
-  $otros_st = $studies_fields['otros_st'][0];
+
+  //$otros_st = $studies_fields['otros_st'][0];
+  $otros_st = isset($studies_fields['otros_st'][0]) ? $studies_fields['otros_st'][0] : NULL;
 
   
 

@@ -344,6 +344,8 @@ function sw_create_laboratories($params){
         }
 
         add_post_meta( $post_id, 'related_laboratory', $app_id );
+        add_post_meta( $post_id, 'laboratory_related_patient', $patient_id );
+
 
       $result['success'] = TRUE;
       $result['msg'] = 'Nuevo laboratorio creado - código: '.$post_id;

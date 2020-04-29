@@ -298,8 +298,8 @@ function CheckPageSpaceLeft($page_height, $current_y)
 $colpo_post_id = $_GET['colpo_id'];
 $colpo_data_post = get_post_custom($colpo_post_id);
 $patient_id = $colpo_data_post['colpo_related_patient'][0];
-$patient_fields = get_post_custom($patient_id);
 
+$patient_fields = get_post_custom($patient_id);
 $name = isset($patient_fields['nombre'][0]) ? $patient_fields['nombre'][0] : NULL;
 // $name = $patient_fields['nombre'][0];  
 $lastname = isset($patient_fields['apellido'][0]) ? $patient_fields['apellido'][0] : NULL;

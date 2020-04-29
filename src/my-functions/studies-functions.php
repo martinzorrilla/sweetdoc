@@ -288,6 +288,8 @@ function sw_create_studies($params){
         }
 
         add_post_meta( $post_id, 'related_study', $app_id );
+        add_post_meta( $post_id, 'study_related_patient', $patient_id );
+
 
       $result['success'] = TRUE;
       $result['msg'] = 'Nuevo estudio creado';
