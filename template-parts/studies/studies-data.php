@@ -439,6 +439,23 @@
                     <input type="text" id="tsts_dx" name="tsts_dx" value="<?php echo $tsts_dx ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
                   </div>
 
+                  <!-- checkbox_ TAC de silla turca contraste -->
+                  <div class="floated-label-wrapper small-12 large-6 columns checkbox-radio text-left ">
+                      <label class="separator-left"> TAC de silla turca con Contraste </label>
+                          <input type="checkbox" id="tstc" name="tstc[]" value="tstc_si" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                          <?php 
+                          if( $checkbox_tstc != NULL || $checkbox_tstc != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
+                            if(in_array("tstc_si", $checkbox_tstc)) echo "checked";
+                          }
+                          ?> >
+                          <label for="tstc">Si</label>
+                  </div>  
+                  <div class="floated-label-wrapper small-12 large-6 columns">
+                    <label class="separator-left" for="tstc_dx">Descripción</label>
+                    <input type="text" id="tstc_dx" name="tstc_dx" value="<?php echo $tstc_dx ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
+                  </div>
+
+
                   <!-- checkbox_ Ecografía mamaria bilateral + axilar -->
                   <div class="floated-label-wrapper small-12 large-6 columns checkbox-radio text-left ">
                       <label class="separator-left"> Ecografía mamaria bilateral + axilar </label>
@@ -538,7 +555,8 @@
                   <!-- otros estudios -->
                   <div class="floated-label-wrapper small-12 large-12 columns">
                     <label class="separator-left" for="otros_st">Otros estudios</label>
-                    <input type="text" id="otros_st" name="otros_st" value="<?php echo $otros_st ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
+                    <!-- <input type="text" id="otros_st" name="otros_st" value="< ?php echo $otros_st ?>" placeholder="Escribir..." class="disableable-input" < ?php if($is_editable == "false")  echo "disabled"; ?> required> -->
+                    <textarea id="otros_st" name="otros_st" placeholder="Escribir..." style="height:5em" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required><?php echo $otros_st ?></textarea>     
                   </div>
 
                   </fieldset>

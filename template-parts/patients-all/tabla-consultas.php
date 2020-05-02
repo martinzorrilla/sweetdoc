@@ -5,8 +5,15 @@
 <?php
   $appointment_url = home_url().'/consulta/?patient_id=';
   $colpo_url = home_url().'/colposcopia/?patient_id=';
+
   $indicacion_url = home_url().'/indicacion/?patient_id=';
+  $prescription_pdf_url = home_url().'/indicacion-pdf/?indication_id='.$post_id;
+
+
   $estudios_url = home_url().'/estudios/?patient_id=';
+  // $studies_pdf_url = home_url().'/estudios-pdf/?studies_id='.$post_id;
+  $studies_pdf_url = home_url().'/estudios-pdf/?studies_id=';
+  
   $laboratorios_url = home_url().'/laboratorios/?patient_id=';
   $patient_id = $template_args["patient_id"];
   $related = sw_get_related_appointments($patient_id);
@@ -103,7 +110,9 @@
                   if ($studies_id) {
                       ?>
                       <br>  
-                      <a href="<?php echo get_permalink( $studies_id ); ?> "> Imprimir <?php //echo $studies_id; ?></a>
+                      <!-- <a href="< ?php echo get_permalink( $studies_id ); ?> "> Imprimir < ?php //echo $studies_id; ?></a> -->
+                      <a href="<?php echo esc_url( $studies_pdf_url ).$studies_id; ?>">Imprimir PDF</a>
+                      
                       <?php 
                   }
                   ?>

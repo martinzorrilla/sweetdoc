@@ -30,12 +30,14 @@
           <fieldset row>
             <div class="floated-label-wrapper large-6 columns">
               <label for="rp">R.P. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="rp" name="rp" value="<?php echo $rp ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
+              <!-- <input type="text" id="rp" name="rp" value="< ?php echo $rp ?>" placeholder="Escribir..." class="disableable-input" < ?php if($is_editable == "false")  echo "disabled"; ?> required> -->
+              <textarea id="rp" name="rp" placeholder="Escribir..." style="height:7em" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>  required><?php echo $rp ?></textarea>           
             </div>
 
             <div class="floated-label-wrapper large-6 columns">
               <label for="indicaciones">Indicaciónes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="indicaciones" name="indicaciones" value="<?php echo $indicaciones ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
+              <!-- <input type="text" id="indicaciones" name="indicaciones" value="< ?php echo $indicaciones ?>" placeholder="Escribir..." class="disableable-input" < ?php if($is_editable == "false")  echo "disabled"; ?> required> -->
+              <textarea id="indicaciones" name="indicaciones" placeholder="Escribir..." style="height:7em" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>  required><?php echo $indicaciones ?></textarea>           
             </div>
 
           </fieldset>

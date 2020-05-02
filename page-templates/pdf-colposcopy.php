@@ -397,14 +397,14 @@ $pdf->SetAuthor('Dra. Andrea Zorrilla');
 $title = 'Informe Colposcopico';
 //$title = $fullname;
 //$pdf->SetTitle($title);
-
 $pdf->AddPage();
 $page_height = $pdf->GetPageHeight();
 $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
 $pdf->PrintElement(2,utf8_decode(' - Nombre'),$datos_personales);
-
 $pdf->Ln(4);
 $pdf->PrintSection(2,'HALLAZGOS', $fullname);
+
+
 $pdf->PrintElement(2,' - Macroscopia',$macroscopia);
 $pdf->PrintElement(2,' - Colposcopia',$colposcopia);
 $pdf->PrintEvaluacionGeneral(2,$radiobox_evaluacion_general,$checkbox_motivo_inadecuada);
