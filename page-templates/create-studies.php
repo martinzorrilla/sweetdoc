@@ -11,7 +11,10 @@
   
   
   $studies_array = sw_get_studies_id($app_id);
-  $studies_id = $studies_array[0];
+  // $studies_id = $studies_array[0];
+  $studies_id = isset($studies_array[0]) ? $studies_array[0] : NULL;
+
+
   // var_dump($studies_id);
   $title = $studies_id === NULL ? "Crear solicitud de estudios" : "Editar solicitud de estudios";
 ?>

@@ -1,13 +1,24 @@
-<div id="consultas_paciente" data-closable class="callout alert-callout-border primary text-center" style="margin-top: 2rem;">
+<div id="consultas_paciente" data-closable class="callout alert-callout-border secondary text-center" style="margin-top: 2rem;">
     <h3 style="font-weight: bold;">Consultas Previas</h3>
 </div>
 
 <?php
   $appointment_url = home_url().'/consulta/?patient_id=';
   $colpo_url = home_url().'/colposcopia/?patient_id=';
+
   $indicacion_url = home_url().'/indicacion/?patient_id=';
+  // $prescription_pdf_url = home_url().'/indicacion-pdf/?indication_id='.$post_id;
+  $prescription_pdf_url = home_url().'/indicacion-pdf/?indication_id=';
+
+
   $estudios_url = home_url().'/estudios/?patient_id=';
+  // $studies_pdf_url = home_url().'/estudios-pdf/?studies_id='.$post_id;
+  $studies_pdf_url = home_url().'/estudios-pdf/?studies_id=';
+  
   $laboratorios_url = home_url().'/laboratorios/?patient_id=';
+  // $laboratories_pdf_url = home_url().'/laboratorios-pdf/?laboratories_id='.$post_id;
+  $laboratories_pdf_url = home_url().'/laboratorios-pdf/?laboratories_id=';
+
   $patient_id = $template_args["patient_id"];
   $related = sw_get_related_appointments($patient_id);
   
@@ -89,7 +100,9 @@
                   if ($indication_id) {
                       ?>
                       <br>
-                      <a href="<?php echo get_permalink( $indication_id ); ?> "> Imprimir <?php //echo $indication_id; ?></a>
+                      <!--  -->
+                      <!-- <a href="< ?php echo get_permalink( $indication_id ) ?> "> Imprimir < ?php //echo $indication_id; ?></a> -->
+                      <a href="<?php echo esc_url( $prescription_pdf_url ).$indication_id; ?>">Imprimir PDF</a>
                       <?php 
                   }
                   ?>
@@ -103,7 +116,9 @@
                   if ($studies_id) {
                       ?>
                       <br>  
-                      <a href="<?php echo get_permalink( $studies_id ); ?> "> Imprimir <?php //echo $studies_id; ?></a>
+                      <!-- <a href="< ?php echo get_permalink( $studies_id ); ?> "> Imprimir < ?php //echo $studies_id; ?></a> -->
+                      <a href="<?php echo esc_url( $studies_pdf_url ).$studies_id; ?>">Imprimir PDF</a>
+                      
                       <?php 
                   }
                   ?>
@@ -116,8 +131,9 @@
                   <?php 
                   if ($laboratories_id) {
                       ?>
-                      <br>  
-                      <a href="<?php echo get_permalink( $laboratories_id ); ?> "> Imprimir <?php //echo $studies_id; ?></a>
+                      <br>
+                      <!-- <a href="< ?php echo get_permalink( $laboratories_id ); ?> "> Imprimir < ?php //echo $studies_id; ?></a> -->
+                      <a href="<?php echo esc_url( $laboratories_pdf_url ).$laboratories_id; ?>">Imprimir PDF</a>
                       <?php 
                   }
                   ?>

@@ -22,12 +22,13 @@
   <h3> <?= $title ?> </h3>
 </div>
 
-<?php hm_get_template_part('template-parts/studies/studies-data', ['app_id' => $app_id, 'is_editable' => $is_editable ]); ?>
+<?php //hm_get_template_part('template-parts/studies/studies-data', ['app_id' => $app_id, 'is_editable' => $is_editable ]); ?>
+<?php hm_get_template_part('template-parts/studies/studies-data', ['patient_id' => $patient_id, 'app_id' => $app_id, 'studies_id' => $post_id, 'is_editable' => $is_editable ]); ?>
 
 <!-- if(role == doctor){ show AGO form} -->
 
 <div class="button-div">
-    <a href="<?php echo esc_url( $studies_pdf_url ).$r; ?>" target="_blank" 
+    <a href="<?php echo esc_url( $studies_pdf_url ); ?>" target="_blank" 
       <button id="create-studies-pdf" class="save-button-expanded" type="submit" value="Next">Generar solicitud en PDF</button>
     </a>  
     <p class="errorWrapper"></p>

@@ -17,7 +17,7 @@ function sw_create_indication_ajax(){
     $indicaciones = isset($_POST['indicaciones']) && $_POST['indicaciones'] != '' ? $_POST['indicaciones'] : NULL;
 
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
-     error_log(json_encode($_POST), 0);
+    //  error_log(json_encode($_POST), 0);
 
     $params = array(
         "patient_id" => $patient_id,
@@ -58,7 +58,7 @@ function sw_create_indication($params){
       $fullname = $name.'-'.$lastname;
       //$fullname = "no anda";
 
-      $post_author = $params['post_author'];
+      // $post_author = $params['post_author'];
       //sw_get_patient_owner: devuelve el id del doctor directamente, o si el rol del usuario actual es secretaty 
       //devuelve el id del doctor que le corresponde 
       $patient_owner = sw_get_patient_owner();
@@ -92,6 +92,8 @@ function sw_create_indication($params){
         }
 
         add_post_meta( $post_id, 'related_indication', $app_id );
+        add_post_meta( $post_id, 'indication_related_patient', $patient_id );
+
 
       $result['success'] = TRUE;
       $result['msg'] = 'Nueva Indicacion creada';

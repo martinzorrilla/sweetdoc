@@ -1,7 +1,7 @@
 <?php get_header();?>
 
 <?php
-  //the id of the post in the current loop. witch is the patient
+  //the id of the post in the current loop. witch is the colpossopy
   $post_id = get_the_ID(); 
   //echo $post_id;
   $colpo_data_post = get_post_custom($post_id);
@@ -141,7 +141,7 @@ if(true){
       </div> <!-- div.archivos -->
 
   <div class="button-div">
-    <a href="<?php echo esc_url( $colposcopy_pdf_url ); ?>" target="_blank" 
+    <a href="<?php echo esc_url( $colposcopy_pdf_url ); ?>"  
       <button id="create-colposcopy-pdf" class="save-button-expanded" type="submit" value="Next">Generar informe colposcopico</button>
     </a>  
     <p class="errorWrapper"></p>

@@ -29,6 +29,8 @@ var CreateLaboratoriesModule = function(){
 
         createLaboratoriesBtn.on("click", function (e) {
           createLaboratoriesBtn.fadeOut( "slow" );
+            // metemos el div con el spinner hasta que se retonrne del ajaz request
+          $("#overlay").fadeIn(300);
             //alert("se creara una solicitud de laboratorio");
           saveProfileData(e);
         })
@@ -64,7 +66,11 @@ var CreateLaboratoriesModule = function(){
           }
           if(data.success){
             alert(data['msg']);
+            setTimeout(function(){
+              $("#overlay").fadeOut(300);
+            },500);
             window.history.back();
+            // window.history.back();
             //window.history.go(-1) //funciona, lleva a la pagina anterior.
             //window.location.reload();          
            //window.location.replace("https://www.tutorialrepublic.com");

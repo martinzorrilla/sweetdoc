@@ -22,8 +22,10 @@ var CreateIndicationModule = function(){
 
         createStudiesBtn.on("click", function (e) {
           createStudiesBtn.fadeOut( "slow" );
-            alert("se creara una solicitud de estudio");
-          saveProfileData(e);
+            // alert("se creara una solicitud de estudio");
+            // metemos el div con el spinner hasta que se retonrne del ajaz request
+            $("#overlay").fadeIn(300);
+            saveProfileData(e);
         })
       });
     }
@@ -58,6 +60,10 @@ var CreateIndicationModule = function(){
           if(data.success){
             alert(data['msg']);
 //            window.location.reload();
+            // window.history.back();
+            setTimeout(function(){
+              $("#overlay").fadeOut(300);
+            },500);
             window.history.back();
 
 

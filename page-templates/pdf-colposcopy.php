@@ -298,8 +298,8 @@ function CheckPageSpaceLeft($page_height, $current_y)
 $colpo_post_id = $_GET['colpo_id'];
 $colpo_data_post = get_post_custom($colpo_post_id);
 $patient_id = $colpo_data_post['colpo_related_patient'][0];
-$patient_fields = get_post_custom($patient_id);
 
+$patient_fields = get_post_custom($patient_id);
 $name = isset($patient_fields['nombre'][0]) ? $patient_fields['nombre'][0] : NULL;
 // $name = $patient_fields['nombre'][0];  
 $lastname = isset($patient_fields['apellido'][0]) ? $patient_fields['apellido'][0] : NULL;
@@ -397,14 +397,14 @@ $pdf->SetAuthor('Dra. Andrea Zorrilla');
 $title = 'Informe Colposcopico';
 //$title = $fullname;
 //$pdf->SetTitle($title);
-
 $pdf->AddPage();
 $page_height = $pdf->GetPageHeight();
 $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
 $pdf->PrintElement(2,utf8_decode(' - Nombre'),$datos_personales);
-
 $pdf->Ln(4);
 $pdf->PrintSection(2,'HALLAZGOS', $fullname);
+
+
 $pdf->PrintElement(2,' - Macroscopia',$macroscopia);
 $pdf->PrintElement(2,' - Colposcopia',$colposcopia);
 $pdf->PrintEvaluacionGeneral(2,$radiobox_evaluacion_general,$checkbox_motivo_inadecuada);
@@ -412,7 +412,13 @@ $pdf->PrintEvaluacionGeneral(2,$radiobox_evaluacion_general,$checkbox_motivo_ina
 $pdf->PrintElement(2,utf8_decode(' - Visibilidad de la unión escamo columnar'),str_replace("_", " ", $radiobox_union_escamo_columnar));
 $pdf->PrintElement(2,utf8_decode(' - Zona de transformación'), str_replace("_", " ", $radiobox_zona_de_transformacion));
 $pdf->PrintArray(2,utf8_decode(' - Hallazgos colposcopicos normales'),$checkbox_colposcopicos_normales);
-$pdf->PrintSecondaryTitle(2,utf8_decode(' - Hallazgos colposcopicos anormales'), "");
+
+// imprimir el titulo de hllazgos anormales solo si alguno de ellos tiene datos
+if ( (is_array($checkbox_colposcopicos_anormales_grado_1) && !empty($checkbox_colposcopicos_anormales_grado_1))  ||  (is_array($checkbox_colposcopicos_anormales_grado_2) && !empty($checkbox_colposcopicos_anormales_grado_2))  || 
+(is_array($checkbox_colposcopicos_anormales_no_especificos) && !empty($checkbox_colposcopicos_anormales_no_especificos))
+){
+    $pdf->PrintSecondaryTitle(2,utf8_decode(' - Hallazgos colposcopicos anormales'), "");
+}
 $pdf->PrintArray(2,utf8_decode(' - Grado 1'),$checkbox_colposcopicos_anormales_grado_1);
 $pdf->PrintArray(2,utf8_decode(' - Grado 2'),$checkbox_colposcopicos_anormales_grado_2);
 $pdf->PrintArray(2,utf8_decode(' - No especificos'),$checkbox_colposcopicos_anormales_no_especificos);

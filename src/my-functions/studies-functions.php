@@ -206,7 +206,7 @@ function sw_create_studies($params){
       $lastname = $patient_fields['apellido'][0];
       //$cedula = $patient_fields['cedula'][0];
       $fullname = $name.'-'.$lastname;
-      $post_author = $params['post_author'];
+      // $post_author = $params['post_author'];
       //sw_get_patient_owner: devuelve el id del doctor directamente, o si el rol del usuario actual es secretaty 
       //devuelve el id del doctor que le corresponde 
       $patient_owner = sw_get_patient_owner();
@@ -288,6 +288,8 @@ function sw_create_studies($params){
         }
 
         add_post_meta( $post_id, 'related_study', $app_id );
+        add_post_meta( $post_id, 'study_related_patient', $patient_id );
+
 
       $result['success'] = TRUE;
       $result['msg'] = 'Nuevo estudio creado';

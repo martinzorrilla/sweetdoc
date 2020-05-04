@@ -12,9 +12,20 @@
 		un padding arriba y abajo de todo el sitio -->
 		<div class="top-bottom-spacer"></div>
      <!-- the content ends here! -->
+		
+
 	 </div>
   </div>
 </div>
+
+<!-- ESTE DIV ES una capa que esta escondida y contiene un spinner lo activamos con js cuando se hace un Ajax Request
+y lo desactivamos una vez que este haya terminado -->
+<div id="overlay">
+	<div class="cv-spinner">
+		<span class="spinner"></span>
+	</div>
+</div>
+
 </div><!-- patient-div -->
 
 <div class="footer-container">
