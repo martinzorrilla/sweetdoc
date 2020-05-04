@@ -101,13 +101,13 @@
             <!-- macroscopia -->
             <div class="floated-label-wrapper large-6 columns ">
               <label class="separator-left" for="macroscopia">Macroscopía &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="macroscopia" name="macroscopia" value="<?php echo $macroscopia ?>" placeholder="Escribir..." required>
+              <input type="text" id="macroscopia" name="macroscopia" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>  value="<?php echo $macroscopia ?>" placeholder="Escribir..." required>
             </div>
 
             <!-- colposcopia -->
             <div class="floated-label-wrapper large-6 columns">
               <label class="separator-left" for="colposcopia">Colposcopía &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="colposcopia" name="colposcopia" value="<?php echo $colposcopia ?>" placeholder="Escribir..." required>
+              <input type="text" id="colposcopia" name="colposcopia" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> value="<?php echo $colposcopia ?>" placeholder="Escribir..." required>
             </div>
 
             <!-- evaluacion_general -->
@@ -227,7 +227,7 @@
                       if(in_array("epitelio_escamoso_metaplasico", $checkbox_colposcopicos_normales)) echo "checked";
                     }
                     ?> >
-                    <label for="epitelio_escamoso_metaplasico">Epitelio_escamoso_metaplasico</label>
+                    <label for="epitelio_escamoso_metaplasico">Epitelio escamoso metaplasico</label>
 
                     <input type="checkbox" id="quiste_naboth" name="colposcopicos_normales[]" value="quiste_naboth" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -235,7 +235,7 @@
                       if(in_array("quiste_naboth", $checkbox_colposcopicos_normales)) echo "checked";
                     }
                     ?> >
-                    <label for="quiste_naboth">quiste_naboth</label>
+                    <label for="quiste_naboth">Quiste naboth</label>
 
                     <input type="checkbox" id="orificios_glandulares" name="colposcopicos_normales[]" value="orificios_glandulares" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -243,7 +243,7 @@
                       if(in_array("orificios_glandulares", $checkbox_colposcopicos_normales)) echo "checked";
                     }
                     ?> >
-                    <label for="orificios_glandulares">orificios_glandulares</label>
+                    <label for="orificios_glandulares">Orificios glandulares</label>
 
                     <input type="checkbox" id="deciduosis_en_embarazo" name="colposcopicos_normales[]" value="deciduosis_en_embarazo" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -251,13 +251,17 @@
                       if(in_array("deciduosis_en_embarazo", $checkbox_colposcopicos_normales)) echo "checked";
                     }
                     ?> >
-                    <label for="deciduosis_en_embarazo">deciduosis_en_embarazo</label>
+                    <label for="deciduosis_en_embarazo">Deciduosis en el embarazo</label>
 
             </div>  
 
+            <div class="small-12 columns">
+              <h6 class="separator-left" style="font-weight: bold; padding-top: 20px;" >Hallazgos Colposcópicos Anormales </h6>
+            </div>
+
             <!-- colposcopicos_anormales_grado_1 - checkbox -->
             <div class="floated-label-wrapper small-12 columns checkbox-radio text-left ">
-                <label class="separator-left">colposcopicos_anormales_grado_1</label>
+                <label class="separator-left">Grado 1 (Menor)</label>
               
 
                     <input type="checkbox" id="mosaico_regular_ca1" name="colposcopicos_anormales_grado_1[]" value="mosaico_regular" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
@@ -266,7 +270,7 @@
                       if(in_array("mosaico_regular", $checkbox_colposcopicos_anormales_grado_1)) echo "checked";
                     }
                     ?> >
-                    <label for="mosaico_regular_ca1">mosaico_regular</label>
+                    <label for="mosaico_regular_ca1">Mosaico regular</label>
 
                     <input type="checkbox" id="epitelio_acetoblanco_ca1" name="colposcopicos_anormales_grado_1[]" value="epitelio_acetoblanco" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -274,7 +278,7 @@
                       if(in_array("epitelio_acetoblanco", $checkbox_colposcopicos_anormales_grado_1)) echo "checked";
                     }
                     ?> >
-                    <label for="epitelio_acetoblanco_ca1">epitelio_acetoblanco</label>
+                    <label for="epitelio_acetoblanco_ca1">Epitelio acetoblanco</label>
 
 
                     <input type="checkbox" id="puntillado_fino_ca1" name="colposcopicos_anormales_grado_1[]" value="puntillado_fino" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
@@ -283,13 +287,13 @@
                       if(in_array("puntillado_fino", $checkbox_colposcopicos_anormales_grado_1)) echo "checked";
                     }
                     ?> >
-                    <label for="puntillado_fino_ca1">puntillado_fino</label>
+                    <label for="puntillado_fino_ca1">Puntillado fino</label>
 
             </div>  
 
             <!-- colposcopicos_anormales_grado_2 - checkbox -->
             <div class="floated-label-wrapper small-12 columns checkbox-radio text-left ">
-                <label class="separator-left">colposcopicos_anormales_grado_2</label>
+                <label class="separator-left">Grado 2 (Mayor)</label>
               
 
                     <input type="checkbox" id="mosaico_irregular_ca2" name="colposcopicos_anormales_grado_2[]" value="mosaico_irregular" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
@@ -298,7 +302,7 @@
                       if(in_array("mosaico_irregular", $checkbox_colposcopicos_anormales_grado_2)) echo "checked";
                     }
                     ?> >
-                    <label for="mosaico_irregular_ca2">mosaico_irregular</label>
+                    <label for="mosaico_irregular_ca2">Mosaico irregular</label>
 
                     <input type="checkbox" id="puntillado_grueso_ca2" name="colposcopicos_anormales_grado_2[]" value="puntillado_grueso" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -306,7 +310,7 @@
                       if(in_array("puntillado_grueso", $checkbox_colposcopicos_anormales_grado_2)) echo "checked";
                     }
                     ?> >
-                    <label for="puntillado_grueso_ca2">puntillado_grueso</label>
+                    <label for="puntillado_grueso_ca2">Puntillado grueso</label>
 
                     <input type="checkbox" id="signo_de_limite_borde_interno_ca2" name="colposcopicos_anormales_grado_2[]" value="signo_de_limite_borde_interno" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -314,7 +318,7 @@
                       if(in_array("signo_de_limite_borde_interno", $checkbox_colposcopicos_anormales_grado_2)) echo "checked";
                     }
                     ?> >
-                    <label for="signo_de_limite_borde_interno_ca2">signo_de_limite_borde_interno</label>
+                    <label for="signo_de_limite_borde_interno_ca2">Signo del limite del borde interno</label>
 
 
                     <input type="checkbox" id="signo_cresta_ca2" name="colposcopicos_anormales_grado_2[]" value="signo_cresta" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
@@ -323,7 +327,7 @@
                       if(in_array("signo_cresta", $checkbox_colposcopicos_anormales_grado_2)) echo "checked";
                     }
                     ?> >
-                    <label for="signo_cresta_ca2">signo_cresta</label>
+                    <label for="signo_cresta_ca2">Signo de cresta</label>
 
                     <input type="checkbox" id="sobre_elevado_ca2" name="colposcopicos_anormales_grado_2[]" value="sobre_elevado" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -331,13 +335,13 @@
                       if(in_array("sobre_elevado", $checkbox_colposcopicos_anormales_grado_2)) echo "checked";
                     }
                     ?> >
-                    <label for="sobre_elevado_ca2">sobre_elevado</label>
+                    <label for="sobre_elevado_ca2">Sobre elevado</label>
 
             </div>  
 
             <!-- colposcopicos_anormales_no_especificos - checkbox -->
             <div class="floated-label-wrapper small-12 columns checkbox-radio text-left ">
-                <label class="separator-left">colposcopicos_anormales_no_especificos</label>
+                <label class="separator-left">No especificos</label>
 
                     <input type="checkbox" id="leucoplasia_queratosis" name="colposcopicos_anormales_no_especificos[]" value="leucoplasia_queratosis" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -345,7 +349,7 @@
                       if(in_array("leucoplasia_queratosis", $checkbox_colposcopicos_anormales_no_especificos)) echo "checked";
                     }
                     ?> >
-                    <label for="leucoplasia_queratosis">leucoplasia_queratosis</label>
+                    <label for="leucoplasia_queratosis">Leucoplasia queratosis</label>
 
                     <input type="checkbox" id="erosion_can" name="colposcopicos_anormales_no_especificos[]" value="erosion" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -353,18 +357,18 @@
                       if(in_array("erosion", $checkbox_colposcopicos_anormales_no_especificos)) echo "checked";
                     }
                     ?> >
-                    <label for="erosion_can">erosion</label>
+                    <label for="erosion_can">Erosión</label>
             </div>  
 
             <!-- colposcopicos_anormales_ubicacion -->
               <div class="floated-label-wrapper large-6 columns ">
-              <label for="colposcopicos_anormales_ubicacion">colposcopicos_anormales_ubicacion &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="colposcopicos_anormales_ubicacion" name="colposcopicos_anormales_ubicacion" value="<?php echo $colposcopicos_anormales_ubicacion ?>" placeholder="Escribir..." required>
+              <label for="colposcopicos_anormales_ubicacion"> Ubicación y tamaño de la lesión</label>
+              <input type="text" id="colposcopicos_anormales_ubicacion" name="colposcopicos_anormales_ubicacion" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>  value="<?php echo $colposcopicos_anormales_ubicacion ?>" placeholder="Escribir..." required>
             </div>
 
             <!-- sospecha_de_invasion - checkbox -->
             <div class="floated-label-wrapper small-12 columns checkbox-radio text-left ">
-                <label class="separator-left">sospecha_de_invasion</label>
+                <label class="separator-left">Sospecha de invasión</label>
               
                     <input type="checkbox" id="vasos_atipicos_sdi" name="sospecha_de_invasion[]" value="vasos_atipicos" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -372,7 +376,7 @@
                       if(in_array("vasos_atipicos", $checkbox_sospecha_de_invasion)) echo "checked";
                     }
                     ?> >
-                    <label for="vasos_atipicos_sdi">vasos_atipicos</label>
+                    <label for="vasos_atipicos_sdi">Vasos atipicos</label>
 
                     <input type="checkbox" id="lesion_exofitica_sdi" name="sospecha_de_invasion[]" value="lesion_exofitica" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -380,7 +384,7 @@
                       if(in_array("lesion_exofitica", $checkbox_sospecha_de_invasion)) echo "checked";
                     }
                     ?> >
-                    <label for="lesion_exofitica_sdi">lesion_exofitica</label>
+                    <label for="lesion_exofitica_sdi">Lesion exofitica</label>
 
                     <input type="checkbox" id="necrosis_sdi" name="colposcopicos_anormales_grado_2[]" value="necrosis" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -388,7 +392,7 @@
                       if(in_array("necrosis", $checkbox_sospecha_de_invasion)) echo "checked";
                     }
                     ?> >
-                    <label for="necrosis_sdi">necrosis</label>
+                    <label for="necrosis_sdi">Necrosis</label>
 
 
                     <input type="checkbox" id="ulceracion_sdi" name="sospecha_de_invasion[]" value="ulceracion" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
@@ -397,7 +401,7 @@
                       if(in_array("ulceracion", $checkbox_sospecha_de_invasion)) echo "checked";
                     }
                     ?> >
-                    <label for="ulceracion_sdi">ulceracion</label>
+                    <label for="ulceracion_sdi">Ulceración</label>
 
                     <input type="checkbox" id="tumoracion_sdi" name="sospecha_de_invasion[]" value="tumoracion" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -405,13 +409,13 @@
                       if(in_array("tumoracion", $checkbox_sospecha_de_invasion)) echo "checked";
                     }
                     ?> >
-                    <label for="tumoracion_sdi">tumoracion</label>
+                    <label for="tumoracion_sdi">Tumoración</label>
 
             </div> 
 
             <!-- hallazgos_varios - checkbox -->
             <div class="floated-label-wrapper small-12 columns checkbox-radio text-left ">
-                <label class="separator-left">hallazgos_varios</label>
+                <label class="separator-left">Hallazgos Varios</label>
         
 
                     <input type="checkbox" id="zt_congenita_hv" name="hallazgos_varios[]" value="zt_congenita" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
@@ -420,7 +424,7 @@
                       if(in_array("zt_congenita", $checkbox_hallazgos_varios)) echo "checked";
                     }
                     ?> >
-                    <label for="zt_congenita_hv">zt_congenita</label>
+                    <label for="zt_congenita_hv">Z.T. congenita</label>
 
                     <input type="checkbox" id="inflamacion_hv" name="hallazgos_varios[]" value="inflamacion" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -428,7 +432,7 @@
                       if(in_array("inflamacion", $checkbox_hallazgos_varios)) echo "checked";
                     }
                     ?> >
-                    <label for="inflamacion_hv">inflamacion</label>
+                    <label for="inflamacion_hv">Inflamación</label>
 
                     <input type="checkbox" id="prolapso_hv" name="hallazgos_varios[]" value="prolapso" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -436,7 +440,7 @@
                       if(in_array("prolapso", $checkbox_hallazgos_varios)) echo "checked";
                     }
                     ?> >
-                    <label for="prolapso_hv">prolapso</label>
+                    <label for="prolapso_hv">Prolapso</label>
 
 
                     <input type="checkbox" id="condiloma_hv" name="hallazgos_varios[]" value="condiloma" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
@@ -445,7 +449,7 @@
                       if(in_array("condiloma", $checkbox_hallazgos_varios)) echo "checked";
                     }
                     ?> >
-                    <label for="condiloma_hv">condiloma</label>
+                    <label for="condiloma_hv">Condiloma</label>
 
                     <input type="checkbox" id="estenosis_hv" name="hallazgos_varios[]" value="estenosis" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -453,7 +457,7 @@
                       if(in_array("estenosis", $checkbox_hallazgos_varios)) echo "checked";
                     }
                     ?> >
-                    <label for="estenosis_hv">estenosis</label>
+                    <label for="estenosis_hv">Estenosis</label>
 
                     <input type="checkbox" id="polipo_hv" name="hallazgos_varios[]" value="polipo" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -461,7 +465,7 @@
                       if(in_array("polipo", $checkbox_hallazgos_varios)) echo "checked";
                     }
                     ?> >
-                    <label for="polipo_hv">polipo</label>
+                    <label for="polipo_hv">Polipo</label>
 
                     <input type="checkbox" id="endometriosis_hv" name="hallazgos_varios[]" value="endometriosis" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -469,13 +473,13 @@
                       if(in_array("endometriosis", $checkbox_hallazgos_varios)) echo "checked";
                     }
                     ?> >
-                    <label for="endometriosis_hv">endometriosis</label>
+                    <label for="endometriosis_hv">Endometriosis</label>
 
             </div>  
 
             <!-- examen_de_vyv - checkbox -->
             <div class="floated-label-wrapper small-12 columns checkbox-radio text-left ">
-                <label class="separator-left">examen_de_vyv</label>
+                <label class="separator-left">Exámen de vulva y vagina</label>
 
                     <input type="checkbox" id="sin_particularidades_evyv" name="examen_de_vyv[]" value="sin_particularidades" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -483,18 +487,18 @@
                       if(in_array("sin_particularidades", $checkbox_examen_de_vyv)) echo "checked";
                     }
                     ?> >
-                    <label for="sin_particularidades_evyv">sin_particularidades</label>
+                    <label for="sin_particularidades_evyv">Sin particularidades</label>
             </div>  
 
             <!-- Descripcio Examen de vagina y vulva -->
             <div class="floated-label-wrapper large-12 columns end">
               <label for="examen_de_vyv_descripcion">Descripción del examen &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="examen_de_vyv_descripcion" name="examen_de_vyv_descripcion" value="<?php echo $examen_de_vyv_descripcion ?>" placeholder="Escribir..." required>
+              <input type="text" id="examen_de_vyv_descripcion" name="examen_de_vyv_descripcion" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>  value="<?php echo $examen_de_vyv_descripcion ?>" placeholder="Escribir..." required>
             </div>
 
             <!-- colposcopicos_anormales_test_de_schiller -->
             <div class="floated-label-wrapper small-12 medium-12 columns checkbox-radio text-left ">
-                    <label class="separator-left">colposcopicos_anormales_test_de_schiller</label>
+                    <label class="separator-left">Test de Schiller</label>
                     
                       <input type="radio" id="positivo_cats" name="colposcopicos_anormales_test_de_schiller" value="positivo" <?php if ($radiobox_colposcopicos_anormales_test_de_schiller == "positivo") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="positivo_cats">Positivo</label>
@@ -505,7 +509,7 @@
 
             <!-- test de schiller lugol - checkbox -->
             <div class="floated-label-wrapper small-12 columns checkbox-radio text-left ">
-                <label class="separator-left">test_de_schiller_lugol</label>
+                <label class="separator-left">Lugol</label>
               
                     <input type="checkbox" id="caoba_oscuro_uniforme_ts" name="test_de_schiller_lugol[]" value="caoba_oscuro_uniforme" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -513,7 +517,7 @@
                       if(in_array("caoba_oscuro_uniforme", $checkbox_test_de_schiller_lugol)) echo "checked";
                     }
                     ?> >
-                    <label for="caoba_oscuro_uniforme_ts">caoba_oscuro_uniforme</label>
+                    <label for="caoba_oscuro_uniforme_ts">Caoba oscuro uniforme</label>
 
                     <input type="checkbox" id="caoba_oscuro_irregular_ts" name="test_de_schiller_lugol[]" value="caoba_oscuro_irregular" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -521,7 +525,7 @@
                       if(in_array("caoba_oscuro_irregular", $checkbox_test_de_schiller_lugol)) echo "checked";
                     }
                     ?> >
-                    <label for="caoba_oscuro_irregular_ts">caoba_oscuro_irregular</label>
+                    <label for="caoba_oscuro_irregular_ts">Caoba oscuro irregular</label>
 
                     <input type="checkbox" id="caoba_claro_regular_ts" name="test_de_schiller_lugol[]" value="caoba_claro_regular" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -529,7 +533,7 @@
                       if(in_array("caoba_claro_regular", $checkbox_test_de_schiller_lugol)) echo "checked";
                     }
                     ?> >
-                    <label for="caoba_claro_regular_ts">caoba_claro_regular</label>
+                    <label for="caoba_claro_regular_ts">Caoba claro regular</label>
 
 
                     <input type="checkbox" id="caoba_claro_irregular_ts" name="test_de_schiller_lugol[]" value="caoba_claro_irregular" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
@@ -538,7 +542,7 @@
                       if(in_array("caoba_claro_irregular", $checkbox_test_de_schiller_lugol)) echo "checked";
                     }
                     ?> >
-                    <label for="caoba_claro_irregular_ts">caoba_claro_irregular</label>
+                    <label for="caoba_claro_irregular_ts">Caoba claro irregular</label>
 
                     <input type="checkbox" id="claro_periorificial_ts" name="test_de_schiller_lugol[]" value="claro_periorificial" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
@@ -546,7 +550,7 @@
                       if(in_array("claro_periorificial", $checkbox_test_de_schiller_lugol)) echo "checked";
                     }
                     ?> >
-                    <label for="claro_periorificial_ts">claro_periorificial</label>
+                    <label for="claro_periorificial_ts">Claro periorificial</label>
             </div>
 
             <!-- sugerencias -->

@@ -1,13 +1,14 @@
 <?php
 
   //get data from template if any
-  //$patient_id = "new";
+  //$patient_id = "new"; 
   $patient_id = $template_args["patient_id"];
   $app_id = $template_args["app_id"];
   $laboratories_id = $template_args["laboratories_id"];
   $is_editable = $template_args["is_editable"];
   //$is_editable = "true";
   $laboratories_fields = get_post_custom($laboratories_id);
+  
   $hemograma_completo = get_field('hemograma_completo', $laboratories_id);
   $tipificacion = get_field('tipificacion', $laboratories_id);
   $crasis_sanguinea = get_field('crasis_sanguinea', $laboratories_id);
@@ -249,7 +250,7 @@
                             <input type="checkbox" id="ft4_tsh" name="ft4_tsh[]" value="ft4_tsh" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                             <?php 
                             if( $ft4_tsh != NULL || $ft4_tsh != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
-                              if(in_array("ft4_tsh", $igmfta)) echo "checked";
+                              if(in_array("ft4_tsh", $ft4_tsh)) echo "checked";
                             }
                             ?> >
                         <label for="ft4_tsh">Ft4-TSH</label>

@@ -246,7 +246,9 @@ function sw_update_patient($params){
      $static_data = sw_create_static_data($static_values);
 
     $result['success'] = TRUE;
-    $result['msg'] = 'Datos del paciente actualizados';
+    // $result['msg'] = 'Datos del paciente actualizados';
+    $result['msg'] = $patient_name.'-'. $patient_last_name;
+
     return $result;
 }
 

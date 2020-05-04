@@ -39,7 +39,7 @@
     //wp_die(var_dump($_FILES));
 
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
-    error_log(json_encode($_POST), 0);
+    // error_log(json_encode($_POST), 0);
 
     $params = array(
         "app_id" => $app_id,

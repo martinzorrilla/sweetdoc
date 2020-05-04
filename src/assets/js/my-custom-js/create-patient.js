@@ -104,7 +104,7 @@ var CreatePatientModule = function(){
             }
           }
           if(data.success){
-             alert('Nueva paciente creada: '+data['msg']);
+             alert('Paciente creada/editada: '+data['msg']);
             //var singlePatient = toString(data['msg']);
             //alert(singlePatient);
             //$('#interests').foundation('open');

@@ -545,7 +545,8 @@ foreach ($acf_checkbox_array as $study_name) {
     $title_array=["Estudios Solicitados", ""];
     $pdf->TitleDatosPersonales($title_array);
     $pdf->Ln(4);
-    $pdf->PrintArray(2,utf8_decode($study_name),$checkbox_egcv);
+    // el 3er parametro esta demas y podria eliminar. por pajero no hago
+    $pdf->PrintArray(2,utf8_decode($study_name),$acf_checkbox_array);
     $pdf->Ln(2);
     // $pdf->PrintDescription(2,utf8_decode('- Descripción: '), utf8_decode($egcv_dx));
     $pdf->PrintDescription(2,utf8_decode('Descripción: '), utf8_decode($acf_description_name_array[$i]));
