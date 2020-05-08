@@ -117,6 +117,7 @@ var CreatePatientModule = function(){
             setTimeout(function(){
               $("#overlay").fadeOut(300);
             },500);
+            alert(window.location);
             window.location.replace('/sweetdoc/sw_patient/'+data['msg']);
             //var myPatientUrl = '/sweetdoc/sw_patient/'+singlePatient;
             //window.location.replace(myPatientUrl);
