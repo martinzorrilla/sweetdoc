@@ -118,7 +118,11 @@ var CreatePatientModule = function(){
               $("#overlay").fadeOut(300);
             },500);
             // alert(window.location);
-            window.location.replace('/sweetdoc/sw_patient/'+data['msg']);
+            // esto se usa en desarrollo en localhost
+            // window.location.replace('/sweetdoc/sw_patient/'+data['msg']);
+
+            // esto se usa en produccion en el live-server
+            window.location.replace('/sw_patient/'+data['msg']);
             //var myPatientUrl = '/sweetdoc/sw_patient/'+singlePatient;
             //window.location.replace(myPatientUrl);
 
