@@ -18,7 +18,6 @@
   $today = new Datetime(date('d.m.y'));
   $diff = $today->diff($bday);
   //printf(' Edad : %d años, %d meses, %d dias', $diff->y, $diff->m, $diff->d);
-  
   $static_data_array = sw_get_static_data_id($patient_id); 
   $static_data_post = get_post_custom($static_data_array[0]);
   $numero_embarazos = isset($static_data_post['numero_embarazos'][0]) ? $static_data_post['numero_embarazos'][0] : NULL;
@@ -58,7 +57,14 @@
 
           <p class="about-content">
             <p><?php echo("Cedula : ".$cedula);?></p>
-            <p><?php printf(' Edad : %d años, %d meses, %d dias', $diff->y, $diff->m, $diff->d); ?></p>
+            <p>
+              <?php
+              if ($diff->y == 0) {
+                echo("Edad :");
+              }else{
+                printf(' Edad : %d años, %d meses, %d dias', $diff->y, $diff->m, $diff->d); 
+              }?>
+            </p>
             <p><?php echo("Embarazos : ".$numero_embarazos);?></p>
             <p><?php echo("Parto normal : ".$parto_normal);?></p>
             <p><?php echo("Cesareas : ".$cesareas);?></p>

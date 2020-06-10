@@ -58,7 +58,7 @@ var CreateIndicationModule = function(){
             }
           }
           if(data.success){
-            alert(data['msg']);
+            // alert(data['msg']);
             // window.location.reload();
             setTimeout(function(){
               $("#overlay").fadeOut(300);

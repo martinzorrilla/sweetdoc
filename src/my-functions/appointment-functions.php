@@ -96,7 +96,7 @@
     // sugerencias
 
 
-
+ 
 
 
 
@@ -426,7 +426,9 @@ function sw_create_new_appointment($params){
       $result['success'] = TRUE;
       $result['patient_id'] = $patient_id;
       $result['app_id'] = $app_post;
-      $result['msg'] = 'Nueva consulta creada';
+      // $result['msg'] = 'Nueva consulta creada';
+      $result['msg'] = get_permalink( $patient_id );
+
       return $result;
     }//if new patient = true
 
@@ -660,7 +662,9 @@ function sw_update_single_appointment($params){
         // //end update colposcopy
 
         $result['success'] = TRUE;
-        $result['msg'] = 'Consulta Actualizada';
+        // $result['msg'] = 'Consulta Actualizada';
+        $result['msg'] = get_permalink( $patient_id );
+
     }
     /*else{
         $result['error'] = ["key"=> "create_app_fail", "msg" => "Error creting app"];

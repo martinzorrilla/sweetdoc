@@ -32,6 +32,17 @@ function sw_create_patient_ajax(){
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
      //error_log(json_encode($_POST), 0);
 
+
+    // Sanitizes a username, stripping out unsafe characters.
+    $patient_name= sanitize_user($patient_name);
+    // Capitalize every word in the sring
+    $patient_name= ucwords($patient_name);
+    // Sanitizes a username, stripping out unsafe characters.
+    $patient_last_name= sanitize_user($patient_last_name);
+    // Capitalize every word in the sring
+    $patient_last_name= ucwords($patient_last_name);
+
+
     $params = array(
         "patient_id" => $patient_id,
         "patient_name" => $patient_name,
@@ -105,9 +116,14 @@ function sw_create_patient($params){
       //devuelve el id del doctor que le corresponde 
       $patient_owner = sw_get_patient_owner();
 
+      $username= $patient_name.' '.$patient_last_name;
+      // capitalizar cada palabra del string antes de guardar en la BD
+      $username= ucwords($username);
+
       $my_post = array(
         'ID'   => 0,
-        'post_title'    => wp_strip_all_tags( $patient_name.' '. $patient_last_name ),
+        // 'post_title'    => wp_strip_all_tags( $patient_name.' '. $patient_last_name ),
+        'post_title'    => $username,
         'post_status'   => 'publish',
         //'post_author'   => get_current_user_id(),
         'post_author'   => $patient_owner,
@@ -119,7 +135,7 @@ function sw_create_patient($params){
       // Insert the post into the database // returns post id on succes. 0 on fail
       $post_id = wp_insert_post( $my_post );
       if ($post_id == 0) {
-      //  wp_die( "Error creating a new Patient" );
+        wp_die( "Error creating a new Patient. Patients-functions" );
       }
 
       $acf_fields = array(
@@ -159,7 +175,8 @@ function sw_create_patient($params){
 
       $result['success'] = TRUE;
       // $result['msg'] = 'Nuevo Paciente creado';
-      $result['msg'] = $patient_name.'-'. $patient_last_name;
+      // $result['msg'] = $patient_name.'-'. $patient_last_name;
+      $result['msg'] = get_permalink( $post_id );
       return $result;
 }
 
@@ -190,9 +207,13 @@ function sw_update_patient($params){
     //devuelve el id del doctor que le corresponde 
     $patient_owner = sw_get_patient_owner();
 
+    $username= $patient_name.' '.$patient_last_name;
+    // capitalizar cada palabra del string antes de guardar en la BD
+    $username= ucwords($username);
+
     $my_post = array(
       'ID'   => $patient_id,
-      'post_title'    => wp_strip_all_tags( $patient_name.' '. $patient_last_name ),
+      'post_title'    => $username,
       'post_status'   => 'publish',
       //'post_author'   => get_current_user_id(),
       'post_author'   => $patient_owner,
@@ -247,7 +268,8 @@ function sw_update_patient($params){
 
     $result['success'] = TRUE;
     // $result['msg'] = 'Datos del paciente actualizados';
-    $result['msg'] = $patient_name.'-'. $patient_last_name;
+    // $result['msg'] = $patient_name.'-'. $patient_last_name;
+    $result['msg'] = get_permalink( $post_id );
 
     return $result;
 }

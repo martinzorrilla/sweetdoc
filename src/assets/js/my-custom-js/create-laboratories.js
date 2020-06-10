@@ -65,7 +65,7 @@ var CreateLaboratoriesModule = function(){
             }
           }
           if(data.success){
-            alert(data['msg']);
+            // alert(data['msg']);
             setTimeout(function(){
               $("#overlay").fadeOut(300);
             },500);

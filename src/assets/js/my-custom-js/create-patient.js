@@ -104,9 +104,14 @@ var CreatePatientModule = function(){
             }
           }
           if(data.success){
-             alert('Paciente creada/editada: '+data['msg']);
-            //var singlePatient = toString(data['msg']);
-            //alert(singlePatient);
+            // data['msg'] contiene el permalink del paciente creado o actualizado
+            
+            // var trimmed_name = data['msg'].replace(/\s/g, '');
+
+            //  alert('Paciente creada/editada: '+data['msg'] );
+            
+             // var singlePatient = toString(data['msg']);
+            // alert(singlePatient);
             //$('#interests').foundation('open');
             //var oldUrl = window.location.href;
             //var replaceId = "app_id="+result['app_id'];
@@ -118,11 +123,16 @@ var CreatePatientModule = function(){
               $("#overlay").fadeOut(300);
             },500);
             // alert(window.location);
+
+            // msg contiene el nombre del paciente Creado. hay que eliminar espacios para que redirecciones correctamente
+
             // esto se usa en desarrollo en localhost
-            // window.location.replace('/sweetdoc/sw_patient/'+data['msg']);
+            // window.location.replace('/sweetdoc/sw_patient/'+data['msg'] );
+            window.location.replace(data['msg']);
 
             // esto se usa en produccion en el live-server
-            window.location.replace('/sw_patient/'+data['msg']);
+            // window.location.replace('/sw_patient/'+data['msg']);
+            
             //var myPatientUrl = '/sweetdoc/sw_patient/'+singlePatient;
             //window.location.replace(myPatientUrl);
 
