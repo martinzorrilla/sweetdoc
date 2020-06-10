@@ -313,6 +313,9 @@ if ($fecha_de_nacimiento != ""){ $bday = new Datetime(date('d.m.y', strtotime($f
 $today = new Datetime(date('d.m.y'));
 $diff = $today->diff($bday);
 $edad_paciente = $diff->y;
+// si la edad es cero es por que no se cargo ese dato, entonces imprimos en el informe que no hay datos
+$edad_paciente = $edad_paciente == 0?"Sin datos": $edad_paciente;
+
 $creation_date = get_the_date( 'd-m-Y', $colpo_post_id ); //fecha de creacion de colpo puede no ser == a fecha de la consulta debido a que se puede crear una consulta sin colpo y luego editar
 $fullname = $name.' '.$lastname;
 $datos_personales = $fullname."        Edad: ".$edad_paciente."        Ci: ".$cedula."        Fecha: ".$creation_date;
@@ -353,7 +356,8 @@ $radiobox_colposcopicos_anormales_test_de_schiller = get_field('colposcopicos_an
 $checkbox_test_de_schiller_lugol = get_field('test_de_schiller_lugol', $colpo_post_id);
 // $sugerencias = $colpo_data_post['sugerencias'][0];
 $sugerencias = isset($colpo_data_post['sugerencias'][0]) ? $colpo_data_post['sugerencias'][0] : NULL;
-//wp_die(var_dump($checkbox_motivo_inadecuada));
+// wp_die(var_dump(array_filter($checkbox_colposcopicos_anormales_grado_2)));
+//  wp_die(var_dump($edad_paciente));
 
 
 //Get images ----------------------------------------------------------------
@@ -414,8 +418,8 @@ $pdf->PrintElement(2,utf8_decode(' - Zona de transformación'), str_replace("_",
 $pdf->PrintArray(2,utf8_decode(' - Hallazgos colposcopicos normales'),$checkbox_colposcopicos_normales);
 
 // imprimir el titulo de hllazgos anormales solo si alguno de ellos tiene datos
-if ( (is_array($checkbox_colposcopicos_anormales_grado_1) && !empty($checkbox_colposcopicos_anormales_grado_1))  ||  (is_array($checkbox_colposcopicos_anormales_grado_2) && !empty($checkbox_colposcopicos_anormales_grado_2))  || 
-(is_array($checkbox_colposcopicos_anormales_no_especificos) && !empty($checkbox_colposcopicos_anormales_no_especificos))
+if ( (is_array($checkbox_colposcopicos_anormales_grado_1) && array_filter($checkbox_colposcopicos_anormales_grado_1))  ||  (is_array($checkbox_colposcopicos_anormales_grado_2) && array_filter($checkbox_colposcopicos_anormales_grado_2))  || 
+(is_array($checkbox_colposcopicos_anormales_no_especificos) && array_filter($checkbox_colposcopicos_anormales_no_especificos))
 ){
     $pdf->PrintSecondaryTitle(2,utf8_decode(' - Hallazgos colposcopicos anormales'), "");
 }

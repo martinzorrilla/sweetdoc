@@ -129,6 +129,8 @@
         createAppBtn.on("click", function (e) {
           //get_checkbox_values();
           createAppBtn.fadeOut( "slow" );
+          // metemos el div con el spinner hasta que se retonrne del ajaz request
+          $("#overlay").fadeIn(300);
           saveProfileData(e);
         })
 
@@ -232,13 +234,23 @@
           //jQuery('form#create-appointment-form .errorWrapper').prepend(errorMsg);
         }
         if(result.success){
-          alert(result['msg']);
           //$('#interests').foundation('open');
-          var oldUrl = window.location.href; 
-          var replaceId = "app_id="+result['app_id'];
-          var newUrl = oldUrl.replace("app_id=new", replaceId);
-          window.location.replace(newUrl);
           //window.location.reload();
+          
+          // ANTERIORMENTE USABAMOS ESTO. TAL VEZ SEA UTIL TODAVIA
+          // este paquete de cogigo usabamos para recargar la consulta recien creada pero ya con los datos cargados en la BD por eo cambiamo el app id
+          // alert(result['msg']);
+          // var oldUrl = window.location.href; 
+          // var replaceId = "app_id="+result['app_id'];
+          // var newUrl = oldUrl.replace("app_id=new", replaceId);
+          // window.location.replace(newUrl);
+          // fin del paquete
+
+          setTimeout(function(){
+            $("#overlay").fadeOut(300);
+          },500);
+           window.location.replace(result['msg']);
+
         }
       }
     });

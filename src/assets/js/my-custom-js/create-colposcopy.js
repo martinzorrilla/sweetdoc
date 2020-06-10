@@ -135,7 +135,8 @@ var CreateColposcopyModule = function(){
           //jQuery('form#create-appointment-form .errorWrapper').prepend(errorMsg);
         }
         if(result.success){
-          alert(result['msg']);
+          // alert(result['msg']);
+          
         //   var oldUrl = window.location.href; 
         //   var replaceId = "app_id="+result['app_id'];
         //   var newUrl = oldUrl.replace("app_id=new", replaceId);

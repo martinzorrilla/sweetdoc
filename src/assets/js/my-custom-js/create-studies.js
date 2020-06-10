@@ -58,7 +58,7 @@ var CreateIndicationModule = function(){
             }
           }
           if(data.success){
-            alert(data['msg']);
+            // alert(data['msg']);
 //            window.location.reload();
             // window.history.back();
             setTimeout(function(){
