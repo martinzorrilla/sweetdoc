@@ -9,14 +9,13 @@
   $lastname = $patient_fields['apellido'][0];
   $cedula = $patient_fields['cedula'][0];
   $fullname = $name.' '.$lastname;
-  $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
   // $fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
+  $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
+  $patient_age = calcular_edad($fecha_de_nacimiento);
+  // var_dump($patient_fields['fecha_de_nacimiento'][0]);
+  // var_dump(get_field( "fecha_de_nacimiento", $patient_id ));
   
-  //$bday = new DateTime('23.8.1988'); // Your date of birth
-  $bday = new Datetime(date('d.m.y'));
-  if ($fecha_de_nacimiento != ""){ $bday = new Datetime(date('d.m.y', strtotime($fecha_de_nacimiento)));}
-  $today = new Datetime(date('d.m.y'));
-  $diff = $today->diff($bday);
+
   //printf(' Edad : %d años, %d meses, %d dias', $diff->y, $diff->m, $diff->d);
   $static_data_array = sw_get_static_data_id($patient_id); 
   $static_data_post = get_post_custom($static_data_array[0]);
@@ -59,10 +58,10 @@
             <p><?php echo("Cedula : ".$cedula);?></p>
             <p>
               <?php
-              if ($diff->y == 0) {
-                echo("Edad :");
+              if ($fecha_de_nacimiento == NULL) {
+                echo("Edad : ");
               }else{
-                printf(' Edad : %d años, %d meses, %d dias', $diff->y, $diff->m, $diff->d); 
+                printf(' Edad : %d años, %d meses, %d dias', $patient_age->y, $patient_age->m, $patient_age->d); 
               }?>
             </p>
             <p><?php echo("Embarazos : ".$numero_embarazos);?></p>
