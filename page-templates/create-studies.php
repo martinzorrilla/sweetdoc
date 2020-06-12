@@ -17,11 +17,41 @@
 
   // var_dump($studies_id);
   $title = $studies_id === NULL ? "Crear solicitud de estudios" : "Editar solicitud de estudios";
+  
+  $patient_fields = get_post_custom($patient_id);
+  $name = $patient_fields['nombre'][0];
+  $lastname = $patient_fields['apellido'][0];
+  $cedula = $patient_fields['cedula'][0];
+  $fullname = $name.' '.$lastname;
+
+  //  obtener la edad de la paciente. la funcion esta en functions.php
+  $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
+  $patient_age = calcular_edad($fecha_de_nacimiento);
 ?>
 
 <div data-closable class="callout alert-callout-border secondary text-center">
   <h3> <?= $title ?> </h3>
 </div>
+
+
+<div class="callout secondary">
+    <h3 style="text-align: center; margin-left: 50px;"> <strong> <?php echo $fullname?> </strong>
+    </h3>
+    <h4 style="text-align: center; margin-left: 50px;"> 
+      <p><?php echo "Ci: ".$cedula; ?></p>
+      <p>
+        <?php 
+        if ($fecha_de_nacimiento != NULL) {
+          $patient_age = calcular_edad($fecha_de_nacimiento);
+          $show_age = $patient_age->y;
+          echo "Edad: ".$show_age;
+          // $show_age = "tiene";
+          // printf(' Edad : %d años', $patient_age->y); 
+        }
+        ?>
+      </p>
+    </h4>
+  </div>
 
 <?php hm_get_template_part('template-parts/studies/studies-data', ['patient_id' => $patient_id, 'app_id' => $app_id, 'studies_id' => $studies_id, 'is_editable' => $is_editable ]); ?>
 

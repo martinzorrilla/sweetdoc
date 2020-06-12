@@ -692,3 +692,21 @@ function validate_patient($params){
   $result['msg'] = 'No existe el nro de cedula en la base de datos.';
   return $result;
 }
+
+ 
+// ATENCION: para que funciones es SUPER IMPORTANTE configurar en el acf que devuelva la fecha
+//  en el formato "20200612 Ymd"
+function calcular_edad($fecha_de_nacimiento){
+  //$bday = new DateTime('23.8.1988'); // Your date of birth
+  $bday = new Datetime(date('d.m.y'));
+  //  if ($fecha_de_nacimiento != ""){ $bday = new Datetime(date('d.m.y', strtotime($fecha_de_nacimiento)));}
+   if ($fecha_de_nacimiento != ""){ 
+     $bday = new Datetime($fecha_de_nacimiento);
+      // $bday = new Datetime(intval($fecha_de_nacimiento));
+    //  $bday->setTimestamp(intval($fecha_de_nacimiento));
+    }
+  // if ($fecha_de_nacimiento != ""){ $bday = new Datetime(date($fecha_de_nacimiento));}
+  $today = new Datetime(date('d.m.y'));
+  $diff = $today->diff($bday);
+  return  $diff;
+}

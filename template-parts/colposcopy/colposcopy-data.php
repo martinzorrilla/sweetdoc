@@ -560,7 +560,7 @@
               <textarea id="sugerencias_col" name="sugerencias" placeholder="Escribir..." style="height:7em" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>  required><?php echo $sugerencias ?></textarea>
             </div>
 
-
+            <!-- IMAGENES -->
             <div class="archivos large-12 columns" style="margin-top: 1.5rem;">
             
               <div class="profile-card-about">

@@ -18,7 +18,7 @@ $latest_patients = sw_get_patients($search_param);
       <!-- <th>Código Paciente</th> -->
       <th>Nombre</th>
       <th>Cédula</th>
-      <th>Perfil</th>
+      <th>Edad</th>
       <th>Consultas</th>
       <th>Nueva consulta</th>
       <th>Consultas del día</th>
@@ -57,9 +57,25 @@ $latest_patients = sw_get_patients($search_param);
                 <a href="#"><?php echo (get_field( "cedula", $patient->ID ));?></a>      
             </td>
 
-            <!-- Perfil -->
+            <!-- Edad -->
             <td>
-                <a href="<?php echo get_permalink( $patient->ID ); ?>">Ver</a>
+            <?php 
+                  $fecha_de_nacimiento = get_field( "fecha_de_nacimiento", $patient->ID );
+                
+                  if ($fecha_de_nacimiento == NULL) {
+                    $show_age = "";
+                  }else{
+                   $patient_age = calcular_edad($fecha_de_nacimiento);
+
+                     $show_age = $patient_age->y;
+                    // $show_age = "tiene";
+
+                    // printf(' Edad : %d años', $patient_age->y); 
+                  }
+
+                // echo get_permalink( $patient->ID ); 
+                ?>
+                <a href="#"> <?= $show_age ?> </a>
             </td>
 
             <!-- Consultas -->

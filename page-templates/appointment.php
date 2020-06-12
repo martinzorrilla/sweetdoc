@@ -28,6 +28,10 @@
   $cedula = $patient_fields['cedula'][0];
   $fullname = $name.' '.$lastname;
 
+  //  obtener la edad de la paciente. la funcion esta en functions.php
+  $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
+  $patient_age = calcular_edad($fecha_de_nacimiento);
+
   //ACF get field IS NOT WORKING for the app posst type when it's just been created so we use geet_post_custom instead to retrieve the data.
   $stored_fields = get_post_custom($app_id);
 
@@ -50,11 +54,27 @@
 ?>
 
   <div class="callout secondary">
-    <h3 style="text-align: center; margin-left: 50px;"> <strong> <?php echo $fullname." - Ci: ".$cedula; ?> </strong></h3>
+    <h3 style="text-align: center; margin-left: 50px;"> <strong> <?php echo $fullname?> </strong>
+    </h3>
+    <h4 style="text-align: center; margin-left: 50px;"> 
+      <p><?php echo "Ci: ".$cedula; ?></p>
+      <p>
+        <?php 
+        if ($fecha_de_nacimiento != NULL) {
+          $patient_age = calcular_edad($fecha_de_nacimiento);
+          $show_age = $patient_age->y;
+          echo "Edad: ".$show_age;
+          // $show_age = "tiene";
+          // printf(' Edad : %d años', $patient_age->y); 
+        }
+        ?>
+      </p>
+    </h4>
   </div>
  
   <div class="callout secondary" style="display: <?php if ($app_id === 'new') echo 'none' ?> " >
     <h3 style="text-align: center; margin-left: 50px;">Fecha de la Consulta: <strong> <?php echo $app_creation_date ?> </strong></h3>
+  
   </div>
   
   <!-- <div class="tab">

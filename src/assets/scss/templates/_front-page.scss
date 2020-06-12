@@ -312,6 +312,15 @@ table.my-stack {
     }
   }
 
+  tbody tr:hover{
+    background-color: $sweet-blue;
+    opacity: 0.9;
+    a{
+      color: white;
+    }
+  }
+
+
 }
 
 
