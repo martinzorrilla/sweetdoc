@@ -63,7 +63,7 @@ $latest_patients = sw_get_patients($search_param);
                   $fecha_de_nacimiento = get_field( "fecha_de_nacimiento", $patient->ID );
                 
                   if ($fecha_de_nacimiento == NULL) {
-                    $show_age = "";
+                    $show_age = "-";
                   }else{
                    $patient_age = calcular_edad($fecha_de_nacimiento);
 

@@ -97,7 +97,7 @@
 				<div class="app-dashboard-sidebar-inner">
 					<ul class="menu vertical">
 					<li><a href="<?php echo $all_patient_url ?>" class="is-active">
-						<i class="fas fa-address-book fa-2x"></i><span class="app-dashboard-sidebar-text"> Todos los Pacientes</span>
+						<i class="fas fa-address-book fa-2x"></i><span class="app-dashboard-sidebar-text"> Todas las Pacientes</span>
 					</a></li>
 					<li><a href="<?php echo $create_patient_url ?>">
 						<i class="fas fa-plus fa-2x"></i><span class="app-dashboard-sidebar-text"> Agregar Paciente</span>
