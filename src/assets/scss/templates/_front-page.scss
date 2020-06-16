@@ -307,7 +307,13 @@ table.my-stack {
   tbody{
     tr{
       td{
-        text-transform: capitalize;
+        // text-transform: uppercase;
+        a{
+        //  text-transform: uppercase;
+            // text-transform: lowercase;
+           text-transform: capitalize;
+
+        }
       }
     }
   }

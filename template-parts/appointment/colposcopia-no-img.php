@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="profile-card-about">
-          <h5 class="about-title separator-left"> Ingresar datos de la Colposcopía <?php //echo $name?></h5>
+          <h5 class="about-title separator-left"> Ingresar datos de la Colposcopía. <?php //echo $name?></h5>
 
 
             <!-- macroscopia -->

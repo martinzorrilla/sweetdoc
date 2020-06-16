@@ -4,7 +4,9 @@
 
 <?php
   $appointment_url = home_url().'/consulta/?patient_id=';
+
   $colpo_url = home_url().'/colposcopia/?patient_id=';
+  $colpo_pdf_url = home_url().'/pdf-colpo/?colpo_id=';
 
   $indicacion_url = home_url().'/indicacion/?patient_id=';
   // $prescription_pdf_url = home_url().'/indicacion-pdf/?indication_id='.$post_id;
@@ -86,7 +88,8 @@
                   if ($colpo_post_id) {
                       ?>
                       <br>
-                      <a href="<?php echo get_permalink( $colpo_post_id ); ?> "> Imprimir <?php //echo $indication_id; ?></a>
+                      <!-- <a href="< ?php //echo get_permalink( $colpo_post_id ); ?> "> Imprimir < ?php //echo $indication_id; ?></a> -->
+                      <a href="<?php echo esc_url( $colpo_pdf_url ).$colpo_post_id; ?>">Imprimir PDF</a>
                       <?php 
                   }
                   ?>

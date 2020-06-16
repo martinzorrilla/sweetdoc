@@ -4,7 +4,7 @@
   <?php //hm_get_template_part('template-parts/doctor/doctor-intro', ['data' => ""]); ?>
   
   <div data-closable class="callout alert-callout-border secondary text-center">
-    <h3>Todos los pacientes</h3>
+    <h3>Todas las pacientes</h3>
   </div>
 
   <!-- Get the Part that renders the Patient List. 

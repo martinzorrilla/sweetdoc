@@ -35,10 +35,14 @@ function sw_create_patient_ajax(){
 
     // Sanitizes a username, stripping out unsafe characters.
     $patient_name= sanitize_user($patient_name);
+    // Convert all characters to lowercase
+    $patient_name= strtolower($patient_name);
     // Capitalize every word in the sring
     $patient_name= ucwords($patient_name);
     // Sanitizes a username, stripping out unsafe characters.
     $patient_last_name= sanitize_user($patient_last_name);
+    // Capitalize every word in the sring
+    $patient_last_name= strtolower($patient_last_name);
     // Capitalize every word in the sring
     $patient_last_name= ucwords($patient_last_name);
 
