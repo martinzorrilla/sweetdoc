@@ -171,7 +171,8 @@ function ImageBody($num, $eje_y, $file)
             break;
     }
 
-    $this->Image($file,$abscissa,$ordenada,50,30,'JPG');
+    // $this->Image($file,$abscissa,$ordenada,50,30,'JPG');
+    $this->Image($file,$abscissa,$ordenada,50,30);
     //$this->Cell(50,10,'texto de prueba'.$num.' -> Y='.$this->GetY(), 1);
     $this->Ln();
 }
