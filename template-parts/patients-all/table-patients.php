@@ -16,6 +16,7 @@ $latest_patients = sw_get_patients($search_param);
   <thead>
     <tr>
       <!-- <th>Código Paciente</th> -->
+      <th>Nro</th>
       <th>Nombre</th>
       <th>Cédula</th>
       <th>Edad</th>
@@ -36,7 +37,7 @@ $latest_patients = sw_get_patients($search_param);
     <!-- </tr>Fin de 1ra fila -->
 
     <?php
-     
+    $contador_pacientes = 1;
     foreach ($latest_patients as $patient){
     ?>
         
@@ -46,9 +47,17 @@ $latest_patients = sw_get_patients($search_param);
                 <a href="#"> < ? php// echo $patient->ID;?></a>      
             </td> -->
 
+            <!-- Numero -->
+            <td>    
+            <a href="#">    
+              <?php echo $contador_pacientes ?>
+            </a>
+            </td>
+
             <!-- Nombre -->
             <td>
-                <a href="<?php echo get_permalink( $patient->ID ); ?>"> <?php echo $patient->post_title;?></a>      
+                <a href="<?php echo get_permalink( $patient->ID ); ?>"> <?php echo $patient->post_title;?></a> 
+                <!-- esto es para que se pueda hacer la busqueda por cedula, ya que debe estar con el nombre para poder hacerlo      -->
                 <p style="display:none;"><?php echo $patient->post_title." ".(get_field( "cedula", $patient->ID ));?></p>
             </td>
 
@@ -94,6 +103,7 @@ $latest_patients = sw_get_patients($search_param);
             </td>
         </tr>
     <?php
+    $contador_pacientes ++;
     } //foreach 
     ?>
     </tbody>

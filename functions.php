@@ -710,3 +710,20 @@ function calcular_edad($fecha_de_nacimiento){
   $diff = $today->diff($bday);
   return  $diff;
 }
+
+
+// *
+// *calcular la cantidad de post publicados por post type.  recibe como parametro el post type que se desea calcular. por ejemplo patients
+// parametros: $post_type = 'page' 
+// return: numero de posts
+// *  contador_de_posts($post_type = 'sw_patient')
+// *
+
+function contador_de_posts($post_type){
+  $published_posts = 0;
+  $count_posts = wp_count_posts($post_type);
+  if ( $count_posts ) {
+    $published_posts = $count_posts->publish;
+  }
+  return $published_posts;
+}

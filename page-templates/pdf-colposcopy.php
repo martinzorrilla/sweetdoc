@@ -405,13 +405,13 @@ $title = 'Informe Colposcopico';
 $pdf->AddPage();
 $page_height = $pdf->GetPageHeight();
 $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
-$pdf->PrintElement(2,utf8_decode(' - Nombre'),$datos_personales);
+$pdf->PrintElement(2,utf8_decode(' - Nombre'),utf8_decode($datos_personales));
 $pdf->Ln(4);
 $pdf->PrintSection(2,'HALLAZGOS', $fullname);
 
 
-$pdf->PrintElement(2,' - Macroscopia',$macroscopia);
-$pdf->PrintElement(2,' - Colposcopia',$colposcopia);
+$pdf->PrintElement(2,utf8_decode(' - Macroscopía'),$macroscopia);
+$pdf->PrintElement(2,utf8_decode(' - Colposcopía'),$colposcopia);
 $pdf->PrintEvaluacionGeneral(2,$radiobox_evaluacion_general,$checkbox_motivo_inadecuada);
 // $pdf->PrintElement(2,utf8_decode(' - Visibilidad de la unión escamo columnar'),$radiobox_union_escamo_columnar);
 $pdf->PrintElement(2,utf8_decode(' - Visibilidad de la unión escamo columnar'),str_replace("_", " ", $radiobox_union_escamo_columnar));

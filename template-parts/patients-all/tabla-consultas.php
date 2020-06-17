@@ -28,6 +28,7 @@
       <table class="sw-tabla-consultas">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Consulta</th>
             <th>Fecha</th>
             <th>Colposcopía</th>
@@ -69,6 +70,10 @@
               ?>
               
               <tr> <!--cada tr es una fila en la tabla -->
+                  <!-- ID -->
+                  <td>
+                      <a href="#"><?php echo $r ?></a>      
+                  </td>
                   <!-- consulta -->
                   <td>
                       <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id='.$r; ?>">Ver<?php //echo $r ?></a>      

@@ -54,9 +54,9 @@
 ?>
 
   <div class="callout secondary">
-    <h3 style="text-align: center; margin-left: 50px;"> <strong> <?php echo $fullname?> </strong>
+    <h3 style="text-align: center; "> <strong> <?php echo $fullname?> </strong>
     </h3>
-    <h4 style="text-align: center; margin-left: 50px;"> 
+    <h4 style="text-align: center; "> 
       <p><?php echo "Ci: ".$cedula; ?></p>
       <p>
         <?php 
@@ -73,7 +73,7 @@
   </div>
  
   <div class="callout secondary" style="display: <?php if ($app_id === 'new') echo 'none' ?> " >
-    <h3 style="text-align: center; margin-left: 50px;">Fecha de la Consulta: <strong> <?php echo $app_creation_date ?> </strong></h3>
+    <h3 style="text-align: center; ">Fecha de la Consulta: <strong> <?php echo $app_creation_date ?> </strong></h3>
   
   </div>
   

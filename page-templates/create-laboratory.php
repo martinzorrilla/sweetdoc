@@ -33,9 +33,9 @@
 </div>
 
 <div class="callout secondary">
-    <h3 style="text-align: center; margin-left: 50px;"> <strong> <?php echo $fullname?> </strong>
+    <h3 style="text-align: center; "> <strong> <?php echo $fullname?> </strong>
     </h3>
-    <h4 style="text-align: center; margin-left: 50px;"> 
+    <h4 style="text-align: center; "> 
       <p><?php echo "Ci: ".$cedula; ?></p>
       <p>
         <?php 
