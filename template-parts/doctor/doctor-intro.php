@@ -42,15 +42,19 @@
 
   <div class="card-profile-stats-container">
     <div class="card-profile-stats-statistic">
-      <span class="stat">25</span>
+      <span class="stat">
+        <?php 
+        echo contador_de_posts('sw_patient');
+        ?>
+      </span>
       <p>Pacientes</p>
     </div> <!-- /.card-profile-stats-statistic -->
     <div class="card-profile-stats-statistic">
-      <span class="stat">12</span>
+      <span class="stat">0</span>
       <p>Consultas de hoy</p>
     </div> <!-- /.card-profile-stats-statistic -->
     <div class="card-profile-stats-statistic">
-      <span class="stat">6</span>
+      <span class="stat">0</span>
       <p>En espera</p>
     </div> <!-- /.card-profile-stats-statistic -->
   </div> <!-- /.card-profile-stats-container -->

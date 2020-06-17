@@ -59,6 +59,14 @@ if(true){
   hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => "false"]); 
   ?>
 
+<?php
+  // seccion que trae las consultas del paciente
+  //hm_get_template_part('template-parts/patients-all/lista-consultas', ['patient_id' => $patient_id]);
+  hm_get_template_part('template-parts/patients-all/tabla-consultas', ['patient_id' => $patient_id]);
+  // seccion que trae las colposcopias del paciente
+  //hm_get_template_part('template-parts/patients-all/lista-colpos', ['patient_id' => $patient_id]);
+  ?>
+
   <!-- <h2 style="text-align: center; margin-left: 50px;">Consultas</h2> -->
   <!-- <a href="#"><strong>Nombre paciente</strong></a> -->
   <div data-closable class="callout alert-callout-border secondary text-center" style="margin: 2rem 0;">
@@ -67,13 +75,7 @@ if(true){
     </h3>
   </div>
 
-  <?php
-  // seccion que trae las consultas del paciente
-  //hm_get_template_part('template-parts/patients-all/lista-consultas', ['patient_id' => $patient_id]);
-  hm_get_template_part('template-parts/patients-all/tabla-consultas', ['patient_id' => $patient_id]);
-  // seccion que trae las colposcopias del paciente
-  //hm_get_template_part('template-parts/patients-all/lista-colpos', ['patient_id' => $patient_id]);
-  ?>
+
 
 <?php
 }//if is a doctor
