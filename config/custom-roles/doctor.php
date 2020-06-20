@@ -10,7 +10,8 @@ function sw_add_doctor_role(){
         'read'         => true,  // true allows this capability
         'edit_posts'   => true,
         'delete_posts' => true, // Use false to explicitly deny
-        'create_users' => true,
+        // 'create_users' => true,
+        'create_users' => false,
         'list_users' => true,
         'upload_files' => true,
         'edit_dashboard' => true,

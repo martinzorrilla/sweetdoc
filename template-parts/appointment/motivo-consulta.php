@@ -72,7 +72,7 @@
 
           <div class="floated-label-wrapper large-12 columns">
             <label class="separator-left" for="plan_tratamiento">Plan de tratamiento</label>
-            <textarea id="plan_tratamiento" name="plan_tratamiento" placeholder="Escribir el plan de tratamiento..." style="height:5em" required><?php echo $plan_tratamiento ?></textarea>
+            <textarea id="plan_tratamiento" name="plan_tratamiento" placeholder="Escribir el plan de tratamiento..." style="height:8em" required><?php echo $plan_tratamiento ?></textarea>
           </div>
 
         </div>

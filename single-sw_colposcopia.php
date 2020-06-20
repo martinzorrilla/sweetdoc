@@ -68,7 +68,7 @@
   </style>
 
   <div class="callout secondary">
-    <h3 style="text-align: center; margin-left: 50px;">Colposcopia del Paciente</h3>
+    <h3 style="text-align: center; ">Colposcopia del Paciente</h3>
   </div>      
 
 

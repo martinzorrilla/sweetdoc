@@ -188,7 +188,9 @@ function sw_create_secretary_ajax(){
         "patient_ci" => $patient_ci
     );
 
-    $result = sw_create_secretary($params);
+    
+    // DESCOMENTAR ESTA LINEA PARA QUE FUNCIONE LA CREACION DEL USUARIO CON ROL SECRETARY
+     $result = sw_create_secretary($params);
 
     //if(algun tipo de control)
       //$result['success'] = TRUE;
