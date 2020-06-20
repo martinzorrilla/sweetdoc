@@ -139,6 +139,37 @@
     .floated-label-wrapper.checkbox-radio.grid-content {
     padding-bottom: 1rem;
     }
+
+    .floated-label-wrapper .alert-field.active{
+      // background-color: red;
+      box-shadow: 0 0 20px #f77f00;
+    }
+
+    // no me esta andando OJOOOOOOOOOOOOOOOOOOOOOOO !!!!!!!!!!!!!!!!
+    // .alert-field.active{
+    //   // background-color: red;
+    //   box-shadow: 0 0 20px #f77f00 !important;
+    // }
+
+    .alert-field-active{
+        box-shadow: 0 0 20px #f77f00 !important;
+        // background-color: blue !important;
+        // border: solid red 1px;
+    }
+
+    /* para cambiar el color del placeholder del search box en el header */
+    .floated-label-wrapper .alert-field::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      // color: black;
+      // opacity: 1; /* Firefox */
+    }
+
+    /* Make product in categories glow on hover */
+    .floated-label-wrapper:hover {
+      /* box-shadow: 0 0 20px #1e73be; */
+      box-shadow: 0 0 20px #1779ba;
+      /* background-color: #1e73be; */
+    }
+
   }
   
   .tabcontent.white-tab{

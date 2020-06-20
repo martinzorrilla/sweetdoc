@@ -9,6 +9,8 @@
      echo "El usuario no es doctor o admin. no puede ver esta pagina";
       //wp_redirect( esc_url( wp_login_url() ), 307);
       //wp_redirect('http://example.com/'); exit;
+      // wp_redirect( home_url(), '302' );
+      exit; 
    }
   
   //The patient id is sent from patients-all through the url so we grab here with $_GET
@@ -219,18 +221,18 @@
 
     //console.log("formData = ", formData);
     //Display the key/value pairs
-    for (var pair of formData.entries())
-    {
-       console.log(pair[0]+ ', '+ pair[1]); 
-    }
+    // for (var pair of formData.entries())
+    // {
+    //    console.log(pair[0]+ ', '+ pair[1]); 
+    // }
 
     // SI USABAMODS serialize() en vez de serializeArray(), de esta forma debiamos apendar los campos extras
     //var myData = createAppointmentForm.serialize();
     // var myData = createAppointmentForm.serialize() + 
-    // '&patient_id=' + '<?php //echo $patient_id?>' + 
-    // '&app_id=' + '<?php //echo $appointment_id ?>' + 
-    // '&static_data_post_id=' + '<?php //echo $static_data_post_id ?>' + 
-    // '&colpo_post_id=' + '<?php //echo $colpo_post_id ?>' + 
+    // '&patient_id=' + '< ?php //echo $patient_id?>' + 
+    // '&app_id=' + '< ?php //echo $appointment_id ?>' + 
+    // '&static_data_post_id=' + '< ?php //echo $static_data_post_id ?>' + 
+    // '&colpo_post_id=' + '< ?php //echo $colpo_post_id ?>' + 
     // '&action=' + 'sw_create_appointment_ajax';
 
     $.ajax({

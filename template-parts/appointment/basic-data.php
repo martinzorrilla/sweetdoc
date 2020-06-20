@@ -61,7 +61,7 @@
     <div class="card profile-card-action-icons">
       <div class="card-section">          
           <div class="profile-card-about large-12 columns">
-            <h5 class="about-title separator-left"> Ingresar datos de la paciente <?php //echo $name?></h5>
+            <h5 class="about-title separator-left"> Datos de la paciente <?php //echo $name?></h5>
 
 
             <form id="create-patient-form" name="create-patient-form" method="post" >

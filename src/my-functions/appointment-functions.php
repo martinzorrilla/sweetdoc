@@ -36,7 +36,7 @@
     $ritmo_menstrual = isset($_POST['ritmo_menstrual']) && $_POST['ritmo_menstrual'] != '' ? $_POST['ritmo_menstrual'] : NULL;    
     $fum = isset($_POST['fum']) && $_POST['fum'] != '' ? $_POST['fum'] : NULL; 
 
-    
+    $menopausia = isset($_POST['menopausia']) && $_POST['menopausia'] != '' ? $_POST['menopausia'] : NULL;
     $numero_embarazos = isset($_POST['numero_embarazos']) && $_POST['numero_embarazos'] != '' ? $_POST['numero_embarazos'] : NULL; 
     $parto_normal = isset($_POST['parto_normal']) && $_POST['parto_normal'] != '' ? $_POST['parto_normal'] : NULL; 
     $abortos = isset($_POST['abortos']) && $_POST['abortos'] != '' ? $_POST['abortos'] : NULL; 
@@ -52,6 +52,7 @@
     $tratamientos_anteriores = isset($_POST['tratamientos_anteriores']) && $_POST['tratamientos_anteriores'] != '' ? $_POST['tratamientos_anteriores'] : NULL; 
     $fecha_de_tratamiento = isset($_POST['fecha_de_tratamiento']) && $_POST['fecha_de_tratamiento'] != '' ? $_POST['fecha_de_tratamiento'] : NULL; 
     $observaciones = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : NULL;
+    $alertas = isset($_POST['alertas']) && $_POST['alertas'] != '' ? $_POST['alertas'] : NULL;
     
     //colposcopia data
     $colpo_post_id = isset($_POST['colpo_post_id']) && $_POST['colpo_post_id'] != '' ? $_POST['colpo_post_id'] : NULL;
@@ -134,6 +135,7 @@
         "edad_vph" => $edad_vph,
         "ritmo_menstrual" => $ritmo_menstrual,
         "fum" => $fum,
+        "menopausia" => $menopausia,
         "numero_embarazos" => $numero_embarazos,
         "parto_normal" => $parto_normal,
         "abortos" => $abortos,
@@ -147,6 +149,7 @@
         "tratamientos_anteriores" => $tratamientos_anteriores,
         "fecha_de_tratamiento" => $fecha_de_tratamiento,
         "observaciones" => $observaciones,
+        "alertas" => $alertas,
         
         //colposcopia
         "macroscopia" => $macroscopia,
@@ -217,7 +220,10 @@ function sw_create_new_appointment($params){
     $cigarrillos_por_dia = $params['cigarrillos_por_dia'];    
     $tratamientos_anteriores = $params['tratamientos_anteriores'];    
     $fecha_de_tratamiento = $params['fecha_de_tratamiento'];    
-    $observaciones = $params['observaciones'];    
+    $observaciones = $params['observaciones'];
+
+    $menopausia = $params['menopausia'];    
+    $alertas = $params['alertas'];    
 
 
 
@@ -330,7 +336,9 @@ function sw_create_new_appointment($params){
             "cigarrillos_por_dia" => $cigarrillos_por_dia,
             "tratamientos_anteriores" => $tratamientos_anteriores,
             "fecha_de_tratamiento" => $fecha_de_tratamiento,
-            "observaciones" => $observaciones
+            "observaciones" => $observaciones,
+            "menopausia" => $menopausia,
+            "alertas" => $alertas
 
         );
         foreach ($acf_fields as $field => $value) {
@@ -484,6 +492,9 @@ function sw_update_single_appointment($params){
     $fecha_de_tratamiento = $params['fecha_de_tratamiento'];   
     $observaciones = $params['observaciones'];  
 
+    $menopausia = $params['menopausia'];    
+    $alertas = $params['alertas'];
+
     //colposcopia data
     $colpo_post_id = $params['colpo_post_id'];
     $macroscopia = $params['macroscopia'];
@@ -530,7 +541,9 @@ function sw_update_single_appointment($params){
             "cigarrillos_por_dia" => $cigarrillos_por_dia,
             "tratamientos_anteriores" => $tratamientos_anteriores,
             "fecha_de_tratamiento" => $fecha_de_tratamiento,
-            "observaciones" => $observaciones
+            "observaciones" => $observaciones,
+            "menopausia" => $menopausia,
+            "alertas" => $alertas
 
         );
         foreach ($acf_fields as $field => $value) {

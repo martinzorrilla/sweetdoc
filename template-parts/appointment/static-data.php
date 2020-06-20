@@ -18,6 +18,8 @@
     $newDate = "";
     //acf retoran la fecha asi:20191128 en vez de 2019-11-28 que es como el input[date] requiere, x eso tranformo el valor
     if ($fum != ""){ $newDate = date("Y-m-d", strtotime($fum));}
+    
+    $menopausia = isset($static_data_post['menopausia'][0]) ? $static_data_post['menopausia'][0] : NULL;
     $numero_embarazos = isset($static_data_post['numero_embarazos'][0]) ? $static_data_post['numero_embarazos'][0] : NULL;
     // $numero_embarazos = $static_data_post['numero_embarazos'][0];
     // $parto_normal = $static_data_post['parto_normal'][0];
@@ -71,6 +73,7 @@
     if ($fecha_de_tratamiento != ""){ $new_fecha_de_tratamiento = date("Y-m-d", strtotime($fecha_de_tratamiento));}
     // $observaciones = $static_data_post['observaciones'][0];
     $observaciones = isset($static_data_post['observaciones'][0]) ? $static_data_post['observaciones'][0] : NULL;
+    $alertas = isset($static_data_post['alertas'][0]) ? $static_data_post['alertas'][0] : NULL;
     
     
 
@@ -108,7 +111,7 @@
 
           <!-- menarca -->
           <div class="floated-label-wrapper large-6 columns">
-            <label for="menarca" class="separator-left">Menarca &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="menarca" class="separator-left">Menarca</label>
             <input type="number" id="menarca" name="menarca" value="<?php echo $menarca ?>" placeholder="Menarca" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>>
           </div>
 
@@ -126,37 +129,43 @@
 
           <!-- FUM -->
           <div class="floated-label-wrapper large-6 columns">
-            <label for="fum" class="separator-left">FUM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="fum" class="separator-left">FUM</label>
             <input type="date" id="fum" name="fum" value="<?php echo $newDate ?>" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+          </div>
+
+          <!-- menopausia -->
+          <div class="floated-label-wrapper large-6 columns">
+            <label for="menopausia" class="separator-left">Menopausia</label>
+            <input type="number" id="menopausia" name="menopausia" value="<?php echo $menopausia ?>" placeholder="Menopausia" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>>
           </div>
 
           <!-- Numero de Embarazos -->
           <div class="floated-label-wrapper large-6 columns">
-            <label for="numero_embarazos" class="separator-left">Numero de Embarazos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="numero_embarazos" class="separator-left">Numero de Embarazos</label>
             <input type="number" id="numero_embarazos" name="numero_embarazos" value="<?php echo $numero_embarazos ?>" placeholder="Ingrese el numero de embarazos.." required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> > 
           </div>
 
           <!-- Parto normal -->
           <div class="floated-label-wrapper large-6 columns">
-            <label for="parto_normal" class="separator-left">Parto normal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="parto_normal" class="separator-left">Parto normal</label>
             <input type="number" id="parto_normal" name="parto_normal" value="<?php echo $parto_normal ?>" placeholder="Ingrese el numero de partos normales.." required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- cesareas -->
           <div class="floated-label-wrapper large-6 columns">
-            <label for="cesareas" class="separator-left">Cesareas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="cesareas" class="separator-left">Cesareas</label>
             <input type="number" id="cesareas" name="cesareas" value="<?php echo $cesareas ?>" placeholder="Ingrese el numero de cesareas" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- abortos -->
           <div class="floated-label-wrapper large-6 columns">
-            <label for="abortos" class="separator-left">Abortos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="abortos" class="separator-left">Abortos</label>
             <input type="number" id="abortos" name="abortos" value="<?php echo $abortos ?>" placeholder="Ingrese el numero de abortos..." required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- IRS -->
           <div class="floated-label-wrapper large-6 columns">
-            <label for="irs" class="separator-left">IRS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="irs" class="separator-left">IRS</label>
             <input type="number" id="irs" name="irs" value="<?php echo $irs ?>" placeholder="IRS" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
@@ -185,7 +194,7 @@
 
           <!-- edad VPH -->
           <div class="floated-label-wrapper large-6 columns">
-            <label for="edad_vph" class="separator-left">Edad en la que se aplico la vacuna VPH &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="edad_vph" class="separator-left">Edad en la que se aplico la vacuna VPH</label>
             <input type="number" id="edad_vph" name="edad_vph" value="<?php echo $edad_vph ?>" placeholder="Ingrese la edad en la que se aplico la vacuna VPH" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
@@ -268,7 +277,7 @@
 
           <!-- Marca del anticonceptivo -->
           <div class="floated-label-wrapper large-6 medium-6 columns">
-            <label for="marca_anticonceptivo" class="separator-left">Marca del anticonceptivo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="marca_anticonceptivo" class="separator-left">Marca del anticonceptivo</label>
             <input type="text" id="marca_anticonceptivo" name="marca_anticonceptivo" value="<?php echo $marca_anticonceptivo ?>" placeholder="Ingrese la marca del anticonceptivo.." required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
@@ -288,13 +297,13 @@
 
           <!-- Resultado del pap anterior -->
           <div class="floated-label-wrapper large-6 medium-6 columns">
-            <label for="pap_anterior" class="separator-left">Resultado del PAP anterior &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="pap_anterior" class="separator-left">Resultado del PAP anterior</label>
             <input type="text" id="pap_anterior" name="pap_anterior" value="<?php echo $pap_anterior ?>" placeholder="Ingrese el resultado del PAP anterior.." required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
           <!-- Fecha PAP -->
           <div class="floated-label-wrapper large-6 columns">
-            <label for="fecha_pap" class="separator-left">Fecha del PAP &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="fecha_pap" class="separator-left">Fecha del PAP</label>
             <input type="date" id="fecha_pap" name="fecha_pap" value="<?php echo $new_fecha_pap ?>" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
@@ -389,10 +398,22 @@
             <input type="date" id="fecha_de_tratamiento" name="fecha_de_tratamiento" value="<?php echo $new_fecha_de_tratamiento ?>" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
           </div>
 
-          <!-- observaciones -->
+          <!-- observaciones --> 
           <div class="floated-label-wrapper large-12 columns">
             <label for="observaciones" class="separator-left">Observaciones</label>
-            <input type="text" id="observaciones" name="observaciones" value="<?php echo $observaciones ?>" placeholder="Ingrese las observaciones de la paciente" required class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+            
+            <!-- <input type="text" id="observaciones" name="observaciones" value="< ?php echo $observaciones ?>" placeholder="Ingrese las observaciones de la paciente" required class="disableable-input" < ?php if($is_editable == "false")  echo "disabled"; ?> > -->
+            
+            <textarea id="observaciones" name="observaciones" placeholder="Ingrese las observaciones de la paciente..." style="height:5em" required  class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>><?php echo $observaciones ?></textarea>
+          
+          </div>
+
+          <!-- Alertas --> 
+          <div class="floated-label-wrapper large-12 columns">
+            <label for="alertas" class="separator-left">Alertas</label>
+
+            <textarea id="alertas" name="alertas" placeholder="Ingrese las alertas de la paciente..." style="height:5em" required  class="disableable-input alert-field <?php if ($alertas != '') echo 'active' ?> " <?php if($is_editable == "false")  echo "disabled"; ?>><?php echo $alertas ?></textarea>
+          
           </div>
 
         </div>

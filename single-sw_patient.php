@@ -29,13 +29,29 @@ $patient_id = $post_id;
   //returns an array 
   $static_data_array = sw_get_static_data_id($patient_id);
   $static_data_post_id = $static_data_array[0];
+  // nuevo
+  $static_data_post = get_post_custom($static_data_post_id);
+  $alertas = isset($static_data_post['alertas'][0]) ? $static_data_post['alertas'][0] : NULL;
+
 ?>
 
 
-<p><a href="#consultas_paciente">Ir a consultas</a></p>
-<div data-closable class="callout alert-callout-border secondary text-center">
-  <h3 style="font-weight: bold;">Perfil de la Paciente</h3>
-</div>
+  <p><a href="#consultas_paciente">Ir a consultas</a></p>
+
+  <div data-closable class="callout alert-callout-border secondary text-center">
+    <h3 style="font-weight: bold;">Perfil de la Paciente</h3>
+  </div>
+
+
+  <?php 
+  if($alertas != ""){?>
+  <div class="callout alert-callout-border secondary text-center alert-field-active">
+    <h3 style="font-weight: bold;">Alerta</h3>
+  </div>
+  <?php 
+  }
+  ?>
+
 <!-- <h1 style="text-align: center; margin-left: 50px;">Perfil del Paciente</h1> -->
 <?php 
 //como prueba de concepto. si el usuario es doctor muestra estos campos si no, no
