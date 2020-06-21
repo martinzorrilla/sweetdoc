@@ -501,6 +501,30 @@ return $post_id;
 add_filter('acf/pre_save_post' , 'my_acf_pre_save_post');
 
 
+/*
+*
+*
+*
+* AGREGAR TAXONOMIA A LAS PAGINAS Y POSTS. DE ESTA MANERA PUEDO ASIGNAR PAGINAS Y POSTS CON EL ATRIBUTO "DOCTOR LEVEL" ASI
+* ESTAS PAGINAS Y POSTS NO PUEDEN SER VISTOS POR EL ROLE SECRETARY. ESO LO HAGO CON OTRA FUNCION QUE REDIRECCIONA A ESTOS ROLES
+* A LA PAGINA PRINCIPAL SI ES QUE LAS PAGINAS O POSTS TIENEN EL ATRIBUTO DOCTOR LEVEL *
+*
+* @return void
+*/
+function category_with_pages() {
+  register_taxonomy_for_object_type( 'category', 'page' );
+  // agregar a los otros custom post types tambien
+  // register_taxonomy_for_object_type( 'category', 'sw_colposcopia' );
+  // register_taxonomy_for_object_type( 'category', 'sw paciente' );
+  // register_taxonomy_for_object_type( 'category', 'sw incicaciones' );
+  // . 
+  // . 
+}
+add_action( 'init', 'category_with_pages' );
+
+
+
+
 
 /**
  * WordPress function for redirecting users on login based on user role
@@ -530,7 +554,70 @@ function remove_admin_bar_for_roles() {
         show_admin_bar(false);
     }
 }
+
+/**
+ * Block wp-admin access for secretaries
+ */
+function ace_block_wp_admin() {
+	if ( is_admin() &&  current_user_can( 'secretary' ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+		wp_safe_redirect( home_url() );
+		exit;
+	}
+}
+add_action( 'admin_init', 'ace_block_wp_admin' );
+
+
+/***********************************************************
+**
+*
+*
+*/
 // redirect users that are not doctor or admin to home page when trying to acces special pages like appointment and others
+// Example to restrict entire pages for logged in users only
+function wpex_restrict_page_to_doctors_and_admin() {
+
+	// Get global post
+	global $post;
+  $private_page = false;
+      
+  // Buscamos si la pagina tiene la categoria doctor-level, lo cual indica que solo se debe acceder si el rol es doctor o admin
+  $postcat = get_the_category( $post->ID );
+  $cat_names = wp_list_pluck( $postcat, 'name' );
+  if (in_array("doctor-level", $cat_names)) {
+    $private_page = true;
+  }
+  
+  // Prevent access to page with ID of 2 and all children of this page
+	// $page_id = 397;
+	// if ( is_page() && ( $post->post_parent == $page_id || is_page( $page_id ) ) ) {
+
+    // al usar esta condicion multiple, NO aplica para los single-posts, solo para las paginas y que ademas tienene la categoria doctor-level  
+    if ( is_page()  && $private_page ) {
+    // esta incluye a los single-posts, explicitamente
+    // if ( (is_page() || is_single() ) && $private_page ) {
+        
+    // al usar solo esta condicion, tambien aplica para los single-posts.  
+    // if ($private_page ) {
+      
+		// Set redirect to true by default
+		$redirect = true;
+
+    // $the_role = sw_get_current_user_role(); // antes usaba esta funcion pero puedo hacer lo mismo con 'current_user_can()'
+    if(current_user_can('doctor') || current_user_can('administrator')){
+		 	$redirect = false;
+    }
+		
+		// Redirect people witout access to homepage
+		if ( $redirect ) {
+       wp_redirect( esc_url( home_url( '/' ) ), 307 );
+		}
+
+	}
+
+}
+add_action( 'template_redirect', 'wpex_restrict_page_to_doctors_and_admin' );
+
+
 
 
 //get indication_id post of a given app_id of a patient

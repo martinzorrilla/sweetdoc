@@ -10,7 +10,7 @@
       //wp_redirect( esc_url( wp_login_url() ), 307);
       //wp_redirect('http://example.com/'); exit;
       // wp_redirect( home_url(), '302' );
-      exit; 
+      // exit; 
    }
   
   //The patient id is sent from patients-all through the url so we grab here with $_GET

@@ -409,10 +409,10 @@
           </div>
 
           <!-- Alertas --> 
-          <div class="floated-label-wrapper large-12 columns">
+          <div class="floated-label-wrapper large-12 columns" style="margin-bottom: 1em;">
             <label for="alertas" class="separator-left">Alertas</label>
 
-            <textarea id="alertas" name="alertas" placeholder="Ingrese las alertas de la paciente..." style="height:5em" required  class="disableable-input alert-field <?php if ($alertas != '') echo 'active' ?> " <?php if($is_editable == "false")  echo "disabled"; ?>><?php echo $alertas ?></textarea>
+            <textarea id="alertas" name="alertas" placeholder="Ingrese las alertas de la paciente..." style="height:5em " required  class="disableable-input alert-field <?php if ($alertas != '') echo 'active' ?> " <?php if($is_editable == "false")  echo "disabled"; ?>><?php echo $alertas ?></textarea>
           
           </div>
 

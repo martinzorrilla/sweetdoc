@@ -13,6 +13,8 @@ function create_post_type_patient() {
       'menu_icon' => 'dashicons-groups',
       'menu_position' => 80,
       'has_archive' => true,
+      // 'taxonomies' => 'doctor-level',
+      'taxonomies' => array( 'category' ),
     )
   );
     //echo "Patient post type registered.<br/>";

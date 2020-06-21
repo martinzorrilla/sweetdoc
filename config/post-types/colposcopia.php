@@ -13,6 +13,8 @@ function create_post_type_colposcopia() {
       'menu_icon' => 'dashicons-video-alt',
       'menu_position' => 83,
       'has_archive' => true,
+      'taxonomies' => array( 'category' ),
+
     )
   );
 }

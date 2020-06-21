@@ -44,7 +44,7 @@ $patient_id = $post_id;
 
 
   <?php 
-  if($alertas != ""){?>
+  if($alertas != "" &&  current_user_can( 'doctor' )){?>
   <div class="callout alert-callout-border secondary text-center alert-field-active">
     <h3 style="font-weight: bold;">Alerta</h3>
   </div>
@@ -52,30 +52,24 @@ $patient_id = $post_id;
   }
   ?>
 
-<!-- <h1 style="text-align: center; margin-left: 50px;">Perfil del Paciente</h1> -->
 <?php 
 //como prueba de concepto. si el usuario es doctor muestra estos campos si no, no
 $result = "";
 $result = sw_get_current_user_role();
 
-  //check permissions for the user
-  //this page should be visible only for a doctor role. else redirect to home page
-  $the_role = sw_get_current_user_role(); // antes usaba esta funcion pero puedo hacer lo mismo con 'current_user_can()'
-   if(!current_user_can('doctor') && !current_user_can('administrator')){
-     echo "El usuario no es doctor o admin. no puede ver esta pagina";
-      //wp_redirect( esc_url( wp_login_url() ), 307);
-      //wp_redirect('http://example.com/'); exit;
-   }
    
 //en produccion: verificar que el usuario sea doctor
 //if($result == "doctor"){
 if(true){
   hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id, 'is_editable' => "false"]);
   hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id, 'is_editable' => "false"]);
-  hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => "false"]); 
-  ?>
 
-<?php
+  //check permissions for the user
+  //this section should only  be visible by a doctor role or admin.
+  if(current_user_can('doctor') || current_user_can('administrator')){
+    hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => "false"]); 
+  }
+
   // seccion que trae las consultas del paciente
   //hm_get_template_part('template-parts/patients-all/lista-consultas', ['patient_id' => $patient_id]);
   hm_get_template_part('template-parts/patients-all/tabla-consultas', ['patient_id' => $patient_id]);
