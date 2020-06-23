@@ -406,7 +406,19 @@ function sw_delete_patient($params){
         $colpo_patient_array = sw_get_colpo_id($r);
         $colpo_post_id = $colpo_patient_array[0];
 
+        $indication_array = sw_get_indication_id($r);
+        $indication_id = isset($indication_array[0]) ? $indication_array[0] : NULL;
+
+        $studies_array = sw_get_studies_id($r);
+        $studies_id = isset($studies_array[0]) ? $studies_array[0] : NULL;
+        
+        $laboratories_array = sw_get_laboratories_id($r);
+        $laboratories_id = isset($laboratories_array[0]) ? $laboratories_array[0] : NULL;
+        
         wp_trash_post($colpo_post_id);
+        wp_trash_post($indication_id);
+        wp_trash_post($studies_id);
+        wp_trash_post($laboratories_id);
         wp_trash_post($r);
   }
 

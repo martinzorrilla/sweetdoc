@@ -389,6 +389,40 @@ $patient_owner[0] = sw_get_patient_owner();
   return $latest_patients;
 }
 
+
+//  Get all the posts of a given doctor. post type is a parameter
+function sw_get_post_types_of_current_doctor($post_type){
+
+  //'author__in' needs an array to work properly
+  $patient_owner = [];
+  // gets the doctor id, even id the current user role is secretary
+  $patient_owner[0] = sw_get_patient_owner();
+  
+    $args = array(
+      'post_type'   => $post_type,
+      'numberposts' => -1,
+      'author__in'   => $patient_owner,
+      //'meta_key'   => 'nombre',
+      /*'meta_query' => array(
+        'relation' => 'OR',
+          array(
+            'key'     => 'post_author',
+            'value'   => 2,
+            'compare' => 'LIKE',
+          ),
+          array(
+            'key'     => 'apellido',
+            'value'   => $param,
+            'compare' => 'LIKE',
+          ),
+      ),*/
+    );
+    $latest_patients = get_posts( $args );
+    wp_reset_postdata();
+    return $latest_patients;
+  }
+
+
 //returns the id of the doctor thaat created this sw_get_secretarys_doctor_id
   function sw_get_secretarys_doctor_id(){
     $current_user = wp_get_current_user();
@@ -807,6 +841,7 @@ function calcular_edad($fecha_de_nacimiento){
 // return: numero de posts
 // *  contador_de_posts($post_type = 'sw_patient')
 // *
+// *EL PROBLEMA DE ESTA DUNCION  es que no puede filtrar por autor por lo cual me trae todos los posts y no solo lo que son de este doctor
 
 function contador_de_posts($post_type){
   $published_posts = 0;

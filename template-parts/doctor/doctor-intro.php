@@ -22,6 +22,12 @@
       $default_avatar = $template_url."/src/assets/images/avatar.png";
       $profile_image = isset($client_image) && $client_image !=""  ? $client_image['url'] : $default_avatar ;
 
+
+      // contar la cantidad de posts que pertenecen a este doctor
+      $latest_patients = sw_get_post_types_of_current_doctor("sw_patient");
+      $all_appointments = sw_get_post_types_of_current_doctor("sw_consulta");
+      $all_colpos = sw_get_post_types_of_current_doctor("sw_colposcopia");
+      
 ?>
 
 <div class="card-profile-stats">
@@ -44,18 +50,29 @@
     <div class="card-profile-stats-statistic">
       <span class="stat">
         <?php 
-        echo contador_de_posts('sw_patient');
+        // echo contador_de_posts('sw_patient');
+         echo count($latest_patients);
         ?>
       </span>
       <p>Pacientes</p>
     </div> <!-- /.card-profile-stats-statistic -->
     <div class="card-profile-stats-statistic">
-      <span class="stat">0</span>
-      <p>Consultas de hoy</p>
+    <span class="stat">
+        <?php 
+        // echo contador_de_posts('sw_patient');
+         echo count($all_appointments);
+        ?>
+      </span>
+      <p>Consultas</p>
     </div> <!-- /.card-profile-stats-statistic -->
     <div class="card-profile-stats-statistic">
-      <span class="stat">0</span>
-      <p>En espera</p>
+    <span class="stat">
+        <?php 
+        // echo contador_de_posts('sw_patient');
+         echo count($all_colpos);
+        ?>
+      </span>
+      <p>Colposcopías</p>
     </div> <!-- /.card-profile-stats-statistic -->
   </div> <!-- /.card-profile-stats-container -->
 
