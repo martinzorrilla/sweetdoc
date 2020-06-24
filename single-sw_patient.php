@@ -45,7 +45,7 @@ $patient_id = $post_id;
 
   <?php 
   if($alertas != "" &&  current_user_can( 'doctor' )){?>
-  <div class="callout alert-callout-border secondary text-center alert-field-active">
+  <div class="callout alert-callout-border alert text-center alert-field-active">
     <h3 style="font-weight: bold;">Alerta</h3>
   </div>
   <?php 
