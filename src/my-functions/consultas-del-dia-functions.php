@@ -66,17 +66,22 @@ function sw_cargar_consultas($params){
     
     $full_html = array();
     
+
     foreach ($array_data_from_txt as $patient) {
         $aux_html = "";
         $post_object = get_post( $patient ); 
         $title = $post_object->post_title;
+        $permalink = get_permalink( $patient );
         $aux_html='<li>
             <div data-closable class="callout alert-callout-border secondary list-patients">
                 <div class="row">
                     <div class="large-6 columns">
-                        <a href="#" class="name">'.$title.'</a>
+                        <a href="'.$permalink.'" class="name">'.$title.'</a>
                     </div>
                 </div>
+                <button id="eliminar-paciente-del-dia" class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </li>';
     
@@ -100,7 +105,8 @@ function sw_vaciar_consultas($params){
     file_put_contents($path, "");
 
     $result['success'] = TRUE;
-    $result['msg'] = array("Vaciado");
+    // $result['msg'] = array("Vaciado");
+    $result['msg'] = "";
     return $result;
 }
 

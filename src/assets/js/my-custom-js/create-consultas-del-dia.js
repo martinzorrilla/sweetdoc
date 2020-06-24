@@ -3,19 +3,28 @@ var CargarConsultasDiaModule = function(){
     var $ = jQuery;
     var createStudiesBtn;
     // var seleccion; //las opciones son  "cargar_consultas" y "vaciar_consultas"
+    var vaciarConsultasBtn;
     
+
     function init(){
       $(document).ready(function () {
                 
         createStudiesBtn = $("#cargar-consultas");
+        vaciarConsultasBtn = $("#vaciar-consultas");
 
+        // CARGAR CONSULTAS DESDE EL BACKEND
         createStudiesBtn.on("click", function (e) {
           // createStudiesBtn.fadeOut( "slow" );
-            // alert("se creara una solicitud de estudio");
-            // metemos el div con el spinner hasta que se retonrne del ajaz request
             $("#overlay").fadeIn(300);
-             saveProfileData(e,"cargar_consultas");
+             saveProfileData(e,"cargar_consultas");         
         })
+
+        // VACIAR CONSULTAS EN EL BACK END
+        vaciarConsultasBtn.on("click", function (e) {
+            $("#overlay").fadeIn(300);
+             saveProfileData(e,"vaciar_consultas");        
+        })
+
       });
     }
 
