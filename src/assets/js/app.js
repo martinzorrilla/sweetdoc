@@ -13,13 +13,13 @@ import Foundation from 'foundation-sites';
 //import './lib/custom';
 import './components/buttons';
 import './my-custom-js/create-patient';
+import './my-custom-js/table-patients';
 import './my-custom-js/create-indication';
 import './my-custom-js/create-colposcopy';
 import './my-custom-js/create-studies';
 import './my-custom-js/create-laboratories';
 import './my-custom-js/create-consultas-del-dia';
 import './my-custom-js/globals-module';
-
 
 $(document).foundation();
 

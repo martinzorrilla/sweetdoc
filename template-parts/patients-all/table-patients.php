@@ -99,7 +99,7 @@ $latest_patients = sw_get_patients($search_param);
 
             <!-- Consultas del dia -->
             <td>
-                <a href="#"> Agregar </a>      
+                <a href="#" class="agregar-paciente-consulta" data-id="<?php echo $patient->ID;?>"> Agregar </a>      
             </td>
         </tr>
     <?php
