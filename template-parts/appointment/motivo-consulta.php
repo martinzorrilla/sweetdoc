@@ -7,6 +7,15 @@
     $motivo_de_consulta = isset($stored_fields['motivo_de_consulta'][0]) ? $stored_fields['motivo_de_consulta'][0] : NULL;
     //$antecedente_actual = $stored_fields['antecedente_actual'][0];
     $antecedente_actual = isset($stored_fields['antecedente_actual'][0]) ? $stored_fields['antecedente_actual'][0] : NULL;
+      
+    $examen_fisico = isset($stored_fields['examen_fisico'][0]) ? $stored_fields['examen_fisico'][0] : NULL;
+  
+    $peso = isset($stored_fields['peso'][0]) ? $stored_fields['peso'][0] : NULL;
+
+    $presion = isset($stored_fields['presion'][0]) ? $stored_fields['presion'][0] : NULL;
+
+    $imc = isset($stored_fields['imc'][0]) ? $stored_fields['imc'][0] : NULL;
+
     //$diagnostico_consulta = $stored_fields['diagnostico_consulta'][0];
     $diagnostico_consulta = isset($stored_fields['diagnostico_consulta'][0]) ? $stored_fields['diagnostico_consulta'][0] : NULL;
     //$codigo_diagnostico = $stored_fields['codigo_diagnostico'][0];
@@ -48,6 +57,28 @@
             <label class="separator-left" for="antecedente_actual">Antecedentes de la enfermedad actual &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <!-- <input type="text" id="antecedente_actual" name="antecedente_actual" value="<?php //echo $antecedente_actual ?>" placeholder="Escribir..." required> -->
             <textarea id="antecedente_actual" name="antecedente_actual" placeholder="Ingrese aqui el antecedente actual.." style="height:5em" required><?php echo $antecedente_actual ?></textarea>
+          </div>
+
+
+          <div class="floated-label-wrapper large-4 medium-12 columns ">
+            <label class="separator-left" for="peso">Peso</label>
+            <input type="text" id="peso" name="peso" value="<?php echo $peso ?>" placeholder="Escribir..." required>
+          </div>
+
+          <div class="floated-label-wrapper large-4 medium-12 columns ">
+            <label class="separator-left" for="presion">Presión</label>
+            <input type="text" id="presion" name="presion" value="<?php echo $presion ?>" placeholder="Escribir..." required>
+          </div>
+
+          <div class="floated-label-wrapper large-4 medium-12 columns ">
+            <label class="separator-left" for="imc">IMC</label>
+            <input type="text" id="imc" name="imc" value="<?php echo $imc ?>" placeholder="Escribir..." required>
+          </div>
+
+
+          <div class="floated-label-wrapper large-12 columns">
+            <label class="separator-left" for="examen_fisico">Examen físico</label>
+            <textarea id="examen_fisico" name="examen_fisico" placeholder="Ingrese el examen físico." style="height:5em" required><?php echo $examen_fisico ?></textarea>
           </div>
 
           <div class="floated-label-wrapper large-12 columns">

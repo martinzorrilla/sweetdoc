@@ -259,7 +259,7 @@ function PrintEvaluacionGeneral($num, $radiobox_evaluacion_general, $checkbox_mo
         $arrayToString = implode( ", ", $emptyRemoved );
         //como lo que devuelve son los propios valores de la BD y no los labels, remover los "_"
         $arrayToString = str_replace("_", " ", $arrayToString);
-        $arrayToString = " por ".$arrayToString;
+        $arrayToString = ". ".$arrayToString;
         
         //$pdf->PrintElement(2,$title,$arrayToString);
     }
@@ -381,7 +381,10 @@ for ($i=0; $i < $max_images; $i++) {
 //var_dump($images_ids_array);
 
 //$image_post_id = $colpo_data_post['colpo_imagen_1'][0];
+// Segun mis pruebas medium proporciona una calidad suficiente para el informe con la ventaja de pesar una fraccion de lo que pesaria con la imagen en tamaño "full"
 $size = "medium"; // (thumbnail, medium, large, full or custom size)
+//$size = "full"; // (thumbnail, medium, large, full or custom size)
+
 $images_array = array();
 $images_names = array();
 for ($i=0; $i < sizeof($images_ids_array); $i++) {

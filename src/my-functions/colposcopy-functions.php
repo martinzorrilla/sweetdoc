@@ -193,8 +193,17 @@ function sw_create_new_colpo($params){
               );
               $attach_id = wp_insert_attachment($attachment, $movefile['file']);
 
+              // nuevo. estas 3 lineas permiten que al alzar una imagen WP cree versiones de diferentes tamaños
+              // con lo cual, luego podemos usar imagenes mas pequeñas para hacer los informes colposcopicos casi en un 1000%
+              
+              // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
+              require_once( ABSPATH . 'wp-admin/includes/image.php' ); // me anda igual sin esta linea pero lei que hay que agregar si o si 
+              $attach_data = wp_generate_attachment_metadata($attach_id, $movefile['file']);
+              wp_update_attachment_metadata($attach_id, $attach_data);
+              
               update_field('colpo_imagen_'.$i, $attach_id, $colpo_post);
               //update_field('colpo_imagen', $attach_id, $colpo_post);
+
               $i++;
           }
       }
@@ -318,6 +327,16 @@ function sw_update_single_colpo($params){
             );
             $attach_id = wp_insert_attachment($attachment, $movefile['file']);
             
+
+            // nuevo. estas 3 lineas permiten que al alzar una imagen WP cree versiones de diferentes tamaños
+            // con lo cual, luego podemos usar imagenes mas pequeñas para hacer los informes colposcopicos casi en un 1000%
+            
+            // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
+            require_once( ABSPATH . 'wp-admin/includes/image.php' ); // me anda igual sin esta linea pero lei que hay que agregar si o si 
+            $attach_data = wp_generate_attachment_metadata($attach_id, $movefile['file']);
+            wp_update_attachment_metadata($attach_id, $attach_data);
+
+
             //update_post_meta( $colpo_post_id, 'colpo_imagen', $attach_id );  
             update_post_meta( $colpo_post_id, 'colpo_imagen_'.$i, $attach_id );  
             //update_field('colpo_imagen', $attach_id, $colpo_post_id);

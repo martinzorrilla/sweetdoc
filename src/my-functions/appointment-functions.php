@@ -16,6 +16,12 @@
     $motivo_de_consulta = isset($_POST['motivo_de_consulta']) && $_POST['motivo_de_consulta'] != '' ? $_POST['motivo_de_consulta'] : NULL;
     $antecedente_actual = isset($_POST['antecedente_actual']) && $_POST['antecedente_actual'] != '' ? $_POST['antecedente_actual'] : NULL;
 
+    $examen_fisico = isset($_POST['examen_fisico']) && $_POST['examen_fisico'] != '' ? $_POST['examen_fisico'] : NULL;
+    $peso = isset($_POST['peso']) && $_POST['peso'] != '' ? $_POST['peso'] : NULL;
+    $presion = isset($_POST['presion']) && $_POST['presion'] != '' ? $_POST['presion'] : NULL;
+    $imc = isset($_POST['imc']) && $_POST['imc'] != '' ? $_POST['imc'] : NULL;
+
+
     $diagnostico_consulta = isset($_POST['diagnostico_consulta']) && $_POST['diagnostico_consulta'] != '' ? $_POST['diagnostico_consulta'] : NULL;
     $codigo_diagnostico = isset($_POST['codigo_diagnostico']) && $_POST['codigo_diagnostico'] != '' ? $_POST['codigo_diagnostico'] : NULL;
     $procedimiento = isset($_POST['procedimiento']) && $_POST['procedimiento'] != '' ? $_POST['procedimiento'] : NULL;
@@ -120,11 +126,18 @@
         //consulta
         "motivo_de_consulta" => $motivo_de_consulta,
         "antecedente_actual" => $antecedente_actual,
+        
+        "examen_fisico" => $examen_fisico,
+        "peso" => $peso,
+        "presion" => $presion,
+        "imc" => $imc,
+        
         "diagnostico_consulta" => $diagnostico_consulta,
         "codigo_diagnostico" => $codigo_diagnostico,
         "procedimiento" => $procedimiento,
         "codigo_procedimiento" => $codigo_procedimiento,
         "plan_tratamiento" => $plan_tratamiento,
+        
 
         //ago
         "menarca" => $menarca,
@@ -230,6 +243,12 @@ function sw_create_new_appointment($params){
     //common fields CONSULTA
     $motivo_de_consulta = $params['motivo_de_consulta'];
     $antecedente_actual = $params['antecedente_actual'];
+    
+    $examen_fisico = $params['examen_fisico'];
+    $peso = $params['peso'];
+    $presion = $params['presion'];
+    $imc = $params['imc'];
+     
     $diagnostico_consulta = $params['diagnostico_consulta'];
     $codigo_diagnostico = $params['codigo_diagnostico'];
     $procedimiento = $params['procedimiento'];
@@ -293,6 +312,12 @@ function sw_create_new_appointment($params){
       $acf_fields = array(
             "motivo_de_consulta" => $motivo_de_consulta,
             "antecedente_actual" => $antecedente_actual,
+
+            "examen_fisico" => $examen_fisico,
+            "peso" => $peso,
+            "presion" => $presion,
+            "imc" => $imc,
+
             "diagnostico_consulta" => $diagnostico_consulta,
             "codigo_diagnostico" => $codigo_diagnostico,
             "procedimiento" => $procedimiento,
@@ -461,6 +486,12 @@ function sw_update_single_appointment($params){
     //common fields CONSULTA
     $motivo_de_consulta = $params['motivo_de_consulta'];
     $antecedente_actual = $params['antecedente_actual'];
+
+    $examen_fisico = $params['examen_fisico'];
+    $peso = $params['peso'];
+    $presion = $params['presion'];
+    $imc = $params['imc'];
+
     $diagnostico_consulta = $params['diagnostico_consulta'];
     $codigo_diagnostico = $params['codigo_diagnostico'];
     $procedimiento = $params['procedimiento'];
@@ -559,6 +590,12 @@ function sw_update_single_appointment($params){
         $acf_fields = array(
           "motivo_de_consulta" => $motivo_de_consulta,
           "antecedente_actual" => $antecedente_actual,
+
+          "examen_fisico" => $examen_fisico,
+          "peso" => $peso,
+          "presion" => $presion,
+          "imc" => $imc,
+
           "diagnostico_consulta" => $diagnostico_consulta,
           "codigo_diagnostico" => $codigo_diagnostico,
           "procedimiento" => $procedimiento,

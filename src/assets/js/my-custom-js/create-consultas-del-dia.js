@@ -14,8 +14,8 @@ var CargarConsultasDiaModule = function(){
         // eliminarPacienteBtn = $("#eliminar-paciente-del-dia");
         
         // esto lo que hace es cargar la lista de pacientes del dia automaticamente sin presionar ningun boton
-        saveProfileData(null,"cargar_consultas", nulData, nulData);         
         // alert("ya se cargo toda la pagina");
+        // saveProfileData(null,"cargar_consultas", nulData, nulData);         
 
         // CARGAR CONSULTAS DESDE EL BACKEND
         cargarConsultasBtn.on("click", function (e) {
@@ -46,7 +46,7 @@ var CargarConsultasDiaModule = function(){
     function saveProfileData(e, seleccion, patient_id, eliminar_paciente) {
             
       // e.preventDefault();
-      //alert("Se guardaran los datos"); eliminar_paciente
+      //  alert("saveProfileData");
       var $ = jQuery;
       var myData = 'foo=bar'+ '&action=' + 'sw_cargar_consultas_ajax' + '&seleccion=' + seleccion + '&patient_id=' + patient_id + '&eliminar_paciente=' + eliminar_paciente;
       // var myData = createPatientForm.serialize() + '&patient_id=' + '<?php echo $patient_id ?>';
@@ -92,7 +92,8 @@ var CargarConsultasDiaModule = function(){
           }
         },
         error: function() {
-            alert('No se pudo cargar las consultas del dia');
+            // alert('No se pudo cargar las consultas del dia');
+            console.log('No se pudo cargar las consultas del dia');
         }
       });// $.ajax
     }
