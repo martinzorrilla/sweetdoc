@@ -85,3 +85,65 @@
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
+
+
+
+//LLAMAR PACIENTES
+// . CSS para hacer efecto de pulso "blink" al llamar al paciente al consultorio. esta clase de be agregarse
+// . al div con JQuery por unos segundos y luego remover.
+// .
+	.blink-bg{
+    color: #fff;
+    // box-shadow: 0 0 20px #1779ba;
+    border-bottom: 4px solid #1779ba;
+    // border-right: 4px solid #1779ba;
+		padding: 10px;
+		display: inline-block;
+		border-radius: 5px;
+		animation: blinkingBackground 3s infinite;
+	}
+	@keyframes blinkingBackground{
+		 0%	    { background-color: #eaeaea;}
+		//  25%		{ background-color: #dcebff;}
+		 50%		{ background-color: #c2ddff;}
+		//  75%		{ background-color: #dcebff;;}
+     100%	  { background-color: #eaeaea;}
+    
+
+    //  0%		{ background-color: transparent;}
+		//  25%		{ background-color: #fff;}
+		//  50%		{ background-color: #f2f2f2;}
+		//  75%		{ background-color: #ebebeb;;}
+    //  100%	{ background-color: transparent;}
+
+    // 0%		{ border-bottom: transparent;}
+		// 25%		{ border-bottom: #fff;}
+		// 50%		{ border-bottom: #f2f2f2;}
+		// 75%		{ border-bottom: #ebebeb;;}
+		// 100%	{ border-bottom: transparent;}
+	}
+
+
+  .blink-text{
+		color: #000;
+		font-weight: bold;
+		font-size: 2rem;
+		animation: blinkingText 2s infinite;
+	}
+	@keyframes blinkingText{
+		0%		{ color: #10c018;}
+		25%		{ color: #1056c0;}
+		50%		{ color: #ef0a1a;}
+		75%		{ color: #254878;}
+		100%	{ color: #04a1d5;}
+  }
+  
+  #llamar-pacientes{
+    .paciente-llamado{
+      text-align: center;
+      p{
+        font-size: 40px;
+        font-weight: bold;
+      }
+    }
+  }

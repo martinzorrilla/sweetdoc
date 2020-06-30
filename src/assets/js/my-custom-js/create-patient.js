@@ -71,7 +71,7 @@ var CreatePatientModule = function(){
 
     function saveProfileData(e) {
       e.preventDefault();
-      //alert("Se guardaran los datos");
+      // alert("SaveProfileData - Crear Pacientes");
       var $ = jQuery;
       //var myData = createPatientForm.serialize() + '&patient_id=' + '<?php echo $patient_id ?>';
       var myData = createPatientForm.serialize();

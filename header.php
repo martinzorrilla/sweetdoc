@@ -19,6 +19,9 @@
 		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 		<!-- <script src="../wp-content/themes/FoundationPress/src/assets/js/bar.js"></script> -->
 
+		<!-- TESTING: responsive voice para leer la paciente a llamar en voz alta. si no anda borrar esto -->
+		<script src="https://code.responsivevoice.org/responsivevoice.js?key=TSz0m51D"></script>
+
 		<?php wp_head(); ?>
 
 		<!-- home url -->
@@ -119,8 +122,8 @@
 				<!-- the content starts here! -->
 
 				<!-- <ul class="menu align-right">
-					<li><a href="#"> <?php //echo  $current_user->user_login; ?> </a></li>
-					<a href="<?php //echo wp_logout_url(); ?>">Salir</a>
+					<li><a href="#"> < ?php //echo  $current_user->user_login; ?> </a></li>
+					<a href="< ?php //echo wp_logout_url(); ?>">Salir</a>
 				</ul> -->
 
 				<?php //hm_get_template_part('template-parts/sweet-navbar'); ?>
