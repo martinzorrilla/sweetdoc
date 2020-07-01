@@ -6,19 +6,13 @@ $audio_path = "http://appointments.asunciontasty.com/announcement-sound.mp3";
     <audio id="myAudio">
         <source src="<?= $audio_path ?>" type="audio/mpeg">
         <!-- <source src="http://appointments.asunciontasty.com/announcement-sound.mp3" type="audio/mpeg" /> -->
-        <!-- <source src="http://dl.dropbox.com/u/1538714/article_resources/song.ogg" type="audio/ogg" /> -->
     </audio>
 
-    <!-- <div data-closable class="callout alert-callout-border secondary text-center blink-bg"> -->
-    <!-- <div data-closable class="callout alert-callout-border secondary text-center">
-        <h3>Siguiente Paciente</h3>
-    </div> -->
-
-    <div class="wrap">
+    <div class="wrap"> 
         <h1 class="under">Doctora: Andrea Zorrilla</h1>
     </div>
 
-    <div class="wrap" style="margin-bottom: 2em;">
+    <div class="wrap" style="margin-top: 3em; margin-bottom: 3em;">
         <h1>Siguiente Paciente</h1>
     </div>
 
@@ -36,6 +30,8 @@ $audio_path = "http://appointments.asunciontasty.com/announcement-sound.mp3";
 <?php get_footer(); ?>
 <script src="https://code.responsivevoice.org/responsivevoice.js?key=TSz0m51D"></script>
 
+
+
 <!-- ATENCION! 
 POR QUE AGRAGUE ESTE SCRIPT? todo el JS para manejar los eventos de esta pagina se encuentran ne "create-consultas-del-dia.js"
 y de hecho, este codigo es una copia de una seccion de lo que hay ahi. la cuestion es que para poder hacer que al cargar esta pagina, obtenga la lista de pacientes de forma automatica, tenia que llamar a la funcion saveProfileData("cargar_consultas", "", ""); al iniciar el modulo, y por esto esta funcion era llamada en cualquier otra pagina al terminar de cargarse. lo que hacia que aveces genere un error del request y saltaba una alerta al navegar en cualquier otra pagina del sitio. 
@@ -46,31 +42,29 @@ $(document).ready(function(){
    
     var patientTimestamp = 0;
     var firstTimeExecution = true;
-    // alert(patientTimestamp);
 
     var closeSidebar = $("#close-sidebar");
     closeSidebar.trigger('click')
-    
-    // responsiveVoice.speak("Clara Franco", "Spanish Latin American Female");
+        
+    var audioButton = $("#audioButton");
+    var audio = $("#myAudio");// audio.volume = 0.1;
     
     $("#overlay").fadeIn(300);
     loadNextPatient("get_patient", "", "");         
 
-
-
-    var audioButton = $("#audioButton");
-    var audio = $("#myAudio");
-    // audio.volume = 0.1;
+    // en este caso no importa el id ya que lo que voy a hacer es simplemente vaciar el archivo next-patient.txt
+    $(document).on('click','.eliminar-paciente-llamado',function(){
+        //   var data_id = $(this).data('id'); 
+          // alert("Llamar al paciente: "+ data_id);
+          $("#overlay").fadeIn(300);
+          loadNextPatient("empty-file", "", "");         
+        });
+    
     
 
-    // setTimeout(function(){
-    // // console.log("esperando 5 segundos"); 
-    // alert("esperando 15 segundos");
-    // },15000);
-
-    // setInterval(loadNextPatient("get_patient", "", ""),10000);
+    // setInterval cada 10 segundos llama a la funcion que llama a loadNextPatient
+    // no se puede llamar directamente a loadNextPatient xq falla por eso hice asi 
     setInterval(autoCallNextPatient,10000);
-
     function autoCallNextPatient(){
         if (firstTimeExecution == false) {
             loadNextPatient("get_patient", "", "")
@@ -78,20 +72,17 @@ $(document).ready(function(){
     }
 
     function playAudio() { 
-        // alert("playing sound");
         // audio.volume = 0.2;
         audio.trigger('play')
     } 
 
    function loadNextPatient(seleccion, patient_id, eliminar_paciente) {
       
-      //console.log(Date.now());
       var $ = jQuery;
       var myData = 'foo=bar'+ '&action=' + 'sw_llamar_pacientes_ajax' + '&seleccion=' + seleccion + '&patient_id=' + patient_id + '&eliminar_paciente=' + eliminar_paciente;
       
-
-    //   var patientTimestamp = $('#eliminar-paciente-llamado').data('id'); 
-    //    alert("timestamp del frontend = " + patientTimestamp);
+      //var patientTimestamp = $('#eliminar-paciente-llamado').data('id'); 
+      //alert("timestamp del frontend = " + patientTimestamp);
 
       $.ajax({
          type: "POST",
@@ -102,10 +93,15 @@ $(document).ready(function(){
 
             if(data.error.length >0){
                if(data.error){
-                  alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> cargar consultas ');
-               }
+                //   alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> cargar consultas ');
+                console.log("Error del request loadNextPatient. Revisar si el archivo nextPatient.txt esta vacio");
+                firstTimeExecution = false;
+                setTimeout(function(){
+                $("#overlay").fadeOut(300);
+                },500);
+                }
             }
-            if(data.success && data.accion_inicial!= patientTimestamp ){
+            else if(data.success && data.accion_inicial!= patientTimestamp ){
                 // alert("hizo el ajax request y fue success");
 
                 patientTimestamp = data.accion_inicial
@@ -146,7 +142,7 @@ $(document).ready(function(){
             } //data.success
          },
          error: function() {
-            alert('No se pudo cargar las consultas del dia. JX');
+            // alert('No se pudo cargar las llamdas de paciente. JX');
             console.log('No se pudo cargar las consultas del dia');
          }
       });// $.ajax

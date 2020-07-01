@@ -78,6 +78,7 @@
 		$create_patient_url = home_url().'/crear-paciente/?patient_id=new';
 		$create_secretary_url = home_url().'/crear-asistente/';
 		$consultas_del_dia_url = home_url().'/consultas-del-dia/';
+		$llamar_pacientes_url = home_url().'/llamar-pacientes/';
 		$current_user = wp_get_current_user();
 	?>
 	<div class="app-dashboard shrink-medium">
@@ -110,7 +111,10 @@
 						<i class="fas fa-user-md fa-2x"></i><span class="app-dashboard-sidebar-text"> Crear Asistente</span>
 					</a></li>
 					<li><a href="<?php echo $consultas_del_dia_url ?>">
-						<i class="fas fa-calendar-check fa-2x"></i><span class="app-dashboard-sidebar-text"> Consultas del día</span>
+						<i class="fas fa-calendar-check fa-2x"></i><span class="app-dashboard-sidebar-text"> Consultas del Día</span>
+					</a></li>
+					<li><a href="<?php echo $llamar_pacientes_url ?>">
+						<i class="fas fa-volume-up fa-2x"></i><span class="app-dashboard-sidebar-text"> Llamar Pacientes</span>
 					</a></li>
 					</ul>
 				</div>

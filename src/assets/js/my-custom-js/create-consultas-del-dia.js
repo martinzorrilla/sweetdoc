@@ -37,7 +37,6 @@ var CargarConsultasDiaModule = function(){
           // alert("eliminar de la lista "+ data_id);
           $("#overlay").fadeIn(300);
           saveProfileData(null, nulData, data_id, true);         
-        
         });
 
 
@@ -46,7 +45,6 @@ var CargarConsultasDiaModule = function(){
           // alert("Llamar al paciente: "+ data_id);
           $("#overlay").fadeIn(300);
           callNextPatient("llamar-paciente-add-paciente", data_id, "");         
-        
         });
 
       });
@@ -132,7 +130,7 @@ var CargarConsultasDiaModule = function(){
             } //data.success
          },
          error: function() {
-            alert('No se pudo llamar al paciente. JX');
+            // alert('No se pudo llamar al paciente. JX');
             console.log('No se pudo llamar al paciente');
          }
       });// $.ajax
