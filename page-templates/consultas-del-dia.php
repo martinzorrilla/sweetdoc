@@ -1,9 +1,12 @@
 <?php get_header();/* Template Name: Consultas del dia*/?>
 
-
-      <div data-closable class="callout alert-callout-border secondary text-center">
-         <h3>Listado de pacientes del día</h3>
+      <div class="callout secondary wrap" style="margin-top: 3em; margin-bottom: 3em;">
+         <h2 class="font-bold">Lista de pacientes del día</h2>
       </div>
+
+      <!-- <div data-closable class="callout alert-callout-border secondary text-center">
+         <h3>Lista de pacientes del día</h3>
+      </div> -->
    
       <!-- <p>Click en cargar para traer las consultas del dia:</p> -->
        

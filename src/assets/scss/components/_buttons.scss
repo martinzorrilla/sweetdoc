@@ -55,18 +55,36 @@
 /*Other Stylez*/
 .wrap {
   margin:0 auto;
-  width:800px;
+  // width:800px;
+  width:100%;
   text-align:center;
   
+  font-family: 'Poiret One', cursive;
   h1 {
     font-family: 'Poiret One', cursive;
     font-size:4em;
-    &.under{
-      text-decoration: underline #1779ba;
-    }
+    
+    // &.under{
+    //   text-decoration: underline #1779ba;
+    // }
+    // &.font-bold{
+    //   font-weight: bold;
+    // }
   }
 
-}
+  h2 {
+    font-family: 'Poiret One', cursive;
+    font-size:2em;
+  }
+
+
+  .under{
+    text-decoration: underline #1779ba;
+  }
+  .font-bold{
+    font-weight: bold;
+  }
+}//wrap
 
 
 .button-medium{
