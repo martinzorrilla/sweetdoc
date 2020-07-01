@@ -6,3 +6,73 @@
   border-radius: 3px;
   border: none;
 }
+
+
+
+//Prueba de diseño de botones 
+// .
+// .
+// .
+@import url(https://fonts.googleapis.com/css?family=Poiret+One);
+
+@mixin button-bg($bg) {
+  background: $bg;
+  &:hover {
+    background:darken($bg,8%);
+    transition: all 0.3s ease;
+  }
+  &:active {
+    background:darken($bg,25%);
+  } 
+}
+
+
+.btn {
+ color:white;
+ text-decoration:none;
+ padding:5px 10px;
+ border-radius:3px;
+ font-family: 'Poiret One', cursive;
+ font-size:2em;
+}
+
+.btn-green {
+   @include button-bg(#2ecc71);
+}
+
+.btn-blue {
+   @include button-bg(#3498db);
+}
+
+.btn-yellow{
+   @include button-bg(#f1c40f);
+}
+
+.btn-red {
+   @include button-bg(#e74c3c);
+}
+
+/*Other Stylez*/
+.wrap {
+  margin:0 auto;
+  width:800px;
+  text-align:center;
+  
+  h1 {
+    font-family: 'Poiret One', cursive;
+    font-size:4em;
+    &.under{
+      text-decoration: underline #1779ba;
+    }
+  }
+
+}
+
+
+.button-medium{
+  font-size:1em;
+}
+
+.btn-margin-rg{
+  margin-right: 1em;
+}

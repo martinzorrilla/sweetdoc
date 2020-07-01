@@ -2,15 +2,6 @@
 $audio_path = "http://appointments.asunciontasty.com/announcement-sound.mp3";
 ?>
 
-
-    <!-- <div data-closable class="callout alert-callout-border secondary text-center blink-bg"> -->
-    <div data-closable class="callout alert-callout-border secondary text-center">
-        <h3>Siguiente Paciente</h3>
-    </div>
-          
-    <ul id="llamar-pacientes" style="list-style-type:none; margin-left: 0px;">
-    </ul>
-
     <!-- <button id="audioButton" type="button">Play Audio</button> -->
     <audio id="myAudio">
         <source src="<?= $audio_path ?>" type="audio/mpeg">
@@ -18,29 +9,52 @@ $audio_path = "http://appointments.asunciontasty.com/announcement-sound.mp3";
         <!-- <source src="http://dl.dropbox.com/u/1538714/article_resources/song.ogg" type="audio/ogg" /> -->
     </audio>
 
+    <!-- <div data-closable class="callout alert-callout-border secondary text-center blink-bg"> -->
+    <!-- <div data-closable class="callout alert-callout-border secondary text-center">
+        <h3>Siguiente Paciente</h3>
+    </div> -->
 
+    <div class="wrap">
+        <h1 class="under">Doctora: Andrea Zorrilla</h1>
+    </div>
 
+    <div class="wrap" style="margin-bottom: 2em;">
+        <h1>Siguiente Paciente</h1>
+    </div>
 
+          
+    <ul id="llamar-pacientes" style="list-style-type:none; margin-left: 0px;">
+    </ul>
+
+    <!-- <div class="wrap">
+        <a href="#" class="btn btn-green">Pasar a Consultorio</a>
+        <a href="#" class="btn btn-blue">Pasar a Consultorio</a>
+        <a href="#" class="btn btn-yellow">Pasar a Consultorio</a>
+        <a href="#" class="btn btn-red">Pasar a Consultorio</a>
+    </div> -->
 
 <?php get_footer(); ?>
-
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=TSz0m51D"></script>
 
 <!-- ATENCION! 
 POR QUE AGRAGUE ESTE SCRIPT? todo el JS para manejar los eventos de esta pagina se encuentran ne "create-consultas-del-dia.js"
 y de hecho, este codigo es una copia de una seccion de lo que hay ahi. la cuestion es que para poder hacer que al cargar esta pagina, obtenga la lista de pacientes de forma automatica, tenia que llamar a la funcion saveProfileData("cargar_consultas", "", ""); al iniciar el modulo, y por esto esta funcion era llamada en cualquier otra pagina al terminar de cargarse. lo que hacia que aveces genere un error del request y saltaba una alerta al navegar en cualquier otra pagina del sitio. 
 
 Al hacerlo aca me aseguro que la primera llamada automatica se haga solamente al terminar de cargar ESTA pagina. -->
-
 <script>
 $(document).ready(function(){
    
+    var patientTimestamp = 0;
+    var firstTimeExecution = true;
+    // alert(patientTimestamp);
+
     var closeSidebar = $("#close-sidebar");
     closeSidebar.trigger('click')
     
     // responsiveVoice.speak("Clara Franco", "Spanish Latin American Female");
     
     $("#overlay").fadeIn(300);
-    loadNextPatient("cargar_consultas", "", "");         
+    loadNextPatient("get_patient", "", "");         
 
 
 
@@ -48,11 +62,21 @@ $(document).ready(function(){
     var audio = $("#myAudio");
     // audio.volume = 0.1;
     
-    // audioButton.on("click", function (e) {
-    //       e.preventDefault();  
-    //       playAudio();
-    //     })
-        
+
+    // setTimeout(function(){
+    // // console.log("esperando 5 segundos"); 
+    // alert("esperando 15 segundos");
+    // },15000);
+
+    // setInterval(loadNextPatient("get_patient", "", ""),10000);
+    setInterval(autoCallNextPatient,10000);
+
+    function autoCallNextPatient(){
+        if (firstTimeExecution == false) {
+            loadNextPatient("get_patient", "", "")
+        }
+    }
+
     function playAudio() { 
         // alert("playing sound");
         // audio.volume = 0.2;
@@ -61,9 +85,14 @@ $(document).ready(function(){
 
    function loadNextPatient(seleccion, patient_id, eliminar_paciente) {
       
+      //console.log(Date.now());
       var $ = jQuery;
       var myData = 'foo=bar'+ '&action=' + 'sw_llamar_pacientes_ajax' + '&seleccion=' + seleccion + '&patient_id=' + patient_id + '&eliminar_paciente=' + eliminar_paciente;
       
+
+    //   var patientTimestamp = $('#eliminar-paciente-llamado').data('id'); 
+    //    alert("timestamp del frontend = " + patientTimestamp);
+
       $.ajax({
          type: "POST",
          url:window.homeUrl + "/wp-admin/admin-ajax.php",
@@ -76,49 +105,44 @@ $(document).ready(function(){
                   alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> cargar consultas ');
                }
             }
-            if(data.success){
-            
-            // var accionInicial = data.accion_inicial;
-            // if (accionInicial != "eliminar_paciente") {
-            //    $('#consultas-del-dia').empty();
-            // }            
-            
+            if(data.success && data.accion_inicial!= patientTimestamp ){
+                // alert("hizo el ajax request y fue success");
 
-            $('#llamar-pacientes').empty();
+                patientTimestamp = data.accion_inicial
+                
+                $('#llamar-pacientes').empty();
 
-            $.each( data.msg, function( key, value ) {
-            $('#llamar-pacientes').append(value);
-            });
+                $.each( data.msg, function( key, value ) {
+                $('#llamar-pacientes').append(value);
+                });
 
-            setTimeout(function(){
-               $("#overlay").fadeOut(300);
-            },500);
+                setTimeout(function(){
+                $("#overlay").fadeOut(300);
+                },500);
 
-            // llamo a la funcion para reproducir el sonido de anuncio para llamar al paciente. hay que habilitar en el navegador para que suene
-            setTimeout(function(){
-                playAudio();
-            },500);
+                // llamo a la funcion para reproducir el sonido de anuncio para llamar al paciente. hay que habilitar en el navegador para que suene
+                setTimeout(function(){
+                    playAudio();
+                },500);
 
-            setTimeout(function(){
-                if(responsiveVoice.voiceSupport()) {
-                    var htmlString = $(".nombre-paciente").html();
-                    // Used to add optional pitch (range 0 to 2), rate (range 0 to 1.5), volume (range 0 to 1) and callbacks.
-                    responsiveVoice.speak("Siguiente Paciente", "Spanish Female", {rate: 0.8, pitch: 0.5});
-                    responsiveVoice.speak(htmlString, "Spanish Female", {rate: 0.6, pitch: 0.5});
-                    // responsiveVoice.speak("Ana Desiree Friedmann Ramirez", "Spanish Female", {rate: 0.6, pitch: 0.5});
+                setTimeout(function(){
+                    // if(responsiveVoice.voiceSupport()) {
+                        var htmlString = $(".nombre-paciente").html();
+                        // Used to add optional pitch (range 0 to 2), rate (range 0 to 1.5), volume (range 0 to 1) and callbacks.
+                        // responsiveVoice.speak("Siguiente Paciente", "Spanish Female", {rate: 0.8, pitch: 0.5});
+                        // responsiveVoice.speak(htmlString, "Spanish Female", {rate: 0.6, pitch: 0.5});
 
-                    // responsiveVoice.speak("Siguiente Paciente", "Spanish Latin American Female");
-                    // responsiveVoice.speak("Marisa Vera Melgarejo", "Spanish Latin American Female");
-                    // var voicelist = responsiveVoice.getVoices();
-                    // console.log(voicelist);
-                }
-            },4000);
+                        responsiveVoice.speak("Siguiente,Paciente", "Spanish Female");
+                        responsiveVoice.speak(htmlString, "Spanish Female", {rate: 0.7, pitch: 1});
+                    // }
+                },4000);
 
 
-            setTimeout(function(){
-                $( ".paciente-llamado" ).removeClass( "blink-bg" );
-            },15000);
+                setTimeout(function(){
+                    $( ".paciente-llamado" ).removeClass( "blink-bg" );
+                },13000);
 
+                firstTimeExecution = false;
             } //data.success
          },
          error: function() {

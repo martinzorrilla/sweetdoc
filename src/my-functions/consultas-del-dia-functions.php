@@ -132,9 +132,15 @@ function sw_cargar_consultas($params){
         $aux_html='<li>
             <div data-closable class="callout alert-callout-border secondary list-patients">
                 <div class="row">
+
                     <div class="large-6 columns">
                         <a href="'.$permalink.'" class="name">'.$title.'</a>
                     </div>
+
+                    <div class="large-6 columns text-right">
+                        <a href="#" class="btn btn-blue button-medium btn-margin-rg llamar-paciente" data-id="'.$patient.'">Llamar a consultorio</a>
+                    </div>
+
                 </div>
 
                 <button id="eliminar-paciente-del-dia" class="close-button eliminar-paciente-del-dia" data-id="'.$patient.'" aria-label="Dismiss alert" type="button" data-close>

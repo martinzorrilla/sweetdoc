@@ -40,6 +40,15 @@ var CargarConsultasDiaModule = function(){
         
         });
 
+
+        $(document).on('click','.llamar-paciente',function(){
+          var data_id = $(this).data('id'); 
+          // alert("Llamar al paciente: "+ data_id);
+          $("#overlay").fadeIn(300);
+          callNextPatient("llamar-paciente-add-paciente", data_id, "");         
+        
+        });
+
       });
     }
 
@@ -97,6 +106,38 @@ var CargarConsultasDiaModule = function(){
         }
       });// $.ajax
     }
+
+    function callNextPatient(seleccion, patient_id, eliminar_paciente) {
+      // e.preventDefault();
+      var $ = jQuery;
+      var myData = 'foo=bar'+ '&action=' + 'sw_llamar_pacientes_ajax' + '&seleccion=' + seleccion + '&patient_id=' + patient_id + '&eliminar_paciente=' + eliminar_paciente;
+      
+      $.ajax({
+         type: "POST",
+         url:window.homeUrl + "/wp-admin/admin-ajax.php",
+         data: myData,
+         dataType: "json",
+         success: function(data) {
+
+            if(data.error.length >0){
+               if(data.error){
+                  alert('Error<> Ajax Request: succeded - Backend error: check callNextPatient - create-consultas-del-dia.js');
+               }
+            }
+            if(data.success){
+              // alert("paciente agregado a llamar pacientes");
+              setTimeout(function(){
+                $("#overlay").fadeOut(300);
+              },500);
+            } //data.success
+         },
+         error: function() {
+            alert('No se pudo llamar al paciente. JX');
+            console.log('No se pudo llamar al paciente');
+         }
+      });// $.ajax
+      }
+
 
   return{
     init:init

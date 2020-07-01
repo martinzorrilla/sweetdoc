@@ -94,12 +94,12 @@
 // .
 	.blink-bg{
     color: #fff;
-    // box-shadow: 0 0 20px #1779ba;
-    border-bottom: 4px solid #1779ba;
+    box-shadow: 0 0 20px #1779ba;
+    // border-bottom: 4px solid #1779ba;
     // border-right: 4px solid #1779ba;
-		padding: 10px;
-		display: inline-block;
-		border-radius: 5px;
+		// padding: 10px;
+		// display: inline-block;
+		// border-radius: 5px;
 		animation: blinkingBackground 3s infinite;
 	}
 	@keyframes blinkingBackground{

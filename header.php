@@ -20,7 +20,7 @@
 		<!-- <script src="../wp-content/themes/FoundationPress/src/assets/js/bar.js"></script> -->
 
 		<!-- TESTING: responsive voice para leer la paciente a llamar en voz alta. si no anda borrar esto -->
-		<script src="https://code.responsivevoice.org/responsivevoice.js?key=TSz0m51D"></script>
+		<!-- <script src="https://code.responsivevoice.org/responsivevoice.js?key=TSz0m51D"></script> -->
 
 		<?php wp_head(); ?>
 
