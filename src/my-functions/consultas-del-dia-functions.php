@@ -130,22 +130,25 @@ function sw_cargar_consultas($params){
         $permalink = get_permalink( $patient );
         // $aux_html='<li><a href="'.$permalink.'" class="name">'.$title.'</a><p class="eliminarpacientxx">eliminar</p></li>';
         $aux_html='<li>
-            <div data-closable class="callout alert-callout-border secondary list-patients">
+            <div data-closable class="callout alert-callout-border secondary list-patients blue-shadow">
                 <div class="row">
 
-                    <div class="large-6 columns">
-                        <a href="'.$permalink.'" class="name">'.$title.'</a>
+                    <div class="large-6 medium-12 small-12 columns">
+                        <a href="'.$permalink.'" class="black-font">'.$title.'</a>
                     </div>
 
-                    <div class="large-6 columns text-right">
-                        <a href="#" class="btn btn-blue button-medium btn-margin-rg llamar-paciente" data-id="'.$patient.'">Llamar a consultorio</a>
+                    <div class="large-6 medium-12 small-12 columns">
+                        <div class="large-6 columns text-right" style="padding-bottom:1em;">
+                            <a href="#" class="btn btn-blue button-medium btn-margin-rg llamar-paciente" data-id="'.$patient.'">Llamar a consultorio</a>
+                        </div>
+
+                        <div class="large-6 columns text-right">
+                        <a href="#" class="btn btn-red button-medium btn-margin-rg eliminar-paciente-del-dia" data-id="'.$patient.'" data-close>Eliminar de la lista</a>
+                        </div>
                     </div>
 
                 </div>
 
-                <button id="eliminar-paciente-del-dia" class="close-button eliminar-paciente-del-dia" data-id="'.$patient.'" aria-label="Dismiss alert" type="button" data-close>
-                <span aria-hidden="true">&times;</span>
-                </button>
 
             </div>
         </li>';

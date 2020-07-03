@@ -107,7 +107,8 @@
 					<li><a href="<?php echo $create_patient_url ?>">
 						<i class="fas fa-plus fa-2x"></i><span class="app-dashboard-sidebar-text"> Agregar Paciente</span>
 					</a></li>
-					<li><a href="<?php echo $create_secretary_url ?>">
+					<!-- <li><a href="< ?php echo $create_secretary_url ?>"> -->
+					<li><a href="#">
 						<i class="fas fa-user-md fa-2x"></i><span class="app-dashboard-sidebar-text"> Crear Asistente</span>
 					</a></li>
 					<li><a href="<?php echo $consultas_del_dia_url ?>">

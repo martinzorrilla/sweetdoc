@@ -8,12 +8,14 @@ $audio_path = "http://appointments.asunciontasty.com/announcement-sound.mp3";
         <!-- <source src="http://appointments.asunciontasty.com/announcement-sound.mp3" type="audio/mpeg" /> -->
     </audio>
 
+    <div class="large-spacer"></div>
+
     <div class="wrap"> 
         <h1 class="under font-bold">Doctora: Andrea Zorrilla</h1>
     </div>
 
     <div class="wrap" style="margin-top: 3em; margin-bottom: 3em;">
-        <h1>Siguiente Paciente</h1>
+        <h2>Siguiente Paciente</h2>
     </div>
 
           

@@ -142,8 +142,65 @@
     .paciente-llamado{
       text-align: center;
       p{
-        font-size: 40px;
+        font-size: 1.5em;
         font-weight: bold;
+
+        @include for-size(phone-only) {    
+        font-size: 1.5em;
+
+        }
+    
+        @include for-size(tablet-portrait-up) {    
+        font-size: 3em;
+
+        }
+    
+        @include for-size(tablet-landscape-up) {    
+          font-size: 3em;
+        }
+        
+        @include for-size(desktop-up) {    
+        font-size: 4em;
+
+        }
+    
+        @include for-size(big-desktop-up) {    
+        font-size: 8em;
+
+        }
+
       }
     }
   }
+
+
+// div espaciador utilizado (por ahora) en "llamar pacientes". 
+// . 
+// . 
+  .large-spacer{
+    height: 1em;
+    // border: 1px solid green;
+ 
+    @include for-size(phone-only) {    
+      height: 1em;
+    }
+
+    @include for-size(tablet-portrait-up) {    
+      height: 2em;
+    }
+
+    @include for-size(tablet-landscape-up) {    
+      height: 4em;
+    }
+    
+    @include for-size(desktop-up) {    
+      height: 6em;
+    }
+
+    @include for-size(big-desktop-up) {    
+      height: 10em;
+    }
+
+  }
+
+

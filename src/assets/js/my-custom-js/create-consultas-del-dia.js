@@ -33,7 +33,7 @@ var CargarConsultasDiaModule = function(){
         // Eliminar paciente de la lista. XQ USE document.on? xq solo de esta forma se puede capturar un evento de un elemento que se creo dinamicamente
         // como es el caso de la clase eliminar-paciente-del-dia. esta se crea recien cuando se hace el request de listado de pacientes
         $(document).on('click','.eliminar-paciente-del-dia',function(){
-          var data_id = $(this).data('id'); 
+          var data_id = $(this).data('id');
           // alert("eliminar de la lista "+ data_id);
           $("#overlay").fadeIn(300);
           saveProfileData(null, nulData, data_id, true);         
@@ -42,6 +42,17 @@ var CargarConsultasDiaModule = function(){
 
         $(document).on('click','.llamar-paciente',function(){
           var data_id = $(this).data('id'); 
+
+        // // $(this).closest('div.list-patients').css('display','none'); 
+    // box-shadow: 0 0 20px #1779ba;
+
+          $('div.list-patients').each(function(index,item){
+            // $(item).css('box-shadow','none');
+            $(item).removeClass('gold-shadow');
+        });
+        // $(this).closest('div.list-patients').css('box-shadow','0 0 20px #daa520'); 
+        $(this).closest('div.list-patients').toggleClass('gold-shadow'); 
+
           // alert("Llamar al paciente: "+ data_id);
           $("#overlay").fadeIn(300);
           callNextPatient("llamar-paciente-add-paciente", data_id, "");         

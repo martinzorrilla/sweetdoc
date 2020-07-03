@@ -14,23 +14,13 @@
       <!-- <ul style="list-style-type:none;"> -->
       </ul>
 
-      <div class="row">  
-            <div class="floated-label-wrapper large-6 columns text-center" style="padding-top: 1rem;">
-               <button id="cargar-consultas" class="submit_button save-button-expanded" type="submit" value="cargar-consultas">
-               <span class="app-dashboard-sidebar-text"> Actualizar lista de pacientes </span>
-               </button>
-               <p class="errorWrapper">
-               </p>
-            </div>
-
-            <div class="floated-label-wrapper large-6 columns text-center" style="padding-top: 1rem;">
-               <button id="vaciar-consultas" class="submit_button save-button-expanded" type="submit" value="vaciar-consultas">
-               <i class="fas fa-save 2x"></i>  <span class="app-dashboard-sidebar-text"> Borrar lista de pacientes </span>
-               </button>
-               <p class="errorWrapper">
-               </p>
-            </div>
-
+      <div class="row" style="padding-top: 2rem;">  
+         <div class="small-12 medium-12 large-6 columns text-center" style="padding-bottom:1em;">
+               <a id="cargar-consultas" href="#" class="btn btn-green botones-estandard">Actualizar lista de pacientes</a>
+         </div>
+         <div class="small-12 medium-12 large-6 columns text-center">
+            <a id="vaciar-consultas" href="#" class="btn btn-red botones-estandard" >Borrar lista de pacientes</a>
+         </div>
       </div>
 
 
