@@ -92,9 +92,10 @@
           <br>
           <h5 class="about-title separator-left">Editar paciente</h5>
 
-            <div class="row">  
+              <!-- viejo -->
+            <!-- <div class="row">  
               <div class="floated-label-wrapper large-6 medium-6 columns text-center" style="padding-top: 1rem;">
-              <a href="<?php echo $edit_patient_url ?>">
+              <a href="< ?php echo $edit_patient_url ?>">
                 <button id="edit-patient" class="submit_button save-button-expanded" type="submit" value="">
                   <i class="fas fa-edit 2x"></i>  <span class="app-dashboard-sidebar-text"> Editar </span>
                 </button>
@@ -107,7 +108,18 @@
                   </button>
                 <p class="errorWrapper"></p>
               </div>
+            </div> -->
+
+            <!-- nuevo -->
+          <div class="row" style="padding-top: 2rem;">  
+            <div class="small-12 medium-12 large-6 columns text-center" style="padding-bottom:1em;">
+                <a id="edit-patient" href="<?php echo $edit_patient_url ?>" class="btn btn-green botones-estandard">Editar</a>
             </div>
+            <div class="small-12 medium-12 large-6 columns text-center">
+            <a id="delete-patient" href="#" class="btn btn-red botones-estandard">Borrar</a>
+            </div>
+          </div>
+
 
 
         </div>

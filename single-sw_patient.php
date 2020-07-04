@@ -38,9 +38,15 @@ $patient_id = $post_id;
 
   <p><a href="#consultas_paciente">Ir a consultas</a></p>
 
-  <div data-closable class="callout alert-callout-border secondary text-center">
-    <h3 style="font-weight: bold;">Perfil de la Paciente</h3>
+  <!-- <div class="large-spacer"></div> -->
+
+  <div class="wrap"> 
+      <h1 class="under font-bold">Perfil de la Paciente</h1>
   </div>
+
+  <!-- <div data-closable class="callout alert-callout-border secondary text-center">
+    <h3 style="font-weight: bold;">Perfil de la Paciente</h3>
+  </div> -->
 
 
   <?php 
@@ -79,11 +85,23 @@ if(true){
 
   <!-- <h2 style="text-align: center; margin-left: 50px;">Consultas</h2> -->
   <!-- <a href="#"><strong>Nombre paciente</strong></a> -->
-  <div data-closable class="callout alert-callout-border secondary text-center" style="margin: 2rem 0;">
-    <h3 style="font-weight: bold;">
-      <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id=new'; ?>" class="crete-app">  Crear nueva consulta</a>
-    </h3>
+
+
+
+<!-- nuevo -->
+  <div class="row" style="padding-top: 2rem;">  
+    <div class="small-12 columns text-center" style="padding-bottom:1em;">
+      <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id=new'; ?>" class="crete-app btn btn-green botones-estandard">Crear nueva consulta</a>
+    </div>
   </div>
+
+<!-- viejo -->
+  <!-- <div data-closable class="callout alert-callout-border secondary text-center" style="margin: 2rem 0;">
+    <h3 style="font-weight: bold;">
+      <a href="< ?php echo esc_url( $appointment_url ).$patient_id.'&app_id=new'; ?>" class="crete-app">  Crear nueva consulta</a>
+    </h3>
+  </div> -->
+
 
 
 

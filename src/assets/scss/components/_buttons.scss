@@ -91,6 +91,15 @@
   @include for-size(big-desktop-up) {    
      font-size:2em;
   }
+
+  &.btn-table-patients{
+    font-size:1em;
+    font-family: $body-font-family;
+    min-width: 75%;
+    text-align: center;
+    // min-height: 50%;
+    padding: 1px 10px;
+  }
 }
 /*Other Stylez*/
 .wrap {

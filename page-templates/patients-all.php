@@ -3,8 +3,12 @@
 
   <?php //hm_get_template_part('template-parts/doctor/doctor-intro', ['data' => ""]); ?>
   
-  <div data-closable class="callout alert-callout-border secondary text-center">
+  <!-- <div data-closable class="callout alert-callout-border secondary text-center">
     <h3>Todas las pacientes</h3>
+  </div> -->
+
+  <div class="wrap" style="margin-bottom:2em;"> 
+      <h1 class="under font-bold">Todas las pacientes</h1>
   </div>
 
   <!-- Get the Part that renders the Patient List. 

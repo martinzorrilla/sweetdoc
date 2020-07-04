@@ -1,6 +1,10 @@
-<div id="consultas_paciente" data-closable class="callout alert-callout-border secondary text-center" style="margin-top: 2rem;">
+<!-- <div id="consultas_paciente" data-closable class="callout alert-callout-border secondary text-center" style="margin-top: 2rem;">
     <h3 style="font-weight: bold;">Consultas Previas</h3>
-</div>
+</div> -->
+
+<div class="wrap" style="margin: 2em 0;"> 
+      <h2 class="under font-bold">Consultas Anteriores</h2>
+  </div>
 
 <?php
   $appointment_url = home_url().'/consulta/?patient_id=';
