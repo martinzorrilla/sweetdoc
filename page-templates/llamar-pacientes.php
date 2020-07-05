@@ -49,7 +49,8 @@ $(document).ready(function(){
     closeSidebar.trigger('click')
         
     var audioButton = $("#audioButton");
-    var audio = $("#myAudio");// audio.volume = 0.1;
+    var audio = $("#myAudio");
+    audio[0].volume = 0.3;
     
     $("#overlay").fadeIn(300);
     loadNextPatient("get_patient", "", "");         

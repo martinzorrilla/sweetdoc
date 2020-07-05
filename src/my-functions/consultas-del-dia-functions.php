@@ -133,17 +133,17 @@ function sw_cargar_consultas($params){
             <div data-closable class="callout alert-callout-border secondary list-patients blue-shadow">
                 <div class="row">
 
-                    <div class="large-6 medium-12 small-12 columns">
-                        <a href="'.$permalink.'" class="black-font">'.$title.'</a>
+                    <div class="large-6 medium-12 small-12 columns name-callout-column">
+                        <a href="'.$permalink.'" class="name-callout black">'.$title.'</a>
                     </div>
 
                     <div class="large-6 medium-12 small-12 columns">
-                        <div class="large-6 columns text-right" style="padding-bottom:1em;">
-                            <a href="#" class="btn btn-blue button-medium btn-margin-rg llamar-paciente" data-id="'.$patient.'">Llamar a consultorio</a>
+                        <div class="large-6 medium-12 small-12 columns text-center" style="padding-bottom:1em;">
+                            <a href="#" class="btn btn-blue btn-margin-rg botones-estandard-callout llamar-paciente" data-id="'.$patient.'">Llamar a consultorio</a>
                         </div>
 
-                        <div class="large-6 columns text-right">
-                        <a href="#" class="btn btn-red button-medium btn-margin-rg eliminar-paciente-del-dia" data-id="'.$patient.'" data-close>Eliminar de la lista</a>
+                        <div class="large-6 medium-12 small-12 columns text-center">
+                        <a href="#" class="btn btn-red btn-margin-rg botones-estandard-callout eliminar-paciente-del-dia" data-id="'.$patient.'" data-close>Eliminar de la lista</a>
                         </div>
                     </div>
 

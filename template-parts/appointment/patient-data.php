@@ -90,7 +90,7 @@
           </div> -->
 
           <br>
-          <h5 class="about-title separator-left">Editar paciente</h5>
+          <h5 class="about-title separator-left">Administrar paciente</h5>
 
               <!-- viejo -->
             <!-- <div class="row">  
@@ -113,7 +113,7 @@
             <!-- nuevo -->
           <div class="row" style="padding-top: 2rem;">  
             <div class="small-12 medium-12 large-6 columns text-center" style="padding-bottom:1em;">
-                <a id="edit-patient" href="<?php echo $edit_patient_url ?>" class="btn btn-green botones-estandard">Editar</a>
+                <a id="edit-patient" href="<?php echo $edit_patient_url ?>" class="btn btn-blue botones-estandard">Editar</a>
             </div>
             <div class="small-12 medium-12 large-6 columns text-center">
             <a id="delete-patient" href="#" class="btn btn-red botones-estandard">Borrar</a>

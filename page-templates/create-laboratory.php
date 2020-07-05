@@ -56,7 +56,7 @@
 <!-- if(role == doctor){ show AGO form} -->
 
 <!-- we set the buttons outside the form so the form template remains independent to use in other places -->
-<div class="row">  
+<!-- <div class="row">  
   <div class="floated-label-wrapper large-12 columns text-center" style="padding-top: 1rem;">
     <button id="create-laboratory" class="submit_button save-button-expanded" type="submit" value="create-laboratory">
     <i class="fas fa-save 2x"></i>  <span class="app-dashboard-sidebar-text"> Guardar </span>
@@ -64,8 +64,12 @@
     <p class="errorWrapper">
     </p>
   </div>
+</div> -->
 
+<div class="row" style="padding-top: 2rem;">  
+    <div class="small-12 columns text-center" style="padding-bottom:1em;">
+      <a id="create-laboratory" href="#" class="crete-app btn btn-green botones-estandard">Guardar</a>
+    </div>
 </div>
-
 
 <?php get_footer(); ?>

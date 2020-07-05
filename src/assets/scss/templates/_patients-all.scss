@@ -39,14 +39,10 @@
 	padding: 5px;
 }
 
-.black-font{
-  color: black;
-}
-
 .list-patients{
   a{
     text-transform: capitalize;
-    font-size: 1em;
+    // font-size: 1em;
       
   }
 
@@ -68,6 +64,57 @@
   //   box-shadow: 0 0 20px $sweet-blue;
   // }
 }
+
+
+.name-callout-column{
+  text-align: center;
+  margin-bottom: 1em;
+
+  @include for-size(phone-only) {    
+    text-align: center;
+    margin-bottom: 1em;
+    
+  }
+  // desde 1024px. CASOS muy RAROS, se puede obviar
+    @include for-size(tablet-landscape-xl) {    
+      text-align: left;
+      margin: 0 auto;
+      // margin-top: 0.5em;
+  }
+
+
+
+}
+// esta clase tiene el elemento "a"
+.name-callout{
+  text-align: center;
+  
+  font-weight: bold;
+  font-size: 2em;
+  
+  @include for-size(phone-only) {    
+    font-size: 1.3em;
+  }
+  // desde 600px
+  @include for-size(tablet-portrait-up) {    
+    font-size: 1.3em;
+  }
+  // desde 900px
+  @include for-size(tablet-landscape-up) {    
+    font-size: 1.3em;
+  }
+  // desde 1024px. CASOS muy RAROS, se puede obviar
+  @include for-size(tablet-landscape-xl) {    
+    font-size: 1.3em;
+    // text-decoration: underline;
+  }
+  
+  &.black{
+    color: black;
+  }
+}
+
+
 
 .create-button{
   display: block;

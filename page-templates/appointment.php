@@ -101,9 +101,15 @@
     </form>
   </div>
 
-  <div class="button-div" style="margin-bottom:70px">
+  <!-- <div class="button-div" style="margin-bottom:70px">
     <button id="create-appointment" class="save-button-expanded" type="submit" value="Next">Guardar</button>
     <p class="errorWrapper"></p>
+  </div> -->
+
+  <div class="row" style="padding-top: 2rem;">  
+    <div class="small-12 columns text-center" style="padding-bottom:1em;">
+      <a id="create-appointment" href="#" class="crete-app btn btn-green botones-estandard">Guardar</a>
+    </div>
   </div>
 
 

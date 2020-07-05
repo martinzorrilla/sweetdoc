@@ -41,7 +41,7 @@ $patient_id = $post_id;
   <!-- <div class="large-spacer"></div> -->
 
   <div class="wrap"> 
-      <h1 class="under font-bold">Perfil de la Paciente</h1>
+      <h1 class="under font-bold">Ficha de la Paciente</h1>
   </div>
 
   <!-- <div data-closable class="callout alert-callout-border secondary text-center">
@@ -51,8 +51,14 @@ $patient_id = $post_id;
 
   <?php 
   if($alertas != "" &&  (current_user_can( 'doctor' ) || current_user_can( 'administrator') )){?>
-  <div class="callout alert-callout-border alert text-center alert-field-active">
+  <!-- <div class="callout alert-callout-border alert text-center alert-field-active">
     <h3 style="font-weight: bold;">Alerta</h3>
+  </div> -->
+
+  <div class="row" style="padding-top: 2rem;">  
+    <div class="small-12 columns text-center" style="padding-bottom:1em;">
+      <a href="#alertas" class="crete-app btn btn-red botones-estandard">Alerta</a>
+    </div>
   </div>
   <?php 
   }
@@ -89,7 +95,7 @@ if(true){
 
 
 <!-- nuevo -->
-  <div class="row" style="padding-top: 2rem;">  
+  <div id="consultas_paciente" class="row" style="padding-top: 2rem;">  
     <div class="small-12 columns text-center" style="padding-bottom:1em;">
       <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id=new'; ?>" class="crete-app btn btn-green botones-estandard">Crear nueva consulta</a>
     </div>
