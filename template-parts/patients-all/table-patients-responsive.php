@@ -20,6 +20,7 @@ $latest_patients = sw_get_patients($search_param);
     <tr>
       <th scope="col" class="col-numero">Nro</th>
       <th scope="col">Nombre</th>
+      <!-- <th scope="col" style="width:18em;">Nombre</th> -->
       <th scope="col">Cédula</th>
       <th scope="col" class="col-edad">Edad</th>
       <th scope="col">Consultas</th>

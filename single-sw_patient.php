@@ -84,7 +84,10 @@ if(true){
 
   // seccion que trae las consultas del paciente
   //hm_get_template_part('template-parts/patients-all/lista-consultas', ['patient_id' => $patient_id]);
-  hm_get_template_part('template-parts/patients-all/tabla-consultas', ['patient_id' => $patient_id]);
+
+  // hm_get_template_part('template-parts/patients-all/tabla-consultas', ['patient_id' => $patient_id]);
+  hm_get_template_part('template-parts/patients-all/tabla-consultas-responsive', ['patient_id' => $patient_id]);
+  
   // seccion que trae las colposcopias del paciente
   //hm_get_template_part('template-parts/patients-all/lista-colpos', ['patient_id' => $patient_id]);
   ?>

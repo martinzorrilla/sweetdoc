@@ -249,14 +249,15 @@ table td.min {
 }
 
 table th {
-  font-size: .95em;
-  letter-spacing: .1em;
+  // font-size: .95em;
+  font-size: 1em;
+  // letter-spacing: .1em;
   // text-transform: uppercase;
   text-transform: capitalize;
   // width: min-content;
   &.col-numero{
     width: 4em !important;
-    color: red !important;
+    // color: red !important;
   }
 
 }
