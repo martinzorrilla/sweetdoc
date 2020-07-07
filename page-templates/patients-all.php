@@ -14,6 +14,7 @@
   <!-- Get the Part that renders the Patient List. 
   * search_param = ''; will get all the patients-->
   <?php //hm_get_template_part('template-parts/patients-all/list-patients', ['search_param' => '']); ?>
-  <?php hm_get_template_part('template-parts/patients-all/table-patients', ['search_param' => '']); ?>
+  <!-- < ?php hm_get_template_part('template-parts/patients-all/table-patients', ['search_param' => '']); ?> -->
+  <?php hm_get_template_part('template-parts/patients-all/table-patients-responsive', ['search_param' => '']); ?>
 
 <?php get_footer(); ?>

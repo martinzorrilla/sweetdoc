@@ -204,3 +204,154 @@
   }
 
 
+// . responsive table 
+// . 
+// . 
+
+// body {
+//   font-family: "Open Sans", sans-serif;
+// }
+
+table {
+  line-height: 1.25;
+  // border: 1px solid blue;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color:#ffffff;
+  // background-color: #f8f8f8;
+  // background-color: green;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: left;
+  // min-width: max-content;
+  
+}
+table td.min {
+  width: 1%;
+  white-space: nowrap;
+}
+
+table th {
+  font-size: .95em;
+  letter-spacing: .1em;
+  // text-transform: uppercase;
+  text-transform: capitalize;
+  // width: min-content;
+  &.col-numero{
+    width: 4em !important;
+    color: red !important;
+  }
+
+}
+
+
+table thead tr{
+  // background-color: #2c3840;
+  background-color: $sweet-blue;
+  color: #eee;
+  // color: #fff;
+  border: .5px solid #2c3840;
+}
+
+table tbody td {
+  // text-align: left;
+  a{
+    text-transform: capitalize;  
+    color: black
+  }
+}
+
+table tbody tr{
+  a{
+    &:hover{  
+      // background-color: $sweet-blue;
+      color: black;
+    }
+  }
+}
+
+// desde 600px
+@include for-size(tablet-portrait-up) {    
+  table tbody tr{
+    &:hover{  
+      background-color: $sweet-blue;
+      a{
+        color: #eee;
+      }
+    }
+  }
+}
+
+
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+
+  }
+
+  table td a{
+    // color:  red !important;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}

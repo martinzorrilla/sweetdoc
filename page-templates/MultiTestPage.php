@@ -1,64 +1,144 @@
 <?php get_header();/* Template Name: MultiTestPage*/?>
-<?php
 
-$params = array(
-    "patient_id" => $patient_id,
-    "patient_name" => $patient_name,
-    "patient_last_name" => $patient_last_name,
-    "patient_ci" => "4214578"
-);
+<style>
 
-$app_id = "1276";
-$patient_id =  sw_get_patient_id_by_app($app_id);
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
 
-var_dump($patient_id);
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
 
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
 
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
 
-/*
-********************************************************************************
-*
-      no funciona todavia, yo lo que necesito es que dado una app_id(consulta), traiga su patient_id, pero esto lo que hace
-      es buscar todas las patient_id que tienen esa app_id guardada en ella con la relacion related_patient, pero eso no existe
-*
-********************************************************************************
-*/
- function sw_get_patient_id_by_app($app_id){
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
 
-  $args = array(
-    'post_type'  => 'sw_patient',
-    'meta_key'   => 'related_patient',
-    'posts_per_page' => -1,
-  //'orderby'    => 'meta_value_num',
-  //'order'      => 'ASC',
-    'meta_query' => array(
-      array(
-        'key'     => 'related_patient',
-        'value'   => array($app_id),
-        'compare' => 'IN',
-      ),
-    ),
-  );
-  $myquery = new WP_Query( $args );
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
 
-  //returns a fucking array
-  $related =  wp_list_pluck( $myquery->posts, 'ID' );
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
 
-  wp_reset_postdata(); //always reset the post data!
+  table caption {
+    font-size: 1.3em;
+  }
   
-  //if want to return an array of id's
-  return $related;
-  //if want to return the query object
-  //return $myquery;
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
 }
 
 
-
-?>
+</style>
 
 <div>
   <h2>Multi teste page</h2>
 </div>
+
+
+<table>
+  <caption>Statement Summary</caption>
+  <thead>
+    <tr>
+      <th scope="col">Account</th>
+      <th scope="col">Due Date</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Period</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td data-label="Account">Visa - 3412</td>
+      <td data-label="Due Date">04/01/2016</td>
+      <td data-label="Amount">$1,190</td>
+      <td data-label="Period">03/01/2016 - 03/31/2016</td>
+    </tr>
+    <tr>
+      <td scope="row" data-label="Account">Visa - 6076</td>
+      <td data-label="Due Date">03/01/2016</td>
+      <td data-label="Amount">$2,443</td>
+      <td data-label="Period">02/01/2016 - 02/29/2016</td>
+    </tr>
+    <tr>
+      <td scope="row" data-label="Account">Corporate AMEX</td>
+      <td data-label="Due Date">03/01/2016</td>
+      <td data-label="Amount">$1,181</td>
+      <td data-label="Period">02/01/2016 - 02/29/2016</td>
+    </tr>
+    <tr>
+      <td scope="row" data-label="Acount">Visa - 3412</td>
+      <td data-label="Due Date">02/01/2016</td>
+      <td data-label="Amount">$842</td>
+      <td data-label="Period">01/01/2016 - 01/31/2016</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
 
 <?php get_footer(); ?>
 
