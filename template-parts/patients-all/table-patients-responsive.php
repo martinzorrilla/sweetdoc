@@ -18,11 +18,11 @@ $latest_patients = sw_get_patients($search_param);
   <!-- <caption>Todas las pacientes</caption> -->
   <thead>
     <tr>
-      <th scope="col" class="col-numero">Nro</th>
-      <th scope="col">Nombre</th>
+      <th scope="col" class="hide-on-mobile">Nro</th>
+      <th scope="col" class="text-left">Nombre</th>
       <!-- <th scope="col" style="width:18em;">Nombre</th> -->
-      <th scope="col">Cédula</th>
-      <th scope="col" class="col-edad">Edad</th>
+      <th scope="col"class="text-left">Cédula</th>
+      <th scope="col">Edad</th>
       <th scope="col">Consultas</th>
       <th scope="col">Nueva consulta</th>
       <th scope="col">Consultas del día</th>
@@ -39,21 +39,21 @@ $latest_patients = sw_get_patients($search_param);
     <tr>
 
       <!-- Numero -->
-      <td data-label="Nro">    
+      <td class="hide-on-mobile" data-label="Nro">    
         <a href="#">    
           <?php echo $contador_pacientes ?>
         </a>
       </td>
 
       <!-- Nombre -->
-      <td scope="row" data-label="Nombre">
-        <a href="<?php echo get_permalink( $patient->ID ); ?>"> <?php echo $patient->post_title;?></a> 
+      <td scope="row" class="text-left-on-desktop" data-label="Nombre">
+        <a class="bold-font" href="<?php echo get_permalink( $patient->ID ); ?>"> <?php echo $patient->post_title;?></a> 
         <!-- esto es para que se pueda hacer la busqueda por cedula, ya que debe estar con el nombre para poder hacerlo      -->
         <p style="display:none;"><?php echo $patient->post_title." ".(get_field( "cedula", $patient->ID ));?></p>
       </td>
       
       <!-- Cedula -->
-      <td data-label="Cédula">
+      <td class="text-left-on-desktop" data-label="Cédula">
       <a href="#"><?php echo (get_field( "cedula", $patient->ID ));?></a>      
       </td>
 

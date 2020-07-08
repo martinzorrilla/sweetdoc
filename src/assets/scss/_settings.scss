@@ -430,7 +430,8 @@ $select-background: $white;
 $select-triangle-color: $dark-gray;
 $select-radius: $global-radius;
 $input-color: $black;
-$input-placeholder-color: $medium-gray;
+// $input-placeholder-color: $medium-gray;
+$input-placeholder-color: black;
 $input-font-family: inherit;
 $input-font-size: rem-calc(16);
 $input-font-weight: $global-weight-normal;
@@ -891,3 +892,31 @@ $xy-block-grid-max: 8;
     @media (min-width: 1800px) { @content; }
   }
 }
+
+
+input::placeholder, textarea::placeholder {  
+  // color: red !important;
+  opacity: 0.7;
+}
+
+input:disabled, input[readonly], textarea:disabled, textarea[readonly] {
+  // background-color: #e6e6e6;
+  // cursor: not-allowed;
+  
+  // color: red !important;
+  // color:black;
+  opacity: 0.7;
+}
+
+select:disabled {
+  color:black;
+  opacity: 0.7;
+}
+
+
+//--------------------------------------------------------------------------
+// radio buttons scss
+//.
+//.
+//.
+//.

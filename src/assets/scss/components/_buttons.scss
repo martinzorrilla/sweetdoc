@@ -93,16 +93,41 @@
   &.btn-table-patients{
     font-size:1em;
     font-family: $body-font-family;
-    min-width: 75%;
+    min-width: 100%;
+    // min-width: 75%;
     text-align: center;
     // min-height: 50%;
     padding: 1px 10px;
-    @include for-size(phone-only) {    
+
+    @media screen and (max-width: 800px) {
+    // @include for-size(phone-only) {    
       font-size:1.2em;
-      min-width: 30%;
+      min-width: 50%;
       display: inline-block;
       // color: red;
     }
+  }
+
+
+  &.btn-table-consultas{
+    font-size:1em;
+    font-family: $body-font-family;
+    min-width: 100%;
+    text-align: center;
+    // min-height: 50%;
+    padding: 1px 10px;
+
+    @media screen and (max-width: 800px) {
+    // @include for-size(phone-only) {    
+      font-size:1.2em;
+      min-width: 50%;
+      display: inline-block;
+      // color: red;
+    }
+  }
+
+  &.marg-bot{
+    margin-bottom: .5em;
   }
 }
 
