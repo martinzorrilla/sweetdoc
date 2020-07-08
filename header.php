@@ -101,21 +101,23 @@
 				</div>
 				<div class="app-dashboard-sidebar-inner">
 					<ul class="menu vertical">
-					<li><a href="<?php echo $all_patient_url ?>" class="is-active">
-						<i class="fas fa-address-book fa-2x"></i><span class="app-dashboard-sidebar-text"> Todas las Pacientes</span>
+					<li><a href="<?php echo home_url() ?>">
+						<i class="fas fa-home fa large"></i><span class="app-dashboard-sidebar-text"> Home</span>
+					</a></li>
+					<li><a href="<?php echo $all_patient_url ?>">
+						<i class="fas fa-address-book fa large"></i><span class="app-dashboard-sidebar-text"> Todas las Pacientes</span>
 					</a></li>
 					<li><a href="<?php echo $create_patient_url ?>">
-						<i class="fas fa-plus fa-2x"></i><span class="app-dashboard-sidebar-text"> Agregar Paciente</span>
+						<i class="fas fa-plus fa large"></i><span class="app-dashboard-sidebar-text"> Agregar Paciente</span>
 					</a></li>
-					<!-- <li><a href="< ?php echo $create_secretary_url ?>"> -->
 					<li><a href="#">
-						<i class="fas fa-user-md fa-2x"></i><span class="app-dashboard-sidebar-text"> Crear Asistente</span>
+						<i class="fas fa-user-md fa large"></i><span class="app-dashboard-sidebar-text"> Crear Asistente</span>
 					</a></li>
 					<li><a href="<?php echo $consultas_del_dia_url ?>">
-						<i class="fas fa-calendar-check fa-2x"></i><span class="app-dashboard-sidebar-text"> Consultas del Día</span>
+						<i class="fas fa-calendar-check fa large"></i><span class="app-dashboard-sidebar-text"> Consultas del Día</span>
 					</a></li>
 					<li><a href="<?php echo $llamar_pacientes_url ?>">
-						<i class="fas fa-volume-up fa-2x"></i><span class="app-dashboard-sidebar-text"> Llamar Pacientes</span>
+						<i class="fas fa-volume-up fa large"></i><span class="app-dashboard-sidebar-text"> Llamar Pacientes</span>
 					</a></li>
 					</ul>
 				</div>

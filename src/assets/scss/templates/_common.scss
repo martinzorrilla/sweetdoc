@@ -275,7 +275,8 @@ table tbody td {
     text-transform: capitalize;  
     color: black;
     &.bold-font{
-      font-weight: bold;
+      // font-weight: bold;
+      font-weight: 550;
     }
   }
 }
@@ -335,7 +336,7 @@ table tbody tr{
     // border-bottom: 3px solid #ddd;
     display: block;
     margin-bottom: 1.625em;
-    border: 2px solid #1779ba;
+    border: 2px solid $bluehost-blue;
   }
   
   table td {

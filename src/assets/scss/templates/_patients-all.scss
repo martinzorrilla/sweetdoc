@@ -171,6 +171,13 @@
     .card-profile-stats-intro-pic {
       border-radius: 50%;
       margin: 0 0 1.25rem;
+      //medai aqui
+      @media screen and (max-width: 1024px) {
+        width: 50%;
+      }
+      @media screen and (max-width: 600px) {
+        width: 100%;
+      }
     } // .card-profile-stats-intro-pic
 
     .card-profile-stats-intro-content {

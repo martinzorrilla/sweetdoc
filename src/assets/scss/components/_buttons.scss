@@ -126,8 +126,8 @@
     }
   }
 
-  &.marg-bot{
-    margin-bottom: .5em;
+  &.marg-top{
+    margin-top: .5em;
   }
 }
 
@@ -226,7 +226,8 @@
 
 
   .under{
-    text-decoration: underline #1779ba;
+    // text-decoration: underline #1779ba;
+    text-decoration: underline $bluehost-blue;
   }
   .font-bold{
     font-weight: bold;

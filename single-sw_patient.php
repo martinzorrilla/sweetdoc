@@ -98,7 +98,8 @@ if(true){
 
 
 <!-- nuevo -->
-  <div id="consultas_paciente" class="row" style="padding-top: 2rem;">  
+  <!-- <div id="consultas_paciente" class="row" style="padding-top: 2rem;">   -->
+  <div class="row" style="padding-top: 2rem;">  
     <div class="small-12 columns text-center" style="padding-bottom:1em;">
       <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id=new'; ?>" class="crete-app btn btn-green botones-estandard">Crear nueva consulta</a>
     </div>

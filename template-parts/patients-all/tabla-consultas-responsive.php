@@ -1,4 +1,4 @@
-<div class="wrap" style="margin: 2em 0;"> 
+<div id="consultas_paciente" class="wrap" style="margin: 2em 0;"> 
       <h2 class="under font-bold">Consultas Anteriores</h2>
   </div>
 
@@ -91,14 +91,14 @@
                   <!-- COLPOSCOPIAS -->
                   <td scope="row" data-label="Colposcopía">
                       <!-- <a href="< ?php //echo $colpo_post_url;?>"> < ?php //echo $colpo_title; ?></a> -->
-                  <a class="btn btn-blue botones-estandard btn-table-consultas marg-bot" href="<?php echo esc_url( $colpo_url ).$patient_id.'&app_id='.$r; ?>"><?= $colpo_title?></a>
+                  <a class="btn btn-blue botones-estandard btn-table-consultas" href="<?php echo esc_url( $colpo_url ).$patient_id.'&app_id='.$r; ?>"><?= $colpo_title?></a>
                   <!-- solo si existe una indicacion para esta app (consulta) debemos mostrar las opcion ver indicacion ya que si el valor es null aun no se creo una indicacion. -->
                   <?php 
                   if ($colpo_post_id) {
                       ?>
                       <br>
                       <!-- <a href="< ?php //echo get_permalink( $colpo_post_id ); ?> "> Imprimir < ?php //echo $indication_id; ?></a> -->
-                      <a class="btn btn-green botones-estandard btn-table-consultas" href="<?php echo esc_url( $colpo_pdf_url ).$colpo_post_id; ?>">Imprimir PDF</a>
+                      <a class="btn btn-green botones-estandard btn-table-consultas marg-top" href="<?php echo esc_url( $colpo_pdf_url ).$colpo_post_id; ?>">Imprimir PDF</a>
                       <?php 
                   }
                   ?>
@@ -106,7 +106,7 @@
 
                   <!-- INDICACION -->
                   <td scope="row" data-label="Indicación">
-                  <a class="btn btn-blue botones-estandard btn-table-consultas marg-bot" href="<?php echo esc_url( $indicacion_url ).$patient_id.'&app_id='.$r; ?>"><?= $indication_title?></a>
+                  <a class="btn btn-blue botones-estandard btn-table-consultas" href="<?php echo esc_url( $indicacion_url ).$patient_id.'&app_id='.$r; ?>"><?= $indication_title?></a>
                   <!-- solo si existe una indicacion para esta app (consulta) debemos mostrar las opcion ver indicacion ya que si el valor es null aun no se creo una indicacion. -->
                   <?php 
                   if ($indication_id) {
@@ -114,7 +114,7 @@
                       <br>
                       <!--  -->
                       <!-- <a href="< ?php echo get_permalink( $indication_id ) ?> "> Imprimir < ?php //echo $indication_id; ?></a> -->
-                      <a class="btn btn-green botones-estandard btn-table-consultas" href="<?php echo esc_url( $prescription_pdf_url ).$indication_id; ?>">Imprimir PDF</a>
+                      <a class="btn btn-green botones-estandard btn-table-consultas marg-top" href="<?php echo esc_url( $prescription_pdf_url ).$indication_id; ?>">Imprimir PDF</a>
                       <?php 
                   }
                   ?>
@@ -122,14 +122,14 @@
 
                   <!-- ESTUDIOS -->
                   <td scope="row" data-label="Estudios">
-                  <a class="btn btn-blue botones-estandard btn-table-consultas marg-bot" href="<?php echo esc_url( $estudios_url ).$patient_id.'&app_id='.$r; ?>"><?= $studies_title?></a>
+                  <a class="btn btn-blue botones-estandard btn-table-consultas" href="<?php echo esc_url( $estudios_url ).$patient_id.'&app_id='.$r; ?>"><?= $studies_title?></a>
                   <!-- solo si existe una solicitud de estudios para esta app (consulta) debemos mostrar las opcion ver indicacion ya que si el valor es null aun no se creo una indicacion. -->
                   <?php 
                   if ($studies_id) {
                       ?>
                       <br>  
                       <!-- <a href="< ?php echo get_permalink( $studies_id ); ?> "> Imprimir < ?php //echo $studies_id; ?></a> -->
-                      <a class="btn btn-green botones-estandard btn-table-consultas" href="<?php echo esc_url( $studies_pdf_url ).$studies_id; ?>">Imprimir PDF</a>
+                      <a class="btn btn-green botones-estandard btn-table-consultas marg-top" href="<?php echo esc_url( $studies_pdf_url ).$studies_id; ?>">Imprimir PDF</a>
                       
                       <?php 
                   }
@@ -138,14 +138,14 @@
 
                   <!-- Laboratorio -->
                   <td scope="row" data-label="Laboratorio">                  
-                  <a class="btn btn-blue botones-estandard btn-table-consultas marg-bot" href="<?php echo esc_url( $laboratorios_url ).$patient_id.'&app_id='.$r; ?>"><?= $laboratories_title?></a>
+                  <a class="btn btn-blue botones-estandard btn-table-consultas" href="<?php echo esc_url( $laboratorios_url ).$patient_id.'&app_id='.$r; ?>"><?= $laboratories_title?></a>
                   <!-- solo si existe una solicitud de estudios para esta app (consulta) debemos mostrar las opcion ver indicacion ya que si el valor es null aun no se creo una indicacion. -->
                   <?php 
                   if ($laboratories_id) {
                       ?>
                       <br>
                       <!-- <a href="< ?php echo get_permalink( $laboratories_id ); ?> "> Imprimir < ?php //echo $studies_id; ?></a> -->
-                      <a class="btn btn-green botones-estandard btn-table-consultas" href="<?php echo esc_url( $laboratories_pdf_url ).$laboratories_id; ?>">Imprimir PDF</a>
+                      <a class="btn btn-green botones-estandard btn-table-consultas marg-top" href="<?php echo esc_url( $laboratories_pdf_url ).$laboratories_id; ?>">Imprimir PDF</a>
                       <?php 
                   }
                   ?>

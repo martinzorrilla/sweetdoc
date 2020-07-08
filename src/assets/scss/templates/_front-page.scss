@@ -25,10 +25,29 @@ $app-dashboard-top-nav-height: 55px;
   }
 }
 
+.menu-icon:hover::after {
+	background: $bluehost-blue;
+	box-shadow: 0 7px 0 $bluehost-blue, 0 14px 0 $bluehost-blue;
+}
+
 .app-dashboard-logo {
   color: $sweet-white;
   text-transform: uppercase;
   font-weight: bold;
+  &:hover{
+    color: $bluehost-blue;
+  }
+
+  @media screen and (max-width: 640px) {
+    padding-left: .5em;
+  }
+}
+
+.app-dashboard-log-out {
+  &:hover{
+    color: $bluehost-blue;
+    border: 1px solid $bluehost-blue !important;
+  }
 }
 
 .app-dashboard-search-bar-container {
@@ -105,6 +124,9 @@ $app-dashboard-top-nav-height: 55px;
     font-size: 14px;
     a {
       color: $sweet-white;
+      &:hover{
+        color:$bluehost-blue;
+      }
     }
   }
 
@@ -115,16 +137,26 @@ $app-dashboard-top-nav-height: 55px;
     .menu > li > a {
       align-items: center;
       color: $sweet-white;
+
+      &.is-active{
+        // border: 1px solid #fff;
+      }
+
+      &:hover{
+        color:$bluehost-blue;
+      }
     }
   }
 
   .app-dashboard-sidebar-text{
-    padding: 0 10px;
+    // padding: 0 10px;
+    padding: 0 0;
     vertical-align: super;
   }
 
   .fa.large {
     font-size: rem-calc(24);
+    // width: 40px;
     width: 40px;
   }
 }
@@ -133,6 +165,13 @@ $app-dashboard-top-nav-height: 55px;
   .app-dashboard-open-sidebar {
     display: none;
   }
+}
+
+.hide-for-medium {
+  &:hover{
+    color: red !important;
+  }
+  
 }
 
 .app-dashboard-sidebar-footer {
