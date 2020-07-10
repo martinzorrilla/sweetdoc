@@ -361,7 +361,7 @@
             </div>  
 
             <!-- colposcopicos_anormales_ubicacion -->
-              <div class="floated-label-wrapper large-6 columns ">
+              <div class="floated-label-wrapper large-12 columns ">
               <label for="colposcopicos_anormales_ubicacion"> Ubicación y tamaño de la lesión</label>
               <input type="text" id="colposcopicos_anormales_ubicacion" name="colposcopicos_anormales_ubicacion" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>  value="<?php echo $colposcopicos_anormales_ubicacion ?>" placeholder="Escribir..." required>
             </div>

@@ -795,7 +795,7 @@ function validate_patient($params){
   }
 
   // it sizeof($related)>0 true it means that Cedula already exists
-  //if(sizeof($related)>0){
+  // if(sizeof($related)>0){
   if(sizeof($related)>0 && $patient_id=="new"){
     $ci_exists = true;
     $error_msg_2 = "El numero de cédula ya existe";
