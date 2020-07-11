@@ -267,6 +267,9 @@ table thead tr{
   color: #eee;
   // color: #fff;
   border: .5px solid #2c3840;
+
+  position: sticky; 
+  top: 0; 
 }
 
 table tbody td {

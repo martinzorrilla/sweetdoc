@@ -80,7 +80,7 @@
   }
 
   @include for-size(phone-only) {    
-    font-size: 1em ;
+    font-size: .7em ;
     min-width: 25%;
     max-width: 30%;
     
@@ -142,6 +142,7 @@
         padding: 0.5em 0;
       }
     }
+
     .floated-label-wrapper.checkbox-radio{
       //padding-bottom: 1rem;
       span{
@@ -163,6 +164,8 @@
     padding-bottom: 1rem;
     }
 
+
+    
     .floated-label-wrapper .alert-field.active{
       // background-color: red;
       // box-shadow: 0 0 20px #f77f00;

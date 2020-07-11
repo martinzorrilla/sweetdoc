@@ -894,23 +894,26 @@ $xy-block-grid-max: 8;
 }
 
 
+// palaceholder de los inputs
 input::placeholder, textarea::placeholder {  
   // color: red !important;
-  opacity: 0.7;
+  // font-weight: 500;
+  color:gray;
+  opacity: 0.5;
 }
 
+// inpust que estan desahabilitados
 input:disabled, input[readonly], textarea:disabled, textarea[readonly] {
-  // background-color: #e6e6e6;
-  // cursor: not-allowed;
-  
-  // color: red !important;
-  // color:black;
-  opacity: 0.7;
+  // font-weight: 500;
+  color:$bluehost-blue;  
+  // opacity: 0.7;
 }
 
+// para el select. i.e departamento en datos basicos
 select:disabled {
-  color:black;
-  opacity: 0.7;
+  // font-weight: 500;
+  color:$bluehost-blue;
+  // opacity: 0.7;
 }
 
 
