@@ -78,7 +78,7 @@
 
 
   <div class="tab">
-      <button class="tablinks active" >Datos Básicos</button>
+      <button class="tablinks dabbed" >Datos Básicos</button>
   </div>
 
   <div class="appform tabcontent">

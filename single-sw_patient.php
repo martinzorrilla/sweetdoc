@@ -72,7 +72,19 @@ $result = sw_get_current_user_role();
    
 //en produccion: verificar que el usuario sea doctor
 //if($result == "doctor"){
-if(true){
+  if(true){
+    
+    ?>
+
+  <div class="tab">
+    <button class="tablinks dabbed tab-single-patient" data-id="Resumen"  id="defaultOpen">Resumen</button>
+    <button class="tablinks dabbed tab-single-patient" data-id="Datos-Basicos" >Datos</button>
+    <button class="tablinks dabbed tab-single-patient" data-id="AGO" >AGO</button>
+  </div>
+    
+    <?php 
+
+
   hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id, 'is_editable' => "false"]);
   hm_get_template_part('template-parts/appointment/basic-data', ['patient_id' => $patient_id, 'is_editable' => "false"]);
 
@@ -135,5 +147,6 @@ window.addEventListener( "pageshow", function ( event ) {
     window.location.reload();
   }
 });
+
 </script>
 

@@ -31,12 +31,13 @@
  ?> 
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
   <!-- <div class="tab white-tab"> -->
-  <div class="tab">
-    <button class="tablinks active">Resumen</button>
-  </div>
+  <!-- <div class="tab"> -->
+    <!-- <button class="tablinks active">Resumen</button> -->
+    <!-- <button class="tablinks dabbed" onclick="openCity(event, 'London')" id="defaultOpen">London</button> -->
+  <!-- </div> -->
 
     <!-- <div class="appform tabcontent white-tab"> -->
-  <div class="appform tabcontent">
+  <div id="Resumen" class="appform tabcontent">
     <div class="card profile-card-action-icons">
       <div class="card-section">
         <div class="profile-card-header">

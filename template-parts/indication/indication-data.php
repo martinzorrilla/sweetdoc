@@ -17,7 +17,7 @@
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
   <!-- <div class="tab white-tab"> -->
   <div class="tab">
-    <button class="tablinks active" >Indicación</button>
+    <button class="tablinks dabbed" >Indicación</button>
   </div>
 
   <!-- //patient cambiar por indication aca y en el js que le corresponde -->

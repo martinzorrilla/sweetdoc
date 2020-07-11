@@ -31,11 +31,11 @@
  ?>
 <!-- <h3>Datos de la Consulta</h3> -->
 
-  <div class="tab">
+  <!-- <div class="tab">
     <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
-  </div>
+  </div> -->
 
-  <div class="appform tabcontent">
+  <div id="consulta" class="appform tabcontent">
     <div class="card profile-card-action-icons">
       <div class="card-section">
         <div class="profile-card-header">

@@ -66,11 +66,33 @@
     margin-top: 3em;
   }
   
-  .tablinks.active{
-      border-radius: 10px 10px 0 0;
-      min-width: 164px;
-    }
+
+
+  .tablinks.dabbed{
+  border-radius: 10px 10px 0 0;
+  min-width: 164px;
+  border-right: 1px solid black;
+
+  &.active{
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+  }
+
+  @include for-size(phone-only) {    
+    font-size: 1em ;
+    min-width: 25%;
+    max-width: 30%;
+    
+  }
+  // desde 900px
+  @include for-size(tablet-landscape-up) {    
+    font-size:1.2em;
+    max-width: 25%;
+  }
+}//.tablinks.dabbed
   
+    
   /* Style the buttons inside the tab */
   .tab button {
     font-weight: bold;
@@ -90,18 +112,19 @@
   }
   
   /* Create an active/current tablink class */
-  .tab button.active {
+  .tab button.dabbed {
     background-color: $sweet-single-tab-background;
   }
   
-  .tab.white-tab button.active {
+  // .tab.white-tab button.active {
+  .tab.white-tab button.dabbed {
     background-color: #fff;
     border-left: 1px solid $sweet-single-tab-background;
   }
   
   /* Style the tab content */
   .tabcontent {
-    /* display: none; */
+    // display: none;
     min-height: 250px;
     padding: 20px 12px;
     border: 1px solid $sweet-single-tab-background;
@@ -145,12 +168,6 @@
       // box-shadow: 0 0 20px #f77f00;
       box-shadow: 0 0 20px red;
     }
-
-    // no me esta andando OJOOOOOOOOOOOOOOOOOOOOOOO !!!!!!!!!!!!!!!!
-    // .alert-field.active{
-    //   // background-color: red;
-    //   box-shadow: 0 0 20px #f77f00 !important;
-    // }
 
     .alert-field-active{
         box-shadow: 0 0 20px #f77f00 !important;

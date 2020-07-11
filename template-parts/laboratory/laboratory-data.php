@@ -84,7 +84,7 @@
   <!-- agregar la clase white-tab a la clase tab y tabcontent para modificar el color del fichero -->
   <!-- <div class="tab white-tab"> -->
   <div class="tab">
-    <button class="tablinks active" >Laboratorios</button>
+    <button class="tablinks dabbed" >Laboratorios</button>
   </div>
 
 

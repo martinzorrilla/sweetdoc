@@ -48,7 +48,8 @@
     <?php 
       if($patient_id != "new"){?>
       <div class="small-12 medium-12 large-6 columns text-center">
-        <a id="toggle-input" href="#" class="toggle-input btn btn-blue botones-estandard">Editar</a>
+        <!-- <a id="toggle-input" href="#" class="toggle-input btn btn-blue botones-estandard">Editar</a> -->
+        <a id="toggle-input-patient" href="#" class="toggle-input btn btn-blue botones-estandard">Editar</a>
       </div>
       <?php 
       }

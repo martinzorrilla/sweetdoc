@@ -277,6 +277,13 @@ table tbody td {
     &.bold-font{
       // font-weight: bold;
       font-weight: 550;
+      @media screen and (max-width: 800px) {
+        // @include for-size(phone-only) {    
+          font-size:1.2em;
+          max-width: 65%;
+          display: inline-block;
+          // color: red;
+      }
     }
   }
 }

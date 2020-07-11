@@ -6,19 +6,41 @@ var GloblasModule = function(){
  
     var createPatientForm;
     var editPatientBtn;
-
+    var tabSinglePatient;
+    var tabAppointment;
+    var defaultTab;
+    
     function init(){
       $(document).ready(function () {
         //dom queries 
         createPatientForm = $("#create-patient-form");
-        editPatientBtn = $("#toggle-input");
-        
+        // editPatientBtn = $("#toggle-input");
+        editPatientBtn = $("#toggle-input-patient");
+        tabSinglePatient = $(".tab-single-patient");
+        tabAppointment = $(".tab-appointment");
+        defaultTab = $("#defaultOpen");
+
+          tabSinglePatient.on("click", function (e) {
+          var tabName = $(this).data('id');
+            openCity(e, tabName);
+          })
+
+          tabAppointment.on("click", function (e) {
+            var tabName = $(this).data('id');
+              openCity(e, tabName);
+            })
+
+
+        // Get the element with id="defaultOpen" and click on it
+        if(defaultTab.length){
+          defaultTab.trigger('click');
+        }
+        // document.getElementById("defaultOpen").click();
+
         editPatientBtn.on("click", function (e) {
             // createPatientBtn.fadeOut( "slow" );
             toggleDisableInput(e);
         })
-
-
 
         //to toggle slide of the private-data / AGO section in appointment page
         $(".static-data-click-to-show").click(function(){
@@ -27,7 +49,7 @@ var GloblasModule = function(){
 
 
 
-      });
+      }); //document ready
     }
 
 
@@ -49,6 +71,26 @@ var GloblasModule = function(){
         } 
       });
     }
+
+
+    // comentarios
+
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+    
+
+
 
   return{
     init:init

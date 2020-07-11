@@ -56,7 +56,8 @@
 ?>
 
   <div class="callout secondary">
-    <h3 style="text-align: center; "> <strong> <?php echo $fullname?> </strong>
+    
+    <h3 style="text-align: center; "> <strong> <a href="<?php echo get_permalink( $patient_id ); ?>"><?php echo $fullname?> </a> </strong>
     </h3>
     <h4 style="text-align: center; "> 
       <p><?php echo "Ci: ".$cedula; ?></p>
@@ -83,13 +84,18 @@
     <button class="tablinks active" onclick="openCity(event, 'London')">Datos Básicos</button>
   </div> -->
   <!-- <div class="appform tabcontent">
-    <?php //hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]); ?>
+    < ?php //hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]); ?>
   </div> -->
+  <div class="tab">
+    <button class="tablinks dabbed tab-appointment" data-id="consulta" id="defaultOpen">Consulta</button>
+    <button class="tablinks dabbed tab-appointment" data-id="AGO">AGO</button>
+  </div>
 
   <div class="appform">
     <form id="create-appointment-form" name="create-appointment-form" method="post"  class="text-center" enctype="multipart/form-data">
           
-            <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => $is_editable]); ?>
+
+          <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => $is_editable]); ?>
 
           <fieldset>
             <?php //hm_get_template_part('template-parts/appointment/common-data', ['appointment_id' => $appointment_id]); ?>

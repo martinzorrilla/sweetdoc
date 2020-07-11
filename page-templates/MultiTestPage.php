@@ -1,144 +1,52 @@
 <?php get_header();/* Template Name: MultiTestPage*/?>
 
-<style>
+</head>
+<body>
 
-body {
-  font-family: "Open Sans", sans-serif;
-  line-height: 1.25;
-}
+<p>In this example, we use JavaScript to "click" on the London button, to open the tab on page load.</p>
 
-table {
-  border: 1px solid #ccc;
-  border-collapse: collapse;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  table-layout: fixed;
-}
-
-table caption {
-  font-size: 1.5em;
-  margin: .5em 0 .75em;
-}
-
-table tr {
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-  padding: .35em;
-}
-
-table th,
-table td {
-  padding: .625em;
-  text-align: center;
-}
-
-table th {
-  font-size: .85em;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
-@media screen and (max-width: 600px) {
-  table {
-    border: 0;
-  }
-
-  table caption {
-    font-size: 1.3em;
-  }
-  
-  table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-  
-  table tr {
-    border-bottom: 3px solid #ddd;
-    display: block;
-    margin-bottom: .625em;
-  }
-  
-  table td {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    font-size: .8em;
-    text-align: right;
-  }
-  
-  table td::before {
-    /*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
-  table td:last-child {
-    border-bottom: 0;
-  }
-}
-
-
-</style>
-
-<div>
-  <h2>Multi teste page</h2>
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
 </div>
 
+<div id="London" class="tabcontent">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
+</div>
 
-<table>
-  <caption>Statement Summary</caption>
-  <thead>
-    <tr>
-      <th scope="col">Account</th>
-      <th scope="col">Due Date</th>
-      <th scope="col">Amount</th>
-      <th scope="col">Period</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td data-label="Account">Visa - 3412</td>
-      <td data-label="Due Date">04/01/2016</td>
-      <td data-label="Amount">$1,190</td>
-      <td data-label="Period">03/01/2016 - 03/31/2016</td>
-    </tr>
-    <tr>
-      <td scope="row" data-label="Account">Visa - 6076</td>
-      <td data-label="Due Date">03/01/2016</td>
-      <td data-label="Amount">$2,443</td>
-      <td data-label="Period">02/01/2016 - 02/29/2016</td>
-    </tr>
-    <tr>
-      <td scope="row" data-label="Account">Corporate AMEX</td>
-      <td data-label="Due Date">03/01/2016</td>
-      <td data-label="Amount">$1,181</td>
-      <td data-label="Period">02/01/2016 - 02/29/2016</td>
-    </tr>
-    <tr>
-      <td scope="row" data-label="Acount">Visa - 3412</td>
-      <td data-label="Due Date">02/01/2016</td>
-      <td data-label="Amount">$842</td>
-      <td data-label="Period">01/01/2016 - 01/31/2016</td>
-    </tr>
-  </tbody>
-</table>
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> 
+</div>
 
+<div id="Tokyo" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
 
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
 
-
-
-
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+   
+</body>
+</html> 
 
 <?php get_footer(); ?>
 
