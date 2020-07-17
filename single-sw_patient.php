@@ -57,7 +57,7 @@ $patient_id = $post_id;
 
   <div class="row" style="padding-top: 2rem;">  
     <div class="small-12 columns text-center" style="padding-bottom:1em;">
-      <a href="#alertas" class="crete-app btn btn-red botones-estandard">Alerta</a>
+      <a href="#alertas" class="crete-app btn btn-yellow botones-estandard">Alerta</a>
     </div>
   </div>
   <?php 

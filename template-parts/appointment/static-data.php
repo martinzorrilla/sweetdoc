@@ -121,7 +121,7 @@
           </div>
 
           <!-- ritmo menstrual -->
-          <div class="floated-label-wrapper small-12 medium-6 columns checkbox-radio text-left grid-content">
+          <div class="floated-label-wrapper small-12 medium-12 large-6 columns checkbox-radio text-left grid-content">
               <label class="separator-left">Ritmo menstrual </label>
               
                 <input type="radio" id="regular" name="ritmo_menstrual" value="regular" <?php if ($radiobox_ritmo_menstrual == "regular") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >

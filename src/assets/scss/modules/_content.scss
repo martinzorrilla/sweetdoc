@@ -134,6 +134,10 @@
     box-shadow: 0 0 10px;
 
 
+    border-left: 1px solid black;
+      // border-right: 1px solid black;
+    
+
     .floated-label-wrapper{
       //min-height: 110px !important;
       label{
@@ -142,7 +146,6 @@
         padding: 0.5em 0;
       }
     }
-
     .floated-label-wrapper.checkbox-radio{
       //padding-bottom: 1rem;
       span{
@@ -164,16 +167,14 @@
     padding-bottom: 1rem;
     }
 
-
-    
     .floated-label-wrapper .alert-field.active{
       // background-color: red;
       // box-shadow: 0 0 20px #f77f00;
-      box-shadow: 0 0 20px red;
+      box-shadow: 0 0 20px yellow;
     }
 
     .alert-field-active{
-        box-shadow: 0 0 20px #f77f00 !important;
+        box-shadow: 0 0 20px yellow !important;
         // background-color: blue !important;
         // border: solid red 1px;
     }

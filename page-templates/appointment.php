@@ -28,6 +28,7 @@
   $name = $patient_fields['nombre'][0];
   $lastname = $patient_fields['apellido'][0];
   $cedula = $patient_fields['cedula'][0];
+  $seguro_medico = get_field("seguro_medico", $patient_id);
   $fullname = $name.' '.$lastname;
 
   //  obtener la edad de la paciente. la funcion esta en functions.php
@@ -72,6 +73,13 @@
         }
         ?>
       </p>
+
+      <p><?php 
+      if ($seguro_medico != NULL) {
+        echo "Seguro Médico: ".$seguro_medico; }?>
+      </p>
+      
+
     </h4>
   </div>
  

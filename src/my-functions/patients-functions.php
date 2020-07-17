@@ -26,9 +26,12 @@ function sw_create_patient_ajax(){
     $telefono = isset($_POST['telefono']) && $_POST['telefono'] != '' ? $_POST['telefono'] : NULL;
     $celular = isset($_POST['celular']) && $_POST['celular'] != '' ? $_POST['celular'] : NULL;
     $establecimiento = isset($_POST['establecimiento']) && $_POST['establecimiento'] != '' ? $_POST['establecimiento'] : NULL;
+    $seguro_medico = isset($_POST['seguro_medico']) && $_POST['seguro_medico'] != '' ? $_POST['seguro_medico'] : NULL;
     $region_sanitaria = isset($_POST['region_sanitaria']) && $_POST['region_sanitaria'] != '' ? $_POST['region_sanitaria'] : NULL;
     $epitelio_escamoso = isset($_POST['epitelio_escamoso']) && $_POST['epitelio_escamoso'] != '' ? $_POST['epitelio_escamoso'] : NULL;
 
+
+    
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
      //error_log(json_encode($_POST), 0);
 
@@ -47,6 +50,12 @@ function sw_create_patient_ajax(){
     $patient_last_name= ucwords($patient_last_name);
 
 
+    $seguro_medico= sanitize_user($seguro_medico);
+    // Convert all characters to lowercase
+    $seguro_medico= strtolower($seguro_medico);
+    // Capitalize every word in the sring
+    $seguro_medico= ucwords($seguro_medico);
+
     $params = array(
         "patient_id" => $patient_id,
         "patient_name" => $patient_name,
@@ -61,6 +70,7 @@ function sw_create_patient_ajax(){
         "telefono" => $telefono,
         "celular" => $celular,
         "establecimiento" => $establecimiento,
+        "seguro_medico" => $seguro_medico,
         "region_sanitaria" => $region_sanitaria,
         "epitelio_escamoso" => $epitelio_escamoso
         
@@ -108,10 +118,11 @@ function sw_create_patient($params){
       $telefono = $params['telefono'];
       $celular = $params['celular'];
       $establecimiento = $params['establecimiento'];
+      $seguro_medico = $params['seguro_medico'];
       $region_sanitaria = $params['region_sanitaria'];
       $epitelio_escamoso = $params['epitelio_escamoso'];
 
-
+      
       //$metodo_anticonceptivo = array("inyectable", "preservativos");
       //wp_die(var_dump($metodo_anticonceptivo));
 
@@ -155,9 +166,10 @@ function sw_create_patient($params){
             "telefono" => $telefono,
             "celular" => $celular,
             "establecimiento" => $establecimiento,
+            "seguro_medico" => $seguro_medico,
             "region_sanitaria" => $region_sanitaria,
             "epitelio_escamoso" => $epitelio_escamoso
-
+            
         );
 
         foreach ($acf_fields as $field => $value) {
@@ -203,9 +215,10 @@ function sw_update_patient($params){
     $telefono = $params['telefono'];
     $celular = $params['celular'];
     $establecimiento = $params['establecimiento'];
+    $seguro_medico = $params['seguro_medico'];
     $region_sanitaria = $params['region_sanitaria'];
     $epitelio_escamoso = $params['epitelio_escamoso'];
-
+    
     // $post_author = $params['post_author'];
     //sw_get_patient_owner: devuelve el id del doctor directamente, o si el rol del usuario actual es secretaty 
     //devuelve el id del doctor que le corresponde 
@@ -245,10 +258,11 @@ function sw_update_patient($params){
           "telefono" => $telefono,
           "celular" => $celular,
           "establecimiento" => $establecimiento,
+          "seguro_medico" => $seguro_medico,
           "region_sanitaria" => $region_sanitaria,
           "epitelio_escamoso" => $epitelio_escamoso
       );
-
+      
       foreach ($acf_fields as $field => $value) {
           if($value != NULL){
               update_field( $field, $value, $patient_id );

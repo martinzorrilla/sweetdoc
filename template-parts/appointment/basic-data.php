@@ -22,6 +22,7 @@
   $telefono = isset($patient_fields['telefono'][0]) ? $patient_fields['telefono'][0] : NULL;
   $celular = isset($patient_fields['celular'][0]) ? $patient_fields['celular'][0] : NULL;
   $establecimiento = isset($patient_fields['establecimiento'][0]) ? $patient_fields['establecimiento'][0] : NULL;
+  $seguro_medico = isset($patient_fields['seguro_medico'][0]) ? $patient_fields['seguro_medico'][0] : NULL;
   $region_sanitaria = isset($patient_fields['region_sanitaria'][0]) ? $patient_fields['region_sanitaria'][0] : NULL;
 
   // var_dump($fecha_de_nacimiento);
@@ -144,6 +145,11 @@
                     <div class="floated-label-wrapper large-6 columns end">
                       <label class="separator-left" for="establecimiento">Establecimiento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                       <input type="text" id="establecimiento" name="establecimiento" value="<?php echo $establecimiento ?>" placeholder="Ingrese el establecimiento..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
+                    </div>
+
+                    <div class="floated-label-wrapper large-6 columns end">
+                      <label class="separator-left" for="seguro_medico">Seguro Médico &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                      <input type="text" id="seguro_medico" name="seguro_medico" value="<?php echo $seguro_medico ?>" placeholder="Ingrese el seguro_medico..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
                     </div>
 
               </fieldset>

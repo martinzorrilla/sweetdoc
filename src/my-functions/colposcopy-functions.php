@@ -35,11 +35,11 @@
     $examen_de_vyv_descripcion = isset($_POST['examen_de_vyv_descripcion']) && $_POST['examen_de_vyv_descripcion'] != '' ? $_POST['examen_de_vyv_descripcion'] : NULL;
     $colposcopicos_anormales_test_de_schiller = isset($_POST['colposcopicos_anormales_test_de_schiller']) && $_POST['colposcopicos_anormales_test_de_schiller'] != '' ? $_POST['colposcopicos_anormales_test_de_schiller'] : NULL;
     $test_de_schiller_lugol = isset($_POST['test_de_schiller_lugol']) && $_POST['test_de_schiller_lugol'] != '' ? $_POST['test_de_schiller_lugol'] : NULL;
-    $sugerencias = isset($_POST['sugerencias']) && $_POST['sugerencias'] != '' ? $_POST['sugerencias'] : NULL;
-    //wp_die(var_dump($_FILES));
-
+    // $sugerencias = isset($_POST['sugerencias']) && $_POST['sugerencias'] != '' ? $_POST['sugerencias'] : NULL;
+    $sugerencias = isset($_POST['sugerencias'])? $_POST['sugerencias'] : NULL;
+    
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
-    // error_log(json_encode($_POST), 0);
+    //  error_log(json_encode($_POST), 0);
 
     $params = array(
         "app_id" => $app_id,
@@ -283,9 +283,9 @@ function sw_update_single_colpo($params){
           "sugerencias" => $sugerencias      
         );
         foreach ($acf_fields as $field => $value) {
-            if($value != NULL)
-
+          // if($value != NULL){
                 update_post_meta( $colpo_post_id, $field, $value );
+          // }
         }
 
         //test: empty all image fields before update. but only if image files has been selected to replace the old ones.

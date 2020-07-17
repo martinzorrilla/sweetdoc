@@ -8,6 +8,8 @@
   $name = $patient_fields['nombre'][0];
   $lastname = $patient_fields['apellido'][0];
   $cedula = $patient_fields['cedula'][0];
+  $seguro_medico = get_field("seguro_medico", $patient_id);
+
   $fullname = $name.' '.$lastname;
   // $fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
   $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
@@ -65,9 +67,20 @@
                 printf(' Edad : %d años, %d meses, %d dias', $patient_age->y, $patient_age->m, $patient_age->d); 
               }?>
             </p>
-            <p><?php echo("Embarazos : ".$numero_embarazos);?></p>
-            <p><?php echo("Parto normal : ".$parto_normal);?></p>
-            <p><?php echo("Cesareas : ".$cesareas);?></p>
+            <p><?php 
+            if ($numero_embarazos != NULL) {
+            echo("Embarazos : ".$numero_embarazos);}?></p>
+            <p><?php
+            if ($parto_normal != NULL) {
+             echo("Parto normal : ".$parto_normal);}?></p>
+            <p><?php
+            if ($cesareas != NULL) {
+             echo("Cesareas : ".$cesareas);}?></p>
+            <p><?php 
+              if ($seguro_medico != NULL) {
+                echo "Seguro Médico: ".$seguro_medico; }?>
+            </p>
+
           </p>
 
           <!-- <br>
