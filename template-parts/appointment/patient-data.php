@@ -58,28 +58,55 @@
           <h5 class="about-title separator-left">Acerca de <?php echo $name?></h5>
 
           <p class="about-content">
-            <p><?php echo("Cedula : ".$cedula);?></p>
+          <div class="row">          
+            <div class="large-4 medium-12 columns ">
+              <p><?php echo("Cedula : ".$cedula);?></p>
+            </div>
+
+            <div class="large-4 medium-12 columns ">
             <p>
-              <?php
-              if ($fecha_de_nacimiento == NULL) {
-                echo("Edad : ");
-              }else{
-                printf(' Edad : %d años, %d meses, %d dias', $patient_age->y, $patient_age->m, $patient_age->d); 
-              }?>
-            </p>
-            <p><?php 
-            if ($numero_embarazos != NULL) {
-            echo("Embarazos : ".$numero_embarazos);}?></p>
-            <p><?php
-            if ($parto_normal != NULL) {
-             echo("Parto normal : ".$parto_normal);}?></p>
-            <p><?php
-            if ($cesareas != NULL) {
-             echo("Cesareas : ".$cesareas);}?></p>
-            <p><?php 
-              if ($seguro_medico != NULL) {
-                echo "Seguro Médico: ".$seguro_medico; }?>
-            </p>
+                <?php
+                if ($fecha_de_nacimiento == NULL) {
+                  echo("Edad : ");
+                }else{
+                  printf(' Edad : %d años, %d meses, %d dias', $patient_age->y, $patient_age->m, $patient_age->d); 
+                }?>
+              </p>
+            </div>
+
+            <div class="large-4 medium-12 columns ">
+              <p><?php 
+                  if ($seguro_medico != NULL) {
+                    echo "Seguro Médico: ".$seguro_medico; }?>
+                </p>
+            </div>
+
+          </div> <!-- row -->
+
+          <div class="row">          
+
+            <div class="large-4 medium-12 columns ">
+              <p><?php 
+                if ($numero_embarazos != NULL) {
+                echo("Embarazos : ".$numero_embarazos);}?>
+                </p>
+            </div>
+
+            <div class="large-4 medium-12 columns ">
+              <p>
+                <?php
+                  if ($parto_normal != NULL) {
+                  echo("Parto normal : ".$parto_normal);}?>
+              </p>
+            </div>
+
+            <div class="large-4 medium-12 columns ">
+              <p><?php
+                  if ($cesareas != NULL) {
+                  echo("Cesareas : ".$cesareas);}?>
+              </p>
+            </div>
+          </div> <!-- row -->
 
           </p>
 
