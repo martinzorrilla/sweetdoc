@@ -1,5 +1,10 @@
 <?php get_header();/* Template Name: llamar pacientes*/
 $audio_path = "http://appointments.asunciontasty.com/announcement-sound.mp3";
+
+$client_name = get_field('client_name', 'option');
+$client_name = isset($client_name) && $client_name !="" ? $client_name : "Nombre y Apellido";
+
+$doctor_title= "Doctora: ".$client_name;
 ?>
 
     <!-- <button id="audioButton" type="button">Play Audio</button> -->
@@ -11,7 +16,7 @@ $audio_path = "http://appointments.asunciontasty.com/announcement-sound.mp3";
     <div class="large-spacer"></div>
 
     <div class="wrap"> 
-        <h1 class="under font-bold">Doctora: Andrea Zorrilla</h1>
+        <h1 class="under font-bold"> <?= $doctor_title?></h1>
     </div>
 
     <div class="wrap" style="margin-top: 3em; margin-bottom: 3em;">
