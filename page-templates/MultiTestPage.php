@@ -69,9 +69,18 @@ foreach ($search_words as $key => $value) {
       
       setup_postdata( $post );
       
+      
+
+      $app_fields = get_post_custom($post->ID);
+
+      //$colpo_data_post = get_post_custom($colpo_post_id);
+      $patient = $app_fields['related_patient'][0];
+      
+      // $patient = sw_get_patient_id_from_app_id($post->ID);
+      
       ?>
       <li>
-        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+        <a href="<?php echo get_the_permalink($patient); ?>"><?php echo get_the_title($patient); ?></a>
       </li>
     
     <?php endforeach; ?>
@@ -132,9 +141,17 @@ foreach ($search_words as $key => $value) {
       
       setup_postdata( $post );
       
+
+      $ago_fields = get_post_custom($post->ID);
+
+      //$colpo_data_post = get_post_custom($colpo_post_id);
+      $patient = $ago_fields['patients_static_data'][0];
+
+
       ?>
       <li>
-        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+        <!-- <a href="< ?php the_permalink(); ?>">< ?php the_title(); ?></a> -->
+        <a href="<?php echo get_the_permalink($patient); ?>"><?php echo get_the_title($patient); ?></a>
       </li>
     
     <?php endforeach; ?>
