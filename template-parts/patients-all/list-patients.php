@@ -1,6 +1,6 @@
   <?php
 
-  
+   
   $appointment_url = home_url().'/consulta/?patient_id=';
 
   $search_param = $template_args["search_param"];

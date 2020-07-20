@@ -1,52 +1,151 @@
 <?php get_header();/* Template Name: MultiTestPage*/?>
 
-</head>
-<body>
 
-<p>In this example, we use JavaScript to "click" on the London button, to open the tab on page load.</p>
+<!-- donde buscar en consulta:
+motivo consulta
+antecedentes
+diagnostico
+plan tratamiento
 
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-</div>
 
-<div id="London" class="tabcontent">
-  <h3>London</h3>
-  <p>London is the capital city of England.</p>
-</div>
+palabras:
+hipertiroidismo
+hipotiroidismo
+amenorrea
+diabetes, dbt, diabetica
+aborto, abortos
+hormonas, hormona
+ovario, poliquistico
+sop
 
-<div id="Paris" class="tabcontent">
-  <h3>Paris</h3>
-  <p>Paris is the capital of France.</p> 
-</div>
+array('hipertiroidismo', 'hipotiroidismo', 'amenorrea', 'diabetes', 'dbt', 'diabetica', 'aborto', 'abortos', 'sop', 'hormonas', 'hormona', 'ovario', 'poliquistico'),
 
-<div id="Tokyo" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
-</div>
+ -->
 
-<script>
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
+ <h2>Consultas</h2>
 
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-</script>
-   
-</body>
-</html> 
+<?php 
+
+$search_words = array('hipertiroidismo', 'hipotiroidismo', 'amenorrea', 'diabetes', 'dbt', 'diabetica', 'aborto', 'abortos', 'sop', 'hormonas', 'hormona', 'ovario', 'poliquistico');
+
+foreach ($search_words as $key => $value) {
+  
+  $posts = get_posts(array(
+    'numberposts'	=> -1,
+    'post_type'		=> 'sw_consulta',
+    'meta_query'	=> array(
+      'relation'		=> 'OR',
+      array(
+        'key'	 	=> 'motivo_de_consulta',
+        'value'	  	=> $value,
+        'compare' 	=> 'LIKE',
+      ),
+      array(
+        'key'	  	=> 'antecedente_actual',
+        'value'	  	=> $value,
+        'compare' 	=> 'LIKE',
+      ),
+      array(
+        'key'	  	=> 'diagnostico_consulta',
+        'value'	  	=> $value,
+        'compare' 	=> 'LIKE',
+      ),
+      array(
+        'key'	  	=> 'plan_tratamiento',
+        'value'	  	=> $value,
+        'compare' 	=> 'LIKE',
+      ),
+    ),
+  ));
+  
+
+  if( $posts ): ?>
+
+
+
+    <ul>
+      
+    <?php foreach( $posts as $post ): 
+      
+      setup_postdata( $post );
+      
+      ?>
+      <li>
+        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+      </li>
+    
+    <?php endforeach; ?>
+    
+    </ul>
+    
+    <?php wp_reset_postdata(); ?>
+  
+  <?php endif; 
+  }  
+  ?>
+
+
+
+
+
+
+
+
+
+
+
+<!--  ---------------------------------- --------------------    AGO -->
+
+<!-- observaciones 
+las mismas -->
+
+
+<h2>AGO</h2>
+
+<?php 
+
+// $search_words = array('hipertiroidismo', 'hipotiroidismo', 'amenorrea', 'diabetes', 'dbt', 'diabetica', 'aborto', 'abortos', 'sop', 'hormonas', 'hormona', 'ovario', 'poliquistico');
+
+foreach ($search_words as $key => $value) {
+  
+  $posts = get_posts(array(
+    'numberposts'	=> -1,
+    'post_type'		=> 'sw_static_data',
+    'meta_query'	=> array(
+      // 'relation'		=> 'OR',
+      array(
+        'key'	 	=> 'observaciones',
+        'value'	  	=> $value,
+        'compare' 	=> 'LIKE',
+      )
+    ),
+  ));
+  
+
+  if( $posts ): ?>
+
+
+
+    <ul>
+      
+    <?php foreach( $posts as $post ): 
+      
+      setup_postdata( $post );
+      
+      ?>
+      <li>
+        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+      </li>
+    
+    <?php endforeach; ?>
+    
+    </ul>
+    
+    <?php wp_reset_postdata(); ?>
+  
+  <?php endif; 
+  }  
+  ?>
 
 <?php get_footer(); ?>
 
