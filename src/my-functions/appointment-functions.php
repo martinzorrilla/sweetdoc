@@ -578,7 +578,7 @@ function sw_update_single_appointment($params){
 
         );
         foreach ($acf_fields as $field => $value) {
-            if($value != NULL)
+            // if($value != NULL)
                 //var_dump("clave: ".$field." valor: ".$value)."<br>";
                 //var_dump("app_id: ".$app_id)."<br>";
                 //update_field( $field, $value, $app_id );
@@ -604,7 +604,7 @@ function sw_update_single_appointment($params){
       );
       
         foreach ($acf_fields as $field => $value) {
-            if($value != NULL)
+            // if($value != NULL)
                 //var_dump("clave: ".$field." valor: ".$value)."<br>";
                 //var_dump("app_id: ".$app_id)."<br>";
                 //update_field( $field, $value, $app_id );
