@@ -123,9 +123,11 @@ function ChapterBody($title, $file)
     // Imprimir texto en una columna de 6 cm de ancho
     $this->MultiCell(80,5,$txt);
     $this->Ln();
+
     // Cita en itálica
-    $this->SetFont('','I');
-    $this->Cell(0,6,'(fin de la prescripcion)');
+    // $this->SetFont('','I');
+    // $this->Cell(0,6,'(fin de la prescripcion)');
+    
     // ir a la segunda columna
     $this->SetCol(1);
     $this->y0 = $this->GetY();
