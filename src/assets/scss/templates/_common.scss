@@ -300,7 +300,15 @@ table tbody tr{
   }
 }
 
-// desde 600px
+
+
+tbody tr:nth-child(2n) {
+  @media screen and (max-width: 799px) { 
+    border-bottom: 2px solid $bluehost-blue;
+  }
+}
+
+
 // @include for-size(tablet-portrait-up) {    
   @media screen and (min-width: 800px) {    
   table tbody tr{
@@ -314,6 +322,7 @@ table tbody tr{
   }
 }
 
+
 .text-left-on-desktop{
   text-align: left;
   @media screen and (max-width: 800px) {
@@ -325,6 +334,13 @@ table tbody tr{
   @media screen and (max-width: 800px) {
   table {
     border: 0;
+
+    tbody{      
+      @media screen and (max-width: 800px) {
+        border: none;
+        background-color: #ccc;
+      }
+    }
   }
 
   table caption {

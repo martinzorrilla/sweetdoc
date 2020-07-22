@@ -79,16 +79,27 @@
     border-left: 1px solid black;
   }
 
+  //gasta 599px
   @include for-size(phone-only) {    
-    font-size: .7em ;
-    min-width: 25%;
-    max-width: 30%;
-    
+    font-size: .6em ;
+    min-width: 19%;
+    max-width: 25%;
+    padding: 14px 14px;
   }
+
+//desde 600px
+  @media screen and (min-width: 600px) {
+    // color:red;
+    font-size: .7em ;
+    min-width: 20%;
+    max-width: 24%;
+  }
+
   // desde 900px
   @include for-size(tablet-landscape-up) {    
     font-size:1.2em;
     max-width: 25%;
+    // color:blue;
   }
 }//.tablinks.dabbed
   

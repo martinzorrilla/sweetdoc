@@ -36,7 +36,7 @@ $patient_id = $post_id;
 ?>
 
 
-  <p><a href="#consultas_paciente">Ir a consultas</a></p>
+  <!-- <p><a href="#consultas_paciente">Ir a consultas</a></p> -->
 
   <!-- <div class="large-spacer"></div> -->
 
@@ -80,6 +80,7 @@ $result = sw_get_current_user_role();
     <button class="tablinks dabbed tab-single-patient" data-id="Resumen"  id="defaultOpen">Resumen</button>
     <button class="tablinks dabbed tab-single-patient" data-id="Datos-Basicos" >Datos</button>
     <button class="tablinks dabbed tab-single-patient" data-id="AGO" >AGO</button>
+    <button class="tablinks dabbed tab-single-patient" data-id="Consultas" >Consultas</button>
   </div>
     
     <?php 
@@ -92,13 +93,16 @@ $result = sw_get_current_user_role();
   //this section should only  be visible by a doctor role or admin.
   if(current_user_can('doctor') || current_user_can('administrator')){
     hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => "false"]); 
+    hm_get_template_part('template-parts/patients-all/tabla-consultas-responsive', ['patient_id' => $patient_id]);
+  
   }
 
   // seccion que trae las consultas del paciente
   //hm_get_template_part('template-parts/patients-all/lista-consultas', ['patient_id' => $patient_id]);
 
   // hm_get_template_part('template-parts/patients-all/tabla-consultas', ['patient_id' => $patient_id]);
-  hm_get_template_part('template-parts/patients-all/tabla-consultas-responsive', ['patient_id' => $patient_id]);
+  
+  // hm_get_template_part('template-parts/patients-all/tabla-consultas-responsive', ['patient_id' => $patient_id]);
   
   // seccion que trae las colposcopias del paciente
   //hm_get_template_part('template-parts/patients-all/lista-colpos', ['patient_id' => $patient_id]);
@@ -111,11 +115,12 @@ $result = sw_get_current_user_role();
 
 <!-- nuevo -->
   <!-- <div id="consultas_paciente" class="row" style="padding-top: 2rem;">   -->
-  <div class="row" style="padding-top: 2rem;">  
+
+  <!-- <div class="row" style="padding-top: 2rem;">  
     <div class="small-12 columns text-center" style="padding-bottom:1em;">
-      <a href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id=new'; ?>" class="crete-app btn btn-green botones-estandard">Crear nueva consulta</a>
+      <a href="< ?php echo esc_url( $appointment_url ).$patient_id.'&app_id=new'; ?>" class="crete-app btn btn-green botones-estandard">Crear nueva consulta</a>
     </div>
-  </div>
+  </div> -->
 
 <!-- viejo -->
   <!-- <div data-closable class="callout alert-callout-border secondary text-center" style="margin: 2rem 0;">
