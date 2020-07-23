@@ -290,7 +290,9 @@ $cedula = isset($patient_fields['cedula'][0]) ? $patient_fields['cedula'][0] : N
 $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
 $patient_age = calcular_edad($fecha_de_nacimiento);
 // si la edad es cero es por que no se cargo ese dato, entonces imprimos en el informe que no hay datos
-$edad_paciente = $fecha_de_nacimiento == NULL?"Sin datos": $patient_age->y;
+// $edad_paciente = $fecha_de_nacimiento == NULL?"Sin datos": $patient_age->y;
+$edad_paciente = $fecha_de_nacimiento == NULL?"Sin datos": $patient_age->y.utf8_decode(" años");
+
 
 // $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
 // $fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";

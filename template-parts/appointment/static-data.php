@@ -207,6 +207,21 @@
           <div class="floated-label-wrapper small-12 columns checkbox-radio text-left grid-content">
               <label class="separator-left">Metodo anticonceptivo actual</label>
             
+                  <input type="checkbox" id="ninguno" name="metodo_anticonceptivo[]" value="ninguno" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                  <?php 
+                  if( $checkbox_metodo_anti != NULL || $checkbox_metodo_anti != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
+                    if(in_array("ninguno", $checkbox_metodo_anti)) echo "checked";
+                  }
+                  ?> >
+                  <label for="ninguno">Ninguno</label>
+
+                  <input type="checkbox" id="natural" name="metodo_anticonceptivo[]" value="natural" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                  <?php 
+                  if( $checkbox_metodo_anti != NULL || $checkbox_metodo_anti != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
+                    if(in_array("natural", $checkbox_metodo_anti)) echo "checked";
+                  }
+                  ?> >
+                  <label for="natural">Natural</label>
 
                   <input type="checkbox" id="orales" name="metodo_anticonceptivo[]" value="orales" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                   <?php 

@@ -305,7 +305,9 @@ $cedula = isset($patient_fields['cedula'][0]) ? $patient_fields['cedula'][0] : N
 $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
 $patient_age = calcular_edad($fecha_de_nacimiento);
 // si la edad es cero es por que no se cargo ese dato, entonces imprimos en el informe que no hay datos
-$edad_paciente = $fecha_de_nacimiento == NULL?"Sin datos": $patient_age->y;
+// $edad_paciente = $fecha_de_nacimiento == NULL?"Sin datos": $patient_age->y;
+$edad_paciente = $fecha_de_nacimiento == NULL?"Sin datos": $patient_age->y.utf8_decode(" años");
+
 
 // $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
 // $fecha_de_nacimiento = $patient_fields['fecha_de_nacimiento'][0] !="" && $patient_fields['fecha_de_nacimiento'][0] !=NULL ? $patient_fields['fecha_de_nacimiento'][0] : "";
@@ -386,6 +388,25 @@ $acf_description_name_array = array();
   if($ft4_tsh!= NULL) {
     $acf_checkbox_array[] = "Ft4-TSH";
   }
+
+  
+
+  $anti_tpo = get_field('anti_tpo', $laboratories_id);
+  if($anti_tpo!= NULL) {
+    $acf_checkbox_array[] = "Anti TPO";
+  }
+  $anti_tsh = get_field('anti_tsh', $laboratories_id);
+  if($anti_tsh!= NULL) {
+    $acf_checkbox_array[] = "Anticuerpos anti receptores de TSH (TRAB)";
+  }
+  $anti_tiro_globulina = get_field('anti_tiro_globulina', $laboratories_id);
+  if($anti_tiro_globulina!= NULL) {
+    $acf_checkbox_array[] = "Anti tiro globulina";
+  }
+
+
+
+
   $progesterona = get_field('progesterona', $laboratories_id);
   if($progesterona!= NULL) {
     $acf_checkbox_array[] = "Progesterona";
@@ -552,6 +573,16 @@ $acf_description_name_array = array();
   if($ac_antifosfolípidos!= NULL) {
     $acf_checkbox_array[] = "Ac. Antifosfolípidos";
   }
+
+  $covid_19 = get_field('covid_19', $laboratories_id);
+  if($covid_19!= NULL) {
+    $acf_checkbox_array[] = "Hisopado Nasofaringeo Sars COV 2 (Rt - PCR)";
+  }
+  $tvdpcr = get_field('tvdpcr', $laboratories_id);
+  if($tvdpcr!= NULL) {
+    $acf_checkbox_array[] = "Tipificación viral detección por PCR";
+  }
+
   $vitamina_d25oh = get_field('vitamina_d25oh', $laboratories_id);
   if($vitamina_d25oh!= NULL) {
     $acf_checkbox_array[] = "25 - OH Vitamina D";

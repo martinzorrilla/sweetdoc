@@ -22,6 +22,12 @@
   $igmfta = get_field('igmfta', $laboratories_id);
   $abs = get_field('abs', $laboratories_id);
   $ft4_tsh = get_field('ft4_tsh', $laboratories_id);
+
+  $anti_tpo = get_field('anti_tpo', $laboratories_id);
+  $anti_tsh = get_field('anti_tsh', $laboratories_id);
+  $anti_tiro_globulina = get_field('anti_tiro_globulina', $laboratories_id);
+  
+
   $progesterona = get_field('progesterona', $laboratories_id);
   $estradiol = get_field('estradiol', $laboratories_id);
   $fsh_lab = get_field('fsh_lab', $laboratories_id);
@@ -64,6 +70,11 @@
   $monotest = get_field('monotest', $laboratories_id);
   $ac_anti_dna = get_field('ac_anti_dna', $laboratories_id);
   $ac_antifosfolípidos = get_field('ac_antifosfolípidos', $laboratories_id);
+
+  $covid_19 = get_field('covid_19', $laboratories_id);
+  $tvdpcr = get_field('tvdpcr', $laboratories_id);
+
+
   $vitamina_d25oh = get_field('vitamina_d25oh', $laboratories_id);
   $espermograma_biquimico = get_field('espermograma_biquimico', $laboratories_id);
   $simple_espermograma = get_field('simple_espermograma', $laboratories_id);
@@ -255,6 +266,44 @@
                             ?> >
                         <label for="ft4_tsh">Ft4-TSH</label>
                       </div>
+
+
+                      <!-- anti_tpo -->
+                      <div class="floated-label-wrapper small-12 large-12 columns checkbox-radio text-left ">
+                            <input type="checkbox" id="anti_tpo" name="anti_tpo[]" value="anti_tpo" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                            <?php 
+                            if( $anti_tpo != NULL || $anti_tpo != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
+                              if(in_array("anti_tpo", $anti_tpo)) echo "checked";
+                            }
+                            ?> >
+                        <label for="anti_tpo">Anti TPO</label>
+                      </div>
+
+
+                      <!-- anti_tsh -->
+                      <div class="floated-label-wrapper small-12 large-12 columns checkbox-radio text-left ">
+                            <input type="checkbox" id="anti_tsh" name="anti_tsh[]" value="anti_tsh" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                            <?php 
+                            if( $anti_tsh != NULL || $anti_tsh != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
+                              if(in_array("anti_tsh", $anti_tsh)) echo "checked";
+                            }
+                            ?> >
+                        <label for="anti_tsh">Anticuerpos anti receptores de TSH (TRAB)</label>
+                      </div>
+
+
+                      <!-- anti_tiro_globulina -->
+                      <div class="floated-label-wrapper small-12 large-12 columns checkbox-radio text-left ">
+                            <input type="checkbox" id="anti_tiro_globulina" name="anti_tiro_globulina[]" value="anti_tiro_globulina" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                            <?php 
+                            if( $anti_tiro_globulina != NULL || $anti_tiro_globulina != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
+                              if(in_array("anti_tiro_globulina", $anti_tiro_globulina)) echo "checked";
+                            }
+                            ?> >
+                        <label for="anti_tiro_globulina">Anti tiro globulina</label>
+                      </div>
+
+
 
                       <!-- progesterona -->
                       <div class="floated-label-wrapper small-12 large-12 columns checkbox-radio text-left ">
@@ -723,6 +772,30 @@
                         <label for="ac_antifosfolípidos">Ac. Antifosfolípidos</label>
                       </div>
 
+                      <!-- covid_19 -->
+                      <div class="floated-label-wrapper small-12 large-12 columns checkbox-radio text-left ">
+                            <input type="checkbox" id="covid_19" name="covid_19[]" value="covid_19" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                            <?php 
+                            if( $covid_19 != NULL || $covid_19 != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
+                              if(in_array("covid_19", $covid_19)) echo "checked";
+                            }
+                            ?> >
+                        <label for="covid_19">Hisopado Nasofaringeo Sars COV 2 (Rt - PCR)</label>
+                      </div>
+
+
+                      <!-- tvdpcr -->
+                      <div class="floated-label-wrapper small-12 large-12 columns checkbox-radio text-left ">
+                            <input type="checkbox" id="tvdpcr" name="tvdpcr[]" value="tvdpcr" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                            <?php 
+                            if( $tvdpcr != NULL || $tvdpcr != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
+                              if(in_array("tvdpcr", $tvdpcr)) echo "checked";
+                            }
+                            ?> >
+                        <label for="tvdpcr">Tipificación viral detección por PCR</label>
+                      </div>
+
+
                       <!-- vitamina_d25oh -->
                       <div style="margin-bottom: 16px;" class="floated-label-wrapper small-12 large-12 columns checkbox-radio text-left ">
                             <input type="checkbox" id="vitamina_d25oh" name="vitamina_d25oh[]" value="vitamina_d25oh" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
@@ -733,6 +806,7 @@
                             ?> >
                         <label for="vitamina_d25oh">25 - OH Vitamina D</label>
                       </div>
+
 
 
                       <!-- SUBTITULO ------------------------------------------------------------------------- -->
@@ -818,16 +892,17 @@
                   <div class="row">
                     <h6 class="separator-left" style="font-weight: bold;" > OTROS </h6>
                     
-                    <div class="floated-label-wrapper small-12 large-12 columns">
+                    <div style="padding-top: 1em;" class="floated-label-wrapper small-12 large-12 columns">
                       
                       <input type="text" id="otros_laboratorios" name="otros_laboratorios" value="<?php echo $otros_laboratorios ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
                     </div>
 
                     <h6 class="separator-left" style="font-weight: bold;" > DIAGNÓSTICO </h6>
                     
-                    <div class="floated-label-wrapper small-12 large-12 columns end">
-                      
-                      <input type="text" id="diagnostico_laboratorios" name="diagnostico_laboratorios" value="<?php echo $diagnostico_laboratorios ?>" placeholder="Escribir..." class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required>
+
+
+                    <div style="padding-top: 1em;" class="floated-label-wrapper small-12 large-12 columns end">
+                      <textarea id="diagnostico_laboratorios" name="diagnostico_laboratorios" placeholder="Escribir..." style="height:7em" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>  required><?php echo $diagnostico_laboratorios ?></textarea>           
                     </div>
 
                     

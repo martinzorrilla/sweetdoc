@@ -28,6 +28,12 @@ function sw_create_laboratories_ajax(){
     $igmfta = isset($_POST['igmfta']) && $_POST['igmfta'] != '' ? $_POST['igmfta'] : NULL;
     $abs= isset($_POST['abs']) && $_POST['abs'] != '' ? $_POST['abs'] : NULL;
     $ft4_tsh= isset($_POST['ft4_tsh']) && $_POST['ft4_tsh'] != '' ? $_POST['ft4_tsh'] : NULL;
+    
+    $anti_tpo= isset($_POST['anti_tpo']) && $_POST['anti_tpo'] != '' ? $_POST['anti_tpo'] : NULL;
+    $anti_tsh= isset($_POST['anti_tsh']) && $_POST['anti_tsh'] != '' ? $_POST['anti_tsh'] : NULL;
+    $anti_tiro_globulina= isset($_POST['anti_tiro_globulina']) && $_POST['anti_tiro_globulina'] != '' ? $_POST['anti_tiro_globulina'] : NULL;
+    
+
     $progesterona= isset($_POST['progesterona']) && $_POST['progesterona'] != '' ? $_POST['progesterona'] : NULL;
     $estradiol= isset($_POST['estradiol']) && $_POST['estradiol'] != '' ? $_POST['estradiol'] : NULL;
     $fsh_lab= isset($_POST['fsh_lab']) && $_POST['fsh_lab'] != '' ? $_POST['fsh_lab'] : NULL;
@@ -69,6 +75,11 @@ function sw_create_laboratories_ajax(){
     $monotest= isset($_POST['monotest']) && $_POST['monotest'] != '' ? $_POST['monotest'] : NULL;
     $ac_anti_dna= isset($_POST['ac_anti_dna']) && $_POST['ac_anti_dna'] != '' ? $_POST['ac_anti_dna'] : NULL;
     $ac_antifosfolípidos= isset($_POST['ac_antifosfolípidos']) && $_POST['ac_antifosfolípidos'] != '' ? $_POST['ac_antifosfolípidos'] : NULL;
+    
+    $covid_19= isset($_POST['covid_19']) && $_POST['covid_19'] != '' ? $_POST['covid_19'] : NULL;
+    $tvdpcr= isset($_POST['tvdpcr']) && $_POST['tvdpcr'] != '' ? $_POST['tvdpcr'] : NULL;
+
+    
     $vitamina_d25oh= isset($_POST['vitamina_d25oh']) && $_POST['vitamina_d25oh'] != '' ? $_POST['vitamina_d25oh'] : NULL;
     $espermograma_biquimico= isset($_POST['espermograma_biquimico']) && $_POST['espermograma_biquimico'] != '' ? $_POST['espermograma_biquimico'] : NULL;
     $simple_espermograma= isset($_POST['simple_espermograma']) && $_POST['simple_espermograma'] != '' ? $_POST['simple_espermograma'] : NULL;
@@ -100,6 +111,11 @@ function sw_create_laboratories_ajax(){
         "igmfta" => $igmfta,
         "abs" => $abs,
         "ft4_tsh" => $ft4_tsh,
+
+        "anti_tpo" => $anti_tpo,
+        "anti_tsh" => $anti_tsh,
+        "anti_tiro_globulina" => $anti_tiro_globulina,
+
         "progesterona" => $progesterona,
         "estradiol" => $estradiol,
         "fsh_lab" => $fsh_lab,
@@ -141,6 +157,10 @@ function sw_create_laboratories_ajax(){
         "monotest" => $monotest,
         "ac_anti_dna" => $ac_anti_dna,
         "ac_antifosfolípidos" => $ac_antifosfolípidos,
+
+        "covid_19" => $covid_19,
+        "tvdpcr" => $tvdpcr,
+
         "vitamina_d25oh" => $vitamina_d25oh,
         "espermograma_biquimico" => $espermograma_biquimico,
         "simple_espermograma" => $simple_espermograma,
@@ -190,6 +210,11 @@ function sw_create_laboratories($params){
       $igmfta = $params['igmfta'];
       $abs= $params['abs'];
       $ft4_tsh= $params['ft4_tsh'];
+
+      $anti_tpo= $params['anti_tpo'];
+      $anti_tsh= $params['anti_tsh'];
+      $anti_tiro_globulina= $params['anti_tiro_globulina'];
+
       $progesterona= $params['progesterona'];
       $estradiol= $params['estradiol'];
       $fsh_lab= $params['fsh_lab'];
@@ -231,6 +256,10 @@ function sw_create_laboratories($params){
       $monotest= $params['monotest'];
       $ac_anti_dna= $params['ac_anti_dna'];
       $ac_antifosfolípidos= $params['ac_antifosfolípidos'];
+
+      $covid_19= $params['covid_19'];
+      $tvdpcr= $params['tvdpcr'];
+
       $vitamina_d25oh= $params['vitamina_d25oh'];
       $espermograma_biquimico= $params['espermograma_biquimico'];
       $simple_espermograma= $params['simple_espermograma'];
@@ -285,6 +314,13 @@ function sw_create_laboratories($params){
             "igmfta" => $igmfta,
             "abs" => $abs,
             "ft4_tsh" => $ft4_tsh,
+
+
+            "anti_tpo" => $anti_tpo,
+            "anti_tsh" => $anti_tsh,
+            "anti_tiro_globulina" => $anti_tiro_globulina,
+
+
             "progesterona" => $progesterona,
             "estradiol" => $estradiol,
             "fsh_lab" => $fsh_lab,
@@ -326,6 +362,10 @@ function sw_create_laboratories($params){
             "monotest" => $monotest,
             "ac_anti_dna" => $ac_anti_dna,
             "ac_antifosfolípidos" => $ac_antifosfolípidos,
+
+            "covid_19" => $covid_19,
+            "tvdpcr" => $tvdpcr,
+
             "vitamina_d25oh" => $vitamina_d25oh,
             "espermograma_biquimico" => $espermograma_biquimico,
             "simple_espermograma" => $simple_espermograma,

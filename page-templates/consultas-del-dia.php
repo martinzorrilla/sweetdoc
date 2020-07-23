@@ -2,7 +2,9 @@
 
       <div class="callout secondary wrap" style="margin-top: 3em; margin-bottom: 3em;">
          <h2 class="font-bold">Lista de pacientes del día</h2>
+         <?php echo "<h3 class='text-center'> Fecha: " . date("d/m/Y") . "</h3>";?>
       </div>
+
 
       <!-- <div data-closable class="callout alert-callout-border secondary text-center">
          <h3>Lista de pacientes del día</h3>
