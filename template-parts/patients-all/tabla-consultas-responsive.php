@@ -50,7 +50,8 @@
             <div class="profile-card-about">
 
 
-            <div id="consultas_paciente" class="wrap" style="margin-bottom: 2em;"> 
+            <!-- <div id="consultas_paciente" class="wrap" style="margin-bottom: 2em;">  -->
+            <div class="wrap" style="margin-bottom: 2em;"> 
                 <h2 class="under font-bold">Consultas Anteriores</h2>
             </div>
 
