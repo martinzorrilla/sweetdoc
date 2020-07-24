@@ -522,7 +522,7 @@ $altura_firma = 45;
 $k == 0;
 if (sizeof($images_ids_array)>0) {  
     $k = 0; 
-    $altura_firma = 45; 
+    $altura_firma = 55; 
     foreach ($images_array as $image) { 
         //$pdf->PrintImage(2,'Imagen:',$images_names[$k]);
         if ($k == 0 || $k == 2) {
