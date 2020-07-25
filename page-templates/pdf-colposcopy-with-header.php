@@ -1,4 +1,4 @@
-<?php /* Template Name: pdf-colposcopy-daisy*/
+<?php /* Template Name: pdf-colposcopy-with-header*/
 class PDF extends FPDF
 {
 protected $col = 0; // Columna actual
@@ -15,7 +15,7 @@ function Header()
     global $y_new;
     //global $page_height;
     // $image_path = home_url().'/pregnant.jpg';
-    
+
     // $subtitulo = utf8_decode("Ginecología y Obstetricia");
     // $subtitulo_alterno = utf8_decode("T.G.I. y Colposcopía");
     // $info = utf8_decode("Cel.: (0981) 991 803");
@@ -40,13 +40,13 @@ function Header()
 
     $this->SetFont('Times','I',20);
     //color rosa
-    $this->SetDrawColor(255,128,128); 
+    $this->SetDrawColor(255,128,128);
     $this->SetFillColor(255, 255, 255);
     $this->SetTextColor(0,84,195);
     $this->SetLineWidth(1);
-    
-    
-    
+
+
+
     $this->Cell(0,10,$title,0,1,'C',false);
     $this->SetFont('Arial','I',14);
     //color azul
@@ -81,7 +81,7 @@ function Footer()
     $this->SetY(-30);
     $this->SetFont('Times','I',12);
     //color rosa
-    $this->SetDrawColor(255,128,128); 
+    $this->SetDrawColor(255,128,128);
     $this->SetFillColor(255, 255, 255);
     $this->SetTextColor(0,84,195);
     $this->SetLineWidth(1);
@@ -98,9 +98,9 @@ function Firma($num)
 {
 
 // DATOS DEL CLIENTE DEL SISTEMA(DOCTOR) guardados en el theme options. en el backend wordpress creado con ACF custom fields
-// . 
-// . 
-// . 
+// .
+// .
+// .
 $client_title = get_field('client_title', 'option');
 $client_title = isset($client_title) && $client_title !="" ? $client_title : "Dr/Dra";
 $client_name = get_field('client_name', 'option');
@@ -115,30 +115,7 @@ $client_otros = get_field('client_otros', 'option');
 $client_otros = isset($client_otros) && $client_otros !="" ? $client_otros : "Otros datos";
 
 
-// calcular la altura de la firma en funcion de la cantidad de imagenes si es ue hay
-switch ($num) {
-    case 0:
-        $firma_altura = 14;
-        break;
-    case 1:
-        $firma_altura = 44;
-        break;
-    case 2:
-        $firma_altura = 35;
-        break;
-    case 3:
-        $firma_altura = 124;
-        break;
-    case 4:
-        $firma_altura = -65;
-        break;
-    case 5:
-        $firma_altura = 44;
-        break;
-}
 
-    // Pie de página
-    $altura_actual = $this->GetY(); 
     // $this->SetY($altura_actual + $firma_altura);
     $this->Ln($num);
     //$this->SetFont('Arial','I',8);
@@ -147,7 +124,7 @@ switch ($num) {
     //$this->SetTextColor(128);
     $this->SetX(110);
     $this->Cell(0,12,'...............................................',0,2);
-    $this->SetX(118);
+    $this->SetX(113);
     // $this->Cell(0,5,'Dra. Andrea Zorrilla',0,2);
     $this->Cell(0,5,$client_title." ".$client_name,0,2);
     $this->SetX(114);
@@ -210,20 +187,20 @@ function ChapterBody($file)
     // Abrir fichero de texto
     //$txt = file_get_contents($file);
     $txt = $file;
-    
+
     // Fuente
     $this->SetFont('Times','',12);
     // Imprimir texto en una columna de 6 cm de ancho (si el valor es 60)
     $this->MultiCell(190,7,$txt);
     //$this->Cell(0,5,$txt);
-    
+
     $this->Ln();
     // Cita en itálica
     $this->SetFont('','I');
     $this->Cell(0,5,'(fin de la seccion)');
     // ir a la segunda columna
     //$this->SetCol(1);
-    
+
     $this->Ln(14);
     // Guardar ordenada
     $this->y0 = $this->GetY();
@@ -231,15 +208,15 @@ function ChapterBody($file)
 
 function ImageBody($num, $eje_y, $file)
 {
-    
+
     //$this->SetX(20);
     $abscissa = 50; // eje X
     $ordenada = $eje_y; // eje Y
     $image_height = 30;
-    
+
     $abscissa_inicial = $abscissa; // eje X
     $ordenada_inicial = $ordenada; // eje Y
-    
+
     switch ($num) {
         case 1:
             $abscissa = $abscissa_inicial + 60;
@@ -299,7 +276,7 @@ function PrintElement($num, $title, $file)
 
 function PrintSecondaryTitle($num, $title, $file)
 {
-        
+
         // Fuente
         $this->SetFont('Times','B',12);
         // Imprimir texto en una columna de 6 cm de ancho (si el valor es 60)
@@ -322,7 +299,7 @@ function PrintArray($num, $title, $array)
         //como lo que devuelve son los propios valores de la BD y no los labels, remover los "_"
         $arrayToString = str_replace("_", " ", $arrayToString);
         //$pdf->PrintElement(2,$title,$arrayToString);
-        
+
         $txt = $title.": ".$arrayToString;
         // Fuente
         $this->SetFont('Times','',12);
@@ -348,10 +325,10 @@ function PrintEvaluacionGeneral($num, $radiobox_evaluacion_general, $checkbox_mo
         //como lo que devuelve son los propios valores de la BD y no los labels, remover los "_"
         $arrayToString = str_replace("_", " ", $arrayToString);
         $arrayToString = ". ".$arrayToString;
-        
+
         //$pdf->PrintElement(2,$title,$arrayToString);
     }
-    
+
     if (!empty($radiobox_evaluacion_general)) {
         $txt = " - Evaluacion general: ".$radiobox_evaluacion_general.$arrayToString;;
         $this->SetFont('Times','',12);
@@ -363,18 +340,20 @@ function PrintEvaluacionGeneral($num, $radiobox_evaluacion_general, $checkbox_mo
 
 function PrintImage($num, $eje_y, $file)
 {
-    $this->ImageBody($num, $eje_y, $file);    
+    $this->ImageBody($num, $eje_y, $file);
 }
 
-function CheckPageSpaceLeft($page_height, $current_y)
+function CheckPageSpaceLeft($page_height, $current_y, $espacio_min_inferior)
 {
     //$this->GetPageHeight();
-    $espacio_min_inferior = 115;
+    // $espacio_min_inferior = 115;
     //$espacio_min_inferior = 95;
     $space_left = $page_height - $current_y;
     if ($space_left < $espacio_min_inferior) {
         $this->AddPage();
+        return true;
     }
+    return false;
 }
 
 }//class
@@ -390,7 +369,7 @@ $patient_id = $colpo_data_post['colpo_related_patient'][0];
 
 $patient_fields = get_post_custom($patient_id);
 $name = isset($patient_fields['nombre'][0]) ? $patient_fields['nombre'][0] : NULL;
-// $name = $patient_fields['nombre'][0];  
+// $name = $patient_fields['nombre'][0];
 $lastname = isset($patient_fields['apellido'][0]) ? $patient_fields['apellido'][0] : NULL;
 $cedula = isset($patient_fields['cedula'][0]) ? $patient_fields['cedula'][0] : NULL;
 $fecha_de_nacimiento = isset($patient_fields['fecha_de_nacimiento'][0]) ? $patient_fields['fecha_de_nacimiento'][0] : NULL;
@@ -432,7 +411,7 @@ $datos_personales = $fullname."        Edad: ".$edad_paciente."        Ci: ".$ce
 $macroscopia = isset($colpo_data_post['macroscopia'][0]) ? $colpo_data_post['macroscopia'][0] : NULL;
 // $colposcopia = $colpo_data_post['colposcopia'][0];
 $colposcopia = isset($colpo_data_post['colposcopia'][0]) ? $colpo_data_post['colposcopia'][0] : NULL;
-$radiobox_evaluacion_general = get_field('evaluacion_general', $colpo_post_id); 
+$radiobox_evaluacion_general = get_field('evaluacion_general', $colpo_post_id);
 $checkbox_motivo_inadecuada = get_field('motivo_inadecuada', $colpo_post_id);
 $radiobox_union_escamo_columnar = get_field('union_escamo_columnar', $colpo_post_id);
 $radiobox_zona_de_transformacion = get_field('zona_de_transformacion', $colpo_post_id);
@@ -461,7 +440,7 @@ $sugerencias = isset($colpo_data_post['sugerencias'][0]) ? $colpo_data_post['sug
 //store the ids of the images post
 $max_images = 5;
 $images_ids_array = array();
-// +1 bc 
+// +1 bc
 for ($i=0; $i < $max_images; $i++) {
     $k = $i+1;
     $text = 'colpo_imagen_'.$k;
@@ -471,7 +450,7 @@ for ($i=0; $i < $max_images; $i++) {
 //var_dump($text);
     if ($the_image_id != "" && $the_image_id != NULL) {
         $images_ids_array[$i] = $the_image_id;
-    }   
+    }
 }
 //var_dump($images_ids_array);
 
@@ -483,7 +462,7 @@ $size = "medium"; // (thumbnail, medium, large, full or custom size)
 $images_array = array();
 $images_names = array();
 for ($i=0; $i < sizeof($images_ids_array); $i++) {
-    //store the names 
+    //store the names
     $image_post = get_post_custom( $images_ids_array[$i] );
     $images_names[$i] = $image_post["_wp_attached_file"][0];
     //store the actual image
@@ -497,8 +476,8 @@ for ($i=0; $i < sizeof($images_ids_array); $i++) {
 $pdf = new PDF( 'P', 'mm', 'A4' ); // A4, portrait, measurements in mm. A4 es 210 X 297mm
 //$pdf->SetAutoPageBreak(true, 100);
 $pdf->SetAutoPageBreak(true, 0);
-$pdf->SetAuthor('Dra. Andrea Zorrilla');
-$title = 'Dra. Diana Andrea Zorrilla';
+$pdf->SetAuthor('Sweetdoc');
+$title = 'Informe Colposcopico';
 //$title = $fullname;
 $pdf->SetTitle($title);
 $pdf->AddPage();
@@ -518,7 +497,7 @@ $pdf->PrintElement(2,utf8_decode(' - Zona de transformación'), str_replace("_",
 $pdf->PrintArray(2,utf8_decode(' - Hallazgos colposcopicos normales'),$checkbox_colposcopicos_normales);
 
 // imprimir el titulo de hllazgos anormales solo si alguno de ellos tiene datos
-if ( (is_array($checkbox_colposcopicos_anormales_grado_1) && array_filter($checkbox_colposcopicos_anormales_grado_1))  ||  (is_array($checkbox_colposcopicos_anormales_grado_2) && array_filter($checkbox_colposcopicos_anormales_grado_2))  || 
+if ( (is_array($checkbox_colposcopicos_anormales_grado_1) && array_filter($checkbox_colposcopicos_anormales_grado_1))  ||  (is_array($checkbox_colposcopicos_anormales_grado_2) && array_filter($checkbox_colposcopicos_anormales_grado_2))  ||
 (is_array($checkbox_colposcopicos_anormales_no_especificos) && array_filter($checkbox_colposcopicos_anormales_no_especificos))
 ){
     $pdf->PrintSecondaryTitle(2,utf8_decode(' - Hallazgos colposcopicos anormales'), "");
@@ -530,45 +509,66 @@ $pdf->PrintElement(2,utf8_decode(' - Ubicación'), str_replace("_", " ", $colpos
 $pdf->PrintArray(2,utf8_decode(' - Sospecha de invasión'),$checkbox_sospecha_de_invasion);
 $pdf->PrintArray(2,utf8_decode(' - Hallazgos varios'),$checkbox_hallazgos_varios);
 $pdf->PrintArray(2,utf8_decode(' - Exámen de vulva y vagina'),$checkbox_examen_de_vyv);
+
+// $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 135);
 $pdf->PrintElement(2,utf8_decode(' - Descripción del exámen'),$examen_de_vyv_descripcion);
+// $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 135);
 $pdf->PrintElement(2,utf8_decode(' - Test de Schiller '),$radiobox_colposcopicos_anormales_test_de_schiller);
+$pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 90);
 $pdf->PrintArray(2,utf8_decode(' - Lugol'),$checkbox_test_de_schiller_lugol);
+// $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 105);
 $pdf->PrintElement(2,utf8_decode(' - Sugerencias'),$sugerencias);
 
 //El autoPagaBreak esta desactivado y lo hago manualmente para la seccion de imagenes. esi implica que si el texto de la seccion hallazgos es muy larga no hara el salto de pagian automaticamente
 //$pdf->AddPage();
 
+
+// luego de insertar los campos, verificar si hay espacio para las imagenes y la firma
+// $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 135);
+
 // Output the images ---------------
 $custom_y = $pdf->GetY();
-$altura_firma = 15; 
-if (sizeof($images_ids_array)>0) {  
-    $k = 0; 
-    $altura_firma = 45; 
-    foreach ($images_array as $image) { 
+// $custom_y = intval($custom_y);
+//altura firma es la distancia entre la posicion y actual y el margen para imprimir la firma, si no hay imagen
+$altura_firma = 15;
+$k = 0;
+if (sizeof($images_ids_array)>0) {
+    //si hay imagen (1 o 2) la distancia con la firma debe ser un poco mayor
+    $altura_firma = 40;
+    foreach ($images_array as $image) {
         //$pdf->PrintImage(2,'Imagen:',$images_names[$k]);
+        //verificamos cuando hay una fila o 2 filas
         if ($k == 0 || $k == 2) {
-            $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY());
+            // si no hay espacio agrega otra pagina
+            $custom_y = $pdf->GetY();
             if ($k == 0) {
+                $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 125);
                 $pdf->Ln(3);
-                $pdf->PrintSection(3,utf8_decode(' IMÁGENES'), $fullname);
-            }   
-            $custom_y = $pdf->GetY(); 
+                $pdf->PrintSection(3,utf8_decode('IMÁGENES'), $fullname);
+                $custom_y = $pdf->GetY();
+            }
+            if ($k == 2) {
+                $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 135);
+                $custom_y =  $new_page == true ? 25 :  $pdf->GetY();
+                $altura_firma =  $new_page == true ? 40 :  65;
+            }
         }
-        
+
         $pdf->PrintImage($k,$custom_y + 5,$image[0]);
     $k++;
-    } 
+    }
 }
 
 
-// $pdf->Ln(14);
+// $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 70);
 
 // recibe k xq la altura de la firma depende de la cantidad de imagenes
 // $pdf->Firma(sizeof($images_ids_array));
-if ($k == 3 || $k == 4) {
-    $altura_firma = 65; 
-}
+// if ($k == 3 || $k == 4) {
+//     $altura_firma = 65;
+// }
 $pdf->Firma($altura_firma);
+// $pdf->Firma(90);
 
 ob_start();
 $pdf->Output();
