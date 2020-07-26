@@ -475,8 +475,8 @@ for ($i=0; $i < sizeof($images_ids_array); $i++) {
 $pdf = new PDF( 'P', 'mm', 'A4' ); // A4, portrait, measurements in mm. A4 es 210 X 297mm
 //$pdf->SetAutoPageBreak(true, 100);
 $pdf->SetAutoPageBreak(true, 0);
-$pdf->SetAuthor('Dra. Andrea Zorrilla');
-$title = 'Dra. Diana Andrea Zorrilla';
+$pdf->SetAuthor('Sweetdoc');
+$title = 'Informe Colposcopico';
 //$title = $fullname;
 $pdf->SetTitle($title);
 $pdf->AddPage();
