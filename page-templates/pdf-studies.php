@@ -526,7 +526,7 @@ $acf_description_name_array = array();
 $pdf = new PDF();
 //$pdf->SetAutoPageBreak(true, 100);
 $pdf->SetAutoPageBreak(true, 0);
-$pdf->SetAuthor('Dra. Andrea Zorrilla');
+$pdf->SetAuthor('SweetDoc');
 $title = 'Solicitud de estudios';
 //$title = $fullname;
 //$pdf->SetTitle($title);
