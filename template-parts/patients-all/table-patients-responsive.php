@@ -46,15 +46,19 @@ $latest_patients = sw_get_patients($search_param);
       </td>
 
       <!-- Nombre -->
+      <?php $cedula_paciente = get_field( "cedula", $patient->ID );
+      $cedula_paciente_clean = preg_replace("/[^a-zA-Z0-9-]/", "", $cedula_paciente);
+      ?>
+      
       <td scope="row" class="text-left-on-desktop" data-label="Nombre">
         <a class="bold-font" href="<?php echo get_permalink( $patient->ID ); ?>"> <?php echo $patient->post_title;?></a> 
         <!-- esto es para que se pueda hacer la busqueda por cedula, ya que debe estar con el nombre para poder hacerlo      -->
-        <p style="display:none;"><?php echo $patient->post_title." ".(get_field( "cedula", $patient->ID ));?></p>
+        <p style="display:none;"><?php echo $patient->post_title." ".$cedula_paciente_clean;?></p>
       </td>
       
       <!-- Cedula -->
       <td class="text-left-on-desktop" data-label="Cédula">
-      <a href="#"><?php echo (get_field( "cedula", $patient->ID ));?></a>      
+      <a href="#"><?php echo $cedula_paciente;?></a>      
       </td>
 
       <!-- Edad -->
