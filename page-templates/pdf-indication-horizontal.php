@@ -477,6 +477,7 @@ $title_array=["R.P.", "Indicaciones"];
 $pdf->TitleDatosPersonales($title_array);
 // $pdf->Ln(10);
 $altura_firma = 10;
+$margin_bottom = 40;
 // la pagina esta dividia en dos columnas, todo lo que vaya a chapter 1 se escribe en la parte izq. chapter 2 parte derecha
 // guardamos la y donde empieza la RP para poder empezar en el mismo lugar las indicaciones
 $current_y = $pdf->GetY();
@@ -489,6 +490,7 @@ $k=0;
 foreach ($rp as $sentence) {    
     if ($page_was_added) {
         array_push($rp_continuation,$sentence);
+        // $margin_bottom = 60;
     }
     if (!$page_was_added) {
         $sentence = preg_replace("/\r\n|\r|\n/", '', $sentence);
@@ -498,13 +500,13 @@ foreach ($rp as $sentence) {
         if ($k+1 == sizeof($rp)) {
             # code...
         }else{
-            $page_was_added = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 70);
+            $page_was_added = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $margin_bottom);
         }
     }
     $k++;
 }
 if(!$rp_is_empty){
-    $pdf->Firma($altura_firma);
+    // $pdf->Firma($altura_firma);
 }
 // IMPRIMO LA PARTE DERECHA DE LA PAGINA 1. ES DECIR, INDICACION
 $pdf->SetCol(1);
@@ -528,13 +530,13 @@ foreach ($indicaciones as $sentence) {
         if ($k+1 == sizeof($rp)) {
             # code...
         }else{
-            $page_was_added_ind = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 70);
+            $page_was_added_ind = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $margin_bottom);
         }
     }
     $k++;
 }
 if(!$indicaciones_is_empty){
-    $pdf->Firma($altura_firma);
+    // $pdf->Firma($altura_firma);
 }
 
 
@@ -566,7 +568,7 @@ if ($page_was_added) {
         }
         // $pdf->MultiCell(128,5,$sentence);
     }
-    $pdf->Firma($altura_firma);
+    // $pdf->Firma($altura_firma);
 }
 
 // para la continuacion de indicaciones
@@ -587,7 +589,7 @@ if ($page_was_added_ind) {
         }
         // $pdf->MultiCell(128,5,$sentence);
     }
-    $pdf->Firma($altura_firma);
+    // $pdf->Firma($altura_firma);
 }
 
 

@@ -556,7 +556,7 @@
                   <div class="floated-label-wrapper small-12 large-12 columns">
                     <label class="separator-left" for="otros_st">Otros estudios</label>
                     <!-- <input type="text" id="otros_st" name="otros_st" value="< ?php echo $otros_st ?>" placeholder="Escribir..." class="disableable-input" < ?php if($is_editable == "false")  echo "disabled"; ?> required> -->
-                    <textarea id="otros_st" name="otros_st" placeholder="Escribir..." style="height:5em" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required><?php echo $otros_st ?></textarea>     
+                    <textarea id="otros_st" name="otros_st" placeholder="Escribir..." style="height:13em" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> required><?php echo $otros_st ?></textarea>     
                   </div>
 
                   </fieldset>

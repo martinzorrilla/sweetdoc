@@ -780,7 +780,7 @@ $pdf->PrintHalfPersonData(1,$patient_data);
 $pdf->Ln(4);
 $title_array=["Laboratorios Solicitados", ""];
 $pdf->TitleDatosPersonales($title_array);
-$pdf->Ln(4);
+$pdf->Ln(1);
 $initial_y = $pdf->GetY();
 // $current_y = $pdf->GetY();
 $current_x = $pdf->GetX();
@@ -788,8 +788,9 @@ $need_to_add_page = false;
 
 //cuando hay campo decripcion o "otros" podemos escribir hasta mas abajo y no preocpuarnos tanto por el espacio de la firma
 $min_height = 40;
+// $min_height = 40;
 if(empty($otros_laboratorios) && empty($diagnostico_laboratorios)){
-  $min_height = 75;
+  $min_height = 35;
 }
 
 // imprimir todos los checkboex que estan marcados
@@ -815,7 +816,7 @@ foreach ($acf_checkbox_array as $study_name) {
   $pdf->Ln(1);
 
   if(!empty($otros_laboratorios)) {
-  $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 80);
+  $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 60);
     if (!$need_to_add_page) {
           $pdf->PrintElement(2,utf8_decode("Otros estudios"),$otros_laboratorios);
           $pdf->Ln(2);
@@ -830,7 +831,7 @@ foreach ($acf_checkbox_array as $study_name) {
   }
 
   if(!empty($diagnostico_laboratorios)) {
-  $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 75);
+  $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 60);
     if (!$need_to_add_page) {
           $pdf->PrintElement(2,utf8_decode("Diagnostico"),$diagnostico_laboratorios);
           $pdf->Ln(2);
@@ -845,7 +846,7 @@ foreach ($acf_checkbox_array as $study_name) {
   }
 
   $altura_firma = 6;
-  $pdf->Firma($altura_firma, "");
+  // $pdf->Firma($altura_firma, "");
 
 
 ob_start();

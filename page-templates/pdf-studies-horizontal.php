@@ -647,8 +647,11 @@ $acf_description_name_array = array();
   //$otros_st = $studies_fields['otros_st'][0];
   $otros_st = isset($studies_fields['otros_st'][0]) ? $studies_fields['otros_st'][0] : NULL;
   if($otros_st!= NULL) {
-    $acf_checkbox_array[] = "Otros estudios";
-    $acf_description_name_array[] = $otros_st;
+    // $acf_checkbox_array[] = "Otros estudios";
+    // $acf_description_name_array[] = $otros_st;
+
+    $acf_checkbox_array[] = $otros_st;
+    $acf_description_name_array[] = "";
   }
 
 // fpdf --------------------------------------------
@@ -685,16 +688,16 @@ foreach ($acf_checkbox_array as $study_name) {
     $pdf->Ln(4);
     $title_array=["Estudios Solicitados", ""];
     $pdf->TitleDatosPersonales($title_array);
-    $pdf->Ln(4);
+    $pdf->Ln(2);
     // el 3er parametro esta demas y podria eliminar. por pajero no hago
     $pdf->PrintArray(2,utf8_decode($study_name),$acf_checkbox_array);
     $pdf->Ln(2);
     // $pdf->PrintDescription(2,utf8_decode('- Descripción: '), utf8_decode($egcv_dx));
     if(!empty($acf_description_name_array[$i])){
-        $pdf->PrintDescription(2,utf8_decode('Descripción: '), utf8_decode($acf_description_name_array[$i]));
+        $pdf->PrintDescription(2,utf8_decode(''), utf8_decode($acf_description_name_array[$i]));
     }
     // $pdf->PrintSignature($side); 
-    $pdf->Firma($altura_firma, $side);
+    // $pdf->Firma($altura_firma, $side);
     $pdf->SetY($current_y);
     
 
