@@ -1,7 +1,7 @@
 <div class="row expanded app-dashboard-top-nav-bar">
     <div class="columns large-12">
       <button data-toggle="app-dashboard-sidebar" class="menu-icon hide-for-medium"></button>
-      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="app-dashboard-logo">ZweetDoc!</a>
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="app-dashboard-logo">ZweetDoc!</a> <span>V1.3</span>
     </div>
     
     <div class="columns large-6 shrink app-dashboard-top-bar-actions align-right">
