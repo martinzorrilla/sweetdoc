@@ -48,7 +48,8 @@ function sw_cargar_consultas_paciente($params){
 
     $appointment_url = home_url().'/consulta/?patient_id=';
 
-    $colpo_url = home_url().'/colposcopia/?patient_id=';
+    // $colpo_url = home_url().'/colposcopia/?patient_id=';
+    $colpo_url = home_url().'/imagenes/?patient_id=';
     $colpo_pdf_url = home_url().'/pdf-colpo/?colpo_id=';
   
     $indicacion_url = home_url().'/indicacion/?patient_id=';
@@ -119,12 +120,12 @@ function sw_cargar_consultas_paciente($params){
                 <a class="btn btn-green botones-estandard btn-table-consultas" href="'.esc_url( $appointment_url ).$patient_id.'&app_id='.$r.'">Ver</a>      
             </td>
     
-            <td scope="row" data-label="Colposcopía">
+            <td scope="row" data-label="Imágenes">
             <a class="btn btn-blue botones-estandard btn-table-consultas" href="'.esc_url( $colpo_url ).$patient_id.'&app_id='.$r.'">'.$colpo_title.'</a>';
             
             if ($colpo_post_id) {
                 $filas = $filas.'<br>
-                <a class="btn btn-green botones-estandard btn-table-consultas marg-top" href="'.esc_url( $colpo_pdf_url ).$colpo_post_id.'">Imprimir PDF</a>';
+                <a class="btn btn-green botones-estandard btn-table-consultas marg-top" href="'.esc_url( $colpo_post_url ).$colpo_post_id.'">Ver Imágenes</a>';
             }
         
             $filas = $filas.'

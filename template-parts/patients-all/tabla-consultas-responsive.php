@@ -62,7 +62,7 @@
                     <th scope="col" class="col-numero">ID</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Consulta</th>
-                    <th scope="col">Colposcopía</th>
+                    <th scope="col">Imágenes</th>
                     <th scope="col">Indicación</th>
                     <th scope="col">Estudios</th>
                     <th scope="col">Laboratorio</th>

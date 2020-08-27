@@ -34,7 +34,7 @@
     //var_dump($images_ids_array);
 
     //$image_post_id = $colpo_data_post['colpo_imagen_1'][0];
-    $size = "medium"; // (thumbnail, medium, large, full or custom size)
+    $size = "full"; // (thumbnail, medium, large, full or custom size)
     $images_array = array();
     $images_names = array();
     for ($i=0; $i < sizeof($images_ids_array); $i++) {
@@ -65,11 +65,23 @@
       list-style-type: none;
     }
 
-  </style>
+    .profile-card-about{
+      text-align: center;
+    }
 
-  <div class="callout secondary">
-    <h3 style="text-align: center; ">Colposcopia del Paciente</h3>
-  </div>      
+    .about-title{
+      font-size: 1em;
+      margin-bottom: 2em;
+    }
+
+  .image-class{
+    /* object-fit: cover;
+    width: 60%; */
+    width: 80%;
+    height:auto;
+  }
+
+  </style>
 
 
 <?php 
@@ -81,7 +93,7 @@ $result = sw_get_current_user_role();
 //if($result == "doctor"){
 if(true){
   //hm_get_template_part('template-parts/appointment/patient-data', ['patient_id' => $patient_id]);
-  hm_get_template_part('template-parts/appointment/colposcopia-no-img', ['colpo_post_id' => $post_id, 'is_editable' => $is_editable ]);
+  //hm_get_template_part('template-parts/appointment/colposcopia-no-img', ['colpo_post_id' => $post_id, 'is_editable' => $is_editable ]);
 
 ?>
 
