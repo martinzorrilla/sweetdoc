@@ -165,10 +165,12 @@ $(document).ready(function(){
     var cargarConsultas;
     //here we will load the response from the backend. i.e all the appointments from a patient
     var consultasTargetDiv;
+    var noHayconsultas;
 
     // cargarConsultas = $("#consultasAsync");
     cargarConsultas = $("#fakeid");
     consultasTargetDiv = $("#tbody-consultas");
+    noHayconsultas = $("#profile-card-tabla-consultas");
 
     $("#overlay").fadeIn(300);
     // cargarConsultasPaciente();
@@ -199,17 +201,23 @@ $(document).ready(function(){
               if(data.success){
 
                 consultasTargetDiv.empty();
+                // noHayconsultas.empty();
                 setTimeout(function(){
                   $("#overlay").fadeOut(300);
                 },500);
 
-                data["data"].forEach(function(entry) {
+                if (data["data"].length === 0) {
+                  noHayconsultas.append('<div><p style="text-align: center;margin-top: 1em;">Aun no existen consultas</p></div>');    
+                }
+                else{
+                  noHayconsultas.empty();
+                  data["data"].forEach(function(entry) {
                     // console.log(entry);
-                    consultasTargetDiv.append(entry);
+                    consultasTargetDiv.append(entry);    
+                  });//foreach
+                }
 
-                });
-
-              }
+              }//data.success
            },
            error: function() {
               // alert('No se pudo cargar las llamdas de paciente. JX');

@@ -108,7 +108,7 @@
 						<i class="fas fa-address-book fa large"></i><span class="app-dashboard-sidebar-text"> Todas las Pacientes</span>
 					</a></li>
 					<li><a href="<?php echo $create_patient_url ?>">
-						<i class="fas fa-plus fa large"></i><span class="app-dashboard-sidebar-text"> Agregar Paciente</span>
+						<i class="fas fa-plus fa large"></i><span class="app-dashboard-sidebar-text"> Crear Paciente</span>
 					</a></li>
 					<li><a href="#">
 						<i class="fas fa-user-md fa large"></i><span class="app-dashboard-sidebar-text"> Crear Asistente</span>
