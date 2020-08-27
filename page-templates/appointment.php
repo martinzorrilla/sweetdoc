@@ -291,7 +291,12 @@
           setTimeout(function(){
             $("#overlay").fadeOut(300);
           },500);
-           window.location.replace(result['msg']);
+          
+          // este te lleva a la ficha del paciente
+          //  window.location.replace(result['msg']);
+
+           window.history.back();
+
 
         }
       }

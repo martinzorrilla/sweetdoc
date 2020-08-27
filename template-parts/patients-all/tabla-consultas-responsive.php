@@ -30,7 +30,7 @@
 <div id="Consultas" class="appform tabcontent">
     <div class="card profile-card-action-icons">
       <div class="card-section">
-            <div class="profile-card-header">
+            <div class="profile-card-header" id="consultas-target-div" data-id="<?=$patient_id?>">
                 <div class="profile-card-author">
 
 
@@ -70,122 +70,8 @@
                     </tr>
                 </thead>
 
-                <tbody>
-                        <?php
-                        //r is the current app_id 
-                        foreach ($related as $r){
-                            //get the appointment creation date
-                            $creation_date = get_the_date( 'd-M-Y', $r );    
-                            //get the colposcopy id and href of this app
-                            $colpo_patient_array = sw_get_colpo_id($r);
-                            $colpo_post_id = isset($colpo_patient_array[0]) ? $colpo_patient_array[0] : NULL;
-                            // $colpo_post_id = $colpo_patient_array[0];
-                            $colpo_title = $colpo_post_id === NULL ? "Crear" : "Editar";
-                            $colpo_post_url = $colpo_post_id === NULL ? "&#35" : get_permalink( $colpo_post_id );
-
-                            $indication_array = sw_get_indication_id($r);
-                            $indication_id = isset($indication_array[0]) ? $indication_array[0] : NULL;
-                            // $indication_id = $indication_array[0];
-                            $indication_title = $indication_id === NULL ? "Crear" : "Editar";
-
-                            $studies_array = sw_get_studies_id($r);
-                            $studies_id = isset($studies_array[0]) ? $studies_array[0] : NULL;
-                            // $studies_id = $studies_array[0];
-                            $studies_title = $studies_id === NULL ? "Crear" : "Editar";
-                            
-                            $laboratories_array = sw_get_laboratories_id($r);
-                            $laboratories_id = isset($laboratories_array[0]) ? $laboratories_array[0] : NULL;
-                            // $laboratories_id = $laboratories_array[0];
-                            $laboratories_title = $laboratories_id === NULL ? "Crear" : "Editar";
-
-                            ?>
-                            
-                            <tr> <!--cada tr es una fila en la tabla -->
-                                <!-- ID -->
-                                <td scope="row" data-label="ID">
-                                    <a href="#"><?php echo $r ?></a>      
-                                </td>
-
-                                <!-- Fecha -->
-                                <td scope="row" data-label="Fecha">
-                                    <a href="#"><?php echo $creation_date ?></a>      
-                                </td>
-
-                                <!-- consulta -->
-                                <td scope="row" data-label="Consulta">
-                                    <a class="btn btn-green botones-estandard btn-table-consultas" href="<?php echo esc_url( $appointment_url ).$patient_id.'&app_id='.$r; ?>">Ver<?php //echo $r ?></a>      
-                                </td>
-
-                                <!-- COLPOSCOPIAS -->
-                                <td scope="row" data-label="Colposcopía">
-                                    <!-- <a href="< ?php //echo $colpo_post_url;?>"> < ?php //echo $colpo_title; ?></a> -->
-                                <a class="btn btn-blue botones-estandard btn-table-consultas" href="<?php echo esc_url( $colpo_url ).$patient_id.'&app_id='.$r; ?>"><?= $colpo_title?></a>
-                                <!-- solo si existe una indicacion para esta app (consulta) debemos mostrar las opcion ver indicacion ya que si el valor es null aun no se creo una indicacion. -->
-                                <?php 
-                                if ($colpo_post_id) {
-                                    ?>
-                                    <br>
-                                    <!-- <a href="< ?php //echo get_permalink( $colpo_post_id ); ?> "> Imprimir < ?php //echo $indication_id; ?></a> -->
-                                    <a class="btn btn-green botones-estandard btn-table-consultas marg-top" href="<?php echo esc_url( $colpo_pdf_url ).$colpo_post_id; ?>">Imprimir PDF</a>
-                                    <?php 
-                                }
-                                ?>
-                                </td>
-
-                                <!-- INDICACION -->
-                                <td scope="row" data-label="Indicación">
-                                <a class="btn btn-blue botones-estandard btn-table-consultas" href="<?php echo esc_url( $indicacion_url ).$patient_id.'&app_id='.$r; ?>"><?= $indication_title?></a>
-                                <!-- solo si existe una indicacion para esta app (consulta) debemos mostrar las opcion ver indicacion ya que si el valor es null aun no se creo una indicacion. -->
-                                <?php 
-                                if ($indication_id) {
-                                    ?>
-                                    <br>
-                                    <!--  -->
-                                    <!-- <a href="< ?php echo get_permalink( $indication_id ) ?> "> Imprimir < ?php //echo $indication_id; ?></a> -->
-                                    <a class="btn btn-green botones-estandard btn-table-consultas marg-top" href="<?php echo esc_url( $prescription_pdf_url ).$indication_id; ?>">Imprimir PDF</a>
-                                    <?php 
-                                }
-                                ?>
-                                </td>
-
-                                <!-- ESTUDIOS -->
-                                <td scope="row" data-label="Estudios">
-                                <a class="btn btn-blue botones-estandard btn-table-consultas" href="<?php echo esc_url( $estudios_url ).$patient_id.'&app_id='.$r; ?>"><?= $studies_title?></a>
-                                <!-- solo si existe una solicitud de estudios para esta app (consulta) debemos mostrar las opcion ver indicacion ya que si el valor es null aun no se creo una indicacion. -->
-                                <?php 
-                                if ($studies_id) {
-                                    ?>
-                                    <br>  
-                                    <!-- <a href="< ?php echo get_permalink( $studies_id ); ?> "> Imprimir < ?php //echo $studies_id; ?></a> -->
-                                    <a class="btn btn-green botones-estandard btn-table-consultas marg-top" href="<?php echo esc_url( $studies_pdf_url ).$studies_id; ?>">Imprimir PDF</a>
-                                    
-                                    <?php 
-                                }
-                                ?>
-                                </td>
-
-                                <!-- Laboratorio -->
-                                <td scope="row" data-label="Laboratorio">                  
-                                <a class="btn btn-blue botones-estandard btn-table-consultas" href="<?php echo esc_url( $laboratorios_url ).$patient_id.'&app_id='.$r; ?>"><?= $laboratories_title?></a>
-                                <!-- solo si existe una solicitud de estudios para esta app (consulta) debemos mostrar las opcion ver indicacion ya que si el valor es null aun no se creo una indicacion. -->
-                                <?php 
-                                if ($laboratories_id) {
-                                    ?>
-                                    <br>
-                                    <!-- <a href="< ?php echo get_permalink( $laboratories_id ); ?> "> Imprimir < ?php //echo $studies_id; ?></a> -->
-                                    <a class="btn btn-green botones-estandard btn-table-consultas marg-top" href="<?php echo esc_url( $laboratories_pdf_url ).$laboratories_id; ?>">Imprimir PDF</a>
-                                    <?php 
-                                }
-                                ?>
-                                </td>
-                                <!-- Ecografia -->
-                                <td scope="row" data-label="Ecografía">
-                                    <a href="#" style="text-decoration: line-through;">No disponible</a>      
-                                </td>
-                            </tr>
-                        <?php
-                        } //foreach 
-                        ?>
+                <tbody id="tbody-consultas">
+                        
                         </tbody>
 
                 </table>
