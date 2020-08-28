@@ -66,7 +66,7 @@
                     <th scope="col">Indicación</th>
                     <th scope="col">Estudios</th>
                     <th scope="col">Laboratorio</th>
-                    <th scope="col">Ecografía</th>
+                    <th scope="col">Ecografía Venosa</th>
                     </tr>
                 </thead>
 
