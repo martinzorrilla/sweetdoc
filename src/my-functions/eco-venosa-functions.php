@@ -8,7 +8,7 @@
 */
   function sw_create_eco_venosa_ajax(){
 
-    $result = array('error'=>[], 'success'=>FALSE, 'patient_id'=>'', 'app_id'=>'','msg'=>'');
+    $result = array('error'=>[], 'success'=>FALSE, 'patient_id'=>'', 'app_id'=>'', 'eco_venosa_id'=>'','msg'=>'');
   
     $app_id = isset($_POST['app_id']) && $_POST['app_id'] != '' ? $_POST['app_id'] : NULL;
     $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
@@ -74,7 +74,7 @@
     }
     //elseif ($app_id != NULL && $app_id != '') {
     else{
-      $result = sw_update_single_eco_venosa($params);
+      $result = sw_update_eco_venosa($params);
     }
 
     wp_die(json_encode($result));
@@ -86,7 +86,7 @@ add_action( 'wp_ajax_sw_create_eco_venosa_ajax', 'sw_create_eco_venosa_ajax');
 function sw_create_new_eco_venosa($params){
 
     //global $post;
-    $result = array('error'=>[], 'success'=>FALSE, 'patient_id'=>'', 'app_id'=>'', 'colpo_id'=>'','msg'=>'');
+    $result = array('error'=>[], 'success'=>FALSE, 'patient_id'=>'', 'app_id'=>'', 'eco_venosa_id'=>'','msg'=>'');
 
     $patient_id = $params['patient_id'];
     $app_id  = $params['app_id'];
@@ -218,7 +218,142 @@ function sw_create_new_eco_venosa($params){
 
     //else{$result['error'] = ["key"=> "user_not_created", "msg" => "Error creating the Account"];}
 
-}//end of sw_create_appointment
+}//end of sw_create_eco venosa
+
+
+function sw_update_eco_venosa($params){
+
+  $result = array('error'=>[], 'success'=>FALSE, 'patient_id'=>'', 'app_id'=>'', 'colpo_id'=>'','msg'=>'');    
+
+  $patient_id  = $params["patient_id"];
+  $app_id  = $params["app_id"];
+  $eco_venosa_post_id  = $params['eco_venosa_post_id'];
+ 
+
+  $patient_fields = get_post_custom($patient_id);
+  $name = $patient_fields['nombre'][0];
+  $lastname = $patient_fields['apellido'][0];
+  //$cedula = $patient_fields['cedula'][0];
+  $fullname = $name.'-'.$lastname;
+
+  $vena_femoral_comun = $params['vena_femoral_comun'];
+  $vena_femoral_superficial = $params['vena_femoral_superficial'];
+  $vena_poplitea = $params['vena_poplitea'];
+  $plexo_soleo_y_gemelar = $params['plexo_soleo_y_gemelar'];
+  $union_safeno_femoral = $params['union_safeno_femoral'];
+  $safeno_femoral_medida = $params['safeno_femoral_medida'];
+
+  $tronco_suprapatelar = $params['tronco_suprapatelar'];
+  $tronco_suprapatelar_medida = $params['tronco_suprapatelar_medida'];
+  $tronco_infrapatelar = $params['tronco_infrapatelar'];
+  $tronco_infrapatelar_medida = $params['tronco_infrapatelar_medida'];
+  $union_safeno_poplitea = $params['union_safeno_poplitea'];
+  $union_safeno_poplitea_medida = $params['union_safeno_poplitea_medida'];
+  $vena_safena_parva = $params['vena_safena_parva'];
+  $vena_safena_parva_medida = $params['vena_safena_parva_medida'];
+  $venas_perforantes = $params['venas_perforantes'];    
+  $venas_perforantes_medida = $params['venas_perforantes_medida'];
+  $observaciones = $params['observaciones'];
+  $conclusion = $params['conclusion'];
+
+
+  
+      //update the colposcopy fields
+
+      $acf_fields = array(
+        
+        "vena_femoral_comun" => $vena_femoral_comun,
+        "vena_femoral_superficial" => $vena_femoral_superficial,
+        "vena_poplitea" => $vena_poplitea,
+        "plexo_soleo_y_gemelar" => $plexo_soleo_y_gemelar,
+        "union_safeno_femoral" => $union_safeno_femoral,
+        "safeno_femoral_medida" => $safeno_femoral_medida,
+        "tronco_suprapatelar" => $tronco_suprapatelar,
+        "tronco_suprapatelar_medida" => $tronco_suprapatelar_medida,
+        "tronco_infrapatelar" => $tronco_infrapatelar,
+        "tronco_infrapatelar_medida" => $tronco_infrapatelar_medida,
+        "union_safeno_poplitea" => $union_safeno_poplitea,
+        "union_safeno_poplitea_medida" => $union_safeno_poplitea_medida,
+        "vena_safena_parva" => $vena_safena_parva,
+        "vena_safena_parva_medida" => $vena_safena_parva_medida,
+        "venas_perforantes" => $venas_perforantes,
+        "venas_perforantes_medida" => $venas_perforantes_medida,
+        "observaciones" => $observaciones,
+        "conclusion" => $conclusion  
+      );
+      foreach ($acf_fields as $field => $value) {
+        // if($value != NULL){
+              update_post_meta( $eco_venosa_post_id, $field, $value );
+        // }
+      }
+
+      //test: empty all image fields before update. but only if image files has been selected to replace the old ones.
+      $update_eco_venosa_images = false;
+      foreach ($_FILES as $file ) {
+        if($file['name'] != "") {
+          $update_eco_venosa_images = true;
+          }
+      }
+
+      if ($update_eco_venosa_images) {         
+        $image_fields = array(
+            "eco_venosa_imagen_1" => "",         
+            "eco_venosa_imagen_2" => "",         
+            "eco_venosa_imagen_3" => "",         
+            "eco_venosa_imagen_4" => "",         
+            "eco_venosa_imagen_5" => ""         
+        );
+        foreach ($image_fields as $field => $value) {
+          update_post_meta( $eco_venosa_post_id, $field, $value );
+        }
+      }
+      //file upload test
+      $i = 1;   
+      foreach ($_FILES as $file ) {
+
+        $uploadedfile = $file;
+        $movefile = wp_handle_upload($uploadedfile, array('action' => 'sw_create_eco_venosa_ajax'));
+
+        //Guardamos la foto en la biblioteca multimedia
+        if ($movefile) {
+          $wp_upload_dir = wp_upload_dir();
+          $attachment = array(
+            'guid' => $wp_upload_dir['url'].'/'.basename($movefile['file']),
+            'post_mime_type' => $movefile['type'],
+            'post_title' => preg_replace('/\.[^.]+$/', '', basename($movefile['file'])),
+            'post_content' => '',
+            'post_status' => 'inherit'
+          );
+          $attach_id = wp_insert_attachment($attachment, $movefile['file']);
+          
+
+          // nuevo. estas 3 lineas permiten que al alzar una imagen WP cree versiones de diferentes tamaños
+          // con lo cual, luego podemos usar imagenes mas pequeñas para hacer los informes colposcopicos casi en un 1000%
+          
+          // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
+          require_once( ABSPATH . 'wp-admin/includes/image.php' ); // me anda igual sin esta linea pero lei que hay que agregar si o si 
+          $attach_data = wp_generate_attachment_metadata($attach_id, $movefile['file']);
+          wp_update_attachment_metadata($attach_id, $attach_data);
+
+
+          //update_post_meta( $colpo_post_id, 'colpo_imagen', $attach_id );  
+          update_post_meta( $eco_venosa_post_id, 'eco_venosa_imagen_'.$i, $attach_id );  
+          //update_field('colpo_imagen', $attach_id, $colpo_post_id);
+          $i++;
+        }
+      }
+      //end update colposcopy
+
+      $result['success'] = TRUE;
+      $result['msg'] = 'Ecografía venosa actualizada';
+      $result['patient_id'] = $patient_id;
+      $result['app_id'] = $app_id;
+      $result['colpo_id'] = $eco_venosa_post_id;
+
+      
+  return $result;
+}
+
 
 
 ?>
