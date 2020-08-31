@@ -53,9 +53,10 @@
     $radiobox_vena_femoral_superficial = get_field('vena_femoral_superficial', $eco_venosa_post_id); 
     $radiobox_vena_poplitea = get_field('vena_poplitea', $eco_venosa_post_id); 
     $radiobox_plexo_soleo_y_gemelar = get_field('plexo_soleo_y_gemelar', $eco_venosa_post_id); 
-    
-    
     $checkbox_union_safeno_femoral = get_field('union_safeno_femoral', $eco_venosa_post_id);
+    // var_dump($checkbox_union_safeno_femoral[1]["value"]);
+    // checkbox_union_safeno_femoral
+    
     $safeno_femoral_medida = isset($eco_venosa_data_post['safeno_femoral_medida'][0]) ? $eco_venosa_data_post['safeno_femoral_medida'][0] : NULL;
     
     $checkbox_tronco_suprapatelar = get_field('tronco_suprapatelar', $eco_venosa_post_id);
@@ -114,16 +115,16 @@
             <div class="floated-label-wrapper small-12 medium-12 columns checkbox-radio text-left ">
                     <label class="separator-left">Vena Femoral común</label>
                     
-                      <input type="radio" id="vfc_1" name="vena_femoral_comun" value="permeable_suficiente" <?php if ($radiobox_vena_femoral_comun == "permeable_suficiente ") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="vfc_1" name="vena_femoral_comun" value="permeable_suficiente" <?php if ($radiobox_vena_femoral_comun["value"] == "permeable_suficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfc_1">Permeable y suficiente</label>
 
-                      <input type="radio" id="vfc_2" name="vena_femoral_comun" value="permeable_insuficiente" <?php if ($radiobox_vena_femoral_comun == "permeable_insuficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="vfc_2" name="vena_femoral_comun" value="permeable_insuficiente" <?php if ($radiobox_vena_femoral_comun["value"] == "permeable_insuficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfc_2">Permeable insuficiente</label>         
 
-                      <input type="radio" id="vfc_3" name="vena_femoral_comun" value="ocluido" <?php if ($radiobox_vena_femoral_comun == "ocluido") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="vfc_3" name="vena_femoral_comun" value="ocluido" <?php if ($radiobox_vena_femoral_comun["value"] == "ocluido") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfc_3">Ocluido</label>
 
-                      <input type="radio" id="vfc_4" name="vena_femoral_comun" value="recanalizado" <?php if ($radiobox_vena_femoral_comun == "recanalizado") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="vfc_4" name="vena_femoral_comun" value="recanalizado" <?php if ($radiobox_vena_femoral_comun["value"] == "recanalizado") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfc_4">Recanalizado</label>
 
             </div>
@@ -132,16 +133,16 @@
             <div class="floated-label-wrapper small-12 medium-12 columns checkbox-radio text-left ">
                     <label class="separator-left">Vena Femoral superficial</label>
                     
-                    <input type="radio" id="vfs_1" name="vena_femoral_superficial" value="permeable_suficiente" <?php if ($radiobox_vena_femoral_superficial == "permeable_suficiente ") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                    <input type="radio" id="vfs_1" name="vena_femoral_superficial" value="permeable_suficiente" <?php if ($radiobox_vena_femoral_superficial["value"] == "permeable_suficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfs_1">Permeable y suficiente</label>
 
-                      <input type="radio" id="vfs_2" name="vena_femoral_superficial" value="permeable_insuficiente" <?php if ($radiobox_vena_femoral_superficial == "permeable_insuficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="vfs_2" name="vena_femoral_superficial" value="permeable_insuficiente" <?php if ($radiobox_vena_femoral_superficial["value"] == "permeable_insuficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfs_2">Permeable insuficiente</label>         
 
-                      <input type="radio" id="vfs_3" name="vena_femoral_superficial" value="ocluido" <?php if ($radiobox_vena_femoral_superficial == "ocluido") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="vfs_3" name="vena_femoral_superficial" value="ocluido" <?php if ($radiobox_vena_femoral_superficial["value"] == "ocluido") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfs_3">Ocluido</label>
 
-                      <input type="radio" id="vfs_4" name="vena_femoral_superficial" value="recanalizado" <?php if ($radiobox_vena_femoral_superficial == "recanalizado") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="vfs_4" name="vena_femoral_superficial" value="recanalizado" <?php if ($radiobox_vena_femoral_superficial["value"] == "recanalizado") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfs_4">Recanalizado</label>
         
             </div>
@@ -150,16 +151,16 @@
             <div class="floated-label-wrapper small-12 medium-12 columns checkbox-radio text-left ">
                     <label class="separator-left">Vena poplítea</label>
                     
-                    <input type="radio" id="vfp_1" name="vena_poplitea" value="permeable_suficiente" <?php if ($radiobox_vena_poplitea == "permeable_suficiente ") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                    <input type="radio" id="vfp_1" name="vena_poplitea" value="permeable_suficiente" <?php if ($radiobox_vena_poplitea["value"] == "permeable_suficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfp_1">Permeable y suficiente</label>
 
-                      <input type="radio" id="vfp_2" name="vena_poplitea" value="permeable_insuficiente" <?php if ($radiobox_vena_poplitea == "permeable_insuficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="vfp_2" name="vena_poplitea" value="permeable_insuficiente" <?php if ($radiobox_vena_poplitea["value"] == "permeable_insuficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfp_2">Permeable insuficiente</label>         
 
-                      <input type="radio" id="vfp_3" name="vena_poplitea" value="ocluido" <?php if ($radiobox_vena_poplitea == "ocluido") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="vfp_3" name="vena_poplitea" value="ocluido" <?php if ($radiobox_vena_poplitea["value"] == "ocluido") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfp_3">Ocluido</label>
 
-                      <input type="radio" id="vfp_4" name="vena_poplitea" value="recanalizado" <?php if ($radiobox_vena_poplitea == "recanalizado") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="vfp_4" name="vena_poplitea" value="recanalizado" <?php if ($radiobox_vena_poplitea["value"] == "recanalizado") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfp_4">Recanalizado</label>
 
             </div>
@@ -168,16 +169,16 @@
             <div class="floated-label-wrapper small-12 medium-12 columns checkbox-radio text-left ">
                     <label class="separator-left">Plexo soleo y gemelar</label>
                     
-                    <input type="radio" id="psg_1" name="plexo_soleo_y_gemelar" value="permeable_suficiente" <?php if ($radiobox_plexo_soleo_y_gemelar == "permeable_suficiente ") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                    <input type="radio" id="psg_1" name="plexo_soleo_y_gemelar" value="permeable_suficiente" <?php if ($radiobox_plexo_soleo_y_gemelar["value"] == "permeable_suficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="psg_1">Permeable y suficiente</label>
 
-                      <input type="radio" id="psg_2" name="plexo_soleo_y_gemelar" value="permeable_insuficiente" <?php if ($radiobox_plexo_soleo_y_gemelar == "permeable_insuficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="psg_2" name="plexo_soleo_y_gemelar" value="permeable_insuficiente" <?php if ($radiobox_plexo_soleo_y_gemelar["value"] == "permeable_insuficiente") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="psg_2">Permeable insuficiente</label>         
 
-                      <input type="radio" id="psg_3" name="plexo_soleo_y_gemelar" value="ocluido" <?php if ($radiobox_plexo_soleo_y_gemelar == "ocluido") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="psg_3" name="plexo_soleo_y_gemelar" value="ocluido" <?php if ($radiobox_plexo_soleo_y_gemelar["value"] == "ocluido") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="psg_3">Ocluido</label>
 
-                      <input type="radio" id="psg_4" name="plexo_soleo_y_gemelar" value="recanalizado" <?php if ($radiobox_plexo_soleo_y_gemelar == "recanalizado") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      <input type="radio" id="psg_4" name="plexo_soleo_y_gemelar" value="recanalizado" <?php if ($radiobox_plexo_soleo_y_gemelar["value"] == "recanalizado") echo "checked"; ?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="psg_4">Recanalizado</label>
             
             </div>
@@ -201,10 +202,10 @@
                 <label class="separator-left"> Unión Safeno-Femoral </label>
               
 
-                    <input type="checkbox" id="usf1" name="union_safeno_femoral[]" value="permeable_calibre_conservado " class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                    <input type="checkbox" id="usf1" name="union_safeno_femoral[]" value="permeable_calibre_conservado" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
                     if( $checkbox_union_safeno_femoral != NULL || $checkbox_union_safeno_femoral != "" ){ //si esta vacio genera un error, por eso hay que verificar antes
-                      if(in_array("permeable_calibre_conservado ", $checkbox_union_safeno_femoral)) echo "checked";
+                      if(in_array("permeable_calibre_conservado", $checkbox_union_safeno_femoral)) echo "checked";
                     }
                     ?> >
                     <label for="usf1">Permeable de calibre conservado</label>
