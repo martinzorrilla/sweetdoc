@@ -68,7 +68,7 @@
 <!-- nuevo -->
 <div class="row" style="padding-top: 2rem;">  
     <div class="small-12 columns text-center" style="padding-bottom:1em;">
-      <a id="create-colposcopy" href="#" class="crete-app btn btn-green botones-estandard">Guardar</a>
+      <a id="create-eco-venosa" href="#" class="crete-app btn btn-green botones-estandard">Guardar</a>
     </div>
 </div>
 

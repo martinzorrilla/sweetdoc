@@ -152,12 +152,12 @@ if(true){
         ?>
       </div> <!-- div.archivos -->
 
-  <div class="button-div">
-    <a href="<?php echo esc_url( $colposcopy_pdf_url ); ?>"  
+  <!-- <div class="button-div">
+    <a href="< ?php echo esc_url( $colposcopy_pdf_url ); ?>"  
       <button id="create-colposcopy-pdf" class="save-button-expanded" type="submit" value="Next">Generar informe colposcopico</button>
     </a>  
     <p class="errorWrapper"></p>
-  </div>
+  </div> -->
 
 <?php
  } //if result == doctor
