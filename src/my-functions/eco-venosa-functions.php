@@ -14,7 +14,7 @@
     $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
     $eco_venosa_post_id = isset($_POST['eco_venosa_post_id']) && $_POST['eco_venosa_post_id'] != '' ? $_POST['eco_venosa_post_id'] : NULL;
 
-    //eco_venosa data    
+    //eco_venosa data    IZQUIERDO
     $vena_femoral_comun = isset($_POST['vena_femoral_comun']) && $_POST['vena_femoral_comun'] != '' ? $_POST['vena_femoral_comun'] : NULL;
     $vena_femoral_superficial = isset($_POST['vena_femoral_superficial']) && $_POST['vena_femoral_superficial'] != '' ? $_POST['vena_femoral_superficial'] : NULL;
     $vena_poplitea = isset($_POST['vena_poplitea']) && $_POST['vena_poplitea'] != '' ? $_POST['vena_poplitea'] : NULL;
@@ -36,8 +36,32 @@
     $observaciones = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : NULL;
     $conclusion = isset($_POST['conclusion'])? $_POST['conclusion'] : NULL;
     
+    //eco_venosa data    DERECHO
+    $vena_femoral_comun_der = isset($_POST['vena_femoral_comun_der']) && $_POST['vena_femoral_comun_der'] != '' ? $_POST['vena_femoral_comun_der'] : NULL;
+    
+    $vena_femoral_superficial_der = isset($_POST['vena_femoral_superficial_der']) && $_POST['vena_femoral_superficial_der'] != '' ? $_POST['vena_femoral_superficial_der'] : NULL;
+    $vena_poplitea_der = isset($_POST['vena_poplitea_der']) && $_POST['vena_poplitea_der'] != '' ? $_POST['vena_poplitea_der'] : NULL;
+    $plexo_soleo_y_gemelar_der = isset($_POST['plexo_soleo_y_gemelar_der']) && $_POST['plexo_soleo_y_gemelar_der'] != '' ? $_POST['plexo_soleo_y_gemelar_der'] : NULL;
+    $union_safeno_femoral_der = isset($_POST['union_safeno_femoral_der']) && $_POST['union_safeno_femoral_der'] != '' ? $_POST['union_safeno_femoral_der'] : NULL;
+    $safeno_femoral_medida_der = isset($_POST['safeno_femoral_medida_der']) && $_POST['safeno_femoral_medida_der'] != '' ? $_POST['safeno_femoral_medida_der'] : NULL;
+    $tronco_suprapatelar_der = isset($_POST['tronco_suprapatelar_der']) && $_POST['tronco_suprapatelar_der'] != '' ? $_POST['tronco_suprapatelar_der'] : NULL;
+    $tronco_suprapatelar_medida_der = isset($_POST['tronco_suprapatelar_medida_der']) && $_POST['tronco_suprapatelar_medida_der'] != '' ? $_POST['tronco_suprapatelar_medida_der'] : NULL;
+    $tronco_infrapatelar_der = isset($_POST['tronco_infrapatelar_der']) && $_POST['tronco_infrapatelar_der'] != '' ? $_POST['tronco_infrapatelar_der'] : NULL;
+    $tronco_infrapatelar_medida_der = isset($_POST['tronco_infrapatelar_medida_der']) && $_POST['tronco_infrapatelar_medida_der'] != '' ? $_POST['tronco_infrapatelar_medida_der'] : NULL;
+    $union_safeno_poplitea_der = isset($_POST['union_safeno_poplitea_der']) && $_POST['union_safeno_poplitea_der'] != '' ? $_POST['union_safeno_poplitea_der'] : NULL;
+    $union_safeno_poplitea_medida_der = isset($_POST['union_safeno_poplitea_medida_der']) && $_POST['union_safeno_poplitea_medida_der'] != '' ? $_POST['union_safeno_poplitea_medida_der'] : NULL;
+    $vena_safena_parva_der = isset($_POST['vena_safena_parva_der']) && $_POST['vena_safena_parva_der'] != '' ? $_POST['vena_safena_parva_der'] : NULL;
+    $vena_safena_parva_medida_der = isset($_POST['vena_safena_parva_medida_der']) && $_POST['vena_safena_parva_medida_der'] != '' ? $_POST['vena_safena_parva_medida_der'] : NULL;
+    $venas_perforantes_der = isset($_POST['venas_perforantes_der']) && $_POST['venas_perforantes_der'] != '' ? $_POST['venas_perforantes_der'] : NULL;
+    $venas_perforantes_medida_der = isset($_POST['venas_perforantes_medida_der']) && $_POST['venas_perforantes_medida_der'] != '' ? $_POST['venas_perforantes_medida_der'] : NULL;
+    $observaciones_der = isset($_POST['observaciones_der']) && $_POST['observaciones_der'] != '' ? $_POST['observaciones_der'] : NULL;
+    
+    $conclusion_der = isset($_POST['conclusion_der'])? $_POST['conclusion_der'] : NULL;
+    
+
+    
     //esto es para debugear el json que recibe desde el frontend. se guarda en el phpError.log de apache
-    error_log(json_encode($_POST), 0);
+    // error_log(json_encode($_POST), 0);
 
     $params = array(
         "app_id" => $app_id,
@@ -62,7 +86,28 @@
         "venas_perforantes" => $venas_perforantes,
         "venas_perforantes_medida" => $venas_perforantes_medida,
         "observaciones" => $observaciones,
-        "conclusion" => $conclusion
+        "conclusion" => $conclusion,
+
+
+        //miembro derecho
+        "vena_femoral_comun_der" => $vena_femoral_comun_der,
+        "vena_femoral_superficial_der" => $vena_femoral_superficial_der,
+        "vena_poplitea_der" => $vena_poplitea_der,
+        "plexo_soleo_y_gemelar_der" => $plexo_soleo_y_gemelar_der,
+        "union_safeno_femoral_der" => $union_safeno_femoral_der,
+        "safeno_femoral_medida_der" => $safeno_femoral_medida_der,
+        "tronco_suprapatelar_der" => $tronco_suprapatelar_der,
+        "tronco_suprapatelar_medida_der" => $tronco_suprapatelar_medida_der,
+        "tronco_infrapatelar_der" => $tronco_infrapatelar_der,
+        "tronco_infrapatelar_medida_der" => $tronco_infrapatelar_medida_der,
+        "union_safeno_poplitea_der" => $union_safeno_poplitea_der,
+        "union_safeno_poplitea_medida_der" => $union_safeno_poplitea_medida_der,
+        "vena_safena_parva_der" => $vena_safena_parva_der,
+        "vena_safena_parva_medida_der" => $vena_safena_parva_medida_der,
+        "venas_perforantes_der" => $venas_perforantes_der,
+        "venas_perforantes_medida_der" => $venas_perforantes_medida_der,
+        "observaciones_der" => $observaciones_der,
+        "conclusion_der" => $conclusion_der
 
     );
 
@@ -92,7 +137,7 @@ function sw_create_new_eco_venosa($params){
     $app_id  = $params['app_id'];
 
  
-    //colposcopia data
+    //miembro izquierdo
     $vena_femoral_comun = $params['vena_femoral_comun'];
     $vena_femoral_superficial = $params['vena_femoral_superficial'];
     $vena_poplitea = $params['vena_poplitea'];
@@ -112,6 +157,28 @@ function sw_create_new_eco_venosa($params){
     $venas_perforantes_medida = $params['venas_perforantes_medida'];
     $observaciones = $params['observaciones'];
     $conclusion = $params['conclusion'];
+
+
+    //meiembro derecho
+    $vena_femoral_comun_der = $params['vena_femoral_comun_der'];
+    $vena_femoral_superficial_der = $params['vena_femoral_superficial_der'];
+    $vena_poplitea_der = $params['vena_poplitea_der'];
+    $plexo_soleo_y_gemelar_der = $params['plexo_soleo_y_gemelar_der'];
+    $union_safeno_femoral_der = $params['union_safeno_femoral_der'];
+    $safeno_femoral_medida_der = $params['safeno_femoral_medida_der'];
+
+    $tronco_suprapatelar_der = $params['tronco_suprapatelar_der'];
+    $tronco_suprapatelar_medida_der = $params['tronco_suprapatelar_medida_der'];
+    $tronco_infrapatelar_der = $params['tronco_infrapatelar_der'];
+    $tronco_infrapatelar_medida_der = $params['tronco_infrapatelar_medida_der'];
+    $union_safeno_poplitea_der = $params['union_safeno_poplitea_der'];
+    $union_safeno_poplitea_medida_der = $params['union_safeno_poplitea_medida_der'];
+    $vena_safena_parva_der = $params['vena_safena_parva_der'];
+    $vena_safena_parva_medida_der = $params['vena_safena_parva_medida_der'];
+    $venas_perforantes_der = $params['venas_perforantes_der'];    
+    $venas_perforantes_medida_der = $params['venas_perforantes_medida_der'];
+    $observaciones_der = $params['observaciones_der'];
+    $conclusion_der = $params['conclusion_der'];
 
 
     $patient_fields = get_post_custom($patient_id);
@@ -158,7 +225,30 @@ function sw_create_new_eco_venosa($params){
             "venas_perforantes" => $venas_perforantes,
             "venas_perforantes_medida" => $venas_perforantes_medida,
             "observaciones" => $observaciones,
-            "conclusion" => $conclusion
+            "conclusion" => $conclusion,
+
+
+
+            //miembro derecho
+            "vena_femoral_comun_der" => $vena_femoral_comun_der,
+            "vena_femoral_superficial_der" => $vena_femoral_superficial_der,
+            "vena_poplitea_der" => $vena_poplitea_der,
+            "plexo_soleo_y_gemelar_der" => $plexo_soleo_y_gemelar_der,
+            "union_safeno_femoral_der" => $union_safeno_femoral_der,
+            "safeno_femoral_medida_der" => $safeno_femoral_medida_der,
+            "tronco_suprapatelar_der" => $tronco_suprapatelar_der,
+            "tronco_suprapatelar_medida_der" => $tronco_suprapatelar_medida_der,
+            "tronco_infrapatelar_der" => $tronco_infrapatelar_der,
+            "tronco_infrapatelar_medida_der" => $tronco_infrapatelar_medida_der,
+            "union_safeno_poplitea_der" => $union_safeno_poplitea_der,
+            "union_safeno_poplitea_medida_der" => $union_safeno_poplitea_medida_der,
+            "vena_safena_parva_der" => $vena_safena_parva_der,
+            "vena_safena_parva_medida_der" => $vena_safena_parva_medida_der,
+            "venas_perforantes_der" => $venas_perforantes_der,
+            "venas_perforantes_medida_der" => $venas_perforantes_medida_der,
+            "observaciones_der" => $observaciones_der,
+            "conclusion_der" => $conclusion_der
+
 
         );
 
@@ -255,13 +345,35 @@ function sw_update_eco_venosa($params){
   $venas_perforantes_medida = $params['venas_perforantes_medida'];
   $observaciones = $params['observaciones'];
   $conclusion = $params['conclusion'];
+  
+  
+  //meiembro derecho
+  $vena_femoral_comun_der = $params['vena_femoral_comun_der'];
+  $vena_femoral_superficial_der = $params['vena_femoral_superficial_der'];
+  $vena_poplitea_der = $params['vena_poplitea_der'];
+  $plexo_soleo_y_gemelar_der = $params['plexo_soleo_y_gemelar_der'];
+  $union_safeno_femoral_der = $params['union_safeno_femoral_der'];
+  $safeno_femoral_medida_der = $params['safeno_femoral_medida_der'];
 
+  $tronco_suprapatelar_der = $params['tronco_suprapatelar_der'];
+  $tronco_suprapatelar_medida_der = $params['tronco_suprapatelar_medida_der'];
+  $tronco_infrapatelar_der = $params['tronco_infrapatelar_der'];
+  $tronco_infrapatelar_medida_der = $params['tronco_infrapatelar_medida_der'];
+  $union_safeno_poplitea_der = $params['union_safeno_poplitea_der'];
+  $union_safeno_poplitea_medida_der = $params['union_safeno_poplitea_medida_der'];
+  $vena_safena_parva_der = $params['vena_safena_parva_der'];
+  $vena_safena_parva_medida_der = $params['vena_safena_parva_medida_der'];
+  $venas_perforantes_der = $params['venas_perforantes_der'];    
+  $venas_perforantes_medida_der = $params['venas_perforantes_medida_der'];
+  $observaciones_der = $params['observaciones_der'];
+  $conclusion_der = $params['conclusion_der'];
 
+  
   
       //update the colposcopy fields
 
       $acf_fields = array(
-        
+
         "vena_femoral_comun" => $vena_femoral_comun,
         "vena_femoral_superficial" => $vena_femoral_superficial,
         "vena_poplitea" => $vena_poplitea,
@@ -279,7 +391,30 @@ function sw_update_eco_venosa($params){
         "venas_perforantes" => $venas_perforantes,
         "venas_perforantes_medida" => $venas_perforantes_medida,
         "observaciones" => $observaciones,
-        "conclusion" => $conclusion  
+        "conclusion" => $conclusion,
+
+
+        //miembro derecho
+        "vena_femoral_comun_der" => $vena_femoral_comun_der,
+        "vena_femoral_superficial_der" => $vena_femoral_superficial_der,
+        "vena_poplitea_der" => $vena_poplitea_der,
+        "plexo_soleo_y_gemelar_der" => $plexo_soleo_y_gemelar_der,
+        "union_safeno_femoral_der" => $union_safeno_femoral_der,
+        "safeno_femoral_medida_der" => $safeno_femoral_medida_der,
+        "tronco_suprapatelar_der" => $tronco_suprapatelar_der,
+        "tronco_suprapatelar_medida_der" => $tronco_suprapatelar_medida_der,
+        "tronco_infrapatelar_der" => $tronco_infrapatelar_der,
+        "tronco_infrapatelar_medida_der" => $tronco_infrapatelar_medida_der,
+        "union_safeno_poplitea_der" => $union_safeno_poplitea_der,
+        "union_safeno_poplitea_medida_der" => $union_safeno_poplitea_medida_der,
+        "vena_safena_parva_der" => $vena_safena_parva_der,
+        "vena_safena_parva_medida_der" => $vena_safena_parva_medida_der,
+        "venas_perforantes_der" => $venas_perforantes_der,
+        "venas_perforantes_medida_der" => $venas_perforantes_medida_der,
+        "observaciones_der" => $observaciones_der,
+        "conclusion_der" => $conclusion_der 
+
+        
       );
       foreach ($acf_fields as $field => $value) {
         // if($value != NULL){

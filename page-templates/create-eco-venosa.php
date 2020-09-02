@@ -62,8 +62,25 @@
     </h4>
   </div>
 
-<?php hm_get_template_part('template-parts/eco-venosa/eco-venosa-data', ['patient_id' => $patient_id, 'app_id' => $app_id, 'eco_venosa_post_id' => $eco_venosa_post_id, 'is_editable' => $is_editable ]); ?>
 
+  <!-- <div class="tab">
+      <button class="tablinks dabbed" >Izquierdo</button>
+      <button class="tablinks dabbed" >Derecho</button>
+  </div> -->
+
+
+  <div class="tab">
+    <button class="tablinks dabbed tab-eco-venosa" data-id="izquierdo"  id="defaultOpen">Izquierdo</button>
+    <button class="tablinks dabbed tab-eco-venosa" data-id="derecho">Derecho</button>
+  </div>
+
+  <form id="create-eco-venosa-form" name="create-eco-venosa-form" method="post">
+    <?php 
+    hm_get_template_part('template-parts/eco-venosa/eco-venosa-data', ['patient_id' => $patient_id, 'app_id' => $app_id, 'eco_venosa_post_id' => $eco_venosa_post_id, 'is_editable' => $is_editable ]); 
+
+    hm_get_template_part('template-parts/eco-venosa/eco-venosa-data-derecho', ['patient_id' => $patient_id, 'app_id' => $app_id, 'eco_venosa_post_id' => $eco_venosa_post_id, 'is_editable' => $is_editable ]); 
+    ?>
+  </form>
 
 <!-- nuevo -->
 <div class="row" style="padding-top: 2rem;">  

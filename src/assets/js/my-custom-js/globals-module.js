@@ -7,6 +7,7 @@ var GloblasModule = function(){
     var createPatientForm;
     var editPatientBtn;
     var tabSinglePatient;
+    var tabEcoVenosa;
     var tabAppointment;
     var defaultTab;
     
@@ -17,11 +18,12 @@ var GloblasModule = function(){
         // editPatientBtn = $("#toggle-input");
         editPatientBtn = $("#toggle-input-patient");
         tabSinglePatient = $(".tab-single-patient");
+        tabEcoVenosa = $(".tab-eco-venosa");
         tabAppointment = $(".tab-appointment");
         defaultTab = $("#defaultOpen");
 
           tabSinglePatient.on("click", function (e) {
-          var tabName = $(this).data('id');
+            var tabName = $(this).data('id');
             openCity(e, tabName);
           })
 
@@ -30,6 +32,10 @@ var GloblasModule = function(){
               openCity(e, tabName);
             })
 
+            tabEcoVenosa.on("click", function (e) {
+              var tabName = $(this).data('id');
+              openCity(e, tabName);
+            })
 
         // Get the element with id="defaultOpen" and click on it
         if(defaultTab.length){

@@ -5,8 +5,10 @@ var CreateEcoVenosaModule = function(){
     
     var createEcoVenosaBtn;
     var createEcoVenosaForm;
+    var loadImagesEco;
+    var loadImagesEco_der;
     
-    //added
+    //added 
     // var myInputFile;
     // var myFile;
 
@@ -15,18 +17,35 @@ var CreateEcoVenosaModule = function(){
 
         createEcoVenosaBtn = $("#create-eco-venosa");
         createEcoVenosaForm = $("#create-eco-venosa-form");
+        loadImagesEco = $("#imagen_eco_venosa");
+        loadImagesEco_der = $("#imagen_eco_venosa_der");
 
 
         var fileInput = document.querySelector('input[type="file"]');
         // var preview = document.querySelector('.preview');
         
+        // if (fileInput != null) {
+        //   fileInput.style.opacity = 0;
+        //   //fileInput.addEventListener('change', updateImageDisplay(preview, fileInput));
+        //   fileInput.addEventListener('change', updateImageDisplay);
+        // }
+
         if (fileInput != null) {
           fileInput.style.opacity = 0;
-          //fileInput.addEventListener('change', updateImageDisplay(preview, fileInput));
-          fileInput.addEventListener('change', updateImageDisplay);
         }
 
+        loadImagesEco.on("click", function (e) {
+          alert("IZQUIERDO");
+          // fileInput.style.opacity = 0;
+          fileInput.addEventListener('change', updateImageDisplay);
+        })
 
+
+        loadImagesEco_der.on("click", function (e) {
+          alert("DERECHOOOOO");
+          // fileInput.style.opacity = 0;
+          fileInput.addEventListener('change', updateImageDisplayDer);
+        })
 
         createEcoVenosaBtn.on("click", function (e) {
           //get_checkbox_values();
@@ -62,7 +81,7 @@ var CreateEcoVenosaModule = function(){
     $.each(inputs.filter('[type="file"]'), function (i, element) {
       var input = $(element)[0].files;
       $.each(input, function (j, file) {
-        //console.log("file", file);
+        // console.log("file", file);
         formData.append(file.name, file);
       });
     });
@@ -156,7 +175,7 @@ var CreateEcoVenosaModule = function(){
 
   /*--------------------------------------*/
   function updateImageDisplay(preview, fileInput) {
-    // alert("se cambio la imagen");
+    alert("eco venosa IZQUIERDO  ");
     fileInput = document.querySelector('input[type="file"]');
     preview = document.querySelector('.preview');
     //cuando hay un cambio en input, remover todos los childs de preview
@@ -219,6 +238,73 @@ var CreateEcoVenosaModule = function(){
       }
     }
   }
+
+
+  function updateImageDisplayDer(preview, fileInput) {
+    alert("eco venosa DERECHO ");
+    fileInput = document.querySelector('input[type="file"]');
+    preview = document.querySelector('.preview-der');
+    //cuando hay un cambio en input, remover todos los childs de preview
+    while(preview.firstChild) {
+      preview.removeChild(preview.firstChild);
+    }
+
+    // console.log("fileInput", fileInput.files);
+    var curFiles = fileInput.files;
+    //si no se agregan o no hay ningun file, apendar a preview un parrafo con texto
+    if(curFiles.length === 0) {
+      var para = document.createElement('p');
+      para.textContent = 'No hay archivos seleccionados';
+      preview.appendChild(para);
+    } else {
+      var list = document.createElement('ol');
+      preview.appendChild(list);
+      for(var i = 0; i < curFiles.length; i++) {
+        //var liContainer = document.createElement('div');
+        //liContainer.classList.add("row");
+        var listItem = document.createElement('li');
+        //liContainer.appendChild(listItem);
+        
+        //$( listItem ).wrap( "<div class='row'></div>" );
+        
+        para = document.createElement('p');
+        //para.classList.add("small-12");
+        //si el tipo es validoy el tamnho no exede los 6MB
+        if(validFileType(curFiles[i]) && curFiles[i].size < 6291456) {
+          //add a class to change to succes/valid color
+          //$(listItem).css('background', '#2c3840');
+          
+           para.textContent = 'Nombre del archivo:  ' + curFiles[i].name;
+          //var paraText = 'Archivo:  ' + curFiles[i].name + '<br> Tamaño: ' + returnFileSize(curFiles[i].size) + '.';
+          //$(para ).html(paraText);
+
+          var image = document.createElement('img');
+          
+          image.src = window.URL.createObjectURL(curFiles[i]);
+
+          var liContainer = document.createElement('div');
+          liContainer.classList.add("row");
+          //var listItem = document.createElement('li');
+          listItem.appendChild(liContainer);
+
+          liContainer.appendChild(image);
+          $( image ).wrap( "<div class='small-12 small-centered medium-6 large-6 columns colpo-files-list'></div>" );
+          liContainer.appendChild(para);
+          $( para ).wrap( "<div class='small-12 small-centered medium-6 large-6 colpo-files-list'></div>" );
+
+        } else {
+          //agregar estilo para hacerlo de color rojo
+          //$( listItem ).addClass( "listItem-error-color" );
+          $(listItem).css('background', '#fc1303');
+          para.textContent = 'Nombre del archivo: ' + curFiles[i].name + '  -   Tipo de archivo incorrecto. Actualice las seleccion.';
+          listItem.appendChild(para);
+        }
+
+        list.appendChild(listItem);
+      }
+    }
+  }
+
 
   var fileTypes = [
     'image/jpeg',

@@ -54,7 +54,7 @@
     $radiobox_vena_poplitea = get_field('vena_poplitea', $eco_venosa_post_id); 
     $radiobox_plexo_soleo_y_gemelar = get_field('plexo_soleo_y_gemelar', $eco_venosa_post_id); 
     $checkbox_union_safeno_femoral = get_field('union_safeno_femoral', $eco_venosa_post_id);
-    // var_dump($checkbox_union_safeno_femoral[1]["value"]);
+    // var_dump($radiobox_vena_femoral_comun);
     // checkbox_union_safeno_femoral
     // var_dump($radiobox_plexo_soleo_y_gemelar["value"]);
 
@@ -84,12 +84,7 @@
     
  ?>
 
-
-  <div class="tab">
-      <button class="tablinks dabbed" >Izquierdo</button>
-  </div>
-
-  <div class="appform tabcontent">
+  <div id="izquierdo" class="appform tabcontent">
     <div class="card profile-card-action-icons">
       <div class="card-section">
         <div class="profile-card-header">
@@ -98,9 +93,10 @@
           </div>
         </div>
         <div class="profile-card-about">
-          <h5 class="about-title separator-left"> Ingresar datos de la Ecografía <?php //echo $name?></h5>
+          <h5 class="about-title separator-left"> Ingresar datos de la Ecografía - Miembro Izquierdo <?php //echo $name?></h5>
 
-          <form id="create-eco-venosa-form" name="create-eco-venosa-form" method="post" >
+          <!-- <form id="create-eco-venosa-form" name="create-eco-venosa-form" method="post"> -->
+          <div>
           <input type="hidden" name="action" value="sw_create_eco_venosa_ajax">
           <input type="hidden" name="patient_id" value="<?php echo $patient_id;?>">
           <input type="hidden" name="app_id" value="<?= $app_id?>">
@@ -710,8 +706,8 @@
                 <h5 class="about-title separator-left"> Ingresar imágenes de la ecografía </h5>
               </div>
               <div class="subir-colpo test">
-                <label for="image_uploads">Seleccionar imágenes (png, jpg )</label>
-                <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
+                <label for="imagen_eco_venosa">Seleccionar imágenes (png, jpg )</label>
+                <input type="file" id="imagen_eco_venosa" name="imagen_eco_venosa" accept=".jpg, .jpeg, .png" multiple>
               </div>
 
               <?php 
@@ -742,7 +738,7 @@
             </div> <!-- div.archivos -->
           
           
-          </form>
+            </div> <!-- form -->
         </div>
       </div>
     </div>
