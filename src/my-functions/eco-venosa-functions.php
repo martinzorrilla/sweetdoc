@@ -458,6 +458,7 @@ function sw_update_eco_venosa($params){
       }
       //file upload test
       $i = 1;   
+      $j = 1;   
       foreach ($_FILES as $file ) {
 
         $uploadedfile = $file;
@@ -485,10 +486,24 @@ function sw_update_eco_venosa($params){
           wp_update_attachment_metadata($attach_id, $attach_data);
 
 
-          //update_post_meta( $colpo_post_id, 'colpo_imagen', $attach_id );  
-          update_post_meta( $eco_venosa_post_id, 'eco_venosa_imagen_'.$i, $attach_id );  
-          //update_field('colpo_imagen', $attach_id, $colpo_post_id);
-          $i++;
+          $file_name = $file["name"]; 
+          // $file_name = ""; 
+          // if ($file_name == "azul.PNG") {
+          if (preg_match("/xderx/i", $file_name)) {
+          //if (false) {
+            // update_field('eco_venosa_imagen_der_'.$i, $attach_id, $eco_venosa_post);
+            update_post_meta( $eco_venosa_post_id, 'eco_venosa_imagen_der_'.$i, $attach_id );  
+            $i++;
+          }else {
+            // update_field('eco_venosa_imagen_'.$j, $attach_id, $eco_venosa_post);
+            update_post_meta( $eco_venosa_post_id, 'eco_venosa_imagen_'.$j, $attach_id );  
+            $j++;
+          }
+
+          
+          // update_post_meta( $eco_venosa_post_id, 'eco_venosa_imagen_'.$i, $attach_id );  
+
+          // $i++;
         }
       }
       //end update colposcopy
@@ -497,7 +512,7 @@ function sw_update_eco_venosa($params){
       $result['msg'] = 'Ecografía venosa actualizada';
       $result['patient_id'] = $patient_id;
       $result['app_id'] = $app_id;
-      $result['colpo_id'] = $eco_venosa_post_id;
+      $result['eco_venosa_id'] = $eco_venosa_post_id;
 
       
   return $result;

@@ -47,24 +47,18 @@ var CreateEcoVenosaModule = function(){
           fileInputDer.style.opacity = 0;
         }
 
+        // dependiendo si se va cargar imagenes en el form izq o derecho llamamos a la funcion que corresponde
         loadImagesEco.on("click", function (e) {
-          // alert("IZQUIERDO");
-          // fileInput.style.opacity = 0;
           fileInput.addEventListener('change', updateImageDisplay);
         })
 
-
         loadImagesEco_der.on("click", function (e) {
-          // alert("DERECHOOOOO");
-          // fileInput.style.opacity = 0;
           fileInputDer.addEventListener('change', updateImageDisplayDer);
         })
 
         createEcoVenosaBtn.on("click", function (e) {
-          //get_checkbox_values();
-        //   alert("eco venosssa hmmmm ");
           createEcoVenosaBtn.fadeOut( "slow" );
-            // metemos el div con el spinner hasta que se retonrne del ajaz request
+          // metemos el div con el spinner hasta que se retonrne del ajax request
           $("#overlay").fadeIn(300);
           saveProfileData(e);
         })
@@ -197,6 +191,7 @@ var CreateEcoVenosaModule = function(){
   }
 
   /*--------------------------------------*/
+  // esta funcion carga en el html las imagenes seleccionadas en el lado izquierdo 
   function updateImageDisplay(preview, fileInput) {
     // alert("eco venosa IZQUIERDO  ");
     // fileInput = document.querySelector('input[type="file"]');
@@ -267,7 +262,7 @@ var CreateEcoVenosaModule = function(){
     }
   }
 
-
+  // esta funcion carga en el html las imagenes seleccionadas en el lado derecho 
   function updateImageDisplayDer(preview, fileInput) {
     // alert("eco venosa DERECHO ");
     // fileInput = document.querySelector('input[type="file"]');
