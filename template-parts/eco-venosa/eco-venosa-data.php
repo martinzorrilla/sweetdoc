@@ -27,7 +27,8 @@
          $images_ids_array[$i] = $the_image_id;
        }   
     }
-    //var_dump($images_ids_array);
+    // echo("izq:" );
+    // var_dump($images_ids_array);
     
     //$image_post_id = $eco_venosa_data_post['eco_venosa_imagen_1'][0];
     $size = "thumbnail"; // (thumbnail, medium, large, full or custom size)
@@ -700,7 +701,7 @@
             </div>
 
             <!-- IMAGENES -->
-            <div class="archivos large-12 columns" style="margin-top: 1.5rem;">
+            <div id="imagenes-eco-ven-izq" class="archivos large-12 columns" style="margin-top: 1.5rem;">
             
               <div class="profile-card-about">
                 <h5 class="about-title separator-left"> Ingresar imágenes de la ecografía </h5>

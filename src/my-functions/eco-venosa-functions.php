@@ -264,6 +264,7 @@ function sw_create_new_eco_venosa($params){
 
       //file upload test
       $i = 1;  
+      $j = 1;  
       foreach ($_FILES as $file ) {
 
           $uploadedfile = $file;
@@ -289,10 +290,23 @@ function sw_create_new_eco_venosa($params){
               $attach_data = wp_generate_attachment_metadata($attach_id, $movefile['file']);
               wp_update_attachment_metadata($attach_id, $attach_data);
               
-              update_field('eco_venosa_imagen_'.$i, $attach_id, $eco_venosa_post);
+              $file_name = $file["name"]; 
+              // $file_name = ""; 
+              // if ($file_name == "azul.PNG") {
+              if (preg_match("/xderx/i", $file_name)) {
+              //if (false) {
+                update_field('eco_venosa_imagen_der_'.$i, $attach_id, $eco_venosa_post);
+                $i++;
+              }else {
+                update_field('eco_venosa_imagen_'.$j, $attach_id, $eco_venosa_post);
+                $j++;
+              }
+              
+              // error_log(json_encode($file), 0);
+              // update_field('eco_venosa_imagen_der_'.$i, $attach_id, $eco_venosa_post);
               //update_field('colpo_imagen', $attach_id, $colpo_post);
 
-              $i++;
+              // $i++;
           }
       }
 

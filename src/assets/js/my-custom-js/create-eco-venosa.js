@@ -5,8 +5,12 @@ var CreateEcoVenosaModule = function(){
     
     var createEcoVenosaBtn;
     var createEcoVenosaForm;
+    var imagenesEcoVenIzq;
+    var imagenesEcoVenDer;
     var loadImagesEco;
     var loadImagesEco_der;
+    var fileInput;
+    var fileInputDer;
     
     //added 
     // var myInputFile;
@@ -21,7 +25,12 @@ var CreateEcoVenosaModule = function(){
         loadImagesEco_der = $("#imagen_eco_venosa_der");
 
 
-        var fileInput = document.querySelector('input[type="file"]');
+        // var fileInput = document.querySelector('input[type="file"]');
+        fileInput = document.querySelector('#imagen_eco_venosa');
+        fileInputDer = document.querySelector('#imagen_eco_venosa_der');
+
+        imagenesEcoVenIzq = $("#imagenes-eco-ven-izq");
+        imagenesEcoVenDer = $("#imagenes-eco-ven-der");
         // var preview = document.querySelector('.preview');
         
         // if (fileInput != null) {
@@ -34,17 +43,21 @@ var CreateEcoVenosaModule = function(){
           fileInput.style.opacity = 0;
         }
 
+        if (fileInputDer != null) {
+          fileInputDer.style.opacity = 0;
+        }
+
         loadImagesEco.on("click", function (e) {
-          alert("IZQUIERDO");
+          // alert("IZQUIERDO");
           // fileInput.style.opacity = 0;
           fileInput.addEventListener('change', updateImageDisplay);
         })
 
 
         loadImagesEco_der.on("click", function (e) {
-          alert("DERECHOOOOO");
+          // alert("DERECHOOOOO");
           // fileInput.style.opacity = 0;
-          fileInput.addEventListener('change', updateImageDisplayDer);
+          fileInputDer.addEventListener('change', updateImageDisplayDer);
         })
 
         createEcoVenosaBtn.on("click", function (e) {
@@ -67,7 +80,9 @@ var CreateEcoVenosaModule = function(){
   // El PROBLEMA es que de esa forma no se pueden enviar inputs del tipo FILE, los cuales necesitamos para poder agregar imagenes a las colposcopias, por eso nos vemos obligados a usar formData y añadir los demas inputs con el metodo populateFormData()   
   function populateFormData() {
     //var inputs = createAppointmentForm.serializeArray();
-    var inputs = createEcoVenosaForm.find("input, select, textarea");
+    // var inputs = createEcoVenosaForm.find("input, select, textarea");
+    var inputsIzq = imagenesEcoVenIzq.find("input, select, textarea");
+    var inputsDer = imagenesEcoVenDer.find("input, select, textarea");
     var serializedInputs = createEcoVenosaForm.serializeArray();
     //no recuerdo por que no logre hacer funcionar con serialize(); por eso uso serializeArray(); 
     //var serializedInputs = createAppointmentForm.serialize();
@@ -76,17 +91,24 @@ var CreateEcoVenosaModule = function(){
 
     //console.log("serializedInputs", serializedInputs);
 
-    
-    //Procedimiento para agregar los archivos de imagenes de las colposcopias al formdata
-    $.each(inputs.filter('[type="file"]'), function (i, element) {
-      var input = $(element)[0].files;
-      $.each(input, function (j, file) {
-        // console.log("file", file);
-        formData.append(file.name, file);
-      });
+
+    // tuve que separar la carga de inputs types file en el formdata para que cargue de forma independiente
+    // por cada lado, es decir separar lo de lado izq del lado derecho para poder agregarle una palabra clave en el nombre
+    // del archivo y luego poder parsear eso en el backend y poder asignar al lado que le corresponde
+    $.each(inputsIzq.filter('[type="file"]'), function (i, element) {
+        var input = $(element)[0].files;
+        $.each(input, function (j, file) {
+          formData.append(file.name, file, 'xizqx'+file.name);
+        });
     });
     
-    
+    $.each(inputsDer.filter('[type="file"]'), function (i, element) {
+      var input = $(element)[0].files;
+      $.each(input, function (j, file) {
+        formData.append(file.name, file, 'xderx'+file.name);
+      });
+    });
+
     $.each(serializedInputs, function (i, element) {
       formData.append(element.name, element.value);
     });
@@ -118,12 +140,13 @@ var CreateEcoVenosaModule = function(){
     var $ = jQuery;
     var formData = populateFormData();
 
-    //console.log("formData = ", formData);
+    // console.log("formData = ", formData);
     //Display the key/value pairs
-    // for (var pair of formData.entries())
-    // {
-    //    console.log(pair[0]+ ', '+ pair[1]); 
-    // }
+    //  for (var pair of formData.entries())
+    //  {
+          // console.log(pair[0]+ ', '+ pair[1]); 
+    //  }
+      // alert("display form data");
 
     // SI USABAMODS serialize() en vez de serializeArray(), de esta forma debiamos apendar los campos extras
     //var myData = createAppointmentForm.serialize();
@@ -175,8 +198,9 @@ var CreateEcoVenosaModule = function(){
 
   /*--------------------------------------*/
   function updateImageDisplay(preview, fileInput) {
-    alert("eco venosa IZQUIERDO  ");
-    fileInput = document.querySelector('input[type="file"]');
+    // alert("eco venosa IZQUIERDO  ");
+    // fileInput = document.querySelector('input[type="file"]');
+    fileInput = document.querySelector('#imagen_eco_venosa');
     preview = document.querySelector('.preview');
     //cuando hay un cambio en input, remover todos los childs de preview
     while(preview.firstChild) {
@@ -208,6 +232,9 @@ var CreateEcoVenosaModule = function(){
           //add a class to change to succes/valid color
           //$(listItem).css('background', '#2c3840');
           
+          // var imageName = curFiles[i].name; 
+          // curFiles[i].name = 'XXX.png';
+          // console.log("name: ", curFiles[i].name);
            para.textContent = 'Nombre del archivo:  ' + curFiles[i].name;
           //var paraText = 'Archivo:  ' + curFiles[i].name + '<br> Tamaño: ' + returnFileSize(curFiles[i].size) + '.';
           //$(para ).html(paraText);
@@ -215,6 +242,7 @@ var CreateEcoVenosaModule = function(){
           var image = document.createElement('img');
           
           image.src = window.URL.createObjectURL(curFiles[i]);
+          image.alt = "izq";
 
           var liContainer = document.createElement('div');
           liContainer.classList.add("row");
@@ -241,8 +269,9 @@ var CreateEcoVenosaModule = function(){
 
 
   function updateImageDisplayDer(preview, fileInput) {
-    alert("eco venosa DERECHO ");
-    fileInput = document.querySelector('input[type="file"]');
+    // alert("eco venosa DERECHO ");
+    // fileInput = document.querySelector('input[type="file"]');
+    fileInput = document.querySelector('#imagen_eco_venosa_der');
     preview = document.querySelector('.preview-der');
     //cuando hay un cambio en input, remover todos los childs de preview
     while(preview.firstChild) {
@@ -281,6 +310,11 @@ var CreateEcoVenosaModule = function(){
           var image = document.createElement('img');
           
           image.src = window.URL.createObjectURL(curFiles[i]);
+          // image.meta = 'izq'; 
+          // image.setAttribute("alt","izq");
+          // image.alt = "xxx"
+          // curFiles[i].meta = "der";
+          console.log("fileInput", fileInput.files);
 
           var liContainer = document.createElement('div');
           liContainer.classList.add("row");

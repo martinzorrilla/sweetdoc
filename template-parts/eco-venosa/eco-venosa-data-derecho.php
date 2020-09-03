@@ -14,9 +14,10 @@
     $max_images_der = 5;
     $images_ids_array_der = array();
     // +1 bc 
+    $k = 0;
     for ($i=0; $i < $max_images_der; $i++) {
       $k = $i+1;
-      $text = 'eco_venosa_imagen_der'.$k;
+      $text = 'eco_venosa_imagen_der_'.$k;
       //$the_image_id = $eco_venosa_data_post[$text][0]; // esta linea de codigo funciona pero da un warning the undefined  index cuando el elemento esta vacio
       // $the_image_id = $eco_venosa_data_post[$text][0];
       $the_image_id = isset($eco_venosa_data_post[$text][0]) ? $eco_venosa_data_post[$text][0] : NULL;
@@ -26,8 +27,11 @@
          $images_ids_array_der[$i] = $the_image_id;
        }   
     }
-    //var_dump($images_ids_array);
-    
+    // echo("<br>" );
+    // echo("der:" );
+    // var_dump($images_ids_array_der);
+    // $images_ids_array;
+
     //$image_post_id = $eco_venosa_data_post['eco_venosa_imagen_1'][0];
     $size = "thumbnail"; // (thumbnail, medium, large, full or custom size)
     $images_array_der = array();
@@ -692,7 +696,7 @@
             <!-- pegar aca la seccion: IMAGENES -->
 
             <!-- IMAGENES -->
-            <div class="archivos large-12 columns" style="margin-top: 1.5rem;">
+            <div id="imagenes-eco-ven-der" class="archivos large-12 columns" style="margin-top: 1.5rem;">
             
               <div class="profile-card-about">
                 <h5 class="about-title separator-left"> Ingresar imágenes de la ecografía </h5>
