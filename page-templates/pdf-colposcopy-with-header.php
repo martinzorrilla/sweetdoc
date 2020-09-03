@@ -102,9 +102,9 @@ function Firma($num)
 // .
 // .
 $client_title = get_field('client_title', 'option');
-$client_title = isset($client_title) && $client_title !="" ? $client_title : "Dr/Dra";
+$client_title = isset($client_title) && $client_title !="" ? utf8_decode($client_title) : "Dr/Dra";
 $client_name = get_field('client_name', 'option');
-$client_name = isset($client_name) && $client_name !="" ? $client_name : "Nombre y Apellido";
+$client_name = isset($client_name) && $client_name !="" ? utf8_decode( $client_name ): "Nombre y Apellido";
 $client_especialidad = get_field('client_especialidad', 'option');
 $client_especialidad = isset($client_especialidad) && $client_especialidad !="" ? $client_especialidad : "Especialidad";
 $client_sub_especialidad = get_field('client_sub_especialidad', 'option');
@@ -408,9 +408,9 @@ $datos_personales = $fullname."        Edad: ".$edad_paciente."        Ci: ".$ce
 // .
 // .
 // $macroscopia = $colpo_data_post['macroscopia'][0];
-$macroscopia = isset($colpo_data_post['macroscopia'][0]) ? $colpo_data_post['macroscopia'][0] : NULL;
+$macroscopia = isset($colpo_data_post['macroscopia'][0]) ? utf8_decode( $colpo_data_post['macroscopia'][0] ): NULL;
 // $colposcopia = $colpo_data_post['colposcopia'][0];
-$colposcopia = isset($colpo_data_post['colposcopia'][0]) ? $colpo_data_post['colposcopia'][0] : NULL;
+$colposcopia = isset($colpo_data_post['colposcopia'][0]) ? utf8_decode( $colpo_data_post['colposcopia'][0] ): NULL;
 $radiobox_evaluacion_general = get_field('evaluacion_general', $colpo_post_id);
 $checkbox_motivo_inadecuada = get_field('motivo_inadecuada', $colpo_post_id);
 $radiobox_union_escamo_columnar = get_field('union_escamo_columnar', $colpo_post_id);
@@ -430,7 +430,7 @@ $examen_de_vyv_descripcion = isset($colpo_data_post['examen_de_vyv_descripcion']
 $radiobox_colposcopicos_anormales_test_de_schiller = get_field('colposcopicos_anormales_test_de_schiller', $colpo_post_id);
 $checkbox_test_de_schiller_lugol = get_field('test_de_schiller_lugol', $colpo_post_id);
 // $sugerencias = $colpo_data_post['sugerencias'][0];
-$sugerencias = isset($colpo_data_post['sugerencias'][0]) ? $colpo_data_post['sugerencias'][0] : NULL;
+$sugerencias = isset($colpo_data_post['sugerencias'][0]) ? utf8_decode( $colpo_data_post['sugerencias'][0] ): NULL;
 // wp_die(var_dump(array_filter($checkbox_colposcopicos_anormales_grado_2)));
 //  wp_die(var_dump($edad_paciente));
 

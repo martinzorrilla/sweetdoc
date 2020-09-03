@@ -20,9 +20,9 @@ function Header()
     // datos---------------------------------------------------------------------------------------------
     
     $client_title = get_field('client_title', 'option');
-    $client_title = isset($client_title) && $client_title !="" ? $client_title : "Dr/Dra";
+    $client_title = isset($client_title) && $client_title !="" ? utf8_decode($client_title) : "Dr/Dra";
     $client_name = get_field('client_name', 'option');
-    $client_name = isset($client_name) && $client_name !="" ? $client_name : "Nombre y Apellido";
+    $client_name = isset($client_name) && $client_name !="" ? utf8_decode( $client_name ): "Nombre y Apellido";
     $client_especialidad = get_field('client_especialidad', 'option');
     $client_especialidad = isset($client_especialidad) && $client_especialidad !="" ? $client_especialidad : "Especialidad";
     $client_subtitle = get_field('client_subtitle', 'option');
@@ -442,8 +442,9 @@ $patient_data[] = $edad_paciente;
 $patient_data[] = $cedula;
 $patient_data[] = $creation_date;
 
-$rp = $indication_fields['rp'][0];
-$indicaciones = $indication_fields['indicaciones'][0];
+$rp = utf8_decode( $indication_fields['rp'][0]);
+
+$indicaciones = utf8_decode( $indication_fields['indicaciones'][0]);
 
 //cuando no se escribio nada que no agregue la firma al informe
 $rp_is_empty  = empty($rp) ? true : false;
