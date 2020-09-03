@@ -67,6 +67,7 @@ function sw_cargar_consultas_paciente($params){
 
 
     $eco_venosa_url = home_url().'/eco-venosa/?patient_id=';
+    $eco_venosa_pdf_url = home_url().'/eco-venosa-pdf/?eco_venosa_id=';
 
 
 
