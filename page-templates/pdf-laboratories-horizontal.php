@@ -155,9 +155,9 @@ function Firma($num, $side)
 {
     // DATOS DEL CLIENTE DEL SISTEMA(DOCTOR) guardados en el theme options. en el backend wordpress creado con ACF custom fields
     $client_title = get_field('client_title', 'option');
-    $client_title = isset($client_title) && $client_title !="" ? $client_title : "Dr/Dra";
+    $client_title = isset($client_title) && $client_title !="" ? utf8_decode($client_title) : "Dr/Dra";
     $client_name = get_field('client_name', 'option');
-    $client_name = isset($client_name) && $client_name !="" ? $client_name : "Nombre y Apellido";
+    $client_name = isset($client_name) && $client_name !="" ? utf8_decode( $client_name ): "Nombre y Apellido";
     $client_especialidad = get_field('client_especialidad', 'option');
     $client_especialidad = isset($client_especialidad) && $client_especialidad !="" ? $client_especialidad : "Especialidad";
     $client_sub_especialidad = get_field('client_sub_especialidad', 'option');
@@ -817,14 +817,14 @@ foreach ($acf_checkbox_array as $study_name) {
   if(!empty($otros_laboratorios)) {
   $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 80);
     if (!$need_to_add_page) {
-          $pdf->PrintElement(2,utf8_decode("Otros estudios"),$otros_laboratorios);
+          $pdf->PrintElement(2,utf8_decode("Otros estudios"),utf8_decode($otros_laboratorios) );
           $pdf->Ln(2);
         }
     else{
       $need_to_add_page = false;
       $pdf->SetCol(1);
       $pdf->SetY($current_y);
-      $pdf->PrintElement(2,utf8_decode("Otros estudios"),$otros_laboratorios);
+      $pdf->PrintElement(2,utf8_decode("Otros estudios"), utf8_decode($otros_laboratorios) );
       $pdf->Ln(2);
     }
   }
@@ -832,14 +832,14 @@ foreach ($acf_checkbox_array as $study_name) {
   if(!empty($diagnostico_laboratorios)) {
   $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 75);
     if (!$need_to_add_page) {
-          $pdf->PrintElement(2,utf8_decode("Diagnostico"),$diagnostico_laboratorios);
+          $pdf->PrintElement(2,utf8_decode("Diagnostico"),utf8_decode($diagnostico_laboratorios));
           $pdf->Ln(2);
         }
     else{
         $need_to_add_page = false;
         $pdf->SetCol(1);
         $pdf->SetY($current_y);
-        $pdf->PrintElement(2,utf8_decode("Diagnostico"),$diagnostico_laboratorios);
+        $pdf->PrintElement(2,utf8_decode("Diagnostico"),utf8_decode($diagnostico_laboratorios));
         $pdf->Ln(2);
     }
   }
