@@ -34,7 +34,7 @@ var CreateColposcopyModule = function(){
         }
 
         loadImages.on("click", function (e) {
-          alert("colposcopia");
+          // alert("colposcopia");
 
           // fileInput.style.opacity = 0;
           fileInput.addEventListener('change', updateImageDisplay);
@@ -168,7 +168,7 @@ var CreateColposcopyModule = function(){
 
   /*--------------------------------------*/
   function updateImageDisplay(preview, fileInput) {
-    alert("se cambio la imagen");
+    // alert("se cambio la imagen");
     fileInput = document.querySelector('input[type="file"]');
     preview = document.querySelector('.preview');
     //cuando hay un cambio en input, remover todos los childs de preview

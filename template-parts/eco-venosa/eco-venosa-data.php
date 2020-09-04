@@ -47,19 +47,16 @@
     echo "image <br/>";
     var_dump($image);*/
 
-
+    
     
     //field files
-    $radiobox_vena_femoral_comun = get_field('vena_femoral_comun', $eco_venosa_post_id); 
-    $radiobox_vena_femoral_superficial = get_field('vena_femoral_superficial', $eco_venosa_post_id); 
-    $radiobox_vena_poplitea = get_field('vena_poplitea', $eco_venosa_post_id); 
-    $radiobox_plexo_soleo_y_gemelar = get_field('plexo_soleo_y_gemelar', $eco_venosa_post_id); 
+    // $radiobox_vena_femoral_comun = get_field('vena_femoral_comun', $eco_venosa_post_id); 
+    $radiobox_vena_femoral_comun = get_field('field_5f4847af9b85f', $eco_venosa_post_id); 
+    $radiobox_vena_femoral_superficial = get_field('field_5f4847af9c51c', $eco_venosa_post_id); 
+    $radiobox_vena_poplitea = get_field('field_5f4847af9ec07', $eco_venosa_post_id); 
+    $radiobox_plexo_soleo_y_gemelar = get_field('field_5f48546d30af2', $eco_venosa_post_id); 
+
     $checkbox_union_safeno_femoral = get_field('union_safeno_femoral', $eco_venosa_post_id);
-    // var_dump($radiobox_vena_femoral_comun);
-    // checkbox_union_safeno_femoral
-    // var_dump($radiobox_plexo_soleo_y_gemelar["value"]);
-
-
     $safeno_femoral_medida = isset($eco_venosa_data_post['safeno_femoral_medida'][0]) ? $eco_venosa_data_post['safeno_femoral_medida'][0] : NULL;
     
     $checkbox_tronco_suprapatelar = get_field('tronco_suprapatelar', $eco_venosa_post_id);
@@ -80,8 +77,10 @@
     $observaciones = isset($eco_venosa_data_post['observaciones'][0]) ? $eco_venosa_data_post['observaciones'][0] : NULL;
     $conclusion = isset($eco_venosa_data_post['conclusion'][0]) ? $eco_venosa_data_post['conclusion'][0] : NULL;
     
-    
-    
+    // $emptyRemoved = array_filter($checkbox_union_safeno_femoral);
+    // var_dump(empty($emptyRemoved));
+    // var_dump($checkbox_union_safeno_femoral);
+    // var_dump($emptyRemoved);
     
  ?>
 
@@ -115,21 +114,21 @@
                     <label class="separator-left">Vena Femoral común</label>
                     
                       <input type="radio" id="vfc_1" name="vena_femoral_comun" value="permeable_suficiente" <?php 
-                      if( $radiobox_vena_femoral_comun && in_array('permeable_suficiente', $radiobox_vena_femoral_comun) )  echo "checked";?> 
+                      if( is_array($radiobox_vena_femoral_comun) && in_array('permeable_suficiente', $radiobox_vena_femoral_comun) )  echo "checked";?> 
                       class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfc_1">Permeable y suficiente</label>
 
                       <input type="radio" id="vfc_2" name="vena_femoral_comun" value="permeable_insuficiente" <?php 
-                      if( $radiobox_vena_femoral_comun && in_array('permeable_insuficiente', $radiobox_vena_femoral_comun) )  echo "checked";?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
+                      if( is_array($radiobox_vena_femoral_comun) && in_array('permeable_insuficiente', $radiobox_vena_femoral_comun) )  echo "checked";?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfc_2">Permeable insuficiente</label>         
 
                       <input type="radio" id="vfc_3" name="vena_femoral_comun" value="ocluido" <?php 
-                      if( $radiobox_vena_femoral_comun && in_array('ocluido', $radiobox_vena_femoral_comun) )  echo "checked";?>  
+                      if( is_array($radiobox_vena_femoral_comun) && in_array('ocluido', $radiobox_vena_femoral_comun) )  echo "checked";?>  
                       class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfc_3">Ocluido</label>
 
                       <input type="radio" id="vfc_4" name="vena_femoral_comun" value="recanalizado" <?php 
-                      if( $radiobox_vena_femoral_comun && in_array('recanalizado', $radiobox_vena_femoral_comun) )  echo "checked";?>  
+                      if( is_array($radiobox_vena_femoral_comun) && in_array('recanalizado', $radiobox_vena_femoral_comun) )  echo "checked";?>  
                       class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
                       <label for="vfc_4">Recanalizado</label>
 
@@ -168,7 +167,7 @@
 
                       <input type="radio" id="vfp_2" name="vena_poplitea[]" value="permeable_insuficiente" <?php 
                       if( $radiobox_vena_poplitea && in_array('permeable_insuficiente', $radiobox_vena_poplitea) )  echo "checked";?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
-                      <label for="vfp_2">Permeable y suficiente</label>       
+                      <label for="vfp_2">Permeable insuficiente</label>       
 
                       <input type="radio" id="vfp_3" name="vena_poplitea[]" value="ocluido" <?php 
                       if( $radiobox_vena_poplitea && in_array('ocluido', $radiobox_vena_poplitea) )  echo "checked";?> 

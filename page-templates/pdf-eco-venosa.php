@@ -262,7 +262,7 @@ function PrintElement($num, $title, $file)
 {
     if (!empty($file)) {
 
-        $txt = $title.": ".$file;
+        $txt = $title.$file;
         // Fuente
         $this->SetFont('Times','',12);
         // Imprimir texto en una columna de 6 cm de ancho (si el valor es 60)
@@ -289,27 +289,31 @@ function PrintSecondaryTitle($num, $title, $file)
 
 function PrintArray($num, $title, $array)
 {
-
-    // si es array y todos sus elementos no son vacios
-    if (is_array($array) && array_filter($array)){
-        //primero eliminar los elementos vacios
-        $emptyRemoved = array_filter($array);
-        //unir todos los elementos del array en un string
-        $arrayToString = implode( ", ", $emptyRemoved );
-        //como lo que devuelve son los propios valores de la BD y no los labels, remover los "_"
-        $arrayToString = str_replace("_", " ", $arrayToString);
-        //$pdf->PrintElement(2,$title,$arrayToString);
-
-        $txt = $title.": ".$arrayToString;
-        // Fuente
+    //primero eliminar los elementos vacios
+    $emptyRemoved = array_filter($array);
+    // var_dump(empty($emptyRemoved));
+    if( !empty($emptyRemoved) ):    
         $this->SetFont('Times','',12);
-        // Imprimir texto en una columna de 6 cm de ancho (si el valor es 60)
-        $this->MultiCell(190,7,$txt);
-        //$this->Cell(0,5,$txt);
-        //$this->Ln();
-        // Guardar ordenada
-        $this->y0 = $this->GetY();
-    }
+        
+        $aux = array();
+        foreach( $emptyRemoved as $element ):
+            array_push($aux, utf8_decode($element['label']));
+         endforeach;
+        
+        
+        $emptyRemoved = array_filter($aux);
+        // //unir todos los elementos del array en un string
+        $arrayToString = implode( ". ", $emptyRemoved );
+        
+        // antes de imprimir verificamos que alguna opcion haya sido marcada en el checkbox, de lo contrario
+        // imprime solo el titulo y ningun campo.
+        if ($arrayToString!="") {
+            $this->MultiCell(0,7,$title.": ".$arrayToString);
+        }
+        // $this->MultiCell(0,7,$title.": ".$arrayToString);
+        // $this->MultiCell(190,7,$color['label']);
+
+    endif;
 }
 
 function PrintEvaluacionGeneral($num, $radiobox_evaluacion_general, $checkbox_motivo_inadecuada)
@@ -355,6 +359,22 @@ function CheckPageSpaceLeft($page_height, $current_y, $espacio_min_inferior)
     }
     return false;
 }
+
+// recibe array con nomres de los fields a verificar
+// retorna true o false
+function check_if_radio_values_are_empty($data){
+    $has_value = false;
+    foreach ($data as $item) 
+    {
+        $emptyRemoved = array_filter($item);
+    
+        if(!empty($emptyRemoved) ){
+            $has_value = true;
+        }
+    }
+    return $has_value;
+}
+
 
 }//class
 
@@ -413,12 +433,33 @@ $datos_personales = $fullname."        Edad: ".$edad_paciente."        Ci: ".$ce
 // .
 // .
 // .
-$radiobox_vena_femoral_comun = get_field('vena_femoral_comun', $eco_venosa_post_id); 
+$radiobox_vena_femoral_comun = get_field('field_5f4847af9b85f', $eco_venosa_post_id); 
+$radiobox_vena_femoral_superficial = get_field('field_5f4847af9c51c', $eco_venosa_post_id);
+$radiobox_vena_poplitea = get_field('field_5f4847af9ec07', $eco_venosa_post_id); 
+$radiobox_plexo_soleo_y_gemelar = get_field('field_5f48546d30af2', $eco_venosa_post_id); 
+$checkbox_union_safeno_femoral = get_field('field_5f4847af9bbd9', $eco_venosa_post_id);
+$safeno_femoral_medida = isset($eco_venosa_data_post['safeno_femoral_medida'][0]) ? $eco_venosa_data_post['safeno_femoral_medida'][0] : NULL;
 
-// $macroscopia = isset($colpo_data_post['macroscopia'][0]) ? $colpo_data_post['macroscopia'][0] : NULL;
-// $radiobox_evaluacion_general = get_field('evaluacion_general', $colpo_post_id);
-// $checkbox_motivo_inadecuada = get_field('motivo_inadecuada', $colpo_post_id);
-// wp_die(var_dump($patient_id));
+
+
+$checkbox_tronco_suprapatelar = get_field('field_5f485918b9757', $eco_venosa_post_id);
+$tronco_suprapatelar_medida = isset($eco_venosa_data_post['tronco_suprapatelar_medida'][0]) ? $eco_venosa_data_post['tronco_suprapatelar_medida'][0] : NULL;
+
+$checkbox_tronco_infrapatelar = get_field('field_5f485917b9756', $eco_venosa_post_id);
+$tronco_infrapatelar_medida = isset($eco_venosa_data_post['tronco_infrapatelar_medida'][0]) ? $eco_venosa_data_post['tronco_infrapatelar_medida'][0] : NULL;
+
+$checkbox_union_safeno_poplitea = get_field('field_5f485916b9755', $eco_venosa_post_id);
+$union_safeno_poplitea_medida = isset($eco_venosa_data_post['union_safeno_poplitea_medida'][0]) ? $eco_venosa_data_post['union_safeno_poplitea_medida'][0] : NULL;
+
+$checkbox_vena_safena_parva = get_field('field_5f485916b9754', $eco_venosa_post_id);
+$vena_safena_parva_medida = isset($eco_venosa_data_post['vena_safena_parva_medida'][0]) ? $eco_venosa_data_post['vena_safena_parva_medida'][0] : NULL;
+
+$checkbox_venas_perforantes = get_field('field_5f485915b9753', $eco_venosa_post_id);
+$venas_perforantes_medida = isset($eco_venosa_data_post['venas_perforantes_medida'][0]) ? $eco_venosa_data_post['venas_perforantes_medida'][0] : NULL;
+
+$observaciones = isset($eco_venosa_data_post['observaciones'][0]) ? $eco_venosa_data_post['observaciones'][0] : NULL;
+$conclusion = isset($eco_venosa_data_post['conclusion'][0]) ? $eco_venosa_data_post['conclusion'][0] : NULL;
+
 
 
 //Get images ----------------------------------------------------------------
@@ -463,59 +504,80 @@ $pdf = new PDF( 'P', 'mm', 'A4' ); // A4, portrait, measurements in mm. A4 es 21
 //$pdf->SetAutoPageBreak(true, 100);
 $pdf->SetAutoPageBreak(true, 0);
 $pdf->SetAuthor('Sweetdoc');
-$title = 'Informe eco_venosascopico';
+$title = 'Eco doppler venoso';
 //$title = $fullname;
 $pdf->SetTitle($title);
 $pdf->AddPage();
 $page_height = $pdf->GetPageHeight();
 $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
-$pdf->PrintElement(2,utf8_decode(' - Nombre'),utf8_decode($datos_personales));
+$pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
 $pdf->Ln(4);
-$pdf->PrintSection(2,'HALLAZGOS', $fullname);
+$pdf->PrintSection(2,'ECODOPPLER VENOSO DE MIEMBRO INFERIOR IZQUIERDO', $fullname);
 
 
-$pdf->PrintElement(2,utf8_decode(' - Vena femoral comun'), str_replace("_", " ", $radiobox_vena_femoral_comun["value"]));
+
+// ATENCION: si da un error el pdf probar verificando que no sea empty el array de los fields "radio" antes de imprimir el "label"
+
+// antes de imprimir tbm verificar si hay valor en elguno de los fields por cada seccion
+$radio_field_names = array($radiobox_vena_femoral_comun, $radiobox_vena_femoral_superficial, $radiobox_vena_poplitea, $radiobox_plexo_soleo_y_gemelar);
+
+$sistema_venoso_profundo = $pdf->check_if_radio_values_are_empty($radio_field_names);
+if ($sistema_venoso_profundo) {
+    $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Profundo'), "");
+    $pdf->PrintElement(2,utf8_decode(' - Vena femoral comun: '), utf8_decode( $radiobox_vena_femoral_comun["label"]));
+    $pdf->PrintElement(2,utf8_decode(' - Vena femoral superficial: '), utf8_decode( $radiobox_vena_femoral_superficial["label"]));
+    $pdf->PrintElement(2,utf8_decode(' - Vena poplítea: '), utf8_decode($radiobox_vena_poplitea["label"]));
+    $pdf->PrintElement(2,utf8_decode(' - Plexo soleo y gemelar: '), utf8_decode($radiobox_plexo_soleo_y_gemelar["label"]));
+}
+
+$radio_field_names = array($checkbox_union_safeno_femoral);
+$sistema_venoso_superficial = $pdf->check_if_radio_values_are_empty($radio_field_names);
+if ($sistema_venoso_superficial) {
+    $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Superficial'), "");
+    $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena mayor'), "");
+    // ------------------------------------------------------------------------
+    $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Femoral '),$checkbox_union_safeno_femoral);
+    $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$safeno_femoral_medida);
+}
+
+$radio_field_names = array($checkbox_tronco_suprapatelar, $checkbox_tronco_infrapatelar);
+$vena_safena_magna = $pdf->check_if_radio_values_are_empty($radio_field_names);
+if ($vena_safena_magna) {
+    $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Magna (Interna)'), "");
+    // ------------------------------------------------------------------------
+    $pdf->PrintArray(2,utf8_decode(' - Tronco Suprapatelar '),$checkbox_tronco_suprapatelar);
+    $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_suprapatelar_medida);
+    $pdf->PrintArray(2,utf8_decode(' - Tronco Infrapatelar '),$checkbox_tronco_infrapatelar);
+    $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_infrapatelar_medida);
+}
+
+$radio_field_names = array($checkbox_union_safeno_poplitea, $checkbox_vena_safena_parva);
+$vena_safena_menor = $pdf->check_if_radio_values_are_empty($radio_field_names);
+if ($vena_safena_menor) {
+    $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Menor'), "");
+    // ------------------------------------------------------------------------
+    $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Poplitea '),$checkbox_union_safeno_poplitea);
+    $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$union_safeno_poplitea_medida);
+    $pdf->PrintArray(2,utf8_decode(' - Vena Safena Parva (Externa) '),$checkbox_vena_safena_parva);
+    $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$vena_safena_parva_medida);
+}
+
+$radio_field_names = array($checkbox_venas_perforantes);
+$sistemas_perforantes = $pdf->check_if_radio_values_are_empty($radio_field_names);
+if ($sistemas_perforantes) {
+    $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistemas Perforantes'), "");
+    // ------------------------------------------------------------------------ 
+    $pdf->PrintArray(2,utf8_decode(' - Venas Perforantes '),$checkbox_venas_perforantes);
+    $pdf->PrintElement(2,utf8_decode(' - Medida(cm): '),$venas_perforantes_medida);
+}
+
+
+$pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$observaciones);
+$pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion);
+
 
 if (false) {
-    
 
-$pdf->PrintElement(2,utf8_decode(' - Macroscopía'),$macroscopia);
-$pdf->PrintElement(2,utf8_decode(' - Colposcopía'),$colposcopia);
-$pdf->PrintEvaluacionGeneral(2,$radiobox_evaluacion_general,$checkbox_motivo_inadecuada);
-// $pdf->PrintElement(2,utf8_decode(' - Visibilidad de la unión escamo columnar'),$radiobox_union_escamo_columnar);
-$pdf->PrintElement(2,utf8_decode(' - Visibilidad de la unión escamo columnar'),str_replace("_", " ", $radiobox_union_escamo_columnar));
-$pdf->PrintElement(2,utf8_decode(' - Zona de transformación'), str_replace("_", " ", $radiobox_zona_de_transformacion));
-$pdf->PrintArray(2,utf8_decode(' - Hallazgos colposcopicos normales'),$checkbox_colposcopicos_normales);
-
-// imprimir el titulo de hllazgos anormales solo si alguno de ellos tiene datos
-if ( (is_array($checkbox_colposcopicos_anormales_grado_1) && array_filter($checkbox_colposcopicos_anormales_grado_1))  ||  (is_array($checkbox_colposcopicos_anormales_grado_2) && array_filter($checkbox_colposcopicos_anormales_grado_2))  ||
-(is_array($checkbox_colposcopicos_anormales_no_especificos) && array_filter($checkbox_colposcopicos_anormales_no_especificos))
-){
-    $pdf->PrintSecondaryTitle(2,utf8_decode(' - Hallazgos colposcopicos anormales'), "");
-}
-$pdf->PrintArray(2,utf8_decode(' - Grado 1'),$checkbox_colposcopicos_anormales_grado_1);
-$pdf->PrintArray(2,utf8_decode(' - Grado 2'),$checkbox_colposcopicos_anormales_grado_2);
-$pdf->PrintArray(2,utf8_decode(' - No especificos'),$checkbox_colposcopicos_anormales_no_especificos);
-$pdf->PrintElement(2,utf8_decode(' - Ubicación'), str_replace("_", " ", $colposcopicos_anormales_ubicacion));
-$pdf->PrintArray(2,utf8_decode(' - Sospecha de invasión'),$checkbox_sospecha_de_invasion);
-$pdf->PrintArray(2,utf8_decode(' - Hallazgos varios'),$checkbox_hallazgos_varios);
-$pdf->PrintArray(2,utf8_decode(' - Exámen de vulva y vagina'),$checkbox_examen_de_vyv);
-
-// $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 135);
-$pdf->PrintElement(2,utf8_decode(' - Descripción del exámen'),$examen_de_vyv_descripcion);
-// $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 135);
-$pdf->PrintElement(2,utf8_decode(' - Test de Schiller '),$radiobox_colposcopicos_anormales_test_de_schiller);
-$pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 90);
-$pdf->PrintArray(2,utf8_decode(' - Lugol'),$checkbox_test_de_schiller_lugol);
-// $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 105);
-$pdf->PrintElement(2,utf8_decode(' - Sugerencias'),$sugerencias);
-
-//El autoPagaBreak esta desactivado y lo hago manualmente para la seccion de imagenes. esi implica que si el texto de la seccion hallazgos es muy larga no hara el salto de pagian automaticamente
-//$pdf->AddPage();
-
-
-// luego de insertar los campos, verificar si hay espacio para las imagenes y la firma
-// $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 135);
 
 // Output the images ---------------
 $custom_y = $pdf->GetY();
@@ -553,15 +615,7 @@ if (sizeof($images_ids_array)>0) {
 
 } //if false... borrar
 
-// $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 70);
-
-// recibe k xq la altura de la firma depende de la cantidad de imagenes
-// $pdf->Firma(sizeof($images_ids_array));
-// if ($k == 3 || $k == 4) {
-//     $altura_firma = 65;
-// }
-$pdf->Firma($altura_firma);
-// $pdf->Firma(90);
+// $pdf->Firma($altura_firma);
 
 ob_start();
 $pdf->Output();

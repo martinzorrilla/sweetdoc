@@ -46,16 +46,12 @@
 
 
  //field files
- $radiobox_vena_femoral_comun_der = get_field('vena_femoral_comun_der', $eco_venosa_post_id); 
- $radiobox_vena_femoral_superficial_der = get_field('vena_femoral_superficial_der', $eco_venosa_post_id); 
- $radiobox_vena_poplitea_der = get_field('vena_poplitea_der', $eco_venosa_post_id); 
- $radiobox_plexo_soleo_y_gemelar_der = get_field('plexo_soleo_y_gemelar_der', $eco_venosa_post_id); 
+ $radiobox_vena_femoral_comun_der = get_field('field_5f4dc19d11f62', $eco_venosa_post_id); 
+ $radiobox_vena_femoral_superficial_der = get_field('field_5f4dc1bd11f63', $eco_venosa_post_id); 
+ $radiobox_vena_poplitea_der = get_field('field_5f4dc1d311f64', $eco_venosa_post_id); 
+ $radiobox_plexo_soleo_y_gemelar_der = get_field('field_5f4dc1df11f65', $eco_venosa_post_id); 
+
  $checkbox_union_safeno_femoral_der = get_field('union_safeno_femoral_der', $eco_venosa_post_id);
- // var_dump($radiobox_vena_femoral_comun);
- // checkbox_union_safeno_femoral
- // var_dump($radiobox_plexo_soleo_y_gemelar["value"]);
-
-
  $safeno_femoral_medida_der = isset($eco_venosa_data_post['safeno_femoral_medida_der'][0]) ? $eco_venosa_data_post['safeno_femoral_medida_der'][0] : NULL;
  
  $checkbox_tronco_suprapatelar_der = get_field('tronco_suprapatelar_der', $eco_venosa_post_id);
@@ -161,7 +157,7 @@
 
                       <input type="radio" id="vfp_2_der" name="vena_poplitea_der[]" value="permeable_insuficiente" <?php 
                       if( $radiobox_vena_poplitea_der && in_array('permeable_insuficiente', $radiobox_vena_poplitea_der) )  echo "checked";?> class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> >
-                      <label for="vfp_2_der">Permeable y suficiente</label>       
+                      <label for="vfp_2_der">Permeable insuficiente</label>       
 
                       <input type="radio" id="vfp_3_der" name="vena_poplitea_der[]" value="ocluido" <?php 
                       if( $radiobox_vena_poplitea_der && in_array('ocluido', $radiobox_vena_poplitea_der) )  echo "checked";?> 
