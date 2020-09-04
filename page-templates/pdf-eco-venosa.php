@@ -287,7 +287,7 @@ function PrintSecondaryTitle($num, $title, $file)
         $this->y0 = $this->GetY();
 }
 
-function PrintArray($num, $title, $array)
+function PrintArray($num, $title, $array, $optional = "")
 {
     //primero eliminar los elementos vacios
     $emptyRemoved = array_filter($array);
@@ -300,6 +300,9 @@ function PrintArray($num, $title, $array)
             array_push($aux, utf8_decode($element['label']));
          endforeach;
         
+         if (!empty($optional)){
+            array_push($aux, utf8_decode("Mide: ".$optional." cm."));   
+        }
         
         $emptyRemoved = array_filter($aux);
         // //unir todos los elementos del array en un string
@@ -429,7 +432,7 @@ $datos_personales = $fullname."        Edad: ".$edad_paciente."        Ci: ".$ce
 
 
 
-// DATOS DE LA COSLPOSCOPIA ------------------------------------------------------------------------------------------
+// DATOS DE LA ECO - LADO IZQUIERDO --------------------------------------------------------------------
 // .
 // .
 // .
@@ -439,8 +442,6 @@ $radiobox_vena_poplitea = get_field('field_5f4847af9ec07', $eco_venosa_post_id);
 $radiobox_plexo_soleo_y_gemelar = get_field('field_5f48546d30af2', $eco_venosa_post_id); 
 $checkbox_union_safeno_femoral = get_field('field_5f4847af9bbd9', $eco_venosa_post_id);
 $safeno_femoral_medida = isset($eco_venosa_data_post['safeno_femoral_medida'][0]) ? $eco_venosa_data_post['safeno_femoral_medida'][0] : NULL;
-
-
 
 $checkbox_tronco_suprapatelar = get_field('field_5f485918b9757', $eco_venosa_post_id);
 $tronco_suprapatelar_medida = isset($eco_venosa_data_post['tronco_suprapatelar_medida'][0]) ? $eco_venosa_data_post['tronco_suprapatelar_medida'][0] : NULL;
@@ -459,6 +460,12 @@ $venas_perforantes_medida = isset($eco_venosa_data_post['venas_perforantes_medid
 
 $observaciones = isset($eco_venosa_data_post['observaciones'][0]) ? $eco_venosa_data_post['observaciones'][0] : NULL;
 $conclusion = isset($eco_venosa_data_post['conclusion'][0]) ? $eco_venosa_data_post['conclusion'][0] : NULL;
+
+
+
+
+
+
 
 
 
@@ -514,108 +521,128 @@ $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
 $pdf->Ln(4);
 $pdf->PrintSection(2,'ECODOPPLER VENOSO DE MIEMBRO INFERIOR IZQUIERDO', $fullname);
 
-
-
-// ATENCION: si da un error el pdf probar verificando que no sea empty el array de los fields "radio" antes de imprimir el "label"
-
 // antes de imprimir tbm verificar si hay valor en elguno de los fields por cada seccion
+// check_if_radio_values_are_empty devuelve true or false. false si todos los campos son vacios
 $radio_field_names = array($radiobox_vena_femoral_comun, $radiobox_vena_femoral_superficial, $radiobox_vena_poplitea, $radiobox_plexo_soleo_y_gemelar);
-
 $sistema_venoso_profundo = $pdf->check_if_radio_values_are_empty($radio_field_names);
-if ($sistema_venoso_profundo) {
-    $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Profundo'), "");
-    $pdf->PrintElement(2,utf8_decode(' - Vena femoral comun: '), utf8_decode( $radiobox_vena_femoral_comun["label"]));
-    $pdf->PrintElement(2,utf8_decode(' - Vena femoral superficial: '), utf8_decode( $radiobox_vena_femoral_superficial["label"]));
-    $pdf->PrintElement(2,utf8_decode(' - Vena poplítea: '), utf8_decode($radiobox_vena_poplitea["label"]));
-    $pdf->PrintElement(2,utf8_decode(' - Plexo soleo y gemelar: '), utf8_decode($radiobox_plexo_soleo_y_gemelar["label"]));
-}
 
 $radio_field_names = array($checkbox_union_safeno_femoral);
 $sistema_venoso_superficial = $pdf->check_if_radio_values_are_empty($radio_field_names);
-if ($sistema_venoso_superficial) {
-    $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Superficial'), "");
-    $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena mayor'), "");
-    // ------------------------------------------------------------------------
-    $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Femoral '),$checkbox_union_safeno_femoral);
-    $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$safeno_femoral_medida);
-}
 
 $radio_field_names = array($checkbox_tronco_suprapatelar, $checkbox_tronco_infrapatelar);
 $vena_safena_magna = $pdf->check_if_radio_values_are_empty($radio_field_names);
-if ($vena_safena_magna) {
-    $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Magna (Interna)'), "");
-    // ------------------------------------------------------------------------
-    $pdf->PrintArray(2,utf8_decode(' - Tronco Suprapatelar '),$checkbox_tronco_suprapatelar);
-    $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_suprapatelar_medida);
-    $pdf->PrintArray(2,utf8_decode(' - Tronco Infrapatelar '),$checkbox_tronco_infrapatelar);
-    $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_infrapatelar_medida);
-}
 
 $radio_field_names = array($checkbox_union_safeno_poplitea, $checkbox_vena_safena_parva);
 $vena_safena_menor = $pdf->check_if_radio_values_are_empty($radio_field_names);
-if ($vena_safena_menor) {
-    $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Menor'), "");
-    // ------------------------------------------------------------------------
-    $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Poplitea '),$checkbox_union_safeno_poplitea);
-    $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$union_safeno_poplitea_medida);
-    $pdf->PrintArray(2,utf8_decode(' - Vena Safena Parva (Externa) '),$checkbox_vena_safena_parva);
-    $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$vena_safena_parva_medida);
-}
 
 $radio_field_names = array($checkbox_venas_perforantes);
 $sistemas_perforantes = $pdf->check_if_radio_values_are_empty($radio_field_names);
-if ($sistemas_perforantes) {
-    $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistemas Perforantes'), "");
-    // ------------------------------------------------------------------------ 
-    $pdf->PrintArray(2,utf8_decode(' - Venas Perforantes '),$checkbox_venas_perforantes);
-    $pdf->PrintElement(2,utf8_decode(' - Medida(cm): '),$venas_perforantes_medida);
+
+
+$imprimir_informe = true;
+// si todos son falsos no hay informe que imprimir.
+if ($sistema_venoso_profundo == false && $sistema_venoso_superficial == false && $vena_safena_magna == false && $vena_safena_menor == false && $sistemas_perforantes == false && sizeof($images_ids_array)<=0) {
+        $imprimir_informe = false;
 }
+// ATENCION: si da un error el pdf probar verificando que no sea empty el array de los fields "radio" antes de imprimir el "label"
 
+if ($imprimir_informe) {
 
-$pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$observaciones);
-$pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion);
-
-
-if (false) {
-
-
-// Output the images ---------------
-$custom_y = $pdf->GetY();
-// $custom_y = intval($custom_y);
-//altura firma es la distancia entre la posicion y actual y el margen para imprimir la firma, si no hay imagen
-$altura_firma = 15;
-$k = 0;
-if (sizeof($images_ids_array)>0) {
-    //si hay imagen (1 o 2) la distancia con la firma debe ser un poco mayor
-    $altura_firma = 40;
-    foreach ($images_array as $image) {
-        //$pdf->PrintImage(2,'Imagen:',$images_names[$k]);
-        //verificamos cuando hay una fila o 2 filas
-        if ($k == 0 || $k == 2) {
-            // si no hay espacio agrega otra pagina
-            $custom_y = $pdf->GetY();
-            if ($k == 0) {
-                $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 125);
-                $pdf->Ln(3);
-                $pdf->PrintSection(3,utf8_decode('IMÁGENES'), $fullname);
-                $custom_y = $pdf->GetY();
-            }
-            if ($k == 2) {
-                $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 135);
-                $custom_y =  $new_page == true ? 25 :  $pdf->GetY();
-                $altura_firma =  $new_page == true ? 40 :  65;
-            }
-        }
-
-        $pdf->PrintImage($k,$custom_y + 5,$image[0]);
-    $k++;
+    if ($sistema_venoso_profundo) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Profundo'), "");
+        $pdf->PrintElement(2,utf8_decode(' - Vena femoral comun: '), utf8_decode( $radiobox_vena_femoral_comun["label"]));
+        $pdf->PrintElement(2,utf8_decode(' - Vena femoral superficial: '), utf8_decode( $radiobox_vena_femoral_superficial["label"]));
+        $pdf->PrintElement(2,utf8_decode(' - Vena poplítea: '), utf8_decode($radiobox_vena_poplitea["label"]));
+        $pdf->PrintElement(2,utf8_decode(' - Plexo soleo y gemelar: '), utf8_decode($radiobox_plexo_soleo_y_gemelar["label"]));
     }
+
+    if ($sistema_venoso_superficial) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Superficial'), "");
+        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena mayor'), "");
+        // ------------------------------------------------------------------------
+        $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Femoral '),$checkbox_union_safeno_femoral, $safeno_femoral_medida);
+        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$safeno_femoral_medida);
+    }
+
+
+    if ($vena_safena_magna) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Magna (Interna)'), "");
+        // ------------------------------------------------------------------------
+        $pdf->PrintArray(2,utf8_decode(' - Tronco Suprapatelar '),$checkbox_tronco_suprapatelar, $tronco_suprapatelar_medida);
+        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_suprapatelar_medida);
+        $pdf->PrintArray(2,utf8_decode(' - Tronco Infrapatelar '),$checkbox_tronco_infrapatelar, $tronco_infrapatelar_medida);
+        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_infrapatelar_medida);
+    }
+
+
+    if ($vena_safena_menor) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Menor'), "");
+        // ------------------------------------------------------------------------
+        $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Poplitea '),$checkbox_union_safeno_poplitea, $union_safeno_poplitea_medida);
+        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$union_safeno_poplitea_medida);
+        $pdf->PrintArray(2,utf8_decode(' - Vena Safena Parva (Externa) '),$checkbox_vena_safena_parva, $vena_safena_parva_medida);
+        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$vena_safena_parva_medida);
+    }
+
+
+    if ($sistemas_perforantes) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistemas Perforantes'), "");
+        // ------------------------------------------------------------------------ 
+        $pdf->PrintArray(2,utf8_decode(' - Venas Perforantes '),$checkbox_venas_perforantes, $venas_perforantes_medida);
+        // $pdf->PrintElement(2,utf8_decode(' - Medida(cm): '),$venas_perforantes_medida);
+    }
+
+    $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$observaciones);
+    $pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion);
+    // Fin de impresion de datos --------------------------------------------------------
+
+
+
+
+    // Imprimir las imagenes --------------------------------------------------------
+    $custom_y = $pdf->GetY();
+    // $custom_y = intval($custom_y);
+    //altura firma es la distancia entre la posicion y actual y el margen para imprimir la firma, si no hay imagen
+    $altura_firma = 15;
+    $k = 0;
+    if (sizeof($images_ids_array)>0) {
+        //si hay imagen (1 o 2) la distancia con la firma debe ser un poco mayor
+        $altura_firma = 40;
+        foreach ($images_array as $image) {
+            //$pdf->PrintImage(2,'Imagen:',$images_names[$k]);
+            //verificamos cuando hay una fila o 2 filas
+            if ($k == 0 || $k == 2) {
+                // si no hay espacio agrega otra pagina
+                $custom_y = $pdf->GetY();
+                if ($k == 0) {
+                    $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 125);
+                    $pdf->Ln(3);
+                    $pdf->PrintSection(3,utf8_decode('IMÁGENES'), $fullname);
+                    $custom_y = $pdf->GetY();
+                }
+                if ($k == 2) {
+                    $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 135);
+                    $custom_y =  $new_page == true ? 25 :  $pdf->GetY();
+                    $altura_firma =  $new_page == true ? 40 :  65;
+                }
+            }
+
+            $pdf->PrintImage($k,$custom_y + 5,$image[0]);
+        $k++;
+        }
+    }
+
+    $pdf->Firma($altura_firma);
+
+
+}else{
+    $pdf->PrintElement(2,utf8_decode(' informe: '),"NO IMPRIMIR INFORME XQ ESTA VACIO");
+
 }
 
 
-} //if false... borrar
 
-// $pdf->Firma($altura_firma);
+
 
 ob_start();
 $pdf->Output();
