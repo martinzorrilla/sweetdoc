@@ -181,13 +181,13 @@ function sw_create_patient($params){
 
       //create the patient static data post type
       //send param array with name , lastname and $post_id wich is the receently created patient
-      $static_values = ['patient_name'=>$patient_name,
-                        'static_data_id'=> 0,
-                        'patient_last_name'=>$patient_last_name, 
-                        'patient_id'=>$post_id
-                       ];
+      // $static_values = ['patient_name'=>$patient_name,
+      //                   'static_data_id'=> 0,
+      //                   'patient_last_name'=>$patient_last_name, 
+      //                   'patient_id'=>$post_id
+      //                  ];
 
-      $static_data = sw_create_static_data($static_values);
+      // $static_data = sw_create_static_data($static_values);
 
       $result['success'] = TRUE;
       // $result['msg'] = 'Nuevo Paciente creado';
@@ -271,18 +271,18 @@ function sw_update_patient($params){
 
 
     // returns an array containing the ID of the static data post related to this patient id.
-    $the_query = sw_get_patient_static_data_ago($patient_id);
-    $patient_ago_id =  $the_query[0];      
+    // $the_query = sw_get_patient_static_data_ago($patient_id);
+    // $patient_ago_id =  $the_query[0];      
 
-    //create the patient static data post type
-    //send param array with name , lastname and $post_id wich is the receently created patient
-     $static_values = ['patient_name'=>$patient_name,
-                       'static_data_id'=>$patient_ago_id, 
-                       'patient_last_name'=>$patient_last_name, 
-                       'patient_id'=>$patient_id
-                      ];
+    // //create the patient static data post type
+    // //send param array with name , lastname and $post_id wich is the receently created patient
+    //  $static_values = ['patient_name'=>$patient_name,
+    //                    'static_data_id'=>$patient_ago_id, 
+    //                    'patient_last_name'=>$patient_last_name, 
+    //                    'patient_id'=>$patient_id
+    //                   ];
 
-     $static_data = sw_create_static_data($static_values);
+    //  $static_data = sw_create_static_data($static_values);
 
     $result['success'] = TRUE;
     // $result['msg'] = 'Datos del paciente actualizados';

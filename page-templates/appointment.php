@@ -20,8 +20,8 @@
   $is_editable = "true";
   //this is to get the id of the static_data post for this patient
   //returns an array 
-  $static_data_array = sw_get_static_data_id($patient_id);
-  $static_data_post_id = $static_data_array[0];
+  // $static_data_array = sw_get_static_data_id($patient_id);
+  // $static_data_post_id = $static_data_array[0];
 
 
   $patient_fields = get_post_custom($patient_id);
@@ -96,14 +96,14 @@
   </div> -->
   <div class="tab">
     <button class="tablinks dabbed tab-appointment" data-id="consulta" id="defaultOpen">Consulta</button>
-    <button class="tablinks dabbed tab-appointment" data-id="AGO">AGO</button>
+    <!-- <button class="tablinks dabbed tab-appointment" data-id="AGO">AGO</button> -->
   </div>
 
   <div class="appform">
     <form id="create-appointment-form" name="create-appointment-form" method="post"  class="text-center" enctype="multipart/form-data">
           
 
-          <?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => $is_editable]); ?>
+          <!-- < ?php hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => $is_editable]); ?> -->
 
           <fieldset>
             <?php //hm_get_template_part('template-parts/appointment/common-data', ['appointment_id' => $appointment_id]); ?>
@@ -149,8 +149,8 @@
     function init(){
       $(document).ready(function () {
         //dom queries 
-        OrgTypeDropdown = $('.org-type-dropdown select');
-        rolesDropdown = $('.role-type-dropdown select');
+        // OrgTypeDropdown = $('.org-type-dropdown select');
+        // rolesDropdown = $('.role-type-dropdown select');
         createAppBtn = $("#create-appointment");
         createAppointmentForm = $("#create-appointment-form");
         createProfileClose = $("#create-profile-close");
@@ -224,7 +224,7 @@
 
     formData.append("app_id", "<?php echo $appointment_id ?>");
     formData.append("patient_id", "<?php echo $patient_id ?>");
-    formData.append("static_data_post_id", "<?php echo $static_data_post_id ?>");
+    // formData.append("static_data_post_id", "< ?php echo $static_data_post_id ?>");
     formData.append("colpo_post_id", "<?php echo $colpo_post_id ?>");
 
     formData.append("action", "sw_create_appointment_ajax");
@@ -235,25 +235,8 @@
   function saveProfileData(e) {
     e.preventDefault();
 
-    //alert("Se guardaran los datos");
     var $ = jQuery;
     var formData = populateFormData();
-
-    //console.log("formData = ", formData);
-    //Display the key/value pairs
-    // for (var pair of formData.entries())
-    // {
-    //    console.log(pair[0]+ ', '+ pair[1]); 
-    // }
-
-    // SI USABAMODS serialize() en vez de serializeArray(), de esta forma debiamos apendar los campos extras
-    //var myData = createAppointmentForm.serialize();
-    // var myData = createAppointmentForm.serialize() + 
-    // '&patient_id=' + '< ?php //echo $patient_id?>' + 
-    // '&app_id=' + '< ?php //echo $appointment_id ?>' + 
-    // '&static_data_post_id=' + '< ?php //echo $static_data_post_id ?>' + 
-    // '&colpo_post_id=' + '< ?php //echo $colpo_post_id ?>' + 
-    // '&action=' + 'sw_create_appointment_ajax';
 
     $.ajax({
 
@@ -272,146 +255,21 @@
         //if(result.error){
           //alert(result.error.msg);
           alert('Error<> Ajax Request: succeded - Backend error: check functions.php -> sw_create_appointment_ajax ');
-          //let errorMsg = result.error.msg;
-          //jQuery('form#create-appointment-form .errorWrapper').prepend(errorMsg);
+
         }
         if(result.success){
-          //$('#interests').foundation('open');
-          //window.location.reload();
-          
-          // ANTERIORMENTE USABAMOS ESTO. TAL VEZ SEA UTIL TODAVIA
-          // este paquete de cogigo usabamos para recargar la consulta recien creada pero ya con los datos cargados en la BD por eo cambiamo el app id
-          // alert(result['msg']);
-          // var oldUrl = window.location.href; 
-          // var replaceId = "app_id="+result['app_id'];
-          // var newUrl = oldUrl.replace("app_id=new", replaceId);
-          // window.location.replace(newUrl);
-          // fin del paquete
 
           setTimeout(function(){
             $("#overlay").fadeOut(300);
           },500);
           
-          // este te lleva a la ficha del paciente
-          //  window.location.replace(result['msg']);
-
            window.history.back();
-
 
         }
       }
     });
   }
 
-  /*--------------------------------------*/
-  function updateImageDisplay(preview, fileInput) {
-
-    fileInput = document.querySelector('input[type="file"]');
-    preview = document.querySelector('.preview');
-    //cuando hay un cambio en input, remover todos los childs de preview
-    while(preview.firstChild) {
-      preview.removeChild(preview.firstChild);
-    }
-
-    console.log("fileInput", fileInput.files);
-    var curFiles = fileInput.files;
-    //si no se agregan o no hay ningun file, apendar a preview un parrafo con texto
-    if(curFiles.length === 0) {
-      var para = document.createElement('p');
-      para.textContent = 'No hay archivos seleccionados';
-      preview.appendChild(para);
-    } else {
-      var list = document.createElement('ol');
-      preview.appendChild(list);
-      for(var i = 0; i < curFiles.length; i++) {
-        //var liContainer = document.createElement('div');
-        //liContainer.classList.add("row");
-        var listItem = document.createElement('li');
-        //liContainer.appendChild(listItem);
-        
-        //$( listItem ).wrap( "<div class='row'></div>" );
-        
-        var para = document.createElement('p');
-        //para.classList.add("small-12");
-        //si el tipo es validoy el tamnho no exede los 6MB
-        if(validFileType(curFiles[i]) && curFiles[i].size < 6291456) {
-          //add a class to change to succes/valid color
-          //$(listItem).css('background', '#2c3840');
-          
-           para.textContent = 'Nombre del archivo:  ' + curFiles[i].name;
-          //var paraText = 'Archivo:  ' + curFiles[i].name + '<br> Tamaño: ' + returnFileSize(curFiles[i].size) + '.';
-          //$(para ).html(paraText);
-
-          var image = document.createElement('img');
-          
-          image.src = window.URL.createObjectURL(curFiles[i]);
-
-          var liContainer = document.createElement('div');
-          liContainer.classList.add("row");
-          //var listItem = document.createElement('li');
-          listItem.appendChild(liContainer);
-
-          liContainer.appendChild(image);
-          $( image ).wrap( "<div class='large-6 medium-6 small-12 columns colpo-files-list'></div>" );
-          liContainer.appendChild(para);
-          $( para ).wrap( "<div class='large-6 medium-6 small-12 columns'></div>" );
-
-        } else {
-          //agregar estilo para hacerlo de color rojo
-          //$( listItem ).addClass( "listItem-error-color" );
-          $(listItem).css('background', '#cc4b37');
-          para.textContent = 'Nombre del archivo: ' + curFiles[i].name + '  -   Tipo de archivo incorrecto. Actualice las seleccion.';
-          listItem.appendChild(para);
-        }
-
-        list.appendChild(listItem);
-      }
-    }
-  }
-
-  var fileTypes = [
-    'image/jpeg',
-    'image/pjpeg',
-    'image/png'
-  ]
-
-  function validFileType(file) {
-    for(var i = 0; i < fileTypes.length; i++) {
-      if(file.type === fileTypes[i]) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  function hello_world(){
-    alert("hello_world");
-  }
-
-  function get_checkbox_values(){
-    
-    var checked_values = [];
-      $("input[type=checkbox]").each(function(){
-        if (this.checked) {
-          checked_values.push($(this).val());
-        }
-      });// each
-      console.log(checked_values);
-      //alert("check your console");
-      return checked_values;  
-  }
-
-  function returnFileSize(number) {
-    if(number < 1024) {
-      return number + 'bytes';
-    } else if(number >= 1024 && number < 1048576) {
-      return (number/1024).toFixed(1) + 'KB';
-    } else if(number >= 1048576) {
-      return (number/1048576).toFixed(1) + 'MB';
-    }
-  }
-/*--------------------------------------*/
 
   return{
     init:init

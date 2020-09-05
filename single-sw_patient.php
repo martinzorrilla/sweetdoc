@@ -27,11 +27,11 @@ $patient_id = $post_id;
 
   //this is to get the id of the static_data post for this patient
   //returns an array
-  $static_data_array = sw_get_static_data_id($patient_id);
-  $static_data_post_id = $static_data_array[0];
-  // nuevo
-  $static_data_post = get_post_custom($static_data_post_id);
-  $alertas = isset($static_data_post['alertas'][0]) ? $static_data_post['alertas'][0] : NULL;
+  // $static_data_array = sw_get_static_data_id($patient_id);
+  // $static_data_post_id = $static_data_array[0];
+  // // nuevo
+  // $static_data_post = get_post_custom($static_data_post_id);
+  // $alertas = isset($static_data_post['alertas'][0]) ? $static_data_post['alertas'][0] : NULL;
 
 ?>
 
@@ -49,20 +49,7 @@ $patient_id = $post_id;
   </div> -->
 
 
-  <?php
-  if($alertas != "" &&  (current_user_can( 'doctor' ) || current_user_can( 'administrator') )){?>
-  <!-- <div class="callout alert-callout-border alert text-center alert-field-active">
-    <h3 style="font-weight: bold;">Alerta</h3>
-  </div> -->
 
-  <div class="row" style="padding-top: 2rem;">
-    <div class="small-12 columns text-center" style="padding-bottom:1em;">
-      <a href="#alertas" class="crete-app btn btn-yellow botones-estandard">Alerta</a>
-    </div>
-  </div>
-  <?php
-  }
-  ?>
 
 <?php
 //como prueba de concepto. si el usuario es doctor muestra estos campos si no, no
@@ -79,7 +66,7 @@ $result = sw_get_current_user_role();
   <div class="tab">
     <button class="tablinks dabbed tab-single-patient" data-id="Resumen"  id="defaultOpen">Resumen</button>
     <button class="tablinks dabbed tab-single-patient" data-id="Datos-Basicos" >Datos</button>
-    <button class="tablinks dabbed tab-single-patient" data-id="AGO" >AGO</button>
+    <!-- <button class="tablinks dabbed tab-single-patient" data-id="AGO" >AGO</button> -->
     <button class="tablinks dabbed tab-single-patient" data-id="Consultas" id="consultasAsync" >Consultas</button>
   </div>
 
@@ -92,7 +79,7 @@ $result = sw_get_current_user_role();
   //check permissions for the user
   //this section should only  be visible by a doctor role or admin.
   if(current_user_can('doctor') || current_user_can('administrator')){
-    hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => "false"]);
+    // hm_get_template_part('template-parts/appointment/static-data', ['static_data_post_id' => $static_data_post_id, 'patient_id' => $patient_id, 'is_editable' => "false"]);
     hm_get_template_part('template-parts/patients-all/tabla-consultas-responsive', ['patient_id' => $patient_id]);
 
   }

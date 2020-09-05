@@ -19,11 +19,11 @@
   
 
   //printf(' Edad : %d años, %d meses, %d dias', $diff->y, $diff->m, $diff->d);
-  $static_data_array = sw_get_static_data_id($patient_id); 
-  $static_data_post = get_post_custom($static_data_array[0]);
-  $numero_embarazos = isset($static_data_post['numero_embarazos'][0]) ? $static_data_post['numero_embarazos'][0] : NULL;
-  $parto_normal = isset($static_data_post['parto_normal'][0]) ? $static_data_post['parto_normal'][0] : NULL;
-  $cesareas = isset($static_data_post['cesareas'][0]) ? $static_data_post['cesareas'][0] : NULL;
+  // $static_data_array = sw_get_static_data_id($patient_id); 
+  // $static_data_post = get_post_custom($static_data_array[0]);
+  // $numero_embarazos = isset($static_data_post['numero_embarazos'][0]) ? $static_data_post['numero_embarazos'][0] : NULL;
+  // $parto_normal = isset($static_data_post['parto_normal'][0]) ? $static_data_post['parto_normal'][0] : NULL;
+  // $cesareas = isset($static_data_post['cesareas'][0]) ? $static_data_post['cesareas'][0] : NULL;
 
   // $numero_embarazos = $static_data_post['numero_embarazos'][0];
   // $parto_normal = $static_data_post['parto_normal'][0];
@@ -83,30 +83,7 @@
 
           </div> <!-- row -->
 
-          <div class="row">          
 
-            <div class="large-4 medium-12 columns ">
-              <p><?php 
-                if ($numero_embarazos != NULL) {
-                echo("Embarazos : ".$numero_embarazos);}?>
-                </p>
-            </div>
-
-            <div class="large-4 medium-12 columns ">
-              <p>
-                <?php
-                  if ($parto_normal != NULL) {
-                  echo("Parto normal : ".$parto_normal);}?>
-              </p>
-            </div>
-
-            <div class="large-4 medium-12 columns ">
-              <p><?php
-                  if ($cesareas != NULL) {
-                  echo("Cesareas : ".$cesareas);}?>
-              </p>
-            </div>
-          </div> <!-- row -->
 
           </p>
 
