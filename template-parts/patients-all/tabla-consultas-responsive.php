@@ -67,6 +67,7 @@
                     <th scope="col">Estudios</th>
                     <th scope="col">Laboratorio</th>
                     <th scope="col">Ecografía Venosa</th>
+                    <th scope="col">Ecografía Arterial</th>
                     </tr>
                 </thead>
 

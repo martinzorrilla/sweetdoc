@@ -69,6 +69,8 @@ function sw_cargar_consultas_paciente($params){
     $eco_venosa_url = home_url().'/eco-venosa/?patient_id=';
     $eco_venosa_pdf_url = home_url().'/eco-venosa-pdf/?eco_venosa_id=';
 
+    $eco_arterial_url = home_url().'/eco-arterial/?patient_id=';
+    $eco_arterial_pdf_url = home_url().'/eco-arterial-pdf/?eco_arterial_id=';
 
 
     $related = sw_get_related_appointments($patient_id);
@@ -112,6 +114,12 @@ function sw_cargar_consultas_paciente($params){
         $eco_venosa_id = isset($eco_venosa_array[0]) ? $eco_venosa_array[0] : NULL;
         // $laboratories_id = $laboratories_array[0];
         $eco_venosa_title = $eco_venosa_id === NULL ? "Crear" : "Editar";
+
+
+        $eco_arterial_array = sw_get_eco_arterial_id($r);
+        $eco_arterial_id = isset($eco_arterial_array[0]) ? $eco_arterial_array[0] : NULL;
+        // $laboratories_id = $laboratories_array[0];
+        $eco_arterial_title = $eco_arterial_id === NULL ? "Crear" : "Editar";
 
         $filas =
          '<tr> 
@@ -183,6 +191,18 @@ function sw_cargar_consultas_paciente($params){
             }
             $filas = $filas.'
             </td>
+
+            <td scope="row" data-label="Ecografía Arterial">                  
+            <a class="btn btn-blue botones-estandard btn-table-consultas" href="'.esc_url( $eco_arterial_url ).$patient_id.'&app_id='.$r.'">'.$eco_arterial_title.'</a>';
+        
+            if ($eco_arterial_id) {
+                $filas = $filas.'<br>
+
+                <a class="btn btn-green botones-estandard btn-table-consultas marg-top" href="'.esc_url( $eco_arterial_pdf_url ).$eco_arterial_id.'">Imprimir PDF</a>';
+            }
+            $filas = $filas.'
+            </td>
+
 
         </tr>';
 

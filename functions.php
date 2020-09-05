@@ -326,6 +326,36 @@ function sw_get_eco_venosa_id($app_id){
   //return $myquery;
 }
 
+function sw_get_eco_arterial_id($app_id){
+
+  $args = array(
+    'post_type'  => 'sw_eco_arterial',
+    'meta_key'   => 'eco_arterial_related_app',
+    'posts_per_page' => -1,
+  //'orderby'    => 'meta_value_num',
+  //'order'      => 'ASC',
+    'meta_query' => array(
+      array(
+        'key'     => 'eco_arterial_related_app',
+        'value'   => array($app_id),
+        'compare' => 'IN',
+      ),
+    ),
+  );
+  $myquery = new WP_Query( $args );
+
+  //returns a fucking array
+  $related =  wp_list_pluck( $myquery->posts, 'ID' );
+
+  wp_reset_postdata(); //always reset the post data!
+  
+  //if want to return an array of id's
+  return $related;
+  //if want to return the query object
+  //return $myquery;
+}
+
+
 // como deberia funcionar
 // recibe la app_id y devuelve el patient_id
 function sw_get_patient_id_from_app_id($app_id){
