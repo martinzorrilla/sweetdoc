@@ -14,49 +14,52 @@
     $patient_id = isset($_POST['patient_id']) && $_POST['patient_id'] != '' ? $_POST['patient_id'] : NULL;
     $eco_arterial_post_id = isset($_POST['eco_arterial_post_id']) && $_POST['eco_arterial_post_id'] != '' ? $_POST['eco_arterial_post_id'] : NULL;
 
+
     //eco_arterial data    IZQUIERDO
     $arteria_femoral_comun = isset($_POST['arteria_femoral_comun']) && $_POST['arteria_femoral_comun'] != '' ? $_POST['arteria_femoral_comun'] : NULL;
+    $afc_obs = isset($_POST['afc_obs']) && $_POST['afc_obs'] != '' ? $_POST['afc_obs'] : NULL;
+    $afc_flujo = isset($_POST['afc_flujo']) && $_POST['afc_flujo'] != '' ? $_POST['afc_flujo'] : NULL;
 
-    $vena_femoral_superficial = isset($_POST['vena_femoral_superficial']) && $_POST['vena_femoral_superficial'] != '' ? $_POST['vena_femoral_superficial'] : NULL;
-    $vena_poplitea = isset($_POST['vena_poplitea']) && $_POST['vena_poplitea'] != '' ? $_POST['vena_poplitea'] : NULL;
-   
-    $plexo_soleo_y_gemelar = isset($_POST['plexo_soleo_y_gemelar']) && $_POST['plexo_soleo_y_gemelar'] != '' ? $_POST['plexo_soleo_y_gemelar'] : NULL;
-    $union_safeno_femoral = isset($_POST['union_safeno_femoral']) && $_POST['union_safeno_femoral'] != '' ? $_POST['union_safeno_femoral'] : NULL;
-    $safeno_femoral_medida = isset($_POST['safeno_femoral_medida']) && $_POST['safeno_femoral_medida'] != '' ? $_POST['safeno_femoral_medida'] : NULL;
-    $tronco_suprapatelar = isset($_POST['tronco_suprapatelar']) && $_POST['tronco_suprapatelar'] != '' ? $_POST['tronco_suprapatelar'] : NULL;
-    $tronco_suprapatelar_medida = isset($_POST['tronco_suprapatelar_medida']) && $_POST['tronco_suprapatelar_medida'] != '' ? $_POST['tronco_suprapatelar_medida'] : NULL;
-    $tronco_infrapatelar = isset($_POST['tronco_infrapatelar']) && $_POST['tronco_infrapatelar'] != '' ? $_POST['tronco_infrapatelar'] : NULL;
+
+    $arteria_femoral_profunda = isset($_POST['arteria_femoral_profunda']) && $_POST['arteria_femoral_profunda'] != '' ? $_POST['arteria_femoral_profunda'] : NULL;
+    $afp_obs = isset($_POST['afp_obs']) && $_POST['afp_obs'] != '' ? $_POST['afp_obs'] : NULL;
+    $afp_flujo = isset($_POST['afp_flujo']) && $_POST['afp_flujo'] != '' ? $_POST['afp_flujo'] : NULL;
     
-    $tronco_infrapatelar_medida = isset($_POST['tronco_infrapatelar_medida']) && $_POST['tronco_infrapatelar_medida'] != '' ? $_POST['tronco_infrapatelar_medida'] : NULL;
-    $union_safeno_poplitea = isset($_POST['union_safeno_poplitea']) && $_POST['union_safeno_poplitea'] != '' ? $_POST['union_safeno_poplitea'] : NULL;
-    $union_safeno_poplitea_medida = isset($_POST['union_safeno_poplitea_medida']) && $_POST['union_safeno_poplitea_medida'] != '' ? $_POST['union_safeno_poplitea_medida'] : NULL;
-    $vena_safena_parva = isset($_POST['vena_safena_parva']) && $_POST['vena_safena_parva'] != '' ? $_POST['vena_safena_parva'] : NULL;
-    $vena_safena_parva_medida = isset($_POST['vena_safena_parva_medida']) && $_POST['vena_safena_parva_medida'] != '' ? $_POST['vena_safena_parva_medida'] : NULL;
-    $venas_perforantes = isset($_POST['venas_perforantes']) && $_POST['venas_perforantes'] != '' ? $_POST['venas_perforantes'] : NULL;
-    $venas_perforantes_medida = isset($_POST['venas_perforantes_medida']) && $_POST['venas_perforantes_medida'] != '' ? $_POST['venas_perforantes_medida'] : NULL;
-    $observaciones = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : NULL;
+    $arteria_femoral_superficial = isset($_POST['arteria_femoral_superficial']) && $_POST['arteria_femoral_superficial'] != '' ? $_POST['arteria_femoral_superficial'] : NULL;
+    $afs_obs = isset($_POST['afs_obs']) && $_POST['afs_obs'] != '' ? $_POST['afs_obs'] : NULL;
+    $afs_flujo = isset($_POST['afs_flujo']) && $_POST['afs_flujo'] != '' ? $_POST['afs_flujo'] : NULL;
+    
+    $arteria_poplitea = isset($_POST['arteria_poplitea']) && $_POST['arteria_poplitea'] != '' ? $_POST['arteria_poplitea'] : NULL;
+    $ap_obs = isset($_POST['ap_obs']) && $_POST['ap_obs'] != '' ? $_POST['ap_obs'] : NULL;
+    $ap_flujo = isset($_POST['ap_flujo']) && $_POST['ap_flujo'] != '' ? $_POST['ap_flujo'] : NULL;
+    
+    $arteria_tibial_anterior = isset($_POST['arteria_tibial_anterior']) && $_POST['arteria_tibial_anterior'] != '' ? $_POST['arteria_tibial_anterior'] : NULL;
+    $ata_obs = isset($_POST['ata_obs']) && $_POST['ata_obs'] != '' ? $_POST['ata_obs'] : NULL;
+    $ata_flujo = isset($_POST['ata_flujo']) && $_POST['ata_flujo'] != '' ? $_POST['ata_flujo'] : NULL;
+    
+    $arteria_tibial_posterior = isset($_POST['arteria_tibial_posterior']) && $_POST['arteria_tibial_posterior'] != '' ? $_POST['arteria_tibial_posterior'] : NULL;
+    $atp_obs = isset($_POST['atp_obs']) && $_POST['atp_obs'] != '' ? $_POST['atp_obs'] : NULL;
+    $atp_flujo = isset($_POST['atp_flujo']) && $_POST['atp_flujo'] != '' ? $_POST['atp_flujo'] : NULL;
+    
+   
+    $arteria_fibular_peroneal = isset($_POST['arteria_fibular_peroneal']) && $_POST['arteria_fibular_peroneal'] != '' ? $_POST['arteria_fibular_peroneal'] : NULL;
+    $arfipe_obs = isset($_POST['arfipe_obs']) && $_POST['arfipe_obs'] != '' ? $_POST['arfipe_obs'] : NULL;
+    $arfipe_flujo = isset($_POST['arfipe_flujo']) && $_POST['arfipe_flujo'] != '' ? $_POST['arfipe_flujo'] : NULL;
+   
+
+    $arteria_pedia = isset($_POST['arteria_pedia']) && $_POST['arteria_pedia'] != '' ? $_POST['arteria_pedia'] : NULL;
+    $arpe_obs = isset($_POST['arpe_obs']) && $_POST['arpe_obs'] != '' ? $_POST['arpe_obs'] : NULL;
+    $arpe_flujo = isset($_POST['arpe_flujo']) && $_POST['arpe_flujo'] != '' ? $_POST['arpe_flujo'] : NULL;
+   
+    
     $conclusion = isset($_POST['conclusion'])? $_POST['conclusion'] : NULL;
     
+    
+
+
+
+
     //eco_arterial data    DERECHO
-    $vena_femoral_comun_der = isset($_POST['vena_femoral_comun_der']) && $_POST['vena_femoral_comun_der'] != '' ? $_POST['vena_femoral_comun_der'] : NULL;
-    
-    $vena_femoral_superficial_der = isset($_POST['vena_femoral_superficial_der']) && $_POST['vena_femoral_superficial_der'] != '' ? $_POST['vena_femoral_superficial_der'] : NULL;
-    $vena_poplitea_der = isset($_POST['vena_poplitea_der']) && $_POST['vena_poplitea_der'] != '' ? $_POST['vena_poplitea_der'] : NULL;
-    $plexo_soleo_y_gemelar_der = isset($_POST['plexo_soleo_y_gemelar_der']) && $_POST['plexo_soleo_y_gemelar_der'] != '' ? $_POST['plexo_soleo_y_gemelar_der'] : NULL;
-    $union_safeno_femoral_der = isset($_POST['union_safeno_femoral_der']) && $_POST['union_safeno_femoral_der'] != '' ? $_POST['union_safeno_femoral_der'] : NULL;
-    $safeno_femoral_medida_der = isset($_POST['safeno_femoral_medida_der']) && $_POST['safeno_femoral_medida_der'] != '' ? $_POST['safeno_femoral_medida_der'] : NULL;
-    $tronco_suprapatelar_der = isset($_POST['tronco_suprapatelar_der']) && $_POST['tronco_suprapatelar_der'] != '' ? $_POST['tronco_suprapatelar_der'] : NULL;
-    $tronco_suprapatelar_medida_der = isset($_POST['tronco_suprapatelar_medida_der']) && $_POST['tronco_suprapatelar_medida_der'] != '' ? $_POST['tronco_suprapatelar_medida_der'] : NULL;
-    $tronco_infrapatelar_der = isset($_POST['tronco_infrapatelar_der']) && $_POST['tronco_infrapatelar_der'] != '' ? $_POST['tronco_infrapatelar_der'] : NULL;
-    $tronco_infrapatelar_medida_der = isset($_POST['tronco_infrapatelar_medida_der']) && $_POST['tronco_infrapatelar_medida_der'] != '' ? $_POST['tronco_infrapatelar_medida_der'] : NULL;
-    $union_safeno_poplitea_der = isset($_POST['union_safeno_poplitea_der']) && $_POST['union_safeno_poplitea_der'] != '' ? $_POST['union_safeno_poplitea_der'] : NULL;
-    $union_safeno_poplitea_medida_der = isset($_POST['union_safeno_poplitea_medida_der']) && $_POST['union_safeno_poplitea_medida_der'] != '' ? $_POST['union_safeno_poplitea_medida_der'] : NULL;
-    $vena_safena_parva_der = isset($_POST['vena_safena_parva_der']) && $_POST['vena_safena_parva_der'] != '' ? $_POST['vena_safena_parva_der'] : NULL;
-    $vena_safena_parva_medida_der = isset($_POST['vena_safena_parva_medida_der']) && $_POST['vena_safena_parva_medida_der'] != '' ? $_POST['vena_safena_parva_medida_der'] : NULL;
-    $venas_perforantes_der = isset($_POST['venas_perforantes_der']) && $_POST['venas_perforantes_der'] != '' ? $_POST['venas_perforantes_der'] : NULL;
-    $venas_perforantes_medida_der = isset($_POST['venas_perforantes_medida_der']) && $_POST['venas_perforantes_medida_der'] != '' ? $_POST['venas_perforantes_medida_der'] : NULL;
-    $observaciones_der = isset($_POST['observaciones_der']) && $_POST['observaciones_der'] != '' ? $_POST['observaciones_der'] : NULL;
-    
     $conclusion_der = isset($_POST['conclusion_der'])? $_POST['conclusion_der'] : NULL;
     
 
@@ -71,6 +74,37 @@
         
         //colposcopia
         "arteria_femoral_comun" => $arteria_femoral_comun,
+        "afc_obs" => $afc_obs,
+        "afc_flujo" => $afc_flujo,
+
+        "arteria_femoral_profunda" => $arteria_femoral_profunda,
+        "afp_obs" => $afp_obs,
+        "afp_flujo" => $afp_flujo,
+
+        "arteria_femoral_superficial" => $arteria_femoral_superficial,
+        "afs_obs" => $afs_obs,
+        "afs_flujo" => $afs_flujo,
+
+        "arteria_poplitea" => $arteria_poplitea,
+        "ap_obs" => $ap_obs,
+        "ap_flujo" => $ap_flujo,
+
+        "arteria_tibial_anterior" => $arteria_tibial_anterior,
+        "ata_obs" => $ata_obs,
+        "ata_flujo" => $ata_flujo,
+
+        "arteria_tibial_posterior" => $arteria_tibial_posterior,
+        "atp_obs" => $atp_obs,
+        "atp_flujo" => $atp_flujo,
+
+        "arteria_fibular_peroneal" => $arteria_fibular_peroneal,
+        "arfipe_obs" => $arfipe_obs,
+        "arfipe_flujo" => $arfipe_flujo,
+
+        "arteria_pedia" => $arteria_pedia,
+        "arpe_obs" => $arpe_obs,
+        "arpe_flujo" => $arpe_flujo,
+
 
         "conclusion" => $conclusion,
 
@@ -109,8 +143,48 @@ function sw_create_new_eco_arterial($params){
  
     //miembro izquierdo
     $arteria_femoral_comun = $params['arteria_femoral_comun'];
+    $afc_obs = $params['afc_obs'];
+    $afc_flujo = $params['afc_flujo'];
 
+    $arteria_femoral_profunda = $params['arteria_femoral_profunda'];
+    $afp_obs = $params['afp_obs'];
+    $afp_flujo = $params['afp_flujo'];
+    
+    $arteria_femoral_superficial = $params['arteria_femoral_superficial'];
+    $afs_obs = $params['afs_obs'];
+    $afs_flujo = $params['afs_flujo'];
+    
+    $arteria_poplitea = $params['arteria_poplitea'];
+    $ap_obs = $params['ap_obs'];
+    $ap_flujo = $params['ap_flujo'];
+    
+    $arteria_tibial_anterior = $params['arteria_tibial_anterior'];
+    $ata_obs = $params['ata_obs'];
+    $ata_flujo = $params['ata_flujo'];
+    
+    $arteria_tibial_posterior = $params['arteria_tibial_posterior'];
+    $atp_obs = $params['atp_obs'];
+    $atp_flujo = $params['atp_flujo'];
+    
+   
+    $arteria_fibular_peroneal = $params['arteria_fibular_peroneal'];
+    $arfipe_obs = $params['arfipe_obs'];
+    $arfipe_flujo = $params['arfipe_flujo'];
+   
+
+    $arteria_pedia = $params['arteria_pedia'];
+    $arpe_obs = $params['arpe_obs'];
+    $arpe_flujo = $params['arpe_flujo'];
+
+    
     $conclusion = $params['conclusion'];
+
+
+
+
+
+
+
 
 
     //meiembro derecho
@@ -145,14 +219,44 @@ function sw_create_new_eco_arterial($params){
 
       $acf_fields = array(
 
-            "arteria_femoral_comun" => $arteria_femoral_comun,
+        "arteria_femoral_comun" => $arteria_femoral_comun,
+        "afc_obs" => $afc_obs,
+        "afc_flujo" => $afc_flujo,
 
-            "conclusion" => $conclusion,
+        "arteria_femoral_profunda" => $arteria_femoral_profunda,
+        "afp_obs" => $afp_obs,
+        "afp_flujo" => $afp_flujo,
+
+        "arteria_femoral_superficial" => $arteria_femoral_superficial,
+        "afs_obs" => $afs_obs,
+        "afs_flujo" => $afs_flujo,
+
+        "arteria_poplitea" => $arteria_poplitea,
+        "ap_obs" => $ap_obs,
+        "ap_flujo" => $ap_flujo,
+
+        "arteria_tibial_anterior" => $arteria_tibial_anterior,
+        "ata_obs" => $ata_obs,
+        "ata_flujo" => $ata_flujo,
+
+        "arteria_tibial_posterior" => $arteria_tibial_posterior,
+        "atp_obs" => $atp_obs,
+        "atp_flujo" => $atp_flujo,
+
+        "arteria_fibular_peroneal" => $arteria_fibular_peroneal,
+        "arfipe_obs" => $arfipe_obs,
+        "arfipe_flujo" => $arfipe_flujo,
+
+        "arteria_pedia" => $arteria_pedia,
+        "arpe_obs" => $arpe_obs,
+        "arpe_flujo" => $arpe_flujo,
+
+
+        "conclusion" => $conclusion,
 
 
 
             //miembro derecho
-
             "conclusion_der" => $conclusion_der
 
 
@@ -246,12 +350,47 @@ function sw_update_eco_arterial($params){
   //$cedula = $patient_fields['cedula'][0];
   $fullname = $name.'-'.$lastname;
 
+
+//   lado izq
   $arteria_femoral_comun = $params['arteria_femoral_comun'];
+  $afc_obs = $params['afc_obs'];
+  $afc_flujo = $params['afc_flujo'];
+
+  $arteria_femoral_profunda = $params['arteria_femoral_profunda'];
+  $afp_obs = $params['afp_obs'];
+  $afp_flujo = $params['afp_flujo'];
+  
+  $arteria_femoral_superficial = $params['arteria_femoral_superficial'];
+  $afs_obs = $params['afs_obs'];
+  $afs_flujo = $params['afs_flujo'];
+  
+  $arteria_poplitea = $params['arteria_poplitea'];
+  $ap_obs = $params['ap_obs'];
+  $ap_flujo = $params['ap_flujo'];
+  
+  $arteria_tibial_anterior = $params['arteria_tibial_anterior'];
+  $ata_obs = $params['ata_obs'];
+  $ata_flujo = $params['ata_flujo'];
+  
+  $arteria_tibial_posterior = $params['arteria_tibial_posterior'];
+  $atp_obs = $params['atp_obs'];
+  $atp_flujo = $params['atp_flujo'];
+  
+ 
+  $arteria_fibular_peroneal = $params['arteria_fibular_peroneal'];
+  $arfipe_obs = $params['arfipe_obs'];
+  $arfipe_flujo = $params['arfipe_flujo'];
+ 
+
+  $arteria_pedia = $params['arteria_pedia'];
+  $arpe_obs = $params['arpe_obs'];
+  $arpe_flujo = $params['arpe_flujo'];
+
+  
   $conclusion = $params['conclusion'];
   
   
   //meiembro derecho
-  $vena_femoral_comun_der = $params['vena_femoral_comun_der'];
   $conclusion_der = $params['conclusion_der'];
 
   
@@ -261,6 +400,38 @@ function sw_update_eco_arterial($params){
       $acf_fields = array(
 
         "arteria_femoral_comun" => $arteria_femoral_comun,
+        "afc_obs" => $afc_obs,
+        "afc_flujo" => $afc_flujo,
+
+        "arteria_femoral_profunda" => $arteria_femoral_profunda,
+        "afp_obs" => $afp_obs,
+        "afp_flujo" => $afp_flujo,
+
+        "arteria_femoral_superficial" => $arteria_femoral_superficial,
+        "afs_obs" => $afs_obs,
+        "afs_flujo" => $afs_flujo,
+
+        "arteria_poplitea" => $arteria_poplitea,
+        "ap_obs" => $ap_obs,
+        "ap_flujo" => $ap_flujo,
+
+        "arteria_tibial_anterior" => $arteria_tibial_anterior,
+        "ata_obs" => $ata_obs,
+        "ata_flujo" => $ata_flujo,
+
+        "arteria_tibial_posterior" => $arteria_tibial_posterior,
+        "atp_obs" => $atp_obs,
+        "atp_flujo" => $atp_flujo,
+
+        "arteria_fibular_peroneal" => $arteria_fibular_peroneal,
+        "arfipe_obs" => $arfipe_obs,
+        "arfipe_flujo" => $arfipe_flujo,
+
+        "arteria_pedia" => $arteria_pedia,
+        "arpe_obs" => $arpe_obs,
+        "arpe_flujo" => $arpe_flujo,
+
+
         "conclusion" => $conclusion,
 
 
