@@ -50,12 +50,41 @@
     
     
     //field files
-
     $checkbox_arteria_femoral_comun = get_field('arteria_femoral_comun', $eco_arterial_post_id);
     $afc_obs = isset($eco_arterial_data_post['afc_obs'][0]) ? $eco_arterial_data_post['afc_obs'][0] : NULL;
     $checkbox_afc_flujo = get_field('afc_flujo', $eco_arterial_post_id);
 
+    $checkbox_arteria_femoral_profunda = get_field('arteria_femoral_profunda', $eco_arterial_post_id);
+    $afp_obs = isset($eco_arterial_data_post['afp_obs'][0]) ? $eco_arterial_data_post['afp_obs'][0] : NULL;
+    $checkbox_afp_flujo = get_field('afp_flujo', $eco_arterial_post_id);
 
+
+    $checkbox_arteria_femoral_superficial = get_field('arteria_femoral_superficial', $eco_arterial_post_id);
+    $afs_obs = isset($eco_arterial_data_post['afs_obs'][0]) ? $eco_arterial_data_post['afs_obs'][0] : NULL;
+    $checkbox_afs_flujo = get_field('afs_flujo', $eco_arterial_post_id);
+
+
+    $checkbox_arteria_poplitea = get_field('arteria_poplitea', $eco_arterial_post_id);
+    $ap_obs = isset($eco_arterial_data_post['ap_obs'][0]) ? $eco_arterial_data_post['ap_obs'][0] : NULL;
+    $checkbox_ap_flujo = get_field('ap_flujo', $eco_arterial_post_id);
+
+
+    $checkbox_arteria_tibial_anterior = get_field('arteria_tibial_anterior', $eco_arterial_post_id);
+    $ata_obs = isset($eco_arterial_data_post['ata_obs'][0]) ? $eco_arterial_data_post['ata_obs'][0] : NULL;
+    $checkbox_ata_flujo = get_field('ata_flujo', $eco_arterial_post_id);
+
+    $checkbox_arteria_tibial_posterior = get_field('arteria_tibial_posterior', $eco_arterial_post_id);
+    $atp_obs = isset($eco_arterial_data_post['atp_obs'][0]) ? $eco_arterial_data_post['atp_obs'][0] : NULL;
+    $checkbox_atp_flujo = get_field('atp_flujo', $eco_arterial_post_id);
+
+    $checkbox_arteria_fibular_peroneal = get_field('arteria_fibular_peroneal', $eco_arterial_post_id);
+    $arfipe_obs = isset($eco_arterial_data_post['arfipe_obs'][0]) ? $eco_arterial_data_post['arfipe_obs'][0] : NULL;
+    $checkbox_arfipe_flujo = get_field('arfipe_flujo', $eco_arterial_post_id);
+
+    $checkbox_arteria_pedia = get_field('arteria_pedia', $eco_arterial_post_id);
+    $arpe_obs = isset($eco_arterial_data_post['arpe_obs'][0]) ? $eco_arterial_data_post['arpe_obs'][0] : NULL;
+    $checkbox_arpe_flujo = get_field('arpe_flujo', $eco_arterial_post_id);
+    
     $conclusion = isset($eco_arterial_data_post['conclusion'][0]) ? $eco_arterial_data_post['conclusion'][0] : NULL;
     
 
@@ -82,15 +111,15 @@
         
 
             <!-- ---------------------------------------------------------------------------------------------------------------------------------- -->
-            <div class="small-12 columns">
+            <!-- <div class="small-12 columns">
               <h6 class="separator-left" style="font-weight: bold; padding-top: 20px;" >Sistema Venoso Superficial</h6>
-            </div>
+            </div> -->
             <!-- ---------------------------------------------------------------------------------------------------------------------------------- -->
 
             <!-- ---------------------------------------------------------------------------------------------------------------------------------- -->
-            <div class="small-12 columns">
+            <!-- <div class="small-12 columns">
               <h6 class="separator-left" style="font-weight: bold; padding-top: 20px;" >Vena Safena Mayor</h6>
-            </div>
+            </div> -->
             <!-- ---------------------------------------------------------------------------------------------------------------------------------- -->
 
 
@@ -193,13 +222,12 @@
                     <label for="afc8">Ocluido</label>
 
             </div>  
-
+            
             <!-- afc_obs -->
             <div class="floated-label-wrapper large-12 columns end">
               <label class="separator-left" for="afc_obs">Observaciones</label>
               <textarea id="afc_obs" name="afc_obs" placeholder="Escribir..." style="height:7em" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?>  required><?php echo $afc_obs ?></textarea>
             </div>
-
 
             <!-- checkbox_afc_flujo - checkbox -->
             <!-- <div class="floated-label-wrapper small-12 columns checkbox-radio text-left grid-content"> -->
@@ -257,6 +285,23 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <!-- conclusion -->
             <div class="floated-label-wrapper large-12 columns end">
               <label class="separator-left" for="conclusion">Conclusion</label>
@@ -264,7 +309,7 @@
             </div>
 
             <!-- IMAGENES -->
-            <div id="imagenes-eco-ven-izq" class="archivos large-12 columns" style="margin-top: 1.5rem;">
+            <div id="imagenes-eco-art-izq" class="archivos large-12 columns" style="margin-top: 1.5rem;">
             
               <div class="profile-card-about">
                 <h5 class="about-title separator-left"> Ingresar imágenes de la ecografía </h5>

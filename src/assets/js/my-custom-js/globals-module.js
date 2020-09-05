@@ -8,6 +8,7 @@ var GloblasModule = function(){
     var editPatientBtn;
     var tabSinglePatient;
     var tabEcoVenosa;
+    var tabEcoArterial;
     var tabAppointment;
     var defaultTab;
     
@@ -19,6 +20,7 @@ var GloblasModule = function(){
         editPatientBtn = $("#toggle-input-patient");
         tabSinglePatient = $(".tab-single-patient");
         tabEcoVenosa = $(".tab-eco-venosa");
+        tabEcoArterial = $(".tab-eco-arterial");
         tabAppointment = $(".tab-appointment");
         defaultTab = $("#defaultOpen");
 
@@ -33,6 +35,11 @@ var GloblasModule = function(){
             })
 
             tabEcoVenosa.on("click", function (e) {
+              var tabName = $(this).data('id');
+              openCity(e, tabName);
+            })
+
+            tabEcoArterial.on("click", function (e) {
               var tabName = $(this).data('id');
               openCity(e, tabName);
             })
