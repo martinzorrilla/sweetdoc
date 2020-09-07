@@ -72,7 +72,8 @@
          echo count($all_colpos);
         ?>
       </span>
-      <p>Colposcopías</p>
+      <!-- <p>Colposcopías</p> -->
+      <p>Imágenes</p>
     </div> <!-- /.card-profile-stats-statistic -->
   </div> <!-- /.card-profile-stats-container -->
 

@@ -8,7 +8,8 @@
   </div> -->
 
   <div class="wrap" style="margin-bottom:2em;"> 
-      <h1 class="under font-bold">Todas las pacientes</h1>
+      <!-- <h1 class="under font-bold">Todas las pacientes</h1> -->
+      <h1 class="under font-bold">Todos los pacientes</h1>
   </div>
 
   <!-- Get the Part that renders the Patient List. 

@@ -13,7 +13,7 @@ function Header()
     global $title;
     global $y_actual;
     global $y_new;
-    //global $page_height;
+    global $page_height;
     // $image_path = home_url().'/pregnant.jpg';
 
     // $subtitulo = utf8_decode("Ginecología y Obstetricia");
@@ -36,7 +36,7 @@ function Header()
     $subtitulo = utf8_decode($client_especialidad);
     $subtitulo_alterno = utf8_decode($client_subtitle);
     $info = utf8_decode("Cel.: ".$client_phone);
-    $informe = utf8_decode("ECOGRAFÍA DOPPLER VENOSA");
+    $informe = utf8_decode("DOPPLER DE SISTEMA ARTERIAL");
 
     $this->SetFont('Times','I',20);
     //color rosa
@@ -263,7 +263,7 @@ function PrintElement($num, $title, $file)
 {
     if (!empty($file)) {
 
-        $txt = $title.$file;
+        $txt = $title.utf8_decode($file);
         // Fuente
         $this->SetFont('Times','',12);
         // Imprimir texto en una columna de 6 cm de ancho (si el valor es 60)
@@ -274,6 +274,54 @@ function PrintElement($num, $title, $file)
         $this->y0 = $this->GetY();
     }
 }
+
+function PrintElementWithSpaceChecker($num, $title, $file)
+{
+    if (!empty($file)) {
+
+        // $this->SetFont('Times','',12);
+        $txt = $title.utf8_decode($file);
+        // $this->MultiCell(190,7,$txt);
+
+        // $page_height = $this->$page_height;
+        $page_height = $this->GetPageHeight();
+
+        $page_was_added = false;
+        $rp = array();
+        $rp_continuation = array();
+        $page_was_added = $this->CheckPageSpaceLeft($page_height, $this->GetY(), 70);
+        $rp = explode("\n", $txt);
+
+        $k=0;
+        foreach ($rp as $sentence) {    
+            if ($page_was_added) {
+                array_push($rp_continuation,$sentence);
+            }
+            if (!$page_was_added) {
+                $sentence = preg_replace("/\r\n|\r|\n/", '', $sentence);
+                if (!empty($sentence)) {
+                    // $pdf->MultiCell(128,5,$sentence);
+                    $this->MultiCell(190,7,$sentence);
+                }
+                if ($k+1 == sizeof($rp)) {
+                    # code...
+                }else{
+                    $page_was_added = $this->CheckPageSpaceLeft($page_height, $this->GetY(), 70);
+                }
+            }
+            $k++;
+        }
+
+
+
+        // $this->y0 = $this->GetY();
+    }
+
+
+}//function
+
+
+
 
 function PrintSecondaryTitle($num, $title, $file)
 {
@@ -388,9 +436,9 @@ function check_if_radio_values_are_empty($data){
 // .
 // .
 
-$eco_venosa_post_id = $_GET['eco_venosa_id'];
-$eco_venosa_data_post = get_post_custom($eco_venosa_post_id);
-$patient_id = $eco_venosa_data_post['eco_venosa_related_patient'][0];
+$eco_arterial_post_id = $_GET['eco_arterial_id'];
+$eco_arterial_data_post = get_post_custom($eco_arterial_post_id);
+$patient_id = $eco_arterial_data_post['eco_arterial_related_patient'][0];
 
 
 $patient_fields = get_post_custom($patient_id);
@@ -404,7 +452,7 @@ $patient_age = calcular_edad($fecha_de_nacimiento);
 // $edad_paciente = $fecha_de_nacimiento == NULL?"Sin datos": $patient_age->y;
 $e_unidad = "años";
 $edad_paciente = $fecha_de_nacimiento == NULL?"Sin datos": $patient_age->y." años";
-$creation_date = get_the_date( 'd-m-Y', $eco_venosa_post_id ); //fecha de creacion de eco_venosa puede no ser == a fecha de la consulta debido a que se puede crear una consulta sin eco_venosa y luego editar
+$creation_date = get_the_date( 'd-m-Y', $eco_arterial_post_id ); //fecha de creacion de eco_arterial puede no ser == a fecha de la consulta debido a que se puede crear una consulta sin eco_arterial y luego editar
 $fullname = $name.' '.$lastname;
 $datos_personales = $fullname."        Edad: ".$edad_paciente."        Ci: ".$cedula."        Fecha: ".$creation_date;
 
@@ -414,30 +462,42 @@ $datos_personales = $fullname."        Edad: ".$edad_paciente."        Ci: ".$ce
 // .
 // .
 // .
-$radiobox_vena_femoral_comun = get_field('field_5f4847af9b85f', $eco_venosa_post_id); 
-$radiobox_vena_femoral_superficial = get_field('field_5f4847af9c51c', $eco_venosa_post_id);
-$radiobox_vena_poplitea = get_field('field_5f4847af9ec07', $eco_venosa_post_id); 
-$radiobox_plexo_soleo_y_gemelar = get_field('field_5f48546d30af2', $eco_venosa_post_id); 
-$checkbox_union_safeno_femoral = get_field('field_5f4847af9bbd9', $eco_venosa_post_id);
-$safeno_femoral_medida = isset($eco_venosa_data_post['safeno_femoral_medida'][0]) ? $eco_venosa_data_post['safeno_femoral_medida'][0] : NULL;
+$checkbox_arteria_femoral_comun = get_field('arteria_femoral_comun', $eco_arterial_post_id);
+$afc_obs = isset($eco_arterial_data_post['afc_obs'][0]) ? $eco_arterial_data_post['afc_obs'][0] : NULL;
+$checkbox_afc_flujo = get_field('afc_flujo', $eco_arterial_post_id);
 
-$checkbox_tronco_suprapatelar = get_field('field_5f485918b9757', $eco_venosa_post_id);
-$tronco_suprapatelar_medida = isset($eco_venosa_data_post['tronco_suprapatelar_medida'][0]) ? $eco_venosa_data_post['tronco_suprapatelar_medida'][0] : NULL;
+$checkbox_arteria_femoral_profunda = get_field('arteria_femoral_profunda', $eco_arterial_post_id);
+$afp_obs = isset($eco_arterial_data_post['afp_obs'][0]) ? $eco_arterial_data_post['afp_obs'][0] : NULL;
+$checkbox_afp_flujo = get_field('afp_flujo', $eco_arterial_post_id);
 
-$checkbox_tronco_infrapatelar = get_field('field_5f485917b9756', $eco_venosa_post_id);
-$tronco_infrapatelar_medida = isset($eco_venosa_data_post['tronco_infrapatelar_medida'][0]) ? $eco_venosa_data_post['tronco_infrapatelar_medida'][0] : NULL;
 
-$checkbox_union_safeno_poplitea = get_field('field_5f485916b9755', $eco_venosa_post_id);
-$union_safeno_poplitea_medida = isset($eco_venosa_data_post['union_safeno_poplitea_medida'][0]) ? $eco_venosa_data_post['union_safeno_poplitea_medida'][0] : NULL;
+$checkbox_arteria_femoral_superficial = get_field('arteria_femoral_superficial', $eco_arterial_post_id);
+$afs_obs = isset($eco_arterial_data_post['afs_obs'][0]) ? $eco_arterial_data_post['afs_obs'][0] : NULL;
+$checkbox_afs_flujo = get_field('afs_flujo', $eco_arterial_post_id);
 
-$checkbox_vena_safena_parva = get_field('field_5f485916b9754', $eco_venosa_post_id);
-$vena_safena_parva_medida = isset($eco_venosa_data_post['vena_safena_parva_medida'][0]) ? $eco_venosa_data_post['vena_safena_parva_medida'][0] : NULL;
 
-$checkbox_venas_perforantes = get_field('field_5f485915b9753', $eco_venosa_post_id);
-$venas_perforantes_medida = isset($eco_venosa_data_post['venas_perforantes_medida'][0]) ? $eco_venosa_data_post['venas_perforantes_medida'][0] : NULL;
+$checkbox_arteria_poplitea = get_field('arteria_poplitea', $eco_arterial_post_id);
+$ap_obs = isset($eco_arterial_data_post['ap_obs'][0]) ? $eco_arterial_data_post['ap_obs'][0] : NULL;
+$checkbox_ap_flujo = get_field('ap_flujo', $eco_arterial_post_id);
 
-$observaciones = isset($eco_venosa_data_post['observaciones'][0]) ? $eco_venosa_data_post['observaciones'][0] : NULL;
-$conclusion = isset($eco_venosa_data_post['conclusion'][0]) ? $eco_venosa_data_post['conclusion'][0] : NULL;
+
+$checkbox_arteria_tibial_anterior = get_field('arteria_tibial_anterior', $eco_arterial_post_id);
+$ata_obs = isset($eco_arterial_data_post['ata_obs'][0]) ? $eco_arterial_data_post['ata_obs'][0] : NULL;
+$checkbox_ata_flujo = get_field('ata_flujo', $eco_arterial_post_id);
+
+$checkbox_arteria_tibial_posterior = get_field('arteria_tibial_posterior', $eco_arterial_post_id);
+$atp_obs = isset($eco_arterial_data_post['atp_obs'][0]) ? $eco_arterial_data_post['atp_obs'][0] : NULL;
+$checkbox_atp_flujo = get_field('atp_flujo', $eco_arterial_post_id);
+
+$checkbox_arteria_fibular_peroneal = get_field('arteria_fibular_peroneal', $eco_arterial_post_id);
+$arfipe_obs = isset($eco_arterial_data_post['arfipe_obs'][0]) ? $eco_arterial_data_post['arfipe_obs'][0] : NULL;
+$checkbox_arfipe_flujo = get_field('arfipe_flujo', $eco_arterial_post_id);
+
+$checkbox_arteria_pedia = get_field('arteria_pedia', $eco_arterial_post_id);
+$arpe_obs = isset($eco_arterial_data_post['arpe_obs'][0]) ? $eco_arterial_data_post['arpe_obs'][0] : NULL;
+$checkbox_arpe_flujo = get_field('arpe_flujo', $eco_arterial_post_id);
+
+$conclusion = isset($eco_arterial_data_post['conclusion'][0]) ? $eco_arterial_data_post['conclusion'][0] : NULL;
 
 //Get images lado izq ----------------------------------------------------------------
 //image files
@@ -447,9 +507,9 @@ $images_ids_array = array();
 // +1 bc
 for ($i=0; $i < $max_images; $i++) {
     $k = $i+1;
-    $text = 'eco_venosa_imagen_'.$k;
-    // $the_image_id = $eco_venosa_data_post[$text][0];
-    $the_image_id = isset($eco_venosa_data_post[$text][0]) ? $eco_venosa_data_post[$text][0] : NULL;
+    $text = 'eco_arterial_imagen_'.$k;
+    // $the_image_id = $eco_arterial_data_post[$text][0];
+    $the_image_id = isset($eco_arterial_data_post[$text][0]) ? $eco_arterial_data_post[$text][0] : NULL;
 
 //var_dump($text);
     if ($the_image_id != "" && $the_image_id != NULL) {
@@ -458,7 +518,7 @@ for ($i=0; $i < $max_images; $i++) {
 }
 //var_dump($images_ids_array);
 
-//$image_post_id = $eco_venosa_data_post['eco_venosa_imagen_1'][0];
+//$image_post_id = $eco_arterial_data_post['eco_arterial_imagen_1'][0];
 // Segun mis pruebas medium proporciona una calidad suficiente para el informe con la ventaja de pesar una fraccion de lo que pesaria con la imagen en tamaño "full"
 $size = "medium"; // (thumbnail, medium, large, full or custom size)
 //$size = "full"; // (thumbnail, medium, large, full or custom size)
@@ -479,31 +539,43 @@ for ($i=0; $i < sizeof($images_ids_array); $i++) {
 // .
 // .
 // .
-$radiobox_vena_femoral_comun_der = get_field('field_5f4dc19d11f62', $eco_venosa_post_id); 
-$radiobox_vena_femoral_superficial_der = get_field('field_5f4dc1bd11f63', $eco_venosa_post_id); 
-$radiobox_vena_poplitea_der = get_field('field_5f4dc1d311f64', $eco_venosa_post_id); 
-$radiobox_plexo_soleo_y_gemelar_der = get_field('field_5f4dc1df11f65', $eco_venosa_post_id); 
+$checkbox_arteria_femoral_comun_der =  get_field('arteria_femoral_comun_der', $eco_arterial_post_id);
+$afc_obs_der =  isset($eco_arterial_data_post['afc_obs_der'][0]) ? $eco_arterial_data_post['afc_obs_der'][0] : NULL;
+$checkbox_afc_flujo_der =  get_field('afc_flujo_der', $eco_arterial_post_id);
 
-$checkbox_union_safeno_femoral_der = get_field('union_safeno_femoral_der', $eco_venosa_post_id);
-$safeno_femoral_medida_der = isset($eco_venosa_data_post['safeno_femoral_medida_der'][0]) ? $eco_venosa_data_post['safeno_femoral_medida_der'][0] : NULL;
+$checkbox_arteria_femoral_profunda_der =  get_field('arteria_femoral_profunda_der', $eco_arterial_post_id);
+// fsdfsdf
+$afp_obs_der =  isset($eco_arterial_data_post['afp_obs_der'][0]) ? $eco_arterial_data_post['afp_obs_der'][0] : NULL;
+$checkbox_afp_flujo_der =  get_field('afp_flujo_der', $eco_arterial_post_id);
 
-$checkbox_tronco_suprapatelar_der = get_field('tronco_suprapatelar_der', $eco_venosa_post_id);
-$tronco_suprapatelar_medida_der = isset($eco_venosa_data_post['tronco_suprapatelar_medida_der'][0]) ? $eco_venosa_data_post['tronco_suprapatelar_medida_der'][0] : NULL;
 
-$checkbox_tronco_infrapatelar_der = get_field('tronco_infrapatelar_der', $eco_venosa_post_id);
-$tronco_infrapatelar_medida_der = isset($eco_venosa_data_post['tronco_infrapatelar_medida_der'][0]) ? $eco_venosa_data_post['tronco_infrapatelar_medida_der'][0] : NULL;
+$checkbox_arteria_femoral_superficial_der =  get_field('arteria_femoral_superficial_der', $eco_arterial_post_id);
+$afs_obs_der =  isset($eco_arterial_data_post['afs_obs_der'][0]) ? $eco_arterial_data_post['afs_obs_der'][0] : NULL;
+$checkbox_afs_flujo_der =  get_field('afs_flujo_der', $eco_arterial_post_id);
 
-$checkbox_union_safeno_poplitea_der = get_field('union_safeno_poplitea_der', $eco_venosa_post_id);
-$union_safeno_poplitea_medida_der = isset($eco_venosa_data_post['union_safeno_poplitea_medida_der'][0]) ? $eco_venosa_data_post['union_safeno_poplitea_medida_der'][0] : NULL;
 
-$checkbox_vena_safena_parva_der = get_field('vena_safena_parva_der', $eco_venosa_post_id);
-$vena_safena_parva_medida_der = isset($eco_venosa_data_post['vena_safena_parva_medida_der'][0]) ? $eco_venosa_data_post['vena_safena_parva_medida_der'][0] : NULL;
+$checkbox_arteria_poplitea_der =  get_field('arteria_poplitea_der', $eco_arterial_post_id);
+$ap_obs_der =  isset($eco_arterial_data_post['ap_obs_der'][0]) ? $eco_arterial_data_post['ap_obs_der'][0] : NULL;
+$checkbox_ap_flujo_der =  get_field('ap_flujo_der', $eco_arterial_post_id);
 
-$checkbox_venas_perforantes_der = get_field('venas_perforantes_der', $eco_venosa_post_id);
-$venas_perforantes_medida_der = isset($eco_venosa_data_post['venas_perforantes_medida_der'][0]) ? $eco_venosa_data_post['venas_perforantes_medida_der'][0] : NULL;
 
-$observaciones_der = isset($eco_venosa_data_post['observaciones_der'][0]) ? $eco_venosa_data_post['observaciones_der'][0] : NULL;
-$conclusion_der = isset($eco_venosa_data_post['conclusion_der'][0]) ? $eco_venosa_data_post['conclusion_der'][0] : NULL;
+$checkbox_arteria_tibial_anterior_der =  get_field('arteria_tibial_anterior_der', $eco_arterial_post_id);
+$ata_obs_der =  isset($eco_arterial_data_post['ata_obs_der'][0]) ? $eco_arterial_data_post['ata_obs_der'][0] : NULL;
+$checkbox_ata_flujo_der =  get_field('ata_flujo_der', $eco_arterial_post_id);
+
+$checkbox_arteria_tibial_posterior_der =  get_field('arteria_tibial_posterior_der', $eco_arterial_post_id);
+$atp_obs_der =  isset($eco_arterial_data_post['atp_obs_der'][0]) ? $eco_arterial_data_post['atp_obs_der'][0] : NULL;
+$checkbox_atp_flujo_der =  get_field('atp_flujo_der', $eco_arterial_post_id);
+
+$checkbox_arteria_fibular_peroneal_der =  get_field('arteria_fibular_peroneal_der', $eco_arterial_post_id);
+$arfipe_obs_der =  isset($eco_arterial_data_post['arfipe_obs_der'][0]) ? $eco_arterial_data_post['arfipe_obs_der'][0] : NULL;
+$checkbox_arfipe_flujo_der =  get_field('arfipe_flujo_der', $eco_arterial_post_id);
+
+$checkbox_arteria_pedia_der =  get_field('arteria_pedia_der', $eco_arterial_post_id);
+$arpe_obs_der =  isset($eco_arterial_data_post['arpe_obs_der'][0]) ? $eco_arterial_data_post['arpe_obs_der'][0] : NULL;
+$checkbox_arpe_flujo_der =  get_field('arpe_flujo_der', $eco_arterial_post_id);
+
+$conclusion_der =  isset($eco_arterial_data_post['conclusion_der'][0]) ? $eco_arterial_data_post['conclusion_der'][0] : NULL;
 
 
 //Get images lado izq ----------------------------------------------------------------
@@ -515,17 +587,17 @@ $conclusion_der = isset($eco_venosa_data_post['conclusion_der'][0]) ? $eco_venos
     $k = 0;
     for ($i=0; $i < $max_images_der; $i++) {
       $k = $i+1;
-      $text = 'eco_venosa_imagen_der_'.$k;
-      //$the_image_id = $eco_venosa_data_post[$text][0]; // esta linea de codigo funciona pero da un warning the undefined  index cuando el elemento esta vacio
-      // $the_image_id = $eco_venosa_data_post[$text][0];
-      $the_image_id = isset($eco_venosa_data_post[$text][0]) ? $eco_venosa_data_post[$text][0] : NULL;
+      $text = 'eco_arterial_imagen_der_'.$k;
+      //$the_image_id = $eco_arterial_data_post[$text][0]; // esta linea de codigo funciona pero da un warning the undefined  index cuando el elemento esta vacio
+      // $the_image_id = $eco_arterial_data_post[$text][0];
+      $the_image_id = isset($eco_arterial_data_post[$text][0]) ? $eco_arterial_data_post[$text][0] : NULL;
 
       if ($the_image_id != "" && $the_image_id != NULL) {
          $images_ids_array_der[$i] = $the_image_id;
        }   
     }
 
-    //$image_post_id = $eco_venosa_data_post['eco_venosa_imagen_1'][0];
+    //$image_post_id = $eco_arterial_data_post['eco_arterial_imagen_1'][0];
     $size = "medium"; // (thumbnail, medium, large, full or custom size)
     $images_array_der = array();
     $images_names_der = array();
@@ -553,32 +625,30 @@ $pdf = new PDF( 'P', 'mm', 'A4' ); // A4, portrait, measurements in mm. A4 es 21
 //$pdf->SetAutoPageBreak(true, 100);
 $pdf->SetAutoPageBreak(true, 0);
 $pdf->SetAuthor('Sweetdoc');
-$title = 'Eco doppler venoso';
+$title = 'Eco doppler arterial';
 //$title = $fullname;
 $pdf->SetTitle($title);
 
 // VERIFICAMOS EL LADO IZQ PRIMERAMENTE PARA VER SI EXISTE ALMENOS ALGUN CAMPO CON DATOS
 // antes de imprimir tbm verificar si hay valor en elguno de los fields por cada seccion
 // check_if_radio_values_are_empty devuelve true or false. false si todos los campos son vacios
-$radio_field_names = array($radiobox_vena_femoral_comun, $radiobox_vena_femoral_superficial, $radiobox_vena_poplitea, $radiobox_plexo_soleo_y_gemelar);
-$sistema_venoso_profundo = $pdf->check_if_radio_values_are_empty($radio_field_names);
 
-$radio_field_names = array($checkbox_union_safeno_femoral);
-$sistema_venoso_superficial = $pdf->check_if_radio_values_are_empty($radio_field_names);
+$radio_field_names = array(
+   $checkbox_arteria_femoral_comun,
+   $checkbox_arteria_femoral_profunda,
+   $checkbox_arteria_femoral_superficial,
+   $checkbox_arteria_poplitea,
+   $checkbox_arteria_tibial_anterior,
+   $checkbox_arteria_tibial_posterior,
+   $checkbox_arteria_fibular_peroneal,
+   $checkbox_arteria_pedia
+);
 
-$radio_field_names = array($checkbox_tronco_suprapatelar, $checkbox_tronco_infrapatelar);
-$vena_safena_magna = $pdf->check_if_radio_values_are_empty($radio_field_names);
-
-$radio_field_names = array($checkbox_union_safeno_poplitea, $checkbox_vena_safena_parva);
-$vena_safena_menor = $pdf->check_if_radio_values_are_empty($radio_field_names);
-
-$radio_field_names = array($checkbox_venas_perforantes);
-$sistemas_perforantes = $pdf->check_if_radio_values_are_empty($radio_field_names);
-
+$sistema_arterial = $pdf->check_if_radio_values_are_empty($radio_field_names);
 
 $imprimir_informe = true;
 // si todos son falsos no hay informe que imprimir.
-if ($sistema_venoso_profundo == false && $sistema_venoso_superficial == false && $vena_safena_magna == false && $vena_safena_menor == false && $sistemas_perforantes == false && sizeof($images_ids_array)<=0) {
+if ($sistema_arterial == false  && sizeof($images_ids_array)<=0) {
         $imprimir_informe = false;
 }
 // ATENCION: si da un error el pdf probar verificando que no sea empty el array de los fields "radio" antes de imprimir el "label"
@@ -586,61 +656,78 @@ if ($sistema_venoso_profundo == false && $sistema_venoso_superficial == false &&
 if ($imprimir_informe) {
 
     $pdf->AddPage();
-    $page_height = $pdf->GetPageHeight();
+    // $page_height = $pdf->GetPageHeight();
+    
+    $need_to_add_page = false;
+    //cuando hay campo decripcion o "otros" podemos escribir hasta mas abajo y no preocpuarnos tanto por el espacio de la firma
+    $min_height = 60;
+    if(empty($conclusion) ){
+      $min_height = 75;
+    }
+
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
     $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
     $pdf->PrintSection(2,'MIEMBRO INFERIOR IZQUIERDO', $fullname);
 
-    if ($sistema_venoso_profundo) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Profundo'), "");
-        $pdf->PrintElement(2,utf8_decode(' - Vena femoral comun: '), utf8_decode( $radiobox_vena_femoral_comun["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Vena femoral superficial: '), utf8_decode( $radiobox_vena_femoral_superficial["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Vena poplítea: '), utf8_decode($radiobox_vena_poplitea["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Plexo soleo y gemelar: '), utf8_decode($radiobox_plexo_soleo_y_gemelar["label"]));
-    }
-
-    if ($sistema_venoso_superficial) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Superficial'), "");
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena mayor'), "");
+    if ($sistema_arterial) {
+        // $pdf->PrintSecondaryTitle(2,utf8_decode(' titulo izq'), "");
         // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Femoral '),$checkbox_union_safeno_femoral, $safeno_femoral_medida);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$safeno_femoral_medida);
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Común'),$checkbox_arteria_femoral_comun);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afc_obs);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afc_flujo);
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Profunda  '),$checkbox_arteria_femoral_profunda);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afp_obs);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afp_flujo);
+
+        // $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
+        // $need_to_add_page = false;
+
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Superficial'),$checkbox_arteria_femoral_superficial);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afs_obs);
+        // $pdf->PrintElementWithSpaceChecker(2,utf8_decode(' - Observaciones: '),$afs_obs);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afs_flujo);
+
+        // $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
+
+        $pdf->PrintArray(2,utf8_decode(' - Arteria poplítea'),$checkbox_arteria_poplitea);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$ap_obs);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_ap_flujo);
+
+        // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Tíbial Anterior '),$checkbox_arteria_tibial_anterior);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$ata_obs);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_ata_flujo);
+
+        // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Tibial Posterior '),$checkbox_arteria_tibial_posterior);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$atp_obs);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_atp_flujo);
+
+        // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
+
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria fibular (Peroneal)'),$checkbox_arteria_fibular_peroneal);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$arfipe_obs);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_arfipe_flujo);
+
+        // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Pedia '),$checkbox_arteria_pedia);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$arpe_obs);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_arpe_flujo);
+
+
     }
 
-
-    if ($vena_safena_magna) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Magna (Interna)'), "");
-        // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Tronco Suprapatelar '),$checkbox_tronco_suprapatelar, $tronco_suprapatelar_medida);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_suprapatelar_medida);
-        $pdf->PrintArray(2,utf8_decode(' - Tronco Infrapatelar '),$checkbox_tronco_infrapatelar, $tronco_infrapatelar_medida);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_infrapatelar_medida);
-    }
-
-
-    if ($vena_safena_menor) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Menor'), "");
-        // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Poplitea '),$checkbox_union_safeno_poplitea, $union_safeno_poplitea_medida);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$union_safeno_poplitea_medida);
-        $pdf->PrintArray(2,utf8_decode(' - Vena Safena Parva (Externa) '),$checkbox_vena_safena_parva, $vena_safena_parva_medida);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$vena_safena_parva_medida);
-    }
-
-
-    if ($sistemas_perforantes) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistemas Perforantes'), "");
-        // ------------------------------------------------------------------------ 
-        $pdf->PrintArray(2,utf8_decode(' - Venas Perforantes '),$checkbox_venas_perforantes, $venas_perforantes_medida);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(cm): '),$venas_perforantes_medida);
-    }
-
-    $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$observaciones);
+    // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
     $pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion);
     // Fin de impresion de datos --------------------------------------------------------
-
-
+   
 
 
     // Imprimir las imagenes --------------------------------------------------------
@@ -684,85 +771,78 @@ if ($imprimir_informe) {
 // impresion del lado derecho si es que no esta vacio ---------------------------------------------------------------------
 
 
-// antes de imprimir tbm verificar si hay valor en elguno de los fields por cada seccion
-// check_if_radio_values_are_empty devuelve true or false. false si todos los campos son vacios
-$radio_field_names = array($radiobox_vena_femoral_comun_der, $radiobox_vena_femoral_superficial_der, $radiobox_vena_poplitea_der, $radiobox_plexo_soleo_y_gemelar_der);
-$sistema_venoso_profundo_der = $pdf->check_if_radio_values_are_empty($radio_field_names);
-
-$radio_field_names = array($checkbox_union_safeno_femoral_der);
-$sistema_venoso_superficial_der = $pdf->check_if_radio_values_are_empty($radio_field_names);
-
-$radio_field_names = array($checkbox_tronco_suprapatelar_der, $checkbox_tronco_infrapatelar_der);
-$vena_safena_magna_der = $pdf->check_if_radio_values_are_empty($radio_field_names);
-
-$radio_field_names = array($checkbox_union_safeno_poplitea_der, $checkbox_vena_safena_parva_der);
-$vena_safena_menor_der = $pdf->check_if_radio_values_are_empty($radio_field_names);
-
-$radio_field_names = array($checkbox_venas_perforantes_der);
-$sistemas_perforantes_der = $pdf->check_if_radio_values_are_empty($radio_field_names);
-
-
-$imprimir_informe_der = true;
-// si todos son falsos no hay informe que imprimir.
-if ($sistema_venoso_profundo_der == false && $sistema_venoso_superficial_der == false && $vena_safena_magna_der == false && $vena_safena_menor_der == false && $sistemas_perforantes_der == false ) {
-        $imprimir_informe_der = false;
-}
-// ATENCION: si da un error el pdf probar verificando que no sea empty el array de los fields "radio" antes de imprimir el "label"
+$radio_field_names = array(
+    $checkbox_arteria_femoral_comun_der,
+    $checkbox_arteria_femoral_profunda_der,
+    $checkbox_arteria_femoral_superficial_der,
+    $checkbox_arteria_poplitea_der,
+    $checkbox_arteria_tibial_anterior_der,
+    $checkbox_arteria_tibial_posterior_der,
+    $checkbox_arteria_fibular_peroneal_der,
+    $checkbox_arteria_pedia_der
+ );
+ 
+ $sistema_arterial_der = $pdf->check_if_radio_values_are_empty($radio_field_names);
+ 
+ $imprimir_informe_der = true;
+ // si todos son falsos no hay informe que imprimir.
+ if ($sistema_arterial_der == false  && sizeof($images_ids_array_der)<=0) {
+         $imprimir_informe_der = false;
+ }
 
 if ($imprimir_informe_der) {
 
     $pdf->AddPage();
     $page_height = $pdf->GetPageHeight();
+
+
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
     $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
     $pdf->PrintSection(2,'MIEMBRO INFERIOR DERECHO', $fullname);
 
-    if ($sistema_venoso_profundo_der) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Profundo'), "");
-        $pdf->PrintElement(2,utf8_decode(' - Vena femoral comun: '), utf8_decode( $radiobox_vena_femoral_comun_der["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Vena femoral superficial: '), utf8_decode( $radiobox_vena_femoral_superficial_der["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Vena poplítea: '), utf8_decode($radiobox_vena_poplitea_der["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Plexo soleo y gemelar: '), utf8_decode($radiobox_plexo_soleo_y_gemelar_der["label"]));
-    }
-
-    if ($sistema_venoso_superficial_der) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Superficial'), "");
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena mayor'), "");
+    if ($sistema_arterial_der) {
+        // $pdf->PrintSecondaryTitle(2,utf8_decode(' titulo der'), "");
         // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Femoral '),$checkbox_union_safeno_femoral_der, $safeno_femoral_medida_der);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$safeno_femoral_medida);
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Común'),$checkbox_arteria_femoral_comun_der);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afc_obs_der);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afc_flujo_der);
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Profunda  '),$checkbox_arteria_femoral_profunda_der);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afp_obs_der);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afp_flujo_der);
+
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Superficial'),$checkbox_arteria_femoral_superficial_der);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afs_obs_der);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afs_flujo_der);
+
+
+        $pdf->PrintArray(2,utf8_decode(' - Arteria poplítea'),$checkbox_arteria_poplitea_der);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$ap_obs_der);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_ap_flujo_der);
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Tíbial Anterior '),$checkbox_arteria_tibial_anterior_der);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$ata_obs_der);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_ata_flujo_der);
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Tibial Posterior '),$checkbox_arteria_tibial_posterior_der);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$atp_obs_der);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_atp_flujo_der);
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria fibular (Peroneal)'),$checkbox_arteria_fibular_peroneal_der);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$arfipe_obs_der);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_arfipe_flujo_der);
+
+        $pdf->PrintArray(2,utf8_decode(' - Artéria Pedia '),$checkbox_arteria_pedia_der);
+        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$arpe_obs_der);
+        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_arpe_flujo_der);
+
+
     }
 
 
-    if ($vena_safena_magna_der) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Magna (Interna)'), "");
-        // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Tronco Suprapatelar '),$checkbox_tronco_suprapatelar_der, $tronco_suprapatelar_medida_der);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_suprapatelar_medida);
-        $pdf->PrintArray(2,utf8_decode(' - Tronco Infrapatelar '),$checkbox_tronco_infrapatelar_der, $tronco_infrapatelar_medida_der);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_infrapatelar_medida);
-    }
 
-
-    if ($vena_safena_menor_der) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Menor'), "");
-        // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Poplitea '),$checkbox_union_safeno_poplitea_der, $union_safeno_poplitea_medida_der);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$union_safeno_poplitea_medida);
-        $pdf->PrintArray(2,utf8_decode(' - Vena Safena Parva (Externa) '),$checkbox_vena_safena_parva_der, $vena_safena_parva_medida_der);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$vena_safena_parva_medida);
-    }
-
-
-    if ($sistemas_perforantes_der) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistemas Perforantes'), "");
-        // ------------------------------------------------------------------------ 
-        $pdf->PrintArray(2,utf8_decode(' - Venas Perforantes '),$checkbox_venas_perforantes_der, $venas_perforantes_medida_der);
-        // $pdf->PrintElement(2,utf8_decode(' - Medida(cm): '),$venas_perforantes_medida);
-    }
-
-    $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$observaciones_der);
     $pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion_der);
     // Fin de impresion de datos --------------------------------------------------------
 

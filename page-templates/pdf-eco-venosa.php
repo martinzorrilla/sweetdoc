@@ -263,7 +263,7 @@ function PrintElement($num, $title, $file)
 {
     if (!empty($file)) {
 
-        $txt = $title.$file;
+        $txt = $title.utf8_decode($file);
         // Fuente
         $this->SetFont('Times','',12);
         // Imprimir texto en una columna de 6 cm de ancho (si el valor es 60)
