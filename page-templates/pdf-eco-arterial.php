@@ -13,7 +13,7 @@ function Header()
     global $title;
     global $y_actual;
     global $y_new;
-    //global $page_height;
+    global $page_height;
     // $image_path = home_url().'/pregnant.jpg';
 
     // $subtitulo = utf8_decode("Ginecología y Obstetricia");
@@ -274,6 +274,54 @@ function PrintElement($num, $title, $file)
         $this->y0 = $this->GetY();
     }
 }
+
+function PrintElementWithSpaceChecker($num, $title, $file)
+{
+    if (!empty($file)) {
+
+        // $this->SetFont('Times','',12);
+        $txt = $title.utf8_decode($file);
+        // $this->MultiCell(190,7,$txt);
+
+        // $page_height = $this->$page_height;
+        $page_height = $this->GetPageHeight();
+
+        $page_was_added = false;
+        $rp = array();
+        $rp_continuation = array();
+        $page_was_added = $this->CheckPageSpaceLeft($page_height, $this->GetY(), 70);
+        $rp = explode("\n", $txt);
+
+        $k=0;
+        foreach ($rp as $sentence) {    
+            if ($page_was_added) {
+                array_push($rp_continuation,$sentence);
+            }
+            if (!$page_was_added) {
+                $sentence = preg_replace("/\r\n|\r|\n/", '', $sentence);
+                if (!empty($sentence)) {
+                    // $pdf->MultiCell(128,5,$sentence);
+                    $this->MultiCell(190,7,$sentence);
+                }
+                if ($k+1 == sizeof($rp)) {
+                    # code...
+                }else{
+                    $page_was_added = $this->CheckPageSpaceLeft($page_height, $this->GetY(), 70);
+                }
+            }
+            $k++;
+        }
+
+
+
+        // $this->y0 = $this->GetY();
+    }
+
+
+}//function
+
+
+
 
 function PrintSecondaryTitle($num, $title, $file)
 {
@@ -608,7 +656,15 @@ if ($sistema_arterial == false  && sizeof($images_ids_array)<=0) {
 if ($imprimir_informe) {
 
     $pdf->AddPage();
-    $page_height = $pdf->GetPageHeight();
+    // $page_height = $pdf->GetPageHeight();
+    
+    $need_to_add_page = false;
+    //cuando hay campo decripcion o "otros" podemos escribir hasta mas abajo y no preocpuarnos tanto por el espacio de la firma
+    $min_height = 60;
+    if(empty($conclusion) ){
+      $min_height = 75;
+    }
+
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
     $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
@@ -625,27 +681,41 @@ if ($imprimir_informe) {
         $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afp_obs);
         $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afp_flujo);
 
+        // $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
+        // $need_to_add_page = false;
+
 
         $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Superficial'),$checkbox_arteria_femoral_superficial);
         $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afs_obs);
+        // $pdf->PrintElementWithSpaceChecker(2,utf8_decode(' - Observaciones: '),$afs_obs);
         $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afs_flujo);
 
+        // $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
 
         $pdf->PrintArray(2,utf8_decode(' - Arteria poplítea'),$checkbox_arteria_poplitea);
         $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$ap_obs);
         $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_ap_flujo);
 
+        // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
+
         $pdf->PrintArray(2,utf8_decode(' - Artéria Tíbial Anterior '),$checkbox_arteria_tibial_anterior);
         $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$ata_obs);
         $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_ata_flujo);
+
+        // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
 
         $pdf->PrintArray(2,utf8_decode(' - Artéria Tibial Posterior '),$checkbox_arteria_tibial_posterior);
         $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$atp_obs);
         $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_atp_flujo);
 
+        // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
+
+
         $pdf->PrintArray(2,utf8_decode(' - Artéria fibular (Peroneal)'),$checkbox_arteria_fibular_peroneal);
         $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$arfipe_obs);
         $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_arfipe_flujo);
+
+        // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
 
         $pdf->PrintArray(2,utf8_decode(' - Artéria Pedia '),$checkbox_arteria_pedia);
         $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$arpe_obs);
@@ -654,10 +724,10 @@ if ($imprimir_informe) {
 
     }
 
+    // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
     $pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion);
     // Fin de impresion de datos --------------------------------------------------------
-
-
+   
 
 
     // Imprimir las imagenes --------------------------------------------------------
@@ -724,6 +794,8 @@ if ($imprimir_informe_der) {
 
     $pdf->AddPage();
     $page_height = $pdf->GetPageHeight();
+
+
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
     $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
@@ -768,6 +840,8 @@ if ($imprimir_informe_der) {
 
 
     }
+
+
 
     $pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion_der);
     // Fin de impresion de datos --------------------------------------------------------
