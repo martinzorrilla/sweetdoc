@@ -1,6 +1,8 @@
 <?php /* Template Name: pdf-laboratories-horizontal*/
 
-class PDF extends FPDF
+// class PDF extends FPDF
+class PDF extends PDF_HTML
+
 {
 protected $col = 0; // Columna actual
 protected $y0;      // Ordenada de comienzo de la columna
@@ -151,7 +153,7 @@ function Footer()
 }
 
 
-function Firma($num, $side)
+function FirmaOldVerWritetml($num, $side)
 {
     // DATOS DEL CLIENTE DEL SISTEMA(DOCTOR) guardados en el theme options. en el backend wordpress creado con ACF custom fields
     $client_title = get_field('client_title', 'option');
@@ -845,7 +847,8 @@ foreach ($acf_checkbox_array as $study_name) {
   }
 
   $altura_firma = 6;
-  $pdf->Firma($altura_firma, "");
+  // $pdf->FirmaIndicacion($altura_firma, "");
+  $pdf->FirmaIndicacion($altura_firma);
 
 
 ob_start();

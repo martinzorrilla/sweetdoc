@@ -1,5 +1,7 @@
 <?php /* Template Name: pdf-studies-horizontal*/
-class PDF extends FPDF
+// class PDF extends FPDF
+class PDF extends PDF_HTML
+
 {
 protected $col = 0; // Columna actual
 protected $y0;      // Ordenada de comienzo de la columna
@@ -150,7 +152,7 @@ function Footer()
 }
 
 
-function Firma($num, $side)
+function FirmaYaNouSoVerWriteHtlm($num, $side)
 {
     // DATOS DEL CLIENTE DEL SISTEMA(DOCTOR) guardados en el theme options. en el backend wordpress creado con ACF custom fields
     $client_title = get_field('client_title', 'option');
@@ -177,23 +179,25 @@ function Firma($num, $side)
     $this->Ln($num);
     //$this->SetFont('Arial','I',8);
     $this->SetFont('Times','',12);
-
-    //$this->SetTextColor(128);
-    $this->SetX($base_x);
-    $this->Cell(0,8,'..................................................',0,2);
-    // $this->SetX($base_x+3);
-    $this->SetX($base_x+$client_sign_offset);
-    // $this->Cell(0,5,'Dra. Andrea Zorrilla',0,2);
-    $this->Cell(0,5,$client_title." ".$client_name,0,2);
-    $this->SetX($base_x+4);
-    // $this->Cell(0,5,utf8_decode('Ginecología y Obstetricia'),0,2);
-    $this->Cell(0,5,utf8_decode($client_especialidad),0,2);
-    $this->SetX($base_x-3);
-    // $this->Cell(0,5,utf8_decode('Especialista en TGI y colposcopia'),0,2);
-    $this->Cell(0,5,utf8_decode($client_sub_especialidad),0,2);
-    $this->SetX($base_x+15);
-    $this->Cell(0,5,utf8_decode('RP: '.$client_registro),0,2);
-    $this->SetX(0);
+		$this->SetFont('Times','',12);
+	
+		//$this->SetTextColor(128);
+		$this->SetX($base_x-2);
+		$this->Cell(0,8,'................................................',0,2);
+		$this->SetX($base_x+$client_sign_offset);
+		// $this->Cell(0,5,'Dra. Andrea Zorrilla',0,2);
+		$this->Cell(0,5,$client_title." ".$client_name,0,2);
+		$this->SetX($base_x+4);
+		// $this->Cell(0,5,utf8_decode('Ginecología y Obstetricia'),0,2);
+		$this->Cell(0,5,utf8_decode($client_especialidad),0,2);
+		
+		// $this->SetX($base_x-3);
+		// $this->Cell(0,5,utf8_decode('Especialista en TGI y colposcopia'),0,2);
+		// $this->Cell(0,5,utf8_decode($client_sub_especialidad),0,2);
+		
+		$this->SetX($base_x+15);
+		$this->Cell(0,5,utf8_decode('RP: '.$client_registro),0,2);
+		$this->SetX(0);
 }
 
 function CheckPageSpaceLeft($page_height, $current_y, $espacio_min_inferior)
@@ -694,7 +698,7 @@ foreach ($acf_checkbox_array as $study_name) {
         $pdf->PrintDescription(2,utf8_decode('Descripción: '), utf8_decode($acf_description_name_array[$i]));
     }
     // $pdf->PrintSignature($side); 
-    $pdf->Firma($altura_firma, $side);
+    $pdf->FirmaStudies($altura_firma, $side);
     $pdf->SetY($current_y);
     
 
