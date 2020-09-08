@@ -1,5 +1,9 @@
 <?php /* Template Name: pdf-eco-arterial*/
-class PDF extends FPDF
+// class PDF extends FPDF
+// class PDF extends PDF_WriteTag
+//agregue un script llamado writeTag en la carpeta fpdf e hice include del archivo en functions.php.
+class PDF extends PDF_HTML
+
 {
 protected $col = 0; // Columna actual
 protected $y0;      // Ordenada de comienzo de la columna
@@ -114,7 +118,8 @@ $client_registro = isset($client_registro) && $client_registro !="" ? $client_re
 $client_otros = get_field('client_otros', 'option');
 $client_otros = isset($client_otros) && $client_otros !="" ? $client_otros : "Otros datos";
 
-
+$client_offset = get_field('client_sign_offset', 'option');
+$client_offset = isset($client_offset) && $client_offset !="" ? intval($client_offset) : 113;
 
     // $this->SetY($altura_actual + $firma_altura);
     $this->Ln($num);
@@ -124,16 +129,16 @@ $client_otros = isset($client_otros) && $client_otros !="" ? $client_otros : "Ot
     //$this->SetTextColor(128);
     $this->SetX(110);
     $this->Cell(0,12,'...............................................',0,2);
-    $this->SetX(113);
+    $this->SetX($client_offset);
     // $this->Cell(0,5,'Dra. Andrea Zorrilla',0,2);
     $this->Cell(0,5,$client_title." ".$client_name,0,2);
     $this->SetX(114); //gineco obstetra (andrea, alba etc)
     // $this->SetX(120); // felbologia yu cirugia
     // $this->Cell(0,5,utf8_decode('Ginecología y Obstetricia'),0,2);
     $this->Cell(0,5,utf8_decode($client_especialidad),0,2);
-    $this->SetX(106);
+    // $this->SetX(106);
     // $this->Cell(0,5,utf8_decode('Especialista en TGI y colposcopia'),0,2);
-    $this->Cell(0,5,utf8_decode($client_sub_especialidad),0,2);
+    // $this->Cell(0,5,utf8_decode($client_sub_especialidad),0,2);
     $this->SetX(125);
     $this->Cell(0,5,utf8_decode('RP: '.$client_registro),0,2);
     $this->SetX(0);
@@ -259,17 +264,35 @@ function PrintSection($num, $title, $file)
     //$this->ChapterBody($file);
 }
 
-function PrintElement($num, $title, $file)
+function PrintElementWr($num, $title, $file)
 {
     if (!empty($file)) {
 
         $txt = $title.utf8_decode($file);
         // Fuente
-        $this->SetFont('Times','',12);
+        $this->SetFont('Times','',12);   
         // Imprimir texto en una columna de 6 cm de ancho (si el valor es 60)
         $this->MultiCell(190,7,$txt);
+        // $pdf->WriteTag(0,7,$txt,0,"L",0,0);
+
         //$this->Cell(0,5,$txt);
         //$this->Ln();
+        // Guardar ordenada
+        $this->y0 = $this->GetY();
+    }
+}
+
+function PrintElement($num, $title, $file)
+{
+    if (!empty($file)) {
+
+        // $txt = $title.utf8_decode($file);
+        $txt = $title.utf8_decode($file);
+        
+        // Fuente
+        $this->SetFont('Times','',12);   
+        $this->WriteHTML($txt);
+        $this->Ln();
         // Guardar ordenada
         $this->y0 = $this->GetY();
     }
@@ -340,18 +363,20 @@ function PrintArray($num, $title, $array, $optional = "")
 {
     //primero eliminar los elementos vacios
     $emptyRemoved = array_filter($array);
-    // var_dump(empty($emptyRemoved));
+    $title_lenght = $this->GetStringWidth($title) + 3;
+    $page_margin = 10;
     if( !empty($emptyRemoved) ):    
         $this->SetFont('Times','',12);
         
+        // $this->SetFont('Times','B',12);
+        // $this->Cell($title_lenght,7,$title.": ", 0 ,0);
+        // $this->SetX(0);
+
         $aux = array();
         foreach( $emptyRemoved as $element ):
             array_push($aux, utf8_decode($element['label']));
          endforeach;
         
-         if (!empty($optional)){
-            array_push($aux, utf8_decode("Mide: ".$optional." cm."));   
-        }
         
         $emptyRemoved = array_filter($aux);
         // //unir todos los elementos del array en un string
@@ -360,7 +385,17 @@ function PrintArray($num, $title, $array, $optional = "")
         // antes de imprimir verificamos que alguna opcion haya sido marcada en el checkbox, de lo contrario
         // imprime solo el titulo y ningun campo.
         if ($arrayToString!="") {
-            $this->MultiCell(0,7,$title.": ".$arrayToString);
+
+            // $this->SetFont('Times','',12);
+            // $this->MultiCell(0,7,$arrayToString);
+            // $this->SetX(0);
+            
+            // $this->MultiCell(0,7,$title.": ".$arrayToString);
+            $this->SetFont('Times','',12);   
+            $this->WriteHTML($title.": ".$arrayToString);
+            $this->Ln();
+            // Guardar ordenada
+            $this->y0 = $this->GetY();   
         }
         // $this->MultiCell(0,7,$title.": ".$arrayToString);
         // $this->MultiCell(190,7,$color['label']);
@@ -621,13 +656,18 @@ $conclusion_der =  isset($eco_arterial_data_post['conclusion_der'][0]) ? $eco_ar
 //*
 //*
 //*
-$pdf = new PDF( 'P', 'mm', 'A4' ); // A4, portrait, measurements in mm. A4 es 210 X 297mm
+// $pdf= new PDF_WriteTag();
+// $pdf= new PDF();
+$pdf= new PDF('P', 'mm', 'A4');
+// $pdf = new PDF( 'P', 'mm', 'A4' ); // A4, portrait, measurements in mm. A4 es 210 X 297mm
 //$pdf->SetAutoPageBreak(true, 100);
 $pdf->SetAutoPageBreak(true, 0);
 $pdf->SetAuthor('Sweetdoc');
 $title = 'Eco doppler arterial';
 //$title = $fullname;
 $pdf->SetTitle($title);
+$page_height = $pdf->GetPageHeight();
+
 
 // VERIFICAMOS EL LADO IZQ PRIMERAMENTE PARA VER SI EXISTE ALMENOS ALGUN CAMPO CON DATOS
 // antes de imprimir tbm verificar si hay valor en elguno de los fields por cada seccion
@@ -666,66 +706,72 @@ if ($imprimir_informe) {
     }
 
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
-    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
+    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),$datos_personales);
+    // $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
     $pdf->PrintSection(2,'MIEMBRO INFERIOR IZQUIERDO', $fullname);
 
     if ($sistema_arterial) {
         // $pdf->PrintSecondaryTitle(2,utf8_decode(' titulo izq'), "");
         // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Común'),$checkbox_arteria_femoral_comun);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afc_obs);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afc_flujo);
 
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Profunda  '),$checkbox_arteria_femoral_profunda);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afp_obs);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afp_flujo);
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Femoral Común</b>'),$checkbox_arteria_femoral_comun);
+        $pdf->PrintElement(2,"<b>Observaciones:</b> ",$afc_obs); 
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_afc_flujo);
+
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Femoral Profunda</b>'),$checkbox_arteria_femoral_profunda);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$afp_obs);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_afp_flujo);
 
         // $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
         // $need_to_add_page = false;
 
 
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Superficial'),$checkbox_arteria_femoral_superficial);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afs_obs);
-        // $pdf->PrintElementWithSpaceChecker(2,utf8_decode(' - Observaciones: '),$afs_obs);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afs_flujo);
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Femoral Superficial</b>'),$checkbox_arteria_femoral_superficial);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$afs_obs);
+        // $pdf->PrintElementWithSpaceChecker(2,utf8_decode("<b>Observaciones:</b> "),$afs_obs);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_afs_flujo);
 
         // $need_to_add_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
 
-        $pdf->PrintArray(2,utf8_decode(' - Arteria poplítea'),$checkbox_arteria_poplitea);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$ap_obs);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_ap_flujo);
+        $pdf->PrintArray(2,utf8_decode('<b>Arteria poplítea</b>'),$checkbox_arteria_poplitea);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$ap_obs);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_ap_flujo);
 
         // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
 
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Tíbial Anterior '),$checkbox_arteria_tibial_anterior);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$ata_obs);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_ata_flujo);
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Tíbial Anterior</b>'),$checkbox_arteria_tibial_anterior);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$ata_obs);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_ata_flujo);
 
         // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
 
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Tibial Posterior '),$checkbox_arteria_tibial_posterior);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$atp_obs);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_atp_flujo);
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Tibial Posterior</b>'),$checkbox_arteria_tibial_posterior);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$atp_obs);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_atp_flujo);
 
         // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
 
 
-        $pdf->PrintArray(2,utf8_decode(' - Artéria fibular (Peroneal)'),$checkbox_arteria_fibular_peroneal);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$arfipe_obs);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_arfipe_flujo);
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria fibular (Peroneal)</b>'),$checkbox_arteria_fibular_peroneal);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$arfipe_obs);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_arfipe_flujo);
 
         // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
 
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Pedia '),$checkbox_arteria_pedia);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$arpe_obs);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_arpe_flujo);
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Pedia</b>'),$checkbox_arteria_pedia);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$arpe_obs);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_arpe_flujo);
 
 
     }
 
     // $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), $min_height);
-    $pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion);
+    
+    if (!empty($conclusion)) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Conclusión: '), "");
+        $pdf->PrintElement(2,'',$conclusion);
+    }
     // Fin de impresion de datos --------------------------------------------------------
    
 
@@ -746,7 +792,7 @@ if ($imprimir_informe) {
                 // si no hay espacio agrega otra pagina
                 $custom_y = $pdf->GetY();
                 if ($k == 0) {
-                    $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 125);
+                    $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 120);
                     $pdf->Ln(3);
                     $pdf->PrintSection(3,utf8_decode('IMÁGENES'), $fullname);
                     $custom_y = $pdf->GetY();
@@ -797,53 +843,56 @@ if ($imprimir_informe_der) {
 
 
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
-    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
+    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),$datos_personales);
+    // $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
     $pdf->PrintSection(2,'MIEMBRO INFERIOR DERECHO', $fullname);
 
     if ($sistema_arterial_der) {
         // $pdf->PrintSecondaryTitle(2,utf8_decode(' titulo der'), "");
         // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Común'),$checkbox_arteria_femoral_comun_der);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afc_obs_der);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afc_flujo_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Femoral Común</b>'),$checkbox_arteria_femoral_comun_der);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$afc_obs_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_afc_flujo_der);
 
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Profunda  '),$checkbox_arteria_femoral_profunda_der);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afp_obs_der);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afp_flujo_der);
-
-
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Femoral Superficial'),$checkbox_arteria_femoral_superficial_der);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$afs_obs_der);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_afs_flujo_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Femoral Profunda</b>'),$checkbox_arteria_femoral_profunda_der);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$afp_obs_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_afp_flujo_der);
 
 
-        $pdf->PrintArray(2,utf8_decode(' - Arteria poplítea'),$checkbox_arteria_poplitea_der);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$ap_obs_der);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_ap_flujo_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Femoral Superficial</b>'),$checkbox_arteria_femoral_superficial_der);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$afs_obs_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_afs_flujo_der);
 
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Tíbial Anterior '),$checkbox_arteria_tibial_anterior_der);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$ata_obs_der);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_ata_flujo_der);
 
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Tibial Posterior '),$checkbox_arteria_tibial_posterior_der);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$atp_obs_der);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_atp_flujo_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Arteria poplítea</b>'),$checkbox_arteria_poplitea_der);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$ap_obs_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_ap_flujo_der);
 
-        $pdf->PrintArray(2,utf8_decode(' - Artéria fibular (Peroneal)'),$checkbox_arteria_fibular_peroneal_der);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$arfipe_obs_der);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_arfipe_flujo_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Tíbial Anterior</b>'),$checkbox_arteria_tibial_anterior_der);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$ata_obs_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_ata_flujo_der);
 
-        $pdf->PrintArray(2,utf8_decode(' - Artéria Pedia '),$checkbox_arteria_pedia_der);
-        $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$arpe_obs_der);
-        $pdf->PrintArray(2,utf8_decode(' - Flujo'),$checkbox_arpe_flujo_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Tibial Posterior</b>'),$checkbox_arteria_tibial_posterior_der);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$atp_obs_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_atp_flujo_der);
+
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria fibular (Peroneal)</b>'),$checkbox_arteria_fibular_peroneal_der);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$arfipe_obs_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_arfipe_flujo_der);
+
+        $pdf->PrintArray(2,utf8_decode('<b>Artéria Pedia</b>'),$checkbox_arteria_pedia_der);
+        $pdf->PrintElement(2,utf8_decode("<b>Observaciones:</b> "),$arpe_obs_der);
+        $pdf->PrintArray(2,utf8_decode('<b>Flujo</b>'),$checkbox_arpe_flujo_der);
 
 
     }
 
 
-
-    $pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion_der);
+    if (!empty($conclusion_der)) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Conclusión: '), "");
+        $pdf->PrintElement(2,'',$conclusion_der);
+    }
     // Fin de impresion de datos --------------------------------------------------------
 
     // Imprimir las imagenes --------------------------------------------------------
@@ -862,7 +911,7 @@ if ($imprimir_informe_der) {
                 // si no hay espacio agrega otra pagina
                 $custom_y = $pdf->GetY();
                 if ($k == 0) {
-                    $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 125);
+                    $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 120);
                     $pdf->Ln(3);
                     $pdf->PrintSection(3,utf8_decode('IMÁGENES'), $fullname);
                     $custom_y = $pdf->GetY();

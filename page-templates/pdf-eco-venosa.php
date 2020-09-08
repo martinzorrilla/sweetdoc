@@ -114,6 +114,8 @@ $client_registro = isset($client_registro) && $client_registro !="" ? $client_re
 $client_otros = get_field('client_otros', 'option');
 $client_otros = isset($client_otros) && $client_otros !="" ? $client_otros : "Otros datos";
 
+$client_offset = get_field('client_sign_offset', 'option');
+$client_offset = isset($client_offset) && $client_offset !="" ? intval($client_offset) : 113;
 
 
     // $this->SetY($altura_actual + $firma_altura);
@@ -124,16 +126,16 @@ $client_otros = isset($client_otros) && $client_otros !="" ? $client_otros : "Ot
     //$this->SetTextColor(128);
     $this->SetX(110);
     $this->Cell(0,12,'...............................................',0,2);
-    $this->SetX(113);
+    $this->SetX($client_offset);
     // $this->Cell(0,5,'Dra. Andrea Zorrilla',0,2);
     $this->Cell(0,5,$client_title." ".$client_name,0,2);
     $this->SetX(114); //gineco obstetra (andrea, alba etc)
     // $this->SetX(120); // felbologia yu cirugia
     // $this->Cell(0,5,utf8_decode('Ginecología y Obstetricia'),0,2);
     $this->Cell(0,5,utf8_decode($client_especialidad),0,2);
-    $this->SetX(106);
+    // $this->SetX(106);
     // $this->Cell(0,5,utf8_decode('Especialista en TGI y colposcopia'),0,2);
-    $this->Cell(0,5,utf8_decode($client_sub_especialidad),0,2);
+    // $this->Cell(0,5,utf8_decode($client_sub_especialidad),0,2);
     $this->SetX(125);
     $this->Cell(0,5,utf8_decode('RP: '.$client_registro),0,2);
     $this->SetX(0);
@@ -588,7 +590,8 @@ if ($imprimir_informe) {
     $pdf->AddPage();
     $page_height = $pdf->GetPageHeight();
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
-    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
+    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),$datos_personales);
+    // $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
     $pdf->PrintSection(2,'MIEMBRO INFERIOR IZQUIERDO', $fullname);
 
@@ -636,8 +639,15 @@ if ($imprimir_informe) {
         // $pdf->PrintElement(2,utf8_decode(' - Medida(cm): '),$venas_perforantes_medida);
     }
 
-    $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$observaciones);
-    $pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion);
+    if (!empty($observaciones)) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Observaciones: '), "");
+        $pdf->PrintElement(2,utf8_decode(' - '),$observaciones);
+    }
+
+    if (!empty($conclusion)) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Conclusión: '), "");
+        $pdf->PrintElement(2,utf8_decode(' - '),$conclusion);
+    }
     // Fin de impresion de datos --------------------------------------------------------
 
 
@@ -714,7 +724,8 @@ if ($imprimir_informe_der) {
     $pdf->AddPage();
     $page_height = $pdf->GetPageHeight();
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
-    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
+    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),$datos_personales);
+    // $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
     $pdf->PrintSection(2,'MIEMBRO INFERIOR DERECHO', $fullname);
 
@@ -762,8 +773,15 @@ if ($imprimir_informe_der) {
         // $pdf->PrintElement(2,utf8_decode(' - Medida(cm): '),$venas_perforantes_medida);
     }
 
-    $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$observaciones_der);
-    $pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion_der);
+    if (!empty($observaciones)) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Observaciones: '), "");
+        $pdf->PrintElement(2,utf8_decode(' - '),$observaciones);
+    }
+
+    if (!empty($conclusion)) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Conclusión: '), "");
+        $pdf->PrintElement(2,utf8_decode(' - '),$conclusion);
+    }
     // Fin de impresion de datos --------------------------------------------------------
 
     // Imprimir las imagenes --------------------------------------------------------
