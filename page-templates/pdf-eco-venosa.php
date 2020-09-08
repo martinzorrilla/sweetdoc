@@ -114,6 +114,8 @@ $client_registro = isset($client_registro) && $client_registro !="" ? $client_re
 $client_otros = get_field('client_otros', 'option');
 $client_otros = isset($client_otros) && $client_otros !="" ? $client_otros : "Otros datos";
 
+$client_offset = get_field('client_sign_offset', 'option');
+$client_offset = isset($client_offset) && $client_offset !="" ? intval($client_offset) : 113;
 
 
     // $this->SetY($altura_actual + $firma_altura);
@@ -124,16 +126,16 @@ $client_otros = isset($client_otros) && $client_otros !="" ? $client_otros : "Ot
     //$this->SetTextColor(128);
     $this->SetX(110);
     $this->Cell(0,12,'...............................................',0,2);
-    $this->SetX(113);
+    $this->SetX($client_offset);
     // $this->Cell(0,5,'Dra. Andrea Zorrilla',0,2);
     $this->Cell(0,5,$client_title." ".$client_name,0,2);
     $this->SetX(114); //gineco obstetra (andrea, alba etc)
     // $this->SetX(120); // felbologia yu cirugia
     // $this->Cell(0,5,utf8_decode('Ginecología y Obstetricia'),0,2);
     $this->Cell(0,5,utf8_decode($client_especialidad),0,2);
-    $this->SetX(106);
+    // $this->SetX(106);
     // $this->Cell(0,5,utf8_decode('Especialista en TGI y colposcopia'),0,2);
-    $this->Cell(0,5,utf8_decode($client_sub_especialidad),0,2);
+    // $this->Cell(0,5,utf8_decode($client_sub_especialidad),0,2);
     $this->SetX(125);
     $this->Cell(0,5,utf8_decode('RP: '.$client_registro),0,2);
     $this->SetX(0);
@@ -588,56 +590,64 @@ if ($imprimir_informe) {
     $pdf->AddPage();
     $page_height = $pdf->GetPageHeight();
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
-    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
+    $pdf->PrintElement(2,utf8_decode('Nombre: '),$datos_personales);
+    // $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
     $pdf->PrintSection(2,'MIEMBRO INFERIOR IZQUIERDO', $fullname);
 
     if ($sistema_venoso_profundo) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Profundo'), "");
-        $pdf->PrintElement(2,utf8_decode(' - Vena femoral comun: '), utf8_decode( $radiobox_vena_femoral_comun["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Vena femoral superficial: '), utf8_decode( $radiobox_vena_femoral_superficial["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Vena poplítea: '), utf8_decode($radiobox_vena_poplitea["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Plexo soleo y gemelar: '), utf8_decode($radiobox_plexo_soleo_y_gemelar["label"]));
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Sistema Venoso Profundo'), "");
+        $pdf->PrintElement(2,utf8_decode('Vena femoral comun: '), utf8_decode( $radiobox_vena_femoral_comun["label"]));
+        $pdf->PrintElement(2,utf8_decode('Vena femoral superficial: '), utf8_decode( $radiobox_vena_femoral_superficial["label"]));
+        $pdf->PrintElement(2,utf8_decode('Vena poplítea: '), utf8_decode($radiobox_vena_poplitea["label"]));
+        $pdf->PrintElement(2,utf8_decode('Plexo soleo y gemelar: '), utf8_decode($radiobox_plexo_soleo_y_gemelar["label"]));
     }
 
     if ($sistema_venoso_superficial) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Superficial'), "");
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena mayor'), "");
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Sistema Venoso Superficial'), "");
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Vena Safena mayor'), "");
         // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Femoral '),$checkbox_union_safeno_femoral, $safeno_femoral_medida);
+        $pdf->PrintArray(2,utf8_decode('Unión Safeno-Femoral '),$checkbox_union_safeno_femoral, $safeno_femoral_medida);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$safeno_femoral_medida);
     }
 
 
     if ($vena_safena_magna) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Magna (Interna)'), "");
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Vena Safena Magna (Interna)'), "");
         // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Tronco Suprapatelar '),$checkbox_tronco_suprapatelar, $tronco_suprapatelar_medida);
+        $pdf->PrintArray(2,utf8_decode('Tronco Suprapatelar '),$checkbox_tronco_suprapatelar, $tronco_suprapatelar_medida);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_suprapatelar_medida);
-        $pdf->PrintArray(2,utf8_decode(' - Tronco Infrapatelar '),$checkbox_tronco_infrapatelar, $tronco_infrapatelar_medida);
+        $pdf->PrintArray(2,utf8_decode('Tronco Infrapatelar '),$checkbox_tronco_infrapatelar, $tronco_infrapatelar_medida);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_infrapatelar_medida);
     }
 
 
     if ($vena_safena_menor) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Menor'), "");
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Vena Safena Menor'), "");
         // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Poplitea '),$checkbox_union_safeno_poplitea, $union_safeno_poplitea_medida);
+        $pdf->PrintArray(2,utf8_decode('Unión Safeno-Poplitea '),$checkbox_union_safeno_poplitea, $union_safeno_poplitea_medida);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$union_safeno_poplitea_medida);
-        $pdf->PrintArray(2,utf8_decode(' - Vena Safena Parva (Externa) '),$checkbox_vena_safena_parva, $vena_safena_parva_medida);
+        $pdf->PrintArray(2,utf8_decode('Vena Safena Parva (Externa) '),$checkbox_vena_safena_parva, $vena_safena_parva_medida);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$vena_safena_parva_medida);
     }
 
 
     if ($sistemas_perforantes) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistemas Perforantes'), "");
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Sistemas Perforantes'), "");
         // ------------------------------------------------------------------------ 
-        $pdf->PrintArray(2,utf8_decode(' - Venas Perforantes '),$checkbox_venas_perforantes, $venas_perforantes_medida);
+        $pdf->PrintArray(2,utf8_decode('Venas Perforantes '),$checkbox_venas_perforantes, $venas_perforantes_medida);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(cm): '),$venas_perforantes_medida);
     }
 
-    $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$observaciones);
-    $pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion);
+    if (!empty($observaciones)) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Observaciones: '), "");
+        $pdf->PrintElement(2,utf8_decode(''),$observaciones);
+    }
+
+    if (!empty($conclusion)) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Conclusión: '), "");
+        $pdf->PrintElement(2,utf8_decode(''),$conclusion);
+    }
     // Fin de impresion de datos --------------------------------------------------------
 
 
@@ -659,7 +669,7 @@ if ($imprimir_informe) {
                 // si no hay espacio agrega otra pagina
                 $custom_y = $pdf->GetY();
                 if ($k == 0) {
-                    $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 125);
+                    $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 120);
                     $pdf->Ln(3);
                     $pdf->PrintSection(3,utf8_decode('IMÁGENES'), $fullname);
                     $custom_y = $pdf->GetY();
@@ -714,21 +724,22 @@ if ($imprimir_informe_der) {
     $pdf->AddPage();
     $page_height = $pdf->GetPageHeight();
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
-    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
+    $pdf->PrintElement(2,utf8_decode('Nombre: '),$datos_personales);
+    // $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
     $pdf->PrintSection(2,'MIEMBRO INFERIOR DERECHO', $fullname);
 
     if ($sistema_venoso_profundo_der) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Profundo'), "");
-        $pdf->PrintElement(2,utf8_decode(' - Vena femoral comun: '), utf8_decode( $radiobox_vena_femoral_comun_der["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Vena femoral superficial: '), utf8_decode( $radiobox_vena_femoral_superficial_der["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Vena poplítea: '), utf8_decode($radiobox_vena_poplitea_der["label"]));
-        $pdf->PrintElement(2,utf8_decode(' - Plexo soleo y gemelar: '), utf8_decode($radiobox_plexo_soleo_y_gemelar_der["label"]));
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Sistema Venoso Profundo'), "");
+        $pdf->PrintElement(2,utf8_decode('Vena femoral comun: '), utf8_decode( $radiobox_vena_femoral_comun_der["label"]));
+        $pdf->PrintElement(2,utf8_decode('Vena femoral superficial: '), utf8_decode( $radiobox_vena_femoral_superficial_der["label"]));
+        $pdf->PrintElement(2,utf8_decode('Vena poplítea: '), utf8_decode($radiobox_vena_poplitea_der["label"]));
+        $pdf->PrintElement(2,utf8_decode('Plexo soleo y gemelar: '), utf8_decode($radiobox_plexo_soleo_y_gemelar_der["label"]));
     }
 
     if ($sistema_venoso_superficial_der) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistema Venoso Superficial'), "");
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena mayor'), "");
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Sistema Venoso Superficial'), "");
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Vena Safena mayor'), "");
         // ------------------------------------------------------------------------
         $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Femoral '),$checkbox_union_safeno_femoral_der, $safeno_femoral_medida_der);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$safeno_femoral_medida);
@@ -736,34 +747,41 @@ if ($imprimir_informe_der) {
 
 
     if ($vena_safena_magna_der) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Magna (Interna)'), "");
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Vena Safena Magna (Interna)'), "");
         // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Tronco Suprapatelar '),$checkbox_tronco_suprapatelar_der, $tronco_suprapatelar_medida_der);
+        $pdf->PrintArray(2,utf8_decode('Tronco Suprapatelar '),$checkbox_tronco_suprapatelar_der, $tronco_suprapatelar_medida_der);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_suprapatelar_medida);
-        $pdf->PrintArray(2,utf8_decode(' - Tronco Infrapatelar '),$checkbox_tronco_infrapatelar_der, $tronco_infrapatelar_medida_der);
+        $pdf->PrintArray(2,utf8_decode('Tronco Infrapatelar '),$checkbox_tronco_infrapatelar_der, $tronco_infrapatelar_medida_der);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$tronco_infrapatelar_medida);
     }
 
 
     if ($vena_safena_menor_der) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Vena Safena Menor'), "");
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Vena Safena Menor'), "");
         // ------------------------------------------------------------------------
-        $pdf->PrintArray(2,utf8_decode(' - Unión Safeno-Poplitea '),$checkbox_union_safeno_poplitea_der, $union_safeno_poplitea_medida_der);
+        $pdf->PrintArray(2,utf8_decode('Unión Safeno-Poplitea '),$checkbox_union_safeno_poplitea_der, $union_safeno_poplitea_medida_der);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$union_safeno_poplitea_medida);
-        $pdf->PrintArray(2,utf8_decode(' - Vena Safena Parva (Externa) '),$checkbox_vena_safena_parva_der, $vena_safena_parva_medida_der);
+        $pdf->PrintArray(2,utf8_decode('Vena Safena Parva (Externa) '),$checkbox_vena_safena_parva_der, $vena_safena_parva_medida_der);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(mm): '),$vena_safena_parva_medida);
     }
 
 
     if ($sistemas_perforantes_der) {
-        $pdf->PrintSecondaryTitle(2,utf8_decode(' Sistemas Perforantes'), "");
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Sistemas Perforantes'), "");
         // ------------------------------------------------------------------------ 
-        $pdf->PrintArray(2,utf8_decode(' - Venas Perforantes '),$checkbox_venas_perforantes_der, $venas_perforantes_medida_der);
+        $pdf->PrintArray(2,utf8_decode('Venas Perforantes '),$checkbox_venas_perforantes_der, $venas_perforantes_medida_der);
         // $pdf->PrintElement(2,utf8_decode(' - Medida(cm): '),$venas_perforantes_medida);
     }
 
-    $pdf->PrintElement(2,utf8_decode(' - Observaciones: '),$observaciones_der);
-    $pdf->PrintElement(2,utf8_decode(' - Conclusion: '),$conclusion_der);
+    if (!empty($observaciones)) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Observaciones: '), "");
+        $pdf->PrintElement(2,utf8_decode(''),$observaciones);
+    }
+
+    if (!empty($conclusion)) {
+        $pdf->PrintSecondaryTitle(2,utf8_decode('Conclusión: '), "");
+        $pdf->PrintElement(2,utf8_decode(''),$conclusion);
+    }
     // Fin de impresion de datos --------------------------------------------------------
 
     // Imprimir las imagenes --------------------------------------------------------
@@ -782,7 +800,7 @@ if ($imprimir_informe_der) {
                 // si no hay espacio agrega otra pagina
                 $custom_y = $pdf->GetY();
                 if ($k == 0) {
-                    $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 125);
+                    $new_page = $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY(), 120);
                     $pdf->Ln(3);
                     $pdf->PrintSection(3,utf8_decode('IMÁGENES'), $fullname);
                     $custom_y = $pdf->GetY();

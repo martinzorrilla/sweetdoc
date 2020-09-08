@@ -92,11 +92,11 @@ $conclusion_der =  isset($eco_arterial_data_post['conclusion_der'][0]) ? $eco_ar
       <div class="card-section">
         <div class="profile-card-header">
           <div class="profile-card-author">
-            <h5 class="author-title">Derecho</h5>
+            <h5 class="author-title">Ecografía arterial</h5>
           </div>
         </div>
         <div class="profile-card-about">
-          <h5 class="about-title separator-left"> Derecho <?php //echo $name?></h5>
+          <h5 class="about-title separator-left">Miembro Derecho <?php //echo $name?></h5>
 
 
           <!-- <form id="der_create-eco-arterial-form" name="create-eco-arterial-form" method="post"> -->

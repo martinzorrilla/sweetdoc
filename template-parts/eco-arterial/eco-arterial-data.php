@@ -87,7 +87,7 @@
     
     $conclusion = isset($eco_arterial_data_post['conclusion'][0]) ? $eco_arterial_data_post['conclusion'][0] : NULL;
     
-
+// var_dump($checkbox_afc_flujo);
     
  ?>
 
@@ -100,7 +100,7 @@
           </div>
         </div>
         <div class="profile-card-about">
-          <h5 class="about-title separator-left"> Ingresar datos de la Ecografía - Miembro Izquierdo <?php //echo $name?></h5>
+          <h5 class="about-title separator-left"> Miembro Izquierdo <?php //echo $name?></h5>
 
           <!-- <form id="create-eco-arterial-form" name="create-eco-arterial-form" method="post"> -->
           <div>
@@ -269,7 +269,7 @@
 
 
 
-                    <input type="checkbox" id="afcflujo4" name="afc_flujo[]" value="sin_flujo " class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                    <input type="checkbox" id="afcflujo4" name="afc_flujo[]" value="sin_flujo" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
                     if( $checkbox_afc_flujo ){ //si esta vacio genera un error, por eso hay que verificar antes
                       foreach ($checkbox_afc_flujo as $field){
@@ -429,7 +429,7 @@
 
 
 
-                    <input type="checkbox" id="afpflujo4" name="afp_flujo[]" value="sin_flujo " class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                    <input type="checkbox" id="afpflujo4" name="afp_flujo[]" value="sin_flujo" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
                     if( $checkbox_afp_flujo ){ //si esta vacio genera un error, por eso hay que verificar antes
                       foreach ($checkbox_afp_flujo as $field){
@@ -591,7 +591,7 @@
 
 
 
-                    <input type="checkbox" id="afsflujo4" name="afs_flujo[]" value="sin_flujo " class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                    <input type="checkbox" id="afsflujo4" name="afs_flujo[]" value="sin_flujo" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
                     if( $checkbox_afs_flujo ){ //si esta vacio genera un error, por eso hay que verificar antes
                       foreach ($checkbox_afs_flujo as $field){
@@ -753,7 +753,7 @@
 
 
 
-                    <input type="checkbox" id="apflujo4" name="ap_flujo[]" value="sin_flujo " class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                    <input type="checkbox" id="apflujo4" name="ap_flujo[]" value="sin_flujo" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
                     if( $checkbox_ap_flujo ){ //si esta vacio genera un error, por eso hay que verificar antes
                       foreach ($checkbox_ap_flujo as $field){
@@ -915,7 +915,7 @@
 
 
 
-                    <input type="checkbox" id="ataflujo4" name="ata_flujo[]" value="sin_flujo " class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                    <input type="checkbox" id="ataflujo4" name="ata_flujo[]" value="sin_flujo" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
                     if( $checkbox_ata_flujo ){ //si esta vacio genera un error, por eso hay que verificar antes
                       foreach ($checkbox_ata_flujo as $field){
@@ -1076,7 +1076,7 @@
 
 
 
-                    <input type="checkbox" id="atpflujo4" name="atp_flujo[]" value="sin_flujo " class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                    <input type="checkbox" id="atpflujo4" name="atp_flujo[]" value="sin_flujo" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
                     if( $checkbox_atp_flujo ){ //si esta vacio genera un error, por eso hay que verificar antes
                       foreach ($checkbox_atp_flujo as $field){
@@ -1237,7 +1237,7 @@
 
 
 
-                    <input type="checkbox" id="arfipeflujo4" name="arfipe_flujo[]" value="sin_flujo " class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                    <input type="checkbox" id="arfipeflujo4" name="arfipe_flujo[]" value="sin_flujo" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
                     if( $checkbox_arfipe_flujo ){ //si esta vacio genera un error, por eso hay que verificar antes
                       foreach ($checkbox_arfipe_flujo as $field){
@@ -1398,7 +1398,7 @@
 
 
 
-                    <input type="checkbox" id="arpeflujo4" name="arpe_flujo[]" value="sin_flujo " class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
+                    <input type="checkbox" id="arpeflujo4" name="arpe_flujo[]" value="sin_flujo" class="disableable-input" <?php if($is_editable == "false")  echo "disabled"; ?> 
                     <?php 
                     if( $checkbox_arpe_flujo ){ //si esta vacio genera un error, por eso hay que verificar antes
                       foreach ($checkbox_arpe_flujo as $field){

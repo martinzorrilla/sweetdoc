@@ -54,6 +54,8 @@ require_once( 'library/responsive-images.php' );
 require_once( 'library/oikos-post-type-lib.php' );
 
 require_once 'library/fpdf/fpdf.php';
+require_once 'library/fpdf/WriteTag.php';
+require_once 'library/fpdf/WriteHTML.php';
 
 
 /** If your site requires protocol relative url's for theme assets, uncomment the line below */
