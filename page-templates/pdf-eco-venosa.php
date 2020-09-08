@@ -1,9 +1,9 @@
 <?php /* Template Name: pdf-eco-venosa*/
-class PDF extends FPDF
+// class PDF extends FPDF
+class PDF extends PDF_HTML
 {
 protected $col = 0; // Columna actual
 protected $y0;      // Ordenada de comienzo de la columna
-
 
 
 
@@ -94,7 +94,8 @@ function Footer()
 
 }
 
-function Firma($num)
+// function Firma($num)
+function FirmaOLdNoUSOVerENWriteHTML($num)
 {
 
 // DATOS DEL CLIENTE DEL SISTEMA(DOCTOR) guardados en el theme options. en el backend wordpress creado con ACF custom fields

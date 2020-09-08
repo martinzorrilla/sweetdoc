@@ -98,7 +98,7 @@ function Footer()
 
 }
 
-function Firma($num)
+function FirmaOLdNoUSOVerENWriteHTML($num)
 {
 
 // DATOS DEL CLIENTE DEL SISTEMA(DOCTOR) guardados en el theme options. en el backend wordpress creado con ACF custom fields
