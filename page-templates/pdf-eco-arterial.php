@@ -704,7 +704,7 @@ if ($imprimir_informe) {
     }
 
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
-    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),$datos_personales);
+    $pdf->PrintElement(2,utf8_decode('Nombre: '),$datos_personales);
     // $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
     $pdf->PrintSection(2,'MIEMBRO INFERIOR IZQUIERDO', $fullname);
@@ -846,7 +846,7 @@ if ($imprimir_informe_der) {
     }
 
     $pdf->PrintSection(1,'DATOS PERSONALES', $fullname);
-    $pdf->PrintElement(2,utf8_decode(' - Nombre: '),$datos_personales);
+    $pdf->PrintElement(2,utf8_decode('Nombre: '),$datos_personales);
     // $pdf->PrintElement(2,utf8_decode(' - Nombre: '),utf8_decode($datos_personales));
     $pdf->Ln(4);
     $pdf->PrintSection(2,'MIEMBRO INFERIOR DERECHO', $fullname);
