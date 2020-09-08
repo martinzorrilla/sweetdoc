@@ -105,7 +105,7 @@
 						<i class="fas fa-home fa large"></i><span class="app-dashboard-sidebar-text"> Home</span>
 					</a></li>
 					<li><a href="<?php echo $all_patient_url ?>">
-						<i class="fas fa-address-book fa large"></i><span class="app-dashboard-sidebar-text"> Todas las Pacientes</span>
+						<i class="fas fa-address-book fa large"></i><span class="app-dashboard-sidebar-text"> Todos los Pacientes</span>
 					</a></li>
 					<li><a href="<?php echo $create_patient_url ?>">
 						<i class="fas fa-plus fa large"></i><span class="app-dashboard-sidebar-text"> Crear Paciente</span>

@@ -41,7 +41,7 @@ $patient_id = $post_id;
   <!-- <div class="large-spacer"></div> -->
 
   <div class="wrap">
-      <h1 class="under font-bold">Ficha de la Paciente</h1>
+      <h1 class="under font-bold">Ficha del Paciente</h1>
   </div>
 
   <!-- <div data-closable class="callout alert-callout-border secondary text-center">
