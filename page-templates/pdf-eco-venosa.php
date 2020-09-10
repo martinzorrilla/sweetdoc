@@ -305,7 +305,8 @@ function PrintArray($num, $title, $array, $optional = "")
          endforeach;
         
          if (!empty($optional)){
-            array_push($aux, utf8_decode("Mide: ".$optional." cm."));   
+             // array_push($aux, utf8_decode("Mide: ".$optional." cm."));   
+            array_push($aux, utf8_decode("Mide: ".$optional));   
         }
         
         $emptyRemoved = array_filter($aux);
