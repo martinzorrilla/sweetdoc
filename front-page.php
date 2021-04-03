@@ -13,24 +13,36 @@
 
   <?php hm_get_template_part('template-parts/doctor/doctor-intro', ['data' => ""]); ?>
 
-  <div class="callout primary">
-    <h1 class="text-center"> <?= $welcome_msg ?> </h1>
-  </div>
+  <!-- <div class="callout primary">
+    <h1 class="text-center"> < ?= $welcome_msg ?> </h1>
+  </div> -->
 
-  <div class="callout secondary">
-  <?php 
-    echo "<h2 class='text-center'> Hoy es el " . date("d/m/Y") . "</h2>";
-  ?>
-  </div>
+  <!-- <div class="row" style="margin:2em 0;">
 
-  <div class="callout secondary">
+    <div class="callout secondary small-12 medium-12 large-6 columns">
+    < ?php 
+      echo "<h2 class='text-center'> Hoy es el " . date("d/m/Y") . "</h2>";
+    ?>
+    </div>
+
+    <div class="callout secondary small-12 medium-12 large-6 columns">
+    < ?php
+
+      echo "<h2 class='text-center'> Hora " . date("h:i:a") . "</h2>";
+    ?>
+    </div>
+
+  </div> -->
+
+  <div class="em-full-calendar" style="padding:0 1em;">
   <?php
-
-    echo "<h5 class='text-center'> Hora " . date("h:i:a") . "</h5>";
-  ?>
+    if(class_exists('WP_FullCalendar')){
+      echo WP_FullCalendar::calendar();
+      // echo EM_Calendar::output(array('full'=>0, 'long_events'=>1))
+    }	
+    ?>
   </div>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus blandit ligula eget est feugiat viverra. Duis a arcu laoreet, rhoncus libero imperdiet, placerat velit. Vestibulum euismod mi et ornare sodales. Donec efficitur mattis blandit. Proin in massa elit. Praesent malesuada iaculis nisl, a venenatis dui. Nullam venenatis tincidunt placerat. Suspendisse egestas urna a aliquet pretium.</p>
-  </div>
+</div>
 
 <?php get_footer(); ?>

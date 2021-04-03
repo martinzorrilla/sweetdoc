@@ -22,6 +22,8 @@
 		<!-- TESTING: responsive voice para leer la paciente a llamar en voz alta. si no anda borrar esto -->
 		<!-- <script src="https://code.responsivevoice.org/responsivevoice.js?key=TSz0m51D"></script> -->
 
+		<!-- <link rel="icon" href="/zweet-logo.png" type="image/gif" sizes="16x16"> -->
+		<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/zweet-logo.png" />
 		<?php wp_head(); ?>
 
 		<!-- home url -->
@@ -79,6 +81,7 @@
 		$create_secretary_url = home_url().'/crear-asistente/';
 		$consultas_del_dia_url = home_url().'/consultas-del-dia/';
 		$llamar_pacientes_url = home_url().'/llamar-pacientes/';
+		$reservar_turnos_url = home_url().'/reservar-turnos/';
 		$current_user = wp_get_current_user();
 	?>
 	<div class="app-dashboard shrink-medium">
@@ -118,6 +121,9 @@
 					</a></li>
 					<li><a href="<?php echo $llamar_pacientes_url ?>">
 						<i class="fas fa-volume-up fa large"></i><span class="app-dashboard-sidebar-text"> Llamar Pacientes</span>
+					</a></li>
+					<li><a href="<?php echo $reservar_turnos_url ?>">
+						<i class="fas fa-calendar-check fa large"></i><span class="app-dashboard-sidebar-text"> Reserva de Turnos</span>
 					</a></li>
 					</ul>
 				</div>

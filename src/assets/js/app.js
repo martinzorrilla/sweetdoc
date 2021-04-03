@@ -22,6 +22,10 @@ import './my-custom-js/create-consultas-del-dia';
 import './my-custom-js/tabla-consultas';
 import './my-custom-js/globals-module';
 
+//quiero agrupar aca todos los eventos relacionados a radio y checkbox buttons
+import './my-custom-js/my-radio-buttons';
+
+
 $(document).foundation();
 
 //this is for the sidebar arrow icon to work

@@ -212,7 +212,7 @@
 //   font-family: "Open Sans", sans-serif;
 // }
 
-table {
+table.responsive-table {
   line-height: 1.25;
   // border: 1px solid blue;
   border: 1px solid #ccc;
@@ -224,12 +224,12 @@ table {
   table-layout: auto;
 }
 
-table caption {
+table.responsive-table caption {
   font-size: 1.5em;
   margin: .5em 0 .75em;
 }
 
-table tr {
+table.responsive-table tr {
   background-color:#ffffff;
   // background-color: #f8f8f8;
   // background-color: green;
@@ -237,8 +237,8 @@ table tr {
   padding: .35em;
 }
 
-table th,
-table td {
+table.responsive-table th,
+table.responsive-table td {
   padding: .625em;
   text-align: left;
   // min-width: max-content;
@@ -246,12 +246,12 @@ table td {
 
   
 }
-table td.min {
+table.responsive-table td.min {
   width: 1%;
   white-space: nowrap;
 }
 
-table th {
+table.responsive-table th {
   font-size: 1em;
   text-transform: capitalize;
   // font-size: .95em;
@@ -261,7 +261,7 @@ table th {
 }
 
 
-table thead tr{
+table.responsive-table thead tr{
   // background-color: #2c3840;
   background-color: $sweet-blue;
   color: #eee;
@@ -272,7 +272,7 @@ table thead tr{
   top: 0; 
 }
 
-table tbody td {
+table.responsive-table tbody td {
   // text-align: left;
   a{
     text-transform: capitalize;  
@@ -288,10 +288,13 @@ table tbody td {
           // color: red;
       }
     }
+    &.btn{
+      color: white;
+    }
   }
 }
 
-table tbody tr{
+table.responsive-table tbody tr{
   a{
     &:hover{  
       // background-color: $sweet-blue;
@@ -311,12 +314,12 @@ tbody tr:nth-child(2n) {
 
 // @include for-size(tablet-portrait-up) {    
   @media screen and (min-width: 800px) {    
-  table tbody tr{
+  table.responsive-table tbody tr{
     &:hover{  
-      background-color: $sweet-blue;
-      opacity: 0.9;
+      // background-color: $sweet-blue;
+      // opacity: 0.9;
       a{
-        color: #eee;
+        // color: #eee;
       }
     }
   }
@@ -330,9 +333,10 @@ tbody tr:nth-child(2n) {
   }
 }
 
+
 // @media screen and (max-width: 600px) {
   @media screen and (max-width: 800px) {
-  table {
+  table.responsive-table {
     border: 0;
 
     tbody{      
@@ -347,11 +351,11 @@ tbody tr:nth-child(2n) {
     }
   }
 
-  table caption {
+  table.responsive-table caption {
     font-size: 1.3em;
   }
   
-  table thead {
+  table.responsive-table thead {
     border: none;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -362,14 +366,14 @@ tbody tr:nth-child(2n) {
     width: 1px;
   }
   
-  table tr {
+  table.responsive-table tr {
     // border-bottom: 3px solid #ddd;
     display: block;
     margin-bottom: 1.625em;
     border: 2px solid $bluehost-blue;
   }
   
-  table td {
+  table.responsive-table td {
     border-bottom: 1px solid #ddd;
     display: block;
     font-size: .8em;
@@ -377,12 +381,12 @@ tbody tr:nth-child(2n) {
 
   }
 
-  table td a{
+  table.responsive-table td a{
     // color:  red !important;
     font-weight: bold;
     font-size: 1.2em;
   }
-  table td::before {
+  table.responsive-table td::before {
     /*
     * aria-label has no advantage, it won't be read inside a table
     content: attr(aria-label);
@@ -393,11 +397,11 @@ tbody tr:nth-child(2n) {
     text-transform: uppercase;
   }
   
-  table td:last-child {
+  table.responsive-table td:last-child {
     border-bottom: 0;
   }
 
-  table .hide-on-mobile{
+  table.responsive-table .hide-on-mobile{
     display: none;
   }
 }

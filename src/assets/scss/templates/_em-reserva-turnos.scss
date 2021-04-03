@@ -1,0 +1,120 @@
+//wrapper del formulario de reserva de turno
+.em-crear-reserva-containter{
+  // border: 1px solid black;
+  padding: 4em;
+}//fin del contenedor
+
+//contenedor principal del formulario
+.css-event-form{
+   
+  input, textarea, select{
+    font-family: "Open Sans", sans-serif;
+    font-weight: normal;
+    color: rgba(31, 30, 30, 0.89);
+  } 
+  // el input del nombre por default solo ocupa el 70%
+  .event-form-name{
+    input{
+      width: 100% !important;
+
+    }
+  }
+
+  .event-categories{
+    label{
+      // color: blue;
+      font-size: 1.9rem;
+      font-family: "Open Sans", sans-serif;
+      font-weight: normal;
+    }
+  }
+
+  // para que el boton submit del form no este a la izquierda
+  .submit{
+    text-align: center;
+    input{
+      color:white;
+      border-color: transparent;
+      // text-decoration:none;
+      // padding:5px 10px;
+      // border-radius:3px;
+      font-family: 'Poiret One', cursive;
+      // font-size:1em;
+    }
+  }
+  
+}
+
+.em-full-calendar{
+  .fc-center{
+    h2{
+      font-size: 1.5em !important;
+      font-weight: 700;
+      // padding-top: 1em;
+    }
+  }
+}
+
+.wpfc-calendar-wrapper{
+
+  .fc-content-skeleton{
+
+    table{
+      tbody{
+        // background-color: #f2f5f7;
+        td{
+          background-color: #f2f5f7;
+          border: 1px solid #dddddd;
+        }
+      }
+    }
+  }
+}
+
+// esconder el link "editar" el post que agrega wordpress por default al single post
+.mz-hide-edit-meta-data{
+  .edit-link, .updated, .author{
+    // display: none;
+  }
+}
+
+.type-event{
+
+  .entry-title, .edit-link {
+    display: none;
+  }
+
+}
+
+
+.em-event-single{
+  .single-event-block-separator{
+    padding-top: 0.5em;
+  
+    p{
+      margin-bottom: 0;
+    }
+  }
+
+  .event-categories{
+    // color: blue;
+    ul{
+      // list-style-type:none;
+    }
+  }
+}
+
+article{
+  header{
+    .entry-title{
+      
+      text-decoration: underline $bluehost-blue;
+      font-weight: bold;
+      font-size: 3em;
+      text-align: center;
+      padding-bottom: 1em;
+      font-family: 'Poiret One', cursive;
+
+    }
+  }
+}
