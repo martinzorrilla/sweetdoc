@@ -520,9 +520,11 @@ $pdf->PrintElement(2,utf8_decode(' - Sugerencias'),$sugerencias);
 $custom_y = $pdf->GetY();
 $altura_firma = 45; 
 $k == 0;
+$print_circle = true;
 if (sizeof($images_ids_array)>0) {  
     $k = 0; 
-    $altura_firma = 55; 
+    $altura_firma = 55;
+    $print_circle = false; 
     foreach ($images_array as $image) { 
         //$pdf->PrintImage(2,'Imagen:',$images_names[$k]);
         if ($k == 0 || $k == 2) {
@@ -542,8 +544,11 @@ if (sizeof($images_ids_array)>0) {
 // luego de insertar los campos, verificar si hay espacio para las imagenes y la firma
 $pdf->CheckPageSpaceLeft($page_height, $pdf->GetY());
 
-$image_path = home_url().'/wp-content/themes/sweetdoc/src/assets/images/circulo-tranparente.png';
-$pdf->Image($image_path,90,$pdf->GetY()+5,30);
+// print the circle only if there is no images
+if ($print_circle) {
+    $image_path = home_url().'/wp-content/themes/sweetdoc/src/assets/images/circulo-tranparente.png';
+    $pdf->Image($image_path,90,$pdf->GetY()+5,30);
+}
 // $pdf->Ln(14);
 
 // recibe k xq la altura de la firma depende de la cantidad de imagenes
